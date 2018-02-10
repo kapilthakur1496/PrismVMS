@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">  
-    <title>Visual Admin Dashboard - Manage Users</title>
+    <title>PrismVMS Admin</title>
     <meta name="description" content="">
     <meta name="author" content="templatemo">
     <!-- 
@@ -73,10 +73,10 @@
             </nav> 
           </div>
  -->        </div>
-<%@ page import="java.sql.*" %>
-<%@page import="java.lang.reflect.Array"%>
-<%@ page import ="javax.sql.*" %>
-<%@ page import="com.daniel.util.control.*"  %> 
+	<%@ page import="java.sql.*" %>
+	<%@page import="java.lang.reflect.Array"%>
+	<%@ page import ="javax.sql.*" %>
+	<%@ page import="com.daniel.util.control.*"  %> 
         <div class="templatemo-content-container">
           <div class="templatemo-content-widget no-padding">
             <div class="panel panel-default table-responsive">

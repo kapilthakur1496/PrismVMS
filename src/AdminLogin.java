@@ -50,11 +50,13 @@ public class AdminLogin extends HttpServlet {
 				{	
 					
 					String adminId = adminLoginRs.getString("id"); 
+					String adminType = adminLoginRs.getString("admin_type");
 					 HttpSession session = request.getSession();
 					session.setAttribute("adminId", adminId); 
+					session.setAttribute("adminType", adminType); 
 					session.setMaxInactiveInterval(1800); 
 					
-					response.sendRedirect("admin/manage-users.jsp?pageNumber=1");
+					response.sendRedirect("admin/index.jsp");
 					/*javax.servlet.RequestDispatcher dispatcher=request.getRequestDispatcher("adminIndex.jsp");
 					dispatcher.forward(request, response); */  
 				}  
