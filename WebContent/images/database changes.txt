@@ -1,0 +1,259 @@
+
+alter table ngo_details add column `registration_act` varchar(500) after `photo`
+ 
+alter table ngo_details add column `number_running_year` varchar(1000) after `registration_date`
+
+alter table ngo_details add column `approve_status` varchar(255) default 'Pending'
+
+
+
+alter table ngo_details add column `registration_status` varchar(255) default 'Pending'
+
+alter table ngo_details drop column `registration_status` 
+
+
+
+CREATE TABLE ngo_verifcation (
+	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	otp VARCHAR(255),
+	ngo_details_id int unsigned,
+	FOREIGN KEY (ngo_details_id) REFERENCES ngo_details(id) ON DELETE CASCADE  ON UPDATE  CASCADE	 
+)
+
+RENAME TABLE ngo_verifcation TO ngo_verification;
+
+
+CREATE TABLE subscribers (
+	email varchar(255)   NOT NULL   PRIMARY KEY 
+	 
+)
+
+
+CREATE TABLE admin (
+	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	email VARCHAR(255),
+	password varbinary(200) 
+)
+
+
+
+insert into admin(email , password) values('kapil.thakur1496@gmail.com', 'hitkari')
+
+
+
+CREATE TABLE cart (
+	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	quantity int(10),  
+	product_details_id int(10) unsigned,
+	customer_id int(10) unsigned,
+	FOREIGN KEY (product_details_id) REFERENCES product_details(id) ON DELETE CASCADE  ON UPDATE  CASCADE	,
+	FOREIGN KEY (customer_id) REFERENCES customer(id) ON DELETE CASCADE  ON UPDATE  CASCADE	
+)
+
+
+CREATE TABLE wallet (
+	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	amount real(10,2),
+	customer_id int(10) unsigned ,
+	FOREIGN KEY (customer_id) REFERENCES customer(id) ON DELETE CASCADE  ON UPDATE  CASCADE 	
+)
+
+
+alter table cart add  column `total_amount` double(10,2) after `quantity`
+
+
+
+CREATE TABLE shipper (
+	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name varchar(500),
+	phone int(10), 
+	email varchar(500)    	
+)
+
+
+CREATE TABLE order_detail (
+	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	order_date varchar(255),
+	delivery_date   varchar(500) , 
+	address_id varchar(500),
+	shipper_id int(10) unsigned ,
+	cart_id int(10) unsigned , 
+	customer_id int(10) unsigned ,
+	FOREIGN KEY (shipper_id) REFERENCES shipper(id) ON DELETE CASCADE  ON UPDATE  CASCADE 	,
+	FOREIGN KEY (cart_id) REFERENCES cart(id) ON DELETE CASCADE  ON UPDATE  CASCADE 	,
+	FOREIGN KEY (customer_id) REFERENCES customer(id) ON DELETE CASCADE  ON UPDATE  CASCADE 	
+)
+
+
+
+
+
+CREATE TABLE   country (
+	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name varchar(500) 
+)
+CREATE TABLE state (
+	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name varchar(500) ,
+	country_id int(10) unsigned ,
+	FOREIGN KEY (country_id) REFERENCES country(id) ON DELETE CASCADE  ON UPDATE  CASCADE 	
+
+)
+
+CREATE TABLE city (
+	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name varchar(500) ,
+	state_id int(10) unsigned , 
+	FOREIGN KEY (state_id) REFERENCES state(id) ON DELETE CASCADE  ON UPDATE  CASCADE 	
+)
+
+alter table address add column `landmark` varchar(300) after `line2`
+
+
+
+alter table volunteer_details add column `lastdate` varchar(255) after `days`
+alter table volunteer_details add column `stipend` varchar(255) after `lastdate` 
+
+
+
+alter table volunteer_details add column `experience` longtext after `stipend`
+
+
+alter table volunteer_details add column `location` varchar(500)  after `experience`  
+
+
+CREATE TABLE volunteer_apply (
+	id  INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	apply_date VARCHAR(255),
+	application_status  varchar(25),
+	volunteer_details_id  int unsigned,
+	customer_id int unsigned,
+FOREIGN KEY (customer_id) REFERENCES customer(id) ON DELETE CASCADE  ON UPDATE  CASCADE,	 
+FOREIGN KEY (volunteer_details_id) REFERENCES volunteer_details(id) ON DELETE CASCADE  ON UPDATE  CASCADE	 
+
+)
+
+
+
+CREATE TABLE product_review (
+	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	review text,
+	rating int(1),
+	customer_id  int unsigned,
+	product_details_id  int unsigned,
+	 FOREIGN KEY (customer_id) REFERENCES customer(id) ON DELETE CASCADE  ON UPDATE  CASCADE,	 
+FOREIGN KEY (product_details_id) REFERENCES product_details(id) ON DELETE CASCADE  ON UPDATE  CASCADE	 
+
+)
+
+alter table product_review add  column `review_date` varchar(255) after `rating`
+
+
+alter table volunteer_apply add  column `resume` varchar(555) after `application_status`
+
+
+
+
+ALTER TABLE ngo_details
+MODIFY COLUMN photo varchar(500);
+
+
+alter table ngo_details add column `headquater` varchar(500) after `registration_status`
+
+alter table ngo_details add column `year_founded` varchar(500) after `headquater`
+
+
+alter table ngo_details add column `company_type` varchar(500) after `year_founded`
+
+alter table ngo_details add column `company_size` varchar(500) after `company_type`
+
+
+alter table ngo_details add column `website`  varchar(500) after `company_size`
+
+alter table ngo_details add column `specialties`  varchar(500) after `website`  
+
+
+
+alter table ngo_details add column `logo`  varchar(1000) after `description`
+
+
+
+
+
+alter table volunteer_details add column `start_date`  varchar(255) after `ngo_details_id`
+
+  
+
+
+CREATE TABLE event_details (
+	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	event_name varchar(255),
+	event_date   varchar(500) , 
+	event_start_time varchar(500),
+	event_description longtext,
+	registration_status varchar(255),
+	website_link varchar(1000),
+	post_date varchar(250),
+	event_duration varchar(255) , 
+	ngo_details_id int(10) unsigned ,
+	 FOREIGN KEY (ngo_details_id) REFERENCES ngo_details(id) ON DELETE CASCADE  ON UPDATE  CASCADE 
+	 )
+
+
+alter table event_details add column `poster`  varchar(255) after `ngo_details_id`
+
+CREATE TABLE event_transaction (
+	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	staus VARCHAR(255),
+	customer_id int unsigned,
+	FOREIGN KEY (customer_id) REFERENCES customer(id) ON DELETE CASCADE  ON UPDATE  CASCADE	 
+)
+
+
+
+alter table event_transaction add column `apply_date`  varchar(255) after `staus`
+
+
+CREATE TABLE faq_details (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    question text,
+    answer longtext 
+)
+
+
+CREATE TABLE contact_details (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name varchar(255),
+    email varchar(255),
+    phone varchar(255),
+    subject text,
+    message longtext 
+)
+
+
+CREATE TABLE faq_details (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    question text,
+    answer longtext 
+)
+
+
+CREATE TABLE contact_details (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name varchar(255),
+    email varchar(255),
+    phone varchar(255),
+    subject text,
+    messsage longtext 
+)
+
+
+
+
+
+
+
+
+
+
+
