@@ -80,72 +80,57 @@
         <div class="templatemo-content-container">
           <div class="templatemo-content-widget no-padding">
             <div class="panel panel-default table-responsive">
-            <form id="regForm" action="${pageContext.request.contextPath}/Control?action=ngoapproval" method="post" style="margin-top:0px; padding-top:30px;">  
+            <form id="regForm" action="${pageContext.request.contextPath}/Control?action=volunteerApproval" method="post" style="margin-top:0px; padding-top:30px;">  
 			  <table class="table table-striped table-bordered templatemo-user-table">
                 <thead>
                   <tr>
                     <td><a href="" class="white-text templatemo-sort-by"># <span class="caret"></span></a></td>
                     <td><a href="" class="white-text templatemo-sort-by">First Name <span class="caret"></span></a></td>
-                    <td><a href="" class="white-text templatemo-sort-by">Last Name <span class="caret"></span></a></td>
-                    <td><a href="" class="white-text templatemo-sort-by">Verification Status <span class="caret"></span></a></td>
-                    <td><a href="" class="white-text templatemo-sort-by">Status <span class="caret"></span></a></td>
-                    <td><a href="" class="white-text templatemo-sort-by"> Document <span class="caret"></span></a></td>
+                    <td><a href="" class="white-text templatemo-sort-by">Email<span class="caret"></span></a></td>
+                    <td><a href="" class="white-text templatemo-sort-by">  Status <span class="caret"></span></a></td>
+                    <td><a href="" class="white-text templatemo-sort-by">Profile <span class="caret"></span></a></td>
+                     
                     
-                    <td>Edit</td>
-                    <td>Action</td>
-                    <td>Delete</td>
                   </tr>
                 </thead>
                 <tbody>
                 <% try{ %>
 			  
-				<%! String ngoStatus=null;
-					ResultSet ngoDetailsRs=null;
-				 	int ngoCount =0, pageCount = 0;
+				<%! 
+					ResultSet volunteerDetailsRs=null;
+				 	int volunteerCount =0, pageCount = 0;
 					Control ct = new Control();
 					int pageNumber=0, nextRecordCount=10;	
 				%>
 				<%  
 				 	  pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
-					  ngoCount = ct.ngoCount();
-					  pageCount= ngoCount/10 +1;		  
-					  ngoDetailsRs = ct.NgoDetails(pageNumber-1, nextRecordCount);
+						volunteerCount = ct.volunteerCount();
+					  pageCount= volunteerCount/10 +1;		  
+					  volunteerDetailsRs = ct.volunteerDetails(pageNumber-1, nextRecordCount);
 			} catch (Exception e)	{
 				}
 			%>
-			 <%  while(ngoDetailsRs.next()){  %>
+			 <%  while(volunteerDetailsRs.next()){  %>
 			 <%!  int i=1; %>
 							<tr>
 								<td>
-								  <input type="checkbox" name="ngoId" id="u<%=i%>" value="<%=ngoDetailsRs.getString("id") %>">
-                      <label for="u<%=i%>" class="font-weight-400"><span></span> </label> 
+								  	<input type="checkbox" name="volunteerId" id="u<%=i%>" value="<%=volunteerDetailsRs.getString("id") %>">
+                      				<label for="u<%=i%>" class="font-weight-400"><span></span> </label> 
 								 				
 								</td>
 								<td> 
-									<input type="text" class="form-control" name="name" value="<%=ngoDetailsRs.getString("name") %>" >					
+									<input type="text" readonly class="form-control" name="name" value="<%=volunteerDetailsRs.getString("volunteer_name") %>" >					
 								</td>
 								<td>
-									<input type="text" name="email"  class="form-control"  value="<%=ngoDetailsRs.getString("email") %>" >
+									<input type="text" readonly name="email"  class="form-control"  value="<%=volunteerDetailsRs.getString("email_id") %>" >
+								</td>  
+								<td>
+									<input type="text" readonly name="email_status"  class="form-control"   value="<%=volunteerDetailsRs.getString("approve_status") %>" >
+								</td> 
+								 <td>
+									<a href="#" >View </a>
 								</td> 
 								 
-								<td>
-									<input type="text" name="email_status"  class="form-control"   value="<%=ngoDetailsRs.getString("registration_status") %>" >
-								</td> 
-								<td>
-									<input type="text" name="email_status"  class="form-control"   value="<%=ngoDetailsRs.getString("approve_status") %>" >
-								</td> 
-								<td>
-									<a href="/sarv_hitkari/images/<%=ngoDetailsRs.getString("document")%>" target="_blank" class="templatemo-edit-btn" > View </a>
-								</td>
-								<td>
-									<a href="#" class="templatemo-edit-btn">Edit</a>
-								</td> 
-								<td>
-									 <a href="" class="templatemo-edit-btn">info</a>
-								</td> 
-								<td>
-									 <a href="" class="templatemo-edit-btn">delete</a>
-								</td> 
 							</tr>
 							<input type="hidden" name="pageNumber"    value="<%=pageNumber %>">
 							<% ++i; } %> 

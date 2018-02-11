@@ -19,9 +19,24 @@
     <servlet-name>UserLogin</servlet-name>
     <url-pattern>/UserLogin</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>VolunteerPreLogin</servlet-name>
+    <servlet-class>VolunteerPreLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VolunteerPreLogin</servlet-name>
+    <url-pattern>/VolunteerPreLogin</url-pattern>
+  </servlet-mapping>
    
   
-      
+     <servlet>
+    <servlet-name>Control</servlet-name>
+    <servlet-class>com.daniel.util.control.Control</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Control</servlet-name>
+    <url-pattern>/Control</url-pattern>
+  </servlet-mapping> 
   
 <context-param>
   <param-name>EncryptionKey</param-name>

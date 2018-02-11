@@ -1,9 +1,4 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,11 +76,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 </div> 
 	<div class="login">
-	
 		<div class="main-agileits">
 				<div class="form-w3agile">
 					<h3>Login</h3>
-					<form action="NgoPreLogin" method="post">
+					<form action="VolunteerPreLogin" method="post">
 						<div class="key">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
 							<input  type="text" name="email" required="" placeholder="Email">
@@ -101,7 +95,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 				<div class="forg">
 					<a href="#" class="forg-left">Forgot Password</a>
-					<a href="NgoRegister.jsp" class="forg-right">Register</a>
+					<a href="volunteerRegistration.jsp" class="forg-right">Register</a>
 				<div class="clearfix"></div>
 				</div>
 			</div>
