@@ -58,7 +58,6 @@ h1 {
     <style type="text/css">
         
         
-   
      
     </style>
 </head>
@@ -125,85 +124,108 @@ h1 {
 			<div class="clearfix"></div>
 		</div>
 	</div>
-</div>  
+</div> 
+<% try{ %>
+  
 <%!  
-	ResultSet professionalSkillRs=null,academicSkillRs=null,lifeSkillRs=null,softSkillRs=null;
+	ResultSet ngoDetail=null;
+	int volunteerStatus=0; 
+	String volunteerId=null;
+	ResultSet SubCategoryRs=null; 
 	Control ct = new Control();
 %>
+<% 
+	volunteerId = (String)session.getAttribute("volunteerId"); 
+	if(volunteerId == null)
+	{	
+		volunteerId = (String)session.getAttribute("NgoId"); 
+	} 
+	volunteerStatus  = ct.checkVolunteerStatus(request, response,volunteerId);  
+} catch (Exception e){ 	 	
+}
+if(volunteerStatus == 1){
+%>  	
  
+<div class="container" style="paddin:0px; margin-left:0px;">
+    <div class="row">
+        <div class="col-md-2 col-lg-3" >
+
+            <div class="bootstrap-vertical-nav" >
 	 
-<form action="Control?action=volunteerChooseSkills" method="post">
-	<div class="container" style="paddin:0px; margin-left:150px;  ">
-	    <div class="row" style="height:400px;"><br>
-	        <div class="col-md-3 col-lg-3" style="text-algin:center; ">
-				<h4 style="text-align:left; margin-bottom:15px;" >Academic Skills</h4>
-				<% academicSkillRs = ct.getAcademicSkill(); %>
-		        <% while(academicSkillRs.next() ){ %>
-		           <label class="container"> <%=academicSkillRs.getString("skill_name") %> 
-						  <input type="checkbox" name="skills" >
-						  <span class="checkmark"></span>
-					</label>
-		       <%} %>  
-	        </div>
-	         <div class="col-md-3 col-lg-3" >
-				
-	           <h4 style="text-align:left; margin-bottom:15px;">Life Skills</h4>   
-				 
-				 
-				 <% lifeSkillRs = ct.getLifeSkill(); %>
-	            	<% while(lifeSkillRs.next() ){ %>
-	             	<label class="container"> <%=lifeSkillRs.getString("skill_name") %> 
-						  <input type="checkbox" name="skills"  >
-						  <span class="checkmark"></span>
-					</label>
-		       <%} %>   
-	        </div>
-	         <div class="col-md-3 col-lg-3" >
-				<h4 style="text-align:left; margin-bottom:15px;">Professional Skills</h4> 
-				 <% softSkillRs = ct.getSoftSkill(); %>
-	             <% while(softSkillRs.next() ){ %>
-	              	<label class="container"> <%=softSkillRs.getString("skill_name") %> 
-						  <input type="checkbox"  name="skills" >
-						  <span class="checkmark"></span>
-					</label>
-		       <%} %> 
-	              					 
-	        </div>
-	        <div class="col-md-3 col-lg-3" >
-				<h4 style="text-align:left; margin-bottom:15px;">Soft Skills</h4> 
-				<% professionalSkillRs = ct.getProfessionalSkill(); %>
-	            <% while(professionalSkillRs.next() ){ %>
-	            	<label class="container"> <%=professionalSkillRs.getString("skill_name") %> 
-						  <input type="checkbox" name="skills" >
-						  <span class="checkmark"></span>
-					</label>
-		       <%} %> 			
-	           
-	        </div>
-	        
-	 	</div>
-	 	<div class="key">
-			<i class="fa fa-lock" aria-hidden="true"></i>
-			<textarea name="additionalSkills" style="width:94%;" placeholder="Write Addtional Skills"></textarea>
-			<div class="clearfix"></div>
-		</div> 
-		<div class="key">
-			<i class="fa fa-lock" aria-hidden="true"></i>
-			<textarea name="background" style="width:94%;" placeholder="Write Backgorund and Achievements"></textarea>
-			<div class="clearfix"></div>
-		</div> 
-		 <div class="row" style="margin-top:-10px;"> 
-		 	<div class="col-md-9 col-lg-9" style="text-algin:right;  ">
-		 	</div>
-		 <div class="col-md-3 col-lg-3" >
-		<input type="submit" class="form-control" style="opacity:1; width:50%;" value="Next" >
-	   </div>
-	       </div>
-	 	
-	</div>
-</form>
-   
-		  <br><br><br><br>
+ 
+                <div   id="collapseExample"style="paddin:0px; margin-left:0px;" >
+                    <ul class="nav flex-column" id="exCollapsingNavbar3">
+	                    <li   class="nav-item" style="text-algin:center">
+	                     <img src="images/logo2.png" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 63px;height: 80px;border-radius: 50%;">
+	                 	</li>
+                       <li class="nav-item">
+                         <form action="#" method="post">
+								<div class="key" style="margin:10px;">
+									<input  type="text"   name="productPrice" required="" placeholder="Search Feature">
+									<div class="clearfix"></div>
+								</div>
+								<button type="submit" class="btn btn-default search" aria-label="Left Align">
+									<i class="fa fa-search" aria-hidden="true"> </i>
+								</button> 
+							</form>	
+                    	</li>
+                    		
+                       	<li   class="nav-item">
+                         	<a class="nav-link active" href="volunteerIndex.jsp">Home</a>
+                        </li>
+                        <li  class="nav-item">
+                            <a class="nav-link" href="workDiary.jsp">Work Diary</a>
+                        </li> 
+                         <li  class="nav-item">
+                            <a class="nav-link" href="workDiaryView.jsp">View Work Diary</a>
+                        </li> 
+                        <li  class="nav-item">
+                            <a class="nav-link" href="workMeeting.jsp">Work Meeting</a>
+                        </li>
+                         <li  class="nav-item">
+                            <a class="nav-link" href="meetingView.jsp">View Work Meeting</a>
+                        </li>
+                        <li   class="nav-item">
+                            <a class="nav-link" href="workTraining.jsp">Work Training</a>
+                        </li>
+                        <li   class="nav-item">
+                            <a class="nav-link" href="trainingView.jsp">View Work Training</a>
+                        </li>
+                         <li   class="nav-item">
+                            <a class="nav-link" href="projectAssigned.jsp?pN=1">Project Assigned</a>
+                        </li>
+                        <li   class="nav-item">
+                            <a class="nav-link" href="monthlyMeeting.jsp">Monlty Report</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link  " href="teamProject.jsp">Team Project</a>
+                        </li>
+                        <li   class="nav-item">
+                            <a class="nav-link" href="branchProject.jsp">Branch Project</a>
+                        </li>
+                        <li   class="nav-item">
+                            <a class="nav-link" href="branchProject.jsp">Grievance</a>
+                        </li>
+                        <li   class="nav-item">
+                            <a class="nav-link" href="support.jsp">Online Support</a>
+                        </li>
+                         
+                         
+                          
+                        
+                    </ul>
+                </div> 
+            </div> 
+        </div>
+        <div class="col-md-10 col-lg-9">
+             
+    	</div>
+ 	</div>
+</div>
+  
+<%} %>
+<br><br><br><br><br>
+		  
 <!-- newsletter -->
 <div class="newsletter">
 	<div class="container">

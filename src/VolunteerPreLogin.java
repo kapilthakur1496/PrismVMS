@@ -32,43 +32,33 @@ public class VolunteerPreLogin extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	 
-
-		
-		
-		 java.sql.Statement ngoDetailSt;
-		 	ngoDetailSt=null;
-	        java.sql.ResultSet ngoDetailRs;
-	        ngoDetailRs=null;
-	        PrintWriter out;
-
-			RequestDispatcher rd=null;
-		try	{
-			out = response.getWriter();
-			 
-			String username = request.getParameter("email");
-			String password = request.getParameter("password");
-			  
-			ngoDetailSt = connection.createStatement();			
-			ngoDetailRs = ngoDetailSt.executeQuery("select * from volunteer_registration where email_id='"+username+"' and password='"+password+"'");
-			if (ngoDetailRs.next())	
-				
-			{	
-				String volunteerId=ngoDetailRs.getString("id");
-				 
-				HttpSession session = request.getSession();
+			java.sql.Statement volunteerPreLoginSt = null; 
+	        java.sql.ResultSet volunteerPreLoginRs = null;  
+	        PrintWriter out  = response.getWriter();
+    
+		try	{ 
+			if(connection == null) {
+			      connection = DbUtil.getConnection();
+			      } 
+				String username = request.getParameter("email");
+				String password = request.getParameter("password");
 				  
-				session.setAttribute("volunteerId", volunteerId); 
-				 
-				session.setMaxInactiveInterval(1800);
-				response.sendRedirect("volunteerPreIndex.jsp");  /*
-				response.sendRedirect("volunteerindex.jsp");*/ 
+				volunteerPreLoginSt = connection.createStatement();			
+				volunteerPreLoginRs = volunteerPreLoginSt.executeQuery("select * from volunteer_registration where email_id='"+username+"' and password='"+password+"'");
+				if (volunteerPreLoginRs.next())	
+					
+				{	
+					String volunteerId=volunteerPreLoginRs.getString("id"); 
+					
+					HttpSession session = request.getSession(); 
+					session.setAttribute("volunteerId", volunteerId); 
+					response.sendRedirect("volunteerPreIndex.jsp");  
+				}
+				else
+				{
+					response.sendRedirect("volunteerPreLogin.jsp?msg3=fail"); 
+				}
 			}
-			else
-			{
-				response.sendRedirect("volunteerPreLogin.jsp?msg3=fail"); 
-			}
-	}
 		 catch(SQLException se){
            se.printStackTrace();
         }
@@ -79,24 +69,25 @@ public class VolunteerPreLogin extends HttpServlet {
         catch(Exception e){
            e.printStackTrace();
         }
-       finally{
-       	 
-			if(ngoDetailSt!=null)
+       finally{ 
+			if(volunteerPreLoginSt!=null)
 				try {
-					ngoDetailSt.close();
+					volunteerPreLoginSt.close();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			
-			if(ngoDetailRs!=null)
+			if(volunteerPreLoginRs!=null)
 				try {
-					ngoDetailRs.close();
+					volunteerPreLoginRs.close();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				} 
+			} 
        	} 
-	}
+     
+    
+}
 
 }

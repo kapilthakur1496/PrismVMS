@@ -58,7 +58,6 @@ h1 {
     <style type="text/css">
         
         
-   
      
     </style>
 </head>
@@ -125,85 +124,107 @@ h1 {
 			<div class="clearfix"></div>
 		</div>
 	</div>
-</div>  
+</div> 
+<% try{ %>
+  
 <%!  
-	ResultSet professionalSkillRs=null,academicSkillRs=null,lifeSkillRs=null,softSkillRs=null;
+	ResultSet volunteerDetails=null;
+	int mentorStatus=0; 
+	String adminId =null;
+	ResultSet SubCategoryRs=null; 
 	Control ct = new Control();
 %>
+<% 
+	adminId = (String)session.getAttribute("adminId"); 
+	if(adminId == null)
+	{	
+		adminId = (String)session.getAttribute("adminId"); 
+	} 
+	mentorStatus  = ct.checkMentorStatus(request, response,adminId);  
+} catch (Exception e){ 	 	
+}
+if(mentorStatus == 1){
+	String vId = request.getParameter("vId");
+ %>
  
+ 	
+ 
+<div class="container" style="paddin:0px; margin-left:0px;">
+    <div class="row">
+        <div class="col-md-2 col-lg-3" >
+
+            <div class="bootstrap-vertical-nav" >
 	 
-<form action="Control?action=volunteerChooseSkills" method="post">
-	<div class="container" style="paddin:0px; margin-left:150px;  ">
-	    <div class="row" style="height:400px;"><br>
-	        <div class="col-md-3 col-lg-3" style="text-algin:center; ">
-				<h4 style="text-align:left; margin-bottom:15px;" >Academic Skills</h4>
-				<% academicSkillRs = ct.getAcademicSkill(); %>
-		        <% while(academicSkillRs.next() ){ %>
-		           <label class="container"> <%=academicSkillRs.getString("skill_name") %> 
-						  <input type="checkbox" name="skills" >
-						  <span class="checkmark"></span>
-					</label>
-		       <%} %>  
-	        </div>
-	         <div class="col-md-3 col-lg-3" >
-				
-	           <h4 style="text-align:left; margin-bottom:15px;">Life Skills</h4>   
-				 
-				 
-				 <% lifeSkillRs = ct.getLifeSkill(); %>
-	            	<% while(lifeSkillRs.next() ){ %>
-	             	<label class="container"> <%=lifeSkillRs.getString("skill_name") %> 
-						  <input type="checkbox" name="skills"  >
-						  <span class="checkmark"></span>
-					</label>
-		       <%} %>   
-	        </div>
-	         <div class="col-md-3 col-lg-3" >
-				<h4 style="text-align:left; margin-bottom:15px;">Professional Skills</h4> 
-				 <% softSkillRs = ct.getSoftSkill(); %>
-	             <% while(softSkillRs.next() ){ %>
-	              	<label class="container"> <%=softSkillRs.getString("skill_name") %> 
-						  <input type="checkbox"  name="skills" >
-						  <span class="checkmark"></span>
-					</label>
-		       <%} %> 
-	              					 
-	        </div>
-	        <div class="col-md-3 col-lg-3" >
-				<h4 style="text-align:left; margin-bottom:15px;">Soft Skills</h4> 
-				<% professionalSkillRs = ct.getProfessionalSkill(); %>
-	            <% while(professionalSkillRs.next() ){ %>
-	            	<label class="container"> <%=professionalSkillRs.getString("skill_name") %> 
-						  <input type="checkbox" name="skills" >
-						  <span class="checkmark"></span>
-					</label>
-		       <%} %> 			
-	           
-	        </div>
-	        
-	 	</div>
-	 	<div class="key">
-			<i class="fa fa-lock" aria-hidden="true"></i>
-			<textarea name="additionalSkills" style="width:94%;" placeholder="Write Addtional Skills"></textarea>
-			<div class="clearfix"></div>
-		</div> 
-		<div class="key">
-			<i class="fa fa-lock" aria-hidden="true"></i>
-			<textarea name="background" style="width:94%;" placeholder="Write Backgorund and Achievements"></textarea>
-			<div class="clearfix"></div>
-		</div> 
-		 <div class="row" style="margin-top:-10px;"> 
-		 	<div class="col-md-9 col-lg-9" style="text-algin:right;  ">
-		 	</div>
-		 <div class="col-md-3 col-lg-3" >
-		<input type="submit" class="form-control" style="opacity:1; width:50%;" value="Next" >
-	   </div>
-	       </div>
-	 	
-	</div>
-</form>
-   
-		  <br><br><br><br>
+ 
+                <div   id="collapseExample"style="paddin:0px; margin-left:0px;" >
+                    <ul class="nav flex-column" id="exCollapsingNavbar3">
+	                    <li   class="nav-item" style="text-algin:center">
+	                     <img src="images/logo2.png" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 63px;height: 80px;border-radius: 50%;">
+	                 	</li>
+                       <li class="nav-item">
+                         <form action="#" method="post">
+								<div class="key" style="margin:10px;">
+									<input  type="text"   name="productPrice" required="" placeholder="Search Feature">
+									<div class="clearfix"></div>
+								</div>
+								<button type="submit" class="btn btn-default search" aria-label="Left Align">
+									<i class="fa fa-search" aria-hidden="true"> </i>
+								</button> 
+							</form>	
+                    	</li>
+                    		
+                       	<li  class="nav-item">
+                         	<a class="nav-link " href="mentorIndex.jsp">Home</a>
+                        </li>
+                        <li  class="nav-item">
+                            <a class="nav-link active" href="individualProject.jsp">Individual Projects</a>
+                        </li> 
+                        <li  class="nav-item">
+                            <a class="nav-link" href="workMeeting.jsp">Team Projects</a>
+                        </li>
+                        <li   class="nav-item">
+                            <a class="nav-link" href="workTraining.jsp">Branch Projects</a>
+                        </li>
+                         <li   class="nav-item">
+                            <a class="nav-link" href="projectAssigned.jsp">Meeting Report</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link  " href="teamProject.jsp">Team Project</a>
+                        </li>
+                        <li   class="nav-item">
+                            <a class="nav-link" href="branchProject.jsp">Branch Project</a>
+                        </li>
+                        <li   class="nav-item">
+                            <a class="nav-link" href="branchProject.jsp">Grievance</a>
+                        </li>
+                        <li   class="nav-item">
+                            <a class="nav-link" href="support.jsp">Online Support</a>
+                        </li>
+                         
+                         
+                          
+                        
+                    </ul>
+                </div> 
+            </div> 
+        </div>
+        <div class="col-md-10 col-lg-9" style="padding:22px 10px;">
+ 			<form action="Control?action=assignIndividualProject" method="post" >
+ 			<input type="hidden" name="vId" value="<%=vId %>" >
+			<input type="text" name="projectTitle" required placeholder="Enter Project Title">
+			<input  name="projectStartDate" type="date"  required placeholder="Choose Project Start Date">
+			<input  name="projectEndDate" type="date" required placeholder="Choose Project End Date">
+			<textarea  required name="projectDesc" placeholder="Enter Project Description"></textarea>
+			<input type="submit" value="Assign">
+ 			</form>
+          
+    	</div>
+ 	</div>
+</div>
+  
+<%} %>
+<br><br><br><br><br>
+		  
 <!-- newsletter -->
 <div class="newsletter">
 	<div class="container">
@@ -268,97 +289,6 @@ h1 {
 	</div>
 </div>
 
-	<!-- cart-js -->
-	<script src="js/minicart.js"></script>
-	<!-- <script>
-        w3ls1.render();
-
-        w3ls1.cart.on('w3sb1_checkout', function (evt) {
-        	var items, len, i;
-
-        	if (this.subtotal() > 0) {
-        		items = this.items();
-
-        		for (i = 0, len = items.length; i < len; i++) {
-        			items[i].set('shipping', 0);
-        			items[i].set('shipping2', 0);
-        		}
-        	}
-        });
-    </script> -->  
-	<!-- //cart-js -->  
-
-<%
-	String registered =request.getParameter("ngomsg");
-	if(registered != null){
-%>
-<div class="Message Message--green">
-  <div class="Message-icon">
-    <i class="fa fa-check "></i>
-  </div>
-  <div class="Message-body">
-    <p>Thank You for registering with us. Please check your mail to verify your account</p>   
-  </div>
-  <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
-</div>
-<%} %>
-
-
-	<!-- cart-js -->
-	<script src="js/minicart.js"></script>
-	<script>
-        w3ls1.render();
-
-        w3ls1.cart.on('w3sb1_checkout', function (evt) {
-        	var items, len, i;
-
-        	if (this.subtotal() > 0) {
-        		items = this.items();
-
-        		for (i = 0, len = items.length; i < len; i++) {
-        			items[i].set('shipping', 0);
-        			items[i].set('shipping2', 0);
-        		}
-        	}
-        });
-    </script>  
-	<!-- //cart-js -->  
-	
- 
-<script type="text/javascript">
-
-function closeMessage(el) {
-	  el.addClass('is-hidden');
-	}
-
-	$('.js-messageClose').on('click', function(e) {
-	  closeMessage($(this).closest('.Message'));
-	});
-
-	$('#js-helpMe').on('click', function(e) {
-	  alert('Help you we will, young padawan');
-	  closeMessage($(this).closest('.Message'));
-	});
-
-	$('#js-authMe').on('click', function(e) {
-	  alert('Okelidokeli, requesting data transfer.');
-	  closeMessage($(this).closest('.Message'));
-	});
-
-	$('#js-showMe').on('click', function(e) {
-	  alert("You're off to our help section. See you later!");
-	  closeMessage($(this).closest('.Message'));
-	});
-
-	$(document).ready(function() {
-	  setTimeout(function() {
-	    closeMessage($('#js-timer'));
-	  }, 5000);
-	});
-
-
-</script>
-
-	  
+	 
 </body>
 </html>

@@ -51,14 +51,18 @@ public class AdminLogin extends HttpServlet {
 					
 					String adminId = adminLoginRs.getString("id"); 
 					String adminType = adminLoginRs.getString("admin_type");
-					 HttpSession session = request.getSession();
+					HttpSession session = request.getSession();
 					session.setAttribute("adminId", adminId); 
 					session.setAttribute("adminType", adminType); 
 					session.setMaxInactiveInterval(1800); 
-					
-					response.sendRedirect("admin/index.jsp");
-					/*javax.servlet.RequestDispatcher dispatcher=request.getRequestDispatcher("adminIndex.jsp");
-					dispatcher.forward(request, response); */  
+					if(adminType.equals("Admin"))
+					{
+						response.sendRedirect("admin/index.jsp"); 
+					}
+					else if(adminType.equals("Mentor"))
+					{
+						response.sendRedirect("mentorIndex.jsp"); 
+					} 
 				}  
 				else
 				{

@@ -12,12 +12,12 @@
     <url-pattern>/AdminLogin</url-pattern>
   </servlet-mapping>
     <servlet>
-    <servlet-name>UserLogin</servlet-name>
-    <servlet-class>UserLogin</servlet-class>
+    <servlet-name>VolunteerLogin</servlet-name>
+    <servlet-class>VolunteerLogin</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>UserLogin</servlet-name>
-    <url-pattern>/UserLogin</url-pattern>
+    <servlet-name>VolunteerLogin</servlet-name>
+    <url-pattern>/VolunteerLogin</url-pattern>
   </servlet-mapping>
     <servlet>
     <servlet-name>VolunteerPreLogin</servlet-name>

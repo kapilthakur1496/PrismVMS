@@ -97,21 +97,21 @@
                 <% try{ %>
 			  
 				<%! 
-					ResultSet volunteerDetailsRs=null;
+					ResultSet volunteerDetailsRs=null,teamRs=null,branchRs=null;
 				 	int volunteerCount =0, pageCount = 0;
 					Control ct = new Control();
 					int pageNumber=0, nextRecordCount=10;	
 				%>
 				<%  
-				 	  pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
-						volunteerCount = ct.volunteerCount();
-					  pageCount= volunteerCount/10 +1;		  
-					  volunteerDetailsRs = ct.volunteerDetails(pageNumber-1, nextRecordCount);
+				 	pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+					volunteerCount = ct.volunteerCount();
+					pageCount= volunteerCount/10 +1;		  
+					volunteerDetailsRs = ct.applicationDetails(pageNumber-1, nextRecordCount);
 			} catch (Exception e)	{
 				}
-			%>
+			%> <%!  int i=1; %>
 			 <%  while(volunteerDetailsRs.next()){  %>
-			 <%!  int i=1; %>
+			
 							<tr>
 								<td>
 								  	<input type="checkbox" name="volunteerId" id="u<%=i%>" value="<%=volunteerDetailsRs.getString("id") %>">
@@ -132,8 +132,8 @@
 								</td> 
 								 
 							</tr>
-							<input type="hidden" name="pageNumber"    value="<%=pageNumber %>">
-							<% ++i; } %> 
+							<input type="hidden" name="pageNumber"  value="<%=pageNumber %>">
+							<% ++i; }  %> 
                 </tbody>
               </table>  
               <div style="margin:10px;">
@@ -145,21 +145,107 @@
 								<option>Rejected </option> 
 								<option>Pending</option>
 							</select>
-						</div> 
+						</div>  
 						<div  class="col-lg-5">
-							<input type="submit"  class="form-control"  value="Submit" >
+							<input type="submit"  class="form-control"  value="Update Application Status" >
 						</div> 
 					</div>
 					</form> 
 			 <div class="col-lg-12 text-center" style="margin-left:auto; margin-right:auto;">
 				<ul class="pagination " >
-					<% for( int i=1; i<=pageCount; i++){ %>
-				    	<li><a href="manage-users.jsp?pageNumber=<%=i%>"><%=i%></a></li>
+					<% for( int k=1; k<=pageCount; k++){ %>
+				    	<li><a href="manage-users.jsp?pageNumber=<%=k%>"><%=k%></a></li>
+				    <% } %> 
+			 	</ul>
+		 	</div>  
+            </div>
+            <div class="panel panel-default table-responsive">
+            <form id="regForm" action="${pageContext.request.contextPath}/Control?action=assignTeam" method="post" style="margin-top:0px; padding-top:30px;">  
+			  <table class="table table-striped table-bordered templatemo-user-table">
+                <thead>
+                  <tr>
+                    <td><a href="" class="white-text templatemo-sort-by"># <span class="caret"></span></a></td>
+                    <td><a href="" class="white-text templatemo-sort-by">First Name <span class="caret"></span></a></td>
+                    <td><a href="" class="white-text templatemo-sort-by">Email<span class="caret"></span></a></td>
+                    <td><a href="" class="white-text templatemo-sort-by">  Status <span class="caret"></span></a></td>
+                    <td><a href="" class="white-text templatemo-sort-by">Profile <span class="caret"></span></a></td>
+                     
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                <% try{ %> 
+				<%  
+				 	pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+					volunteerCount = ct.volunteerCount();
+					pageCount= volunteerCount/10 +1;		  
+					volunteerDetailsRs = ct.volunteerDetails(pageNumber-1, nextRecordCount);
+			} catch (Exception e)	{
+				}
+			%>
+			 <%!  int j=i; %>
+			 <%  while(volunteerDetailsRs.next()){  %>
+			
+							<tr>
+								<td>
+								  	<input type="checkbox" name="volunteerId" id="t<%=j%>" value="<%=volunteerDetailsRs.getString("id") %>">
+                      				<label for="t<%=j%>" class="font-weight-400"><span></span> </label> 
+								 				
+								</td>
+								<td> 
+									<input type="text" readonly class="form-control" name="name" value="<%=volunteerDetailsRs.getString("volunteer_name") %>" >					
+								</td>
+								<td>
+									<input type="text" readonly name="email"  class="form-control"  value="<%=volunteerDetailsRs.getString("email_id") %>" >
+								</td>  
+								<td>
+									<input type="text" readonly name="email_status"  class="form-control"   value="<%=volunteerDetailsRs.getString("approve_status") %>" >
+								</td> 
+								 <td>
+									<a href="#" >View </a>
+								</td> 
+								 
+							</tr>
+							<input type="hidden" name="pageNumber"  value="<%=pageNumber %>">
+							<% ++j; } %> 
+                </tbody>
+              </table>  
+              <div style="margin:10px;">
+						<div class="col-lg-4">
+							<select   class="form-control" name="team">
+							<option value="0">Select the Team</option>
+								<%	teamRs = ct.getTeams();
+              					%>
+              				<% while(teamRs.next() ){ %>
+              					<option> <%=teamRs.getString("team_name") %></option>
+              				<%} %> 
+							</select>
+						</div>  
+						<div class="col-lg-4">
+							<select   class="form-control" name="branch">
+							<option value="0">Select the Branch</option>
+								<%	branchRs = ct.getBranch();
+              					%>
+              				<% while(branchRs.next() ){ %>
+              					<option value="<%=branchRs.getString("id") %>" > <%=branchRs.getString("name") %></option>
+              				<%} %> 
+							</select>
+						</div>
+						<div  class="col-lg-4">
+							<input type="submit"  class="form-control"  value="Assign Team" >
+						</div> 
+					</div>
+					</form> 
+			 <div class="col-lg-12 text-center" style="margin-left:auto; margin-right:auto;">
+				<ul class="pagination " >
+					<% for( int k=1; k<=pageCount; k++){ %>
+				    	<li><a href="manage-users.jsp?pageNumber=<%=k%>"><%=k%></a></li>
 				    <% } %> 
 			 	</ul>
 		 	</div>  
             </div>                          
-          </div>          
+          </div> 
+                   
           <!-- <div class="templatemo-flex-row flex-content-row">
             <div class="col-1">
               <div class="panel panel-default margin-10">

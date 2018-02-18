@@ -58,7 +58,6 @@ h1 {
     <style type="text/css">
         
         
-   
      
     </style>
 </head>
@@ -125,85 +124,157 @@ h1 {
 			<div class="clearfix"></div>
 		</div>
 	</div>
-</div>  
+</div> 
+<% try{ %>
+  
 <%!  
-	ResultSet professionalSkillRs=null,academicSkillRs=null,lifeSkillRs=null,softSkillRs=null;
+	ResultSet teamProjectsRs=null;
+	int mentorStatus=0; 
+	String adminId =null;
+	ResultSet teamsRs=null; 
+	int volunteerCount =0, pageCount = 0;
+	int pageNumber=0, nextRecordCount=10;	
 	Control ct = new Control();
 %>
+<% 
+	adminId = (String)session.getAttribute("adminId"); 
+	if(adminId == null)
+	{	
+		adminId = (String)session.getAttribute("adminId"); 
+	} 
+	mentorStatus  = ct.checkMentorStatus(request, response,adminId);  
+} catch (Exception e){ 	 	
+}
+if(mentorStatus == 1){
+	pageNumber = Integer.parseInt(request.getParameter("pN")); 
+	volunteerCount = ct.volunteerCount();
+	pageCount= volunteerCount/10 +1;
+	teamProjectsRs = ct.getTeamProject(request, response,pageNumber-1, nextRecordCount);  
+	/* ct.teamVolunteerDetails(pageNumber-1, nextRecordCount,adminId,branchId); */
+	
+ %>
  
+ 	
+ 
+<div class="container" style="paddin:0px; margin-left:0px;">
+    <div class="row">
+        <div class="col-md-2 col-lg-3" >
+
+            <div class="bootstrap-vertical-nav" >
 	 
-<form action="Control?action=volunteerChooseSkills" method="post">
-	<div class="container" style="paddin:0px; margin-left:150px;  ">
-	    <div class="row" style="height:400px;"><br>
-	        <div class="col-md-3 col-lg-3" style="text-algin:center; ">
-				<h4 style="text-align:left; margin-bottom:15px;" >Academic Skills</h4>
-				<% academicSkillRs = ct.getAcademicSkill(); %>
-		        <% while(academicSkillRs.next() ){ %>
-		           <label class="container"> <%=academicSkillRs.getString("skill_name") %> 
-						  <input type="checkbox" name="skills" >
-						  <span class="checkmark"></span>
-					</label>
-		       <%} %>  
-	        </div>
-	         <div class="col-md-3 col-lg-3" >
-				
-	           <h4 style="text-align:left; margin-bottom:15px;">Life Skills</h4>   
-				 
-				 
-				 <% lifeSkillRs = ct.getLifeSkill(); %>
-	            	<% while(lifeSkillRs.next() ){ %>
-	             	<label class="container"> <%=lifeSkillRs.getString("skill_name") %> 
-						  <input type="checkbox" name="skills"  >
-						  <span class="checkmark"></span>
-					</label>
-		       <%} %>   
-	        </div>
-	         <div class="col-md-3 col-lg-3" >
-				<h4 style="text-align:left; margin-bottom:15px;">Professional Skills</h4> 
-				 <% softSkillRs = ct.getSoftSkill(); %>
-	             <% while(softSkillRs.next() ){ %>
-	              	<label class="container"> <%=softSkillRs.getString("skill_name") %> 
-						  <input type="checkbox"  name="skills" >
-						  <span class="checkmark"></span>
-					</label>
-		       <%} %> 
-	              					 
-	        </div>
-	        <div class="col-md-3 col-lg-3" >
-				<h4 style="text-align:left; margin-bottom:15px;">Soft Skills</h4> 
-				<% professionalSkillRs = ct.getProfessionalSkill(); %>
-	            <% while(professionalSkillRs.next() ){ %>
-	            	<label class="container"> <%=professionalSkillRs.getString("skill_name") %> 
-						  <input type="checkbox" name="skills" >
-						  <span class="checkmark"></span>
-					</label>
-		       <%} %> 			
-	           
-	        </div>
-	        
-	 	</div>
-	 	<div class="key">
-			<i class="fa fa-lock" aria-hidden="true"></i>
-			<textarea name="additionalSkills" style="width:94%;" placeholder="Write Addtional Skills"></textarea>
-			<div class="clearfix"></div>
-		</div> 
-		<div class="key">
-			<i class="fa fa-lock" aria-hidden="true"></i>
-			<textarea name="background" style="width:94%;" placeholder="Write Backgorund and Achievements"></textarea>
-			<div class="clearfix"></div>
-		</div> 
-		 <div class="row" style="margin-top:-10px;"> 
-		 	<div class="col-md-9 col-lg-9" style="text-algin:right;  ">
-		 	</div>
-		 <div class="col-md-3 col-lg-3" >
-		<input type="submit" class="form-control" style="opacity:1; width:50%;" value="Next" >
-	   </div>
-	       </div>
-	 	
-	</div>
-</form>
-   
-		  <br><br><br><br>
+ 
+                <div   id="collapseExample"style="paddin:0px; margin-left:0px;" >
+                    <ul class="nav flex-column" id="exCollapsingNavbar3">
+	                    <li   class="nav-item" style="text-algin:center">
+	                     <img src="images/logo2.png" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 63px;height: 80px;border-radius: 50%;">
+	                 	</li>
+                       <li class="nav-item">
+                         <form action="#" method="post">
+								<div class="key" style="margin:10px;">
+									<input  type="text"   name="productPrice" required="" placeholder="Search Feature">
+									<div class="clearfix"></div>
+								</div>
+								<button type="submit" class="btn btn-default search" aria-label="Left Align">
+									<i class="fa fa-search" aria-hidden="true"> </i>
+								</button> 
+							</form>	
+                    	</li>
+                    		
+                       	<li  class="nav-item">
+                         	<a class="nav-link " href="mentorIndex.jsp">Home</a>
+                        </li>
+                        <li  class="nav-item">
+                            <a class="nav-link active" href="individualProject.jsp">Individual Projects</a>
+                        </li> 
+                        <li  class="nav-item">
+                            <a class="nav-link" href="teamProject.jsp">Team Projects</a>
+                        </li>
+                        <li  class="nav-item">
+                            <a class="nav-link" href="teamProjectView.jsp?pN=1">View Team Projects</a>
+                        </li>
+                        <li   class="nav-item">
+                            <a class="nav-link" href="workTraining.jsp">Branch Projects</a>
+                        </li>
+                         <li   class="nav-item">
+                            <a class="nav-link" href="projectAssigned.jsp">Meeting Report</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link  " href="teamProject.jsp">Team Project</a>
+                        </li>
+                        <li   class="nav-item">
+                            <a class="nav-link" href="branchProject.jsp">Branch Project</a>
+                        </li>
+                        <li   class="nav-item">
+                            <a class="nav-link" href="branchProject.jsp">Grievance</a>
+                        </li>
+                        <li   class="nav-item">
+                            <a class="nav-link" href="support.jsp">Online Support</a>
+                        </li>
+                         
+                         
+                          
+                        
+                    </ul>
+                </div> 
+            </div> 
+        </div>
+        <div class="col-md-10 col-lg-9" style="padding:22px 10px;">
+	 	  
+				<ul class="collapsible" data-collapsible="accordion" style="list-style:none; margin-left:auto; margin-right:auto;">
+			 
+				 <%while(teamProjectsRs.next()){ %>
+					<li>
+						<div class="collapsible-header active"><p style="padding:10px; background-color:#66bdd7; font-size:14px;">
+							<span class="glyphicon glyphicon-pushpin" style="font-size:20px; color:#fff; font-size:22px; font-style: bold;"></span>&nbsp;&nbsp;
+							<%=teamProjectsRs.getString("tproject_title") %>
+							 
+					  		<span style="float: right; margin-right: 39px;" >
+						  		<i class="fa fa-users"  style="text-align: right; color:#fff; font-size:22px; font-style: bold;"> </i> &nbsp;&nbsp; 
+							 	<%=teamProjectsRs.getString("team") %>  
+							</span> 		
+				 	 	</div> 
+						<div class="collapsible-body" style="background-color: #fff;">
+							<div class="col-lg-12" style="margin-left:90px;">
+								<div class="row"  >
+									<div class="col-lg-6" style="padding:5px;  "> 
+										<div class="info">
+					 			 			<p><strong><i class="fa fa-calendar-o" style="font-size:20px;  "></i>  &nbsp;  &nbsp;  Start Date</strong> &nbsp; <%=teamProjectsRs.getString("tpro_start_date") %>      </p>
+										</div>
+									</div>
+									<div class="col-lg-6" style="padding:5px;  "> 
+										<div class="info">
+					 			 			<p><strong><i class="fa fa-calendar-o" style="font-size:20px;  "></i> &nbsp;  &nbsp; End Date</strong> &nbsp; <%=teamProjectsRs.getString("tpro_end_date") %>   </p>
+										</div>
+									</div>
+								</div>
+								<br>
+								<p style="   font-size:16px;"><%=teamProjectsRs.getString("tproject_desc") %>  </p> 
+								<br><a href="assignTeamProjects.jsp?projectId=<%=teamProjectsRs.getString("id")%>"><i class="fa fa-tags" style="color:#fff; font-size:22px;  "></i> Assign Students </a>
+							</div> 
+					</div>
+				</li>
+				<%} %> 
+				 <div class="col-lg-12 text-center" style="margin-left:auto; margin-right:auto;">
+					<ul class="pagination " >
+						<% for( int k=1; k<=pageCount; k++){ %>
+					    	<li><a href="teamProjectView.jsp?pN=<%=k%>"><%=k%></a></li>
+					    <% } %> 
+				 	</ul>
+		 		</div>  
+	  		</ul>
+		 
+	 
+	 	 
+	 
+  
+ 			 
+    	</div>
+ 	</div>
+</div>
+  
+<%} %>
+<br><br><br><br><br>
+		  
 <!-- newsletter -->
 <div class="newsletter">
 	<div class="container">
@@ -268,97 +339,26 @@ h1 {
 	</div>
 </div>
 
-	<!-- cart-js -->
-	<script src="js/minicart.js"></script>
-	<!-- <script>
-        w3ls1.render();
+	 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
 
-        w3ls1.cart.on('w3sb1_checkout', function (evt) {
-        	var items, len, i;
-
-        	if (this.subtotal() > 0) {
-        		items = this.items();
-
-        		for (i = 0, len = items.length; i < len; i++) {
-        			items[i].set('shipping', 0);
-        			items[i].set('shipping2', 0);
-        		}
-        	}
-        });
-    </script> -->  
-	<!-- //cart-js -->  
-
-<%
-	String registered =request.getParameter("ngomsg");
-	if(registered != null){
-%>
-<div class="Message Message--green">
-  <div class="Message-icon">
-    <i class="fa fa-check "></i>
-  </div>
-  <div class="Message-body">
-    <p>Thank You for registering with us. Please check your mail to verify your account</p>   
-  </div>
-  <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
-</div>
-<%} %>
-
-
-	<!-- cart-js -->
-	<script src="js/minicart.js"></script>
-	<script>
-        w3ls1.render();
-
-        w3ls1.cart.on('w3sb1_checkout', function (evt) {
-        	var items, len, i;
-
-        	if (this.subtotal() > 0) {
-        		items = this.items();
-
-        		for (i = 0, len = items.length; i < len; i++) {
-        			items[i].set('shipping', 0);
-        			items[i].set('shipping2', 0);
-        		}
-        	}
-        });
-    </script>  
-	<!-- //cart-js -->  
-	
- 
 <script type="text/javascript">
 
-function closeMessage(el) {
-	  el.addClass('is-hidden');
-	}
-
-	$('.js-messageClose').on('click', function(e) {
-	  closeMessage($(this).closest('.Message'));
+(function($) {
+	
+	$(window).scroll(function() {
+		
+		$(window).scroll(function() {
+			space = $(window).innerHeight() - $('.fab').offsetTop + $('.fab').offsetHeight;
+			if(space < 200){
+				$('.fab').css('margin-bottom', '150px');
+			}
+		})
+		
 	});
-
-	$('#js-helpMe').on('click', function(e) {
-	  alert('Help you we will, young padawan');
-	  closeMessage($(this).closest('.Message'));
-	});
-
-	$('#js-authMe').on('click', function(e) {
-	  alert('Okelidokeli, requesting data transfer.');
-	  closeMessage($(this).closest('.Message'));
-	});
-
-	$('#js-showMe').on('click', function(e) {
-	  alert("You're off to our help section. See you later!");
-	  closeMessage($(this).closest('.Message'));
-	});
-
-	$(document).ready(function() {
-	  setTimeout(function() {
-	    closeMessage($('#js-timer'));
-	  }, 5000);
-	});
-
+	
+})(jQuery);
 
 </script>
-
-	  
 </body>
 </html>

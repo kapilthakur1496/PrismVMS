@@ -352,7 +352,7 @@ address: <span id="c"></span>
                </div>
                 <div class="templatemo-content-widget white-bg col-2">
               <i class="fa fa-times"></i>
-            <br>
+            	<br>
                
              	<form method="post" action="${pageContext.request.contextPath}/Control?action=addSoftSkills" >
              	<input type="text" Placeholder="Soft Skill"  required class="form-control" name="softSkill">
@@ -419,28 +419,58 @@ address: <span id="c"></span>
              	</form>
            	</div> 
     	</div>
-         <!-- <div class="templatemo-flex-row flex-content-row templatemo-overflow-hidden"> overflow hidden for iPad mini landscape view
-            <div class="col-1 templatemo-overflow-hidden">
-              <div class="templatemo-content-widget white-bg templatemo-overflow-hidden">
-                <i class="fa fa-times"></i>
-                <div class="templatemo-flex-row flex-content-row">
-                  <div class="col-1 col-lg-6 col-md-12">
-                    <h2 class="text-center">Modular<span class="badge">new</span></h2>
-                    <div id="pie_chart_div" class="templatemo-chart"></div> Pie chart div
-                  </div>
-                  <div class="col-1 col-lg-6 col-md-12">
-                    <h2 class="text-center">Interactive<span class="badge">new</span></h2>
-                    <div id="bar_chart_div" class="templatemo-chart"></div> Bar chart div
-                  </div>  
-                </div>                
-              </div>
-            </div>
-          </div>  -->
-          <footer class="text-right">
-            <p>Copyright &copy; 2018 Craplets
-            | Designed by <a href="#" target="_parent"> Anurag Goel and Kapil Thakur</a></p>
-          </footer>         
-        </div>
+    	 <div class="templatemo-flex-row flex-content-row">
+          	<div class="col-2">
+              <div class="panel panel-default templatemo-content-widget white-bg  templatemo-overflow-hidden">
+               <i class="fa fa-times"></i>  
+                     <h2 class="margin-bottom-10">Create Mentors </h2>
+		            <p></p>
+	           		<form action="${pageContext.request.contextPath}/Control?action=createMentor" class="templatemo-login-form" method="post" enctype="multipart/form-data">
+		              	<div class="row form-group">
+			                <div class="col-lg-4 col-md-4 form-group">                  
+			                    <label for="inputFullName">Full Name</label>
+			                    <input type="text" name="fullName"  required class="form-control" id="inputFullName" placeholder="Kapil Thakur">                  
+			                </div>
+			                 <div class="col-lg-4 col-md-4 form-group">                  
+			                    <label for="inputEmail">Email</label>
+			                    <input type="email" name="email" required class="form-control" id="inputEmail" placeholder="prism.mentor@gmail.com">                  
+			                </div> 
+			                 <div class="col-lg-4 col-md-4 form-group"> 
+			                  	<label class="control-label templatemo-block">Select Teams</label>                 
+			                  	<select required multiple name="team" class="templatemo-multi-select form-control" style="overflow-y: scroll;">
+	                				<% 	teamRs = ct.getTeams();  %>
+	              					<% while(teamRs.next() ){ %>
+	              					<option value="<%=teamRs.getString("team_name") %>"><%=teamRs.getString("team_name") %></option>
+	              					<% } %>  
+           						</select> 
+		              		</div>
+		              	</div>
+		              	<div class="row form-group"> 
+		              		<div class="col-lg-4 col-md-4 form-group"> 
+			                  	<label class="control-label templatemo-block">Select Branch</label>                 
+			                  	<select required  name="branch" class="  form-control" style="overflow-y: scroll;">
+	                				<% 	branchRs = ct.getBranch();  %>
+	              					<% while(branchRs.next() ){ %>
+	              					<option value="<%=branchRs.getString("id") %>"><%=branchRs.getString("name")%></option>
+	              					<% } %>  
+           						</select> 
+		              		</div>
+		              		<div class="col-lg-4 col-md-4 form-group"> 
+	                  			<label class="control-label templatemo-block">Select User Type</label>                 
+			                  	<select name="userType" class="form-control">
+				                    <option value="Mentor">Mentor</option>                     
+			                  	</select>
+			                </div>
+		              		<div class=" col-lg-4 col-md-4 form-group "><br>
+		              		<label class="control-label templatemo-block"> </label>       
+			                	<button type="submit" class="templatemo-blue-button" style="padding:8px 10px;">Create Mentor</button>
+				                <button type="reset" class="templatemo-blue-button" style="padding:8px 35px;">Reset</button>
+              				</div>
+	              		</div>               
+		            </form>                    
+             	</div>
+           	</div>           
+         </div>  
       </div>
     </div>
      

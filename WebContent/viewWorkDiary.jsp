@@ -127,23 +127,34 @@ h1 {
 </div> 
 <% try{ %>
   
-<%! String ngoStatus=null;
-	ResultSet ngoDetail=null;
-	String ngoId=null, pId = null; 
-	ResultSet SubCategoryRs=null; 
+<%!  
+	ResultSet workDiaryRs=null,branchRs=null;
+	int volunteerStatus=0; 
+	String volunteerId =null;
+	ResultSet teamsRs=null; 
+	int volunteerCount =0, pageCount = 0;
+	int pageNumber=0, nextRecordCount=10;	
 	Control ct = new Control();
 %>
 <% 
-	ngoId= (String)session.getAttribute("ngoId"); 
-	if(ngoId == null)
+	volunteerId = (String)session.getAttribute("volunteerId"); 
+	if(volunteerId == null)
 	{	
-		ngoId= (String)session.getAttribute("NgoId"); 
+		volunteerId = (String)session.getAttribute("volunteerId"); 
 	} 
-	ngoStatus  = ct.NgoStatus(ngoId);  
+	volunteerStatus  = ct.checkVolunteerStatus(request, response,volunteerId);  
 } catch (Exception e){ 	 	
 }
-%>  	
+finally
+{
+
+}
+if(volunteerStatus == 1){
+
+
+%>
  
+ 	
  
 <div class="container" style="paddin:0px; margin-left:0px;">
     <div class="row">
@@ -155,9 +166,7 @@ h1 {
                 <div   id="collapseExample"style="paddin:0px; margin-left:0px;" >
                     <ul class="nav flex-column" id="exCollapsingNavbar3">
 	                    <li   class="nav-item" style="text-algin:center">
-	                    <%String logo1 = ct.getNgoLogo(ngoId);%>
-						 
-	                         	<img src="images/<%=logo1%>" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 63px;height: 80px;border-radius: 50%;">
+	                     <img src="images/logo2.png" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 63px;height: 80px;border-radius: 50%;">
 	                 	</li>
                        <li class="nav-item">
                          <form action="#" method="post">
@@ -171,31 +180,35 @@ h1 {
 							</form>	
                     	</li>
                     		
-                       	<li   class="nav-item">
-                         	<a class="nav-link active" href="NgoIndex.jsp">Home</a>
+                       	<li  class="nav-item">
+                         	<a class="nav-link " href="mentorIndex.jsp">Home</a>
                         </li>
                         <li  class="nav-item">
-                            <a class="nav-link" href="ngoAddProduct.jsp">Add Products</a>
-                        </li> <li  class="nav-item">
-                            <a class="nav-link" href="ngoProductView.jsp">View Products</a>
+                            <a class="nav-link active" href="individualProject.jsp">Individual Projects</a>
+                        </li> 
+                        <li  class="nav-item">
+                            <a class="nav-link" href="teamProject.jsp">Team Projects</a>
+                        </li>
+                        <li  class="nav-item">
+                            <a class="nav-link" href="teamProjectView.jsp?pN=1">View Team Projects</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="ngoAddDonation.jsp">Ask For Donation</a>
+                            <a class="nav-link" href="workTraining.jsp">Branch Projects</a>
                         </li>
                          <li   class="nav-item">
-                            <a class="nav-link" href="ngoDonationView.jsp">View Donations</a>
+                            <a class="nav-link" href="projectAssigned.jsp">Meeting Report</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  " href="ngoAddVolunteering.jsp">Volunteer Job</a>
+                            <a class="nav-link  " href="teamProject.jsp">Team Project</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="ngoVolunteerView.jsp">View Volunteer Job</a>
+                            <a class="nav-link" href="branchProject.jsp">Branch Project</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="ngoAddEvent.jsp">Add Event</a>
+                            <a class="nav-link" href="branchProject.jsp">Grievance</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="ngoEventView.jsp">View View Events</a>
+                            <a class="nav-link" href="support.jsp">Online Support</a>
                         </li>
                           
                         
@@ -203,13 +216,57 @@ h1 {
                 </div> 
             </div> 
         </div>
-        <div class="col-md-10 col-lg-9">
-             
+        <div class="col-md-10 col-lg-9" style="padding:22px 10px;">
+	 	  <% String id= request.getParameter("id");
+ 	 		 workDiaryRs = ct.getWorkDiaryProject(request, response, id);
+ 	  		 String projectName=null;
+	 	  
+	 	  %> 
+	 	  <table>
+	 	  	<thead>
+	 	  	<tr>
+	 	  		<th>#</th>
+	 	  		<th>Project Name</th>
+	 	  		<th>Work Date</th>
+	 	  		<th>Work Hours</th>
+	 	  		<th>Comment</th>
+	 	  		<th>Status</th>
+	 	  		<th>Reward</th> 
+				<th>Task Description</th>
+	 	  	</tr>
+	 	  	</thead>
+	 	  	<tbody>
+	 	  	<%!int i=1; %>
+	 	  	<% while(workDiaryRs.next()) { %>
+	 	  	  	<tr>
+	 	  			<td><%=i %></td>
+	 	  			<td><% projectName= ct.getProjectName(workDiaryRs.getString("project_id"));  %>
+	 	  			<%=projectName %></td>
+	 	  			<td><%=workDiaryRs.getString("wdate") %></td>
+	 	  			<td><%=workDiaryRs.getString("whours") %></td>
+	 	  			<td><%if(workDiaryRs.getString("comment")==null) {%>
+	 	  			
+	 	  			<%}else {%>
+	 	  				<%=workDiaryRs.getString("comment")%>
+	 	  				
+	 	  				<% }%>
+	 	  			</td>
+	 	  			<td><%=workDiaryRs.getString("work_status") %></td>
+	 	  			<td><%=workDiaryRs.getString("reward") %></td>
+ 	  				<td><%=workDiaryRs.getString("work_desc") %></td>
+ 	  			</tr>
+ 	  			
+	 	  	<%i++;} %>
+	 	  	
+	 	  	</tbody>
+	 	  
+	 	  </table>
+	 	   
     	</div>
  	</div>
 </div>
   
-
+<%} %>
 <br><br><br><br><br>
 		  
 <!-- newsletter -->
@@ -276,97 +333,26 @@ h1 {
 	</div>
 </div>
 
-	<!-- cart-js -->
-	<script src="js/minicart.js"></script>
-	<!-- <script>
-        w3ls1.render();
+	 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
 
-        w3ls1.cart.on('w3sb1_checkout', function (evt) {
-        	var items, len, i;
-
-        	if (this.subtotal() > 0) {
-        		items = this.items();
-
-        		for (i = 0, len = items.length; i < len; i++) {
-        			items[i].set('shipping', 0);
-        			items[i].set('shipping2', 0);
-        		}
-        	}
-        });
-    </script> -->  
-	<!-- //cart-js -->  
-
-<%
-	String registered =request.getParameter("ngomsg");
-	if(registered != null){
-%>
-<div class="Message Message--green">
-  <div class="Message-icon">
-    <i class="fa fa-check "></i>
-  </div>
-  <div class="Message-body">
-    <p>Thank You for registering with us. Please check your mail to verify your account</p>   
-  </div>
-  <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
-</div>
-<%} %>
-
-
-	<!-- cart-js -->
-	<script src="js/minicart.js"></script>
-	<script>
-        w3ls1.render();
-
-        w3ls1.cart.on('w3sb1_checkout', function (evt) {
-        	var items, len, i;
-
-        	if (this.subtotal() > 0) {
-        		items = this.items();
-
-        		for (i = 0, len = items.length; i < len; i++) {
-        			items[i].set('shipping', 0);
-        			items[i].set('shipping2', 0);
-        		}
-        	}
-        });
-    </script>  
-	<!-- //cart-js -->  
-	
- 
 <script type="text/javascript">
 
-function closeMessage(el) {
-	  el.addClass('is-hidden');
-	}
-
-	$('.js-messageClose').on('click', function(e) {
-	  closeMessage($(this).closest('.Message'));
+(function($) {
+	
+	$(window).scroll(function() {
+		
+		$(window).scroll(function() {
+			space = $(window).innerHeight() - $('.fab').offsetTop + $('.fab').offsetHeight;
+			if(space < 200){
+				$('.fab').css('margin-bottom', '150px');
+			}
+		})
+		
 	});
-
-	$('#js-helpMe').on('click', function(e) {
-	  alert('Help you we will, young padawan');
-	  closeMessage($(this).closest('.Message'));
-	});
-
-	$('#js-authMe').on('click', function(e) {
-	  alert('Okelidokeli, requesting data transfer.');
-	  closeMessage($(this).closest('.Message'));
-	});
-
-	$('#js-showMe').on('click', function(e) {
-	  alert("You're off to our help section. See you later!");
-	  closeMessage($(this).closest('.Message'));
-	});
-
-	$(document).ready(function() {
-	  setTimeout(function() {
-	    closeMessage($('#js-timer'));
-	  }, 5000);
-	});
-
+	
+})(jQuery);
 
 </script>
-
-	  
 </body>
 </html>
