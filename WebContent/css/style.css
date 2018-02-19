@@ -877,7 +877,6 @@ ul.wmuSliderPagination {
 	color:#66bdd7;
 }
 p.copy-right{
-	margin-top:40px;
 	text-align:center;
 	font-size:14px;
 	color:#363636;
@@ -1797,7 +1796,7 @@ button:hover {
         #collapseExample  
         {
         margin-top:25px;
-        height:700px;
+        height:800px;
         background-color:#66bdd7;
         }
         #exCollapsingNavbar3 li a:hover

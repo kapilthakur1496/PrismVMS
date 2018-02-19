@@ -37,6 +37,22 @@
     <servlet-name>Control</servlet-name>
     <url-pattern>/Control</url-pattern>
   </servlet-mapping> 
+  <servlet>
+    <servlet-name>VolunteerEditDetails</servlet-name>
+    <servlet-class>VolunteerEditDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VolunteerEditDetails</servlet-name>
+    <url-pattern>/VolunteerEditDetails</url-pattern>
+  </servlet-mapping> 
+    <servlet>
+    <servlet-name>DisplayVolunteerPic</servlet-name>
+    <servlet-class>DisplayVolunteerPic</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DisplayVolunteerPic</servlet-name>
+    <url-pattern>/DisplayVolunteerPic</url-pattern>
+  </servlet-mapping> 
   
 <context-param>
   <param-name>EncryptionKey</param-name>

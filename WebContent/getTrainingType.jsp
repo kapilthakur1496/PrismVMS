@@ -1,4 +1,4 @@
-
+<%-- 
 <%@ page import ="java.sql.*" %>
 <%@ page import ="javax.sql.*" %>
 <%@page import="com.daniel.util.DbUtil"%>
@@ -54,4 +54,4 @@ Connection connection=DbUtil.getConnection();
         
          
         %>
-       
+        --%>

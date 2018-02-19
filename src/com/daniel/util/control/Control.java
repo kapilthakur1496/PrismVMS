@@ -194,6 +194,10 @@ public class Control extends HttpServlet {
 		{   
 			submitVmsExperience(request, response);
 		}
+		else if(action.equals("addVmsExperienceComment"))
+		{   
+			addVmsExperienceComment(request, response);
+		}
 		  
 		  
 	}
@@ -2136,6 +2140,48 @@ public   String getEmail(String id) throws ServletException, IOException {
 			if(getTeamsRs.next())
 			{
 				email = getTeamsRs.getString("email_id");
+			}
+			 
+	} 
+catch (SQLException e) {
+		// TODO: handle exception
+	e.printStackTrace();
+	}
+ catch (Exception e) {
+		// TODO: handle exception
+		 e.printStackTrace();
+	}
+	finally {
+		
+		 if(getTeamsRs!=null)
+			try {
+				getTeamsRs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		 if(getTeamsSt!=null)
+				try {
+					getTeamsSt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+	return email;
+
+	}
+public   String getPhone(String id) throws ServletException, IOException { 
+	Statement getTeamsSt = null;
+	ResultSet getTeamsRs = null;
+	  String email = null;
+	try {  				
+		getTeamsSt = connection.createStatement();
+			String query = "select contact_num from volunteer_registration where id ='"+id+"'";
+			getTeamsRs = getTeamsSt.executeQuery(query);
+			if(getTeamsRs.next())
+			{
+				email = getTeamsRs.getString("contact_num");
 			}
 			 
 	} 
@@ -4706,6 +4752,103 @@ public   ResultSet getVmsExperienceComment(HttpServletRequest request, HttpServl
 	return getTeamProjectRs;
 
 	}
+public void addVmsExperienceComment( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	response.setContentType("text/html");
+    PrintWriter out = response.getWriter();   
+    PreparedStatement assingProjectPs =null;
+	HttpSession session = request.getSession();
+	String volunteerId = (String)session.getAttribute("volunteerId");
+	if(volunteerId !=null) {
+		try {  
+			String comment = request.getParameter("comment"); 
+			String id = request.getParameter("id"); 
+			 
+			Control ct = new Control();
+			String to = ct.getEmail(volunteerId);
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+ 			Date date = new Date();  
+	       // result = "Sent message successfully....";  
+			
+			String query = " insert into vms_experience_comment (comment,volunteer_registration_id,vms_experince_id,comment_time)  values(?,?,?,?)" ;
+			assingProjectPs = connection.prepareStatement(query);
+			assingProjectPs.setString(1, comment); 
+			assingProjectPs.setString(2, volunteerId); 
+			assingProjectPs.setString(3, id);  
+			assingProjectPs.setString(4, dateFormat.format(date));  
+			assingProjectPs.executeUpdate();	
+	
+		  	String from = "kapil.thakur1496@gmail.com";
+   			Properties props = System.getProperties();
+   			props.setProperty("mail.smtp.host", "smtp.gmail.com");
+   			props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+   			props.setProperty("mail.smtp.socketFactory.fallback", "false");
+   			props.setProperty("mail.smtp.port", "465");
+   			props.setProperty("mail.smtp.socketFactory.port", "465");
+   			props.put("mail.smtp.auth", "true");
+   			props.put("mail.debug", "true");
+   			props.put("mail.store.protocol", "pop3");
+   			props.put("mail.transport.protocol", "smtp");
+   			final String username = "prismhack@gmail.com";
+   			final String password = "code2win";
+		       
+			   try{
+			   		Session mySession = Session.getInstance(props, new Authenticator(){
+			   			 
+			   			protected PasswordAuthentication getPasswordAuthentication() {
+			   				return new PasswordAuthentication(username, password);
+						} 
+			   			
+					});
+
+			      MimeMessage message = new MimeMessage(mySession); 
+			      message.setFrom(new InternetAddress(from)); 
+			      message.addRecipient(Message.RecipientType.TO,
+			                               new InternetAddress(to)); 
+			      message.setSubject("Regarding VMS Experience  "); 
+			      message.setText("Dear Volunteer\n "
+			    		  +"\n\n Admin has Send you new Comment on your VMS Experience feedback  "
+			    		  +"\n We will keep you inform about your VMS Experience" 
+			    		   +"\n\nThank You" 
+			    		  +"\nWarm Regards"
+			    		  +"\n\nPrismVMS"
+			    		   );
+			      
+			      Transport.send(message);
+			     // result = "Sent message successfully....";  
+			       
+			      response.sendRedirect("viewVmsExperience.jsp");
+			   			  
+			  } 
+		    catch (MessagingException mex) {
+		      mex.printStackTrace();
+		      //result = "Error: unable to send message....";
+		   } 
+		}
+		catch (SQLException e) {
+			// TODO: handle exception
+		e.printStackTrace();
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			 e.printStackTrace();
+		}
+		finally {
+		 if(assingProjectPs!=null) {
+				try {
+					assingProjectPs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}  
+			}
+		} 	 
+	}	 
+ else{     
+	 response.sendRedirect("volunteerIndex.jsp?msg=LoginAgain");
+ 	}  
+	out.close();
+}
 
 }
  
