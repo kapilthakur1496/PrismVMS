@@ -47,7 +47,7 @@ input[type="submit"]:hover
 <%@ page import ="javax.sql.*" %>
 <%@ page import="com.daniel.util.control.*"  %>
 <%!   
-ResultSet teamRs =null,branchRs=null,professionalSkillRs=null;
+ResultSet teamRs =null,branchRs=null,professionalSkillRs=null,grievanceRs=null,vmsCategoryRs=null;
 ResultSet meetingRs =null,trainingRs=null,academicSkillRs=null,lifeSkillRs=null,softSkillRs=null;
 ResultSet stateRs =null;
 ResultSet contactDetails=null; 
@@ -153,14 +153,14 @@ ResultSet contactDetails=null;
             <br>
              <!--  <h2 class="templatemo-inline-block">Visual Admin Template</h2><hr> -->
              	<form method="post" action="${pageContext.request.contextPath}/Control?action=addMeeting" >
-             	<input type="text" Placeholder="Meeting Type"  required class="form-control" name="meetingType">
-             	 <br>
-             	<input type="submit" class="form-control" value="Add Meeting Type" >
+	             	<input type="text" Placeholder="Meeting Type"  required class="form-control" name="meetingType">
+	             	 <br>
+	             	<input type="submit" class="form-control" value="Add Meeting Type" >
              	</form> <hr>  
               		<form action="" method="post" >
               		 	<select required class="form-control"   name="meetingType"> 
               				<option value="0">View Meeting</option>
-              			  <% 	 
+              			  	<% 	 
               			   		meetingRs = ct.getMeetingType();
               				%>
               				<% while(meetingRs.next() ){ %>
@@ -232,14 +232,47 @@ address: <span id="c"></span>
                </div>
             <div class="templatemo-content-widget white-bg col-2 text-center">
               	<i class="fa fa-times"></i>
-              	<form action="${pageContext.request.contextPath}/Control?action=addFaqDetails" method="post" >
+              	<form method="post" action="${pageContext.request.contextPath}/Control?action=addGrievance" >
+	             	<input type="text" Placeholder="Grievance Type"  required class="form-control" name="grievance">
+	             	 <br>
+	             	<input type="submit" class="form-control" value="Add Grievance Type" >
+             	</form> <hr> 
+             	<form action="" method="post" >
+              		 	<select required class="form-control"   name="meetingType"> 
+              				<option value="0">View Grievance Type</option>
+              			  	<% 	 
+              			  grievanceRs = ct.getGrievanceType();
+              				%>
+              				<% while(grievanceRs.next() ){ %>
+              					<option value="<%=grievanceRs.getString("grievance") %>"><%=grievanceRs.getString("grievance") %></option>
+              				<%} %>   
+              			</select><br> 
+             		<input type="submit" class="form-control" value="View" > 
+              	</form><hr> 
+              	<form method="post" action="${pageContext.request.contextPath}/Control?action=addVmsExperienceCategory" >
+	             	<input type="text" Placeholder="VMS Experience Category  "  required class="form-control" name="category">
+	             	 <br>
+	             	<input type="submit" class="form-control" value="Add Category" >
+             	</form> <hr> 
+             	<form action="" method="post" >
+              		 	<select required class="form-control"   name="meetingType"> 
+              				<option value="0">View VMS Experience Category</option>
+              			  	<%  vmsCategoryRs = ct.getVmsCategory(); %>
+              				<% while(vmsCategoryRs.next() ){ %>
+              					<option value="<%=vmsCategoryRs.getString("category") %>"><%=vmsCategoryRs.getString("category") %></option>
+              				<%} %>   
+              			</select><br> 
+             		<input type="submit" class="form-control" value="View" > 
+              	</form> 
+              <%-- 	<form action="${pageContext.request.contextPath}/Control?action=addFaqDetails" method="post" >
               		<br>
               		<input type="text"  required class="form-control" Placeholder="FAQ Question" name="question">
               		<br>
               		<textarea  name="answer" placeholder="FAQ Answer" required class="form-control"></textarea>
               		<br>
              		<input type="submit" class="form-control" value="Add FAQ Details" >
-             	</form>
+             	</form> --%>
+             	 
            	</div> 
     	</div>
          <div class="templatemo-flex-row flex-content-row">

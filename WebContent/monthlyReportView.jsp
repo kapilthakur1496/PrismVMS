@@ -128,23 +128,33 @@ h1 {
 <% try{ %>
   
 <%!  
-	ResultSet ngoDetail=null;
+	ResultSet monthlyReportRs=null,branchRs=null;
 	int volunteerStatus=0; 
-	String volunteerId=null;
-	ResultSet SubCategoryRs=null; 
+	String volunteerId =null;
+	ResultSet teamsRs=null; 
+	int volunteerCount =0, pageCount = 0;
+	int pageNumber=0, nextRecordCount=10;	
 	Control ct = new Control();
 %>
 <% 
 	volunteerId = (String)session.getAttribute("volunteerId"); 
 	if(volunteerId == null)
 	{	
-		volunteerId = (String)session.getAttribute("NgoId"); 
+		volunteerId = (String)session.getAttribute("volunteerId"); 
 	} 
 	volunteerStatus  = ct.checkVolunteerStatus(request, response,volunteerId);  
 } catch (Exception e){ 	 	
 }
+finally
+{
+
+}
 if(volunteerStatus == 1){
-%>  	
+
+
+%>
+ 
+ 	
  
 <div class="container" style="paddin:0px; margin-left:0px;">
     <div class="row">
@@ -170,64 +180,84 @@ if(volunteerStatus == 1){
 							</form>	
                     	</li>
                     		
-                       	<li   class="nav-item">
-                         	<a class="nav-link active" href="volunteerIndex.jsp">Home</a>
+                       	<li  class="nav-item">
+                         	<a class="nav-link " href="mentorIndex.jsp">Home</a>
                         </li>
                         <li  class="nav-item">
-                            <a class="nav-link" href="workDiary.jsp">Work Diary</a>
-                        </li> 
-                         <li  class="nav-item">
-                            <a class="nav-link" href="workDiaryView.jsp">View Work Diary</a>
+                            <a class="nav-link active" href="individualProject.jsp">Individual Projects</a>
                         </li> 
                         <li  class="nav-item">
-                            <a class="nav-link" href="workMeeting.jsp">Work Meeting</a>
+                            <a class="nav-link" href="teamProject.jsp">Team Projects</a>
                         </li>
-                         <li  class="nav-item">
-                            <a class="nav-link" href="meetingView.jsp">View Work Meeting</a>
-                        </li>
-                        <li   class="nav-item">
-                            <a class="nav-link" href="workTraining.jsp">Work Training</a>
+                        <li  class="nav-item">
+                            <a class="nav-link" href="teamProjectView.jsp?pN=1">View Team Projects</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="trainingView.jsp">View Work Training</a>
+                            <a class="nav-link" href="workTraining.jsp">Branch Projects</a>
                         </li>
                          <li   class="nav-item">
-                            <a class="nav-link" href="projectAssigned.jsp?pN=1">Project Assigned</a>
-                        </li>
-                        <li   class="nav-item">
-                            <a class="nav-link" href="monthlyReport.jsp">Monthly Report</a>
-                        </li>
-                        <li   class="nav-item">
-                            <a class="nav-link" href="monthlyReportView.jsp">View Monthly Report </a>
+                            <a class="nav-link" href="projectAssigned.jsp">Meeting Report</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  " href="viewTeamProject.jsp">View Team Project</a>
+                            <a class="nav-link  " href="teamProject.jsp">Team Project</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="viewBranchProject.jsp">Branch Project</a>
+                            <a class="nav-link" href="branchProject.jsp">Branch Project</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="grievance.jsp">Grievance</a>
+                            <a class="nav-link" href="branchProject.jsp">Grievance</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="grievanceView.jsp">View Grievance  </a>
+                            <a class="nav-link" href="support.jsp">Online Support</a>
                         </li>
-                        <li   class="nav-item">
-                            <a class="nav-link" href="vmsExperience.jsp">Online Support</a>
-                        </li>
-                         <li   class="nav-item">
-                            <a class="nav-link" href="viewVmsExperience.jsp?pN=1">View Online Support</a>
-                        </li>
-                         
-                         
                           
                         
                     </ul>
                 </div> 
             </div> 
         </div>
-        <div class="col-md-10 col-lg-9">
-             
+        <div class="col-md-10 col-lg-9" style="padding:22px 10px;">
+	 	  <%  
+	 	 monthlyReportRs = ct.getMonthlyReport(request, response);
+ 	  		 
+	 	  %> 
+	 	  <table>
+	 	  	<thead>
+	 	  	<tr>
+	 	  		<th>#</th>
+	 	  		<th>Submit Date</th>
+	 	  		<th>From Date</th>
+	 	  		<th>To Date</th>
+	 	  		<th>Skills Acquired</th>  
+				<th>Progress</th>
+				<th>Challenges</th>
+				<th>Future Prospects</th>
+				<th>Status</th>
+				<th>Grades</th>
+	 	  	</tr>
+	 	  	</thead>
+	 	  	<tbody>
+	 	  	  <%!int i=1; %>  
+	 	  	 <% while(monthlyReportRs.next()) { %>  
+	 	  	  	<tr>
+	 	  			  <td><%=i %></td>
+	 	  			<td><%=monthlyReportRs.getString("submit_date").substring(0,10) %></td>
+	 	  			<td><%=monthlyReportRs.getString("from_date") %></td>
+	 	  			<td><%=monthlyReportRs.getString("to_date") %></td>
+	 	  			<td><%=monthlyReportRs.getString("skillaacquired") %></td> 
+ 	  				<td><%=monthlyReportRs.getString("progress")%></td> 
+ 	  				<td><%=monthlyReportRs.getString("challenges") %></td>
+ 	  				<td><%=monthlyReportRs.getString("future_prospects") %></td>
+ 	  				<td><%=monthlyReportRs.getString("report_status") %></td> 
+ 	  				<td><a href="monthlyReportViewGrade.jsp?id=<%=monthlyReportRs.getString("month_work_id") %>">View</a> </td> 
+ 	  			</tr>
+ 	  			
+	 	   	<%i++;} %>  
+	 	  	
+	 	  	</tbody>
+	 	  
+	 	  </table>
+	 	   
     	</div>
  	</div>
 </div>
@@ -299,97 +329,26 @@ if(volunteerStatus == 1){
 	</div>
 </div>
 
-	<!-- cart-js -->
-	<script src="js/minicart.js"></script>
-	<!-- <script>
-        w3ls1.render();
+	 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
 
-        w3ls1.cart.on('w3sb1_checkout', function (evt) {
-        	var items, len, i;
-
-        	if (this.subtotal() > 0) {
-        		items = this.items();
-
-        		for (i = 0, len = items.length; i < len; i++) {
-        			items[i].set('shipping', 0);
-        			items[i].set('shipping2', 0);
-        		}
-        	}
-        });
-    </script> -->  
-	<!-- //cart-js -->  
-
-<%
-	String registered =request.getParameter("ngomsg");
-	if(registered != null){
-%>
-<div class="Message Message--green">
-  <div class="Message-icon">
-    <i class="fa fa-check "></i>
-  </div>
-  <div class="Message-body">
-    <p>Thank You for registering with us. Please check your mail to verify your account</p>   
-  </div>
-  <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
-</div>
-<%} %>
-
-
-	<!-- cart-js -->
-	<script src="js/minicart.js"></script>
-	<script>
-        w3ls1.render();
-
-        w3ls1.cart.on('w3sb1_checkout', function (evt) {
-        	var items, len, i;
-
-        	if (this.subtotal() > 0) {
-        		items = this.items();
-
-        		for (i = 0, len = items.length; i < len; i++) {
-        			items[i].set('shipping', 0);
-        			items[i].set('shipping2', 0);
-        		}
-        	}
-        });
-    </script>  
-	<!-- //cart-js -->  
-	
- 
 <script type="text/javascript">
 
-function closeMessage(el) {
-	  el.addClass('is-hidden');
-	}
-
-	$('.js-messageClose').on('click', function(e) {
-	  closeMessage($(this).closest('.Message'));
+(function($) {
+	
+	$(window).scroll(function() {
+		
+		$(window).scroll(function() {
+			space = $(window).innerHeight() - $('.fab').offsetTop + $('.fab').offsetHeight;
+			if(space < 200){
+				$('.fab').css('margin-bottom', '150px');
+			}
+		})
+		
 	});
-
-	$('#js-helpMe').on('click', function(e) {
-	  alert('Help you we will, young padawan');
-	  closeMessage($(this).closest('.Message'));
-	});
-
-	$('#js-authMe').on('click', function(e) {
-	  alert('Okelidokeli, requesting data transfer.');
-	  closeMessage($(this).closest('.Message'));
-	});
-
-	$('#js-showMe').on('click', function(e) {
-	  alert("You're off to our help section. See you later!");
-	  closeMessage($(this).closest('.Message'));
-	});
-
-	$(document).ready(function() {
-	  setTimeout(function() {
-	    closeMessage($('#js-timer'));
-	  }, 5000);
-	});
-
+	
+})(jQuery);
 
 </script>
-
-	  
 </body>
 </html>

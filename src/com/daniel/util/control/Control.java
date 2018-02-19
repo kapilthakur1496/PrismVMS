@@ -178,6 +178,23 @@ public class Control extends HttpServlet {
 		{   
 			monthWorkDiray(request, response);
 		}
+		else if(action.equals("addGrievance"))
+		{   
+			addGrievance(request, response);
+		}
+		else if(action.equals("submitGrievance"))
+		{   
+			submitGrievance(request, response);
+		}
+		else if(action.equals("addVmsExperienceCategory"))
+		{   
+			addVmsExperienceCategory(request, response);
+		}
+		else if(action.equals("submitVmsExperience"))
+		{   
+			submitVmsExperience(request, response);
+		}
+		  
 		  
 	}
 	private void addTeam( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -3828,7 +3845,7 @@ public void monthWorkDiray( HttpServletRequest request, HttpServletResponse resp
 			assingProjectPs.setString(8, volunteerId);			
 			assingProjectPs.setString(9, status);
 			assingProjectPs.executeUpdate();	 
-			response.sendRedirect("monthlyMeeting.jsp?msg=monthlyReportSubmitted");
+			response.sendRedirect("monthlyReport.jsp?msg=monthlyReportSubmitted");
 		}
 		catch (SQLException e) {
 			// TODO: handle exception
@@ -3902,6 +3919,794 @@ public   ResultSet getWorkDiary(HttpServletRequest request, HttpServletResponse 
 	return getTraningRs;
 
 }
+
+public   ResultSet getMonthlyReport(HttpServletRequest request, HttpServletResponse response)   throws ServletException, IOException { 
+	Statement getMonthReportSt =null;
+	ResultSet getMonthReportRs = null;
+	HttpSession session = request.getSession();
+	String volunteerId = (String)session.getAttribute("volunteerId");
+	if(volunteerId !=null) {
+	  
+		try {  				
+				getMonthReportSt = connection.createStatement();
+				String query = "select *  from month_workdairy where volunteer_registration_id="+volunteerId;
+				getMonthReportRs = getMonthReportSt.executeQuery(query);
+				  
+			} 
+		catch (SQLException e) {
+				// TODO: handle exception
+			e.printStackTrace();
+			}
+		 catch (Exception e) {
+				// TODO: handle exception
+				 e.printStackTrace();
+			}
+			finally {
+				
+				 /*if(getTeamsSt!=null)
+					try {
+						getTeamsSt.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				 if(getTeamsRs!=null)
+						try {
+							getTeamsRs.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} */
+			}
+		}
+	else{
+		response.sendRedirect("volunteerIndex.jsp?action=LoginAgain");
+	}
+	return getMonthReportRs;
+
+}
+public   ResultSet getVolunteerBranchProject(HttpServletRequest request, HttpServletResponse response,int pageNumber, int nextRecordCount) throws ServletException, IOException { 
+	Statement getTeamProjectSt = null; 
+	ResultSet getTeamProjectRs = null;
+ 
+	 HttpSession session = request.getSession();
+		String volunteerId = (String)session.getAttribute("volunteerId");
+		if(volunteerId !=null) {
+		try {  				
+				getTeamProjectSt = connection.createStatement();
+				Control ct = new Control(); 
+				String branchId  = ct.getVolunteerBranch(volunteerId); 
+				
+				String query = "select *  from branch_project where    branch_id ='"+branchId+"'   limit "+(pageNumber*10)+","+nextRecordCount;
+				getTeamProjectRs = getTeamProjectSt.executeQuery(query);
+				  
+		} 
+	catch (SQLException e) {
+			// TODO: handle exception
+		e.printStackTrace();
+		}
+	 catch (Exception e) {
+			// TODO: handle exception
+			 e.printStackTrace();
+		}
+		finally {
+			
+			 /* if(getTeamProjectSt!=null)
+				try {
+					getTeamProjectSt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			 if(getTeamProjectRs!=null)
+					try {
+						getTeamProjectRs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} */
+			}
+		}
+		else
+		{
+			response.sendRedirect("volunteerIndex.jsp?action=LoginAgain");
+		}
+	return getTeamProjectRs;
+
+	}
+public  String getTeamProjectStatus(HttpServletRequest request, HttpServletResponse response, String id  ) throws ServletException, IOException { 
+	Statement getTeamProjectSt = null; 
+	ResultSet getTeamProjectRs = null;
+	Statement getAssignProjectSt = null; 
+	ResultSet getAssignProjectRs = null;
+	String status =null;
+	 HttpSession session = request.getSession();
+		String volunteerId = (String)session.getAttribute("volunteerId");
+		if(volunteerId !=null) {
+		try {  				
+				
+				getAssignProjectSt = connection.createStatement();
+			  	String query = "select enroll_status  from team_project_enrollment where  volunteer_registrationg_id = '"+volunteerId+"' and team_project_id ='"+id+"'";
+				String query1 = "select id  from assign_projects where team_project_id='"+id+"' and volunteer_registration_id='"+volunteerId+"'  ";
+				getAssignProjectRs = getAssignProjectSt.executeQuery(query1);
+				 if(!getAssignProjectRs.next())
+				 {
+					  getTeamProjectSt = connection.createStatement();
+					  getTeamProjectRs = getTeamProjectSt.executeQuery(query);
+					  if(getTeamProjectRs.next()) {
+						  status = getTeamProjectRs.getString("enroll_status");
+					  } 
+					  System.out.println("status "+status);
+				 }
+				 else 
+				 {
+					 status="Project Assigned";
+				 }
+				
+				
+				  
+		} 
+	catch (SQLException e) {
+			// TODO: handle exception
+		e.printStackTrace();
+		}
+	 catch (Exception e) {
+			// TODO: handle exception
+			 e.printStackTrace();
+		}
+		finally {
+			
+			 if(getTeamProjectSt!=null)
+				try {
+					getTeamProjectSt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			 if(getTeamProjectRs!=null)
+					try {
+						getTeamProjectRs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			 if(getAssignProjectSt!=null)
+					try {
+						getAssignProjectSt.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+			 if(getAssignProjectRs!=null)
+					try {
+						getAssignProjectRs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+			}
+		}
+		else
+		{
+			response.sendRedirect("volunteerLogin.jsp?action=LoginAgain");
+		}
+	return status;
+
+	}
+public   ResultSet getVolunteerTeamProject(HttpServletRequest request, HttpServletResponse response,int pageNumber, int nextRecordCount) throws ServletException, IOException { 
+	Statement getTeamProjectSt = null; 
+	ResultSet getTeamProjectRs = null;
+ 
+	 HttpSession session = request.getSession();
+		String volunteerId = (String)session.getAttribute("volunteerId");
+		if(volunteerId !=null) {
+		try {  				
+				getTeamProjectSt = connection.createStatement();
+				Control ct = new Control();
+				String team = ct.getVolunteerTeam(volunteerId);
+				String branchId  = ct.getVolunteerBranch(volunteerId); 
+				
+				String query = "select *  from team_project where team='"+team+"' and branch_id ='"+branchId+"'   limit "+(pageNumber*10)+","+nextRecordCount;
+				getTeamProjectRs = getTeamProjectSt.executeQuery(query);
+				  
+		} 
+	catch (SQLException e) {
+			// TODO: handle exception
+		e.printStackTrace();
+		}
+	 catch (Exception e) {
+			// TODO: handle exception
+			 e.printStackTrace();
+		}
+		finally {
+			
+			 /* if(getTeamProjectSt!=null)
+				try {
+					getTeamProjectSt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			 if(getTeamProjectRs!=null)
+					try {
+						getTeamProjectRs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} */
+			}
+		}
+		else
+		{
+			response.sendRedirect("MentorIndex.jsp?action=LoginAgain");
+		}
+	return getTeamProjectRs;
+
+	}
+public  String getBranchProjectStatus(HttpServletRequest request, HttpServletResponse response, String id  ) throws ServletException, IOException { 
+	Statement getTeamProjectSt = null; 
+	ResultSet getTeamProjectRs = null;
+	Statement getAssignProjectSt = null; 
+	ResultSet getAssignProjectRs = null;
+	String status =null;
+	 HttpSession session = request.getSession();
+		String volunteerId = (String)session.getAttribute("volunteerId");
+		if(volunteerId !=null) {
+		try {  				
+				
+				getAssignProjectSt = connection.createStatement();
+			  	String query = "select enroll_status  from branch_project_enrollment where  volunteer_registrationg_id = '"+volunteerId+"' and branch_project_id ='"+id+"'";
+				String query1 = "select id  from assign_projects where bproject_id='"+id+"' and volunteer_registration_id='"+volunteerId+"'  ";
+				getAssignProjectRs = getAssignProjectSt.executeQuery(query1);
+				 if(!getAssignProjectRs.next())
+				 {
+					  getTeamProjectSt = connection.createStatement();
+					  getTeamProjectRs = getTeamProjectSt.executeQuery(query);
+					  if(getTeamProjectRs.next()) {
+						  status = getTeamProjectRs.getString("enroll_status");
+					  } 
+					  System.out.println("status "+status);
+				 }
+				 else 
+				 {
+					 status="Project Assigned";
+				 }
+				
+				
+				  
+		} 
+	catch (SQLException e) {
+			// TODO: handle exception
+		e.printStackTrace();
+		}
+	 catch (Exception e) {
+			// TODO: handle exception
+			 e.printStackTrace();
+		}
+		finally {
+			
+			 if(getTeamProjectSt!=null)
+				try {
+					getTeamProjectSt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			 if(getTeamProjectRs!=null)
+					try {
+						getTeamProjectRs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			 if(getAssignProjectSt!=null)
+					try {
+						getAssignProjectSt.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+			 if(getAssignProjectRs!=null)
+					try {
+						getAssignProjectRs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+			}
+		}
+		else
+		{
+			response.sendRedirect("volunteerLogin.jsp?action=LoginAgain");
+		}
+	return status;
+
+	}
+
+private void addGrievance( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	response.setContentType("text/html");
+    PrintWriter out = response.getWriter();
+    HttpSession session = request.getSession();
+	String adminId = (String)session.getAttribute("adminId");
+	if(adminId !=null) {
+	String grievance = request.getParameter("grievance");
+	Statement meetingTypeSt = null;
+	ResultSet meetingTypeRs = null;
+	 
+	try {
+			meetingTypeSt = connection.createStatement();
+			String checkQ ="select grievance from grievance_type where grievance ='"+grievance+"'";
+			meetingTypeRs = meetingTypeSt.executeQuery(checkQ);
+			
+			 if (meetingTypeRs.next())	{
+				 response.sendRedirect("admin/index.jsp?msg=MeetingTypeExist");
+			 }
+			 else   {  
+				PreparedStatement addCategoryPs =null;
+				String query = "insert into grievance_type (grievance) values(?)";
+				addCategoryPs  =  connection.prepareStatement(query);
+				addCategoryPs.setString(1, grievance); 
+				addCategoryPs.executeUpdate();	
+				response.sendRedirect("admin/index.jsp");
+  
+ 				  } 
+		}  
+	 catch (SQLException e) {
+			// TODO: handle exception
+		e.printStackTrace(); 
+		}
+	 catch (Exception e) {
+			// TODO: handle exception
+			 e.printStackTrace();
+		}
+	 finally {
+		 
+	 }
+	}
+	else{
+		response.sendRedirect("index.jsp?action=LoginAgain");
+	}
+	 out.close(); 
+	 
+}
+public   ResultSet getGrievanceType() throws ServletException, IOException { 
+	Statement meetingTypeSt =null;
+	ResultSet meetingTypeRs = null;
+	  
+	try {  				
+		meetingTypeSt = connection.createStatement();
+			String query = "select grievance   from grievance_type";
+			meetingTypeRs = meetingTypeSt.executeQuery(query);
+			 
+	} 
+catch (SQLException e) {
+		// TODO: handle exception
+	e.printStackTrace();
+	}
+ catch (Exception e) {
+		// TODO: handle exception
+		 e.printStackTrace();
+	}
+	finally {
+		
+		/*if(NgoDetailSt!=null)
+			try {
+				NgoDetailSt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+    	 
+	}
+	return meetingTypeRs;
+
+}
+public   ResultSet getVmsCategory() throws ServletException, IOException { 
+	Statement meetingTypeSt =null;
+	ResultSet meetingTypeRs = null;
+	  
+	try {  				
+		meetingTypeSt = connection.createStatement();
+			String query = "select category   from vms_experience_category";
+			meetingTypeRs = meetingTypeSt.executeQuery(query);
+			 
+	} 
+catch (SQLException e) {
+		// TODO: handle exception
+	e.printStackTrace();
+	}
+ catch (Exception e) {
+		// TODO: handle exception
+		 e.printStackTrace();
+	}
+	finally {
+		
+		/*if(NgoDetailSt!=null)
+			try {
+				NgoDetailSt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+    	 
+	}
+	return meetingTypeRs;
+
+}
+public void submitGrievance( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	response.setContentType("text/html");
+    PrintWriter out = response.getWriter();   
+    PreparedStatement assingProjectPs =null;
+	HttpSession session = request.getSession();
+	String volunteerId = (String)session.getAttribute("volunteerId");
+	if(volunteerId !=null) {
+		try {  
+			String grievanceType = request.getParameter("grievanceType");
+			String grievanceDesc = request.getParameter("grievanceDesc");
+			 
+			Control ct = new Control();
+			String to = ct.getEmail(volunteerId);
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+ 			Date date = new Date(); 
+ 			
+	       // result = "Sent message successfully....";  
+			
+			String query = "insert into grievance  (grievance,grievance_type, volunteer_registration_id, submit_date)values(?,?,?,?)" ;
+			assingProjectPs = connection.prepareStatement(query);
+			assingProjectPs.setString(1, grievanceDesc); 
+			assingProjectPs.setString(2, grievanceType); 
+			assingProjectPs.setString(3, volunteerId); 
+			assingProjectPs.setString(4,  dateFormat.format(date));  
+			assingProjectPs.executeUpdate();	
+	
+		  	String from = "kapil.thakur1496@gmail.com";
+   			Properties props = System.getProperties();
+   			props.setProperty("mail.smtp.host", "smtp.gmail.com");
+   			props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+   			props.setProperty("mail.smtp.socketFactory.fallback", "false");
+   			props.setProperty("mail.smtp.port", "465");
+   			props.setProperty("mail.smtp.socketFactory.port", "465");
+   			props.put("mail.smtp.auth", "true");
+   			props.put("mail.debug", "true");
+   			props.put("mail.store.protocol", "pop3");
+   			props.put("mail.transport.protocol", "smtp");
+   			final String username = "prismhack@gmail.com";
+   			final String password = "code2win";
+		       
+			   try{
+			   		Session mySession = Session.getInstance(props, new Authenticator(){
+			   			 
+			   			protected PasswordAuthentication getPasswordAuthentication() {
+			   				return new PasswordAuthentication(username, password);
+						} 
+			   			
+					});
+
+			      MimeMessage message = new MimeMessage(mySession); 
+			      message.setFrom(new InternetAddress(from)); 
+			      message.addRecipient(Message.RecipientType.TO,
+			                               new InternetAddress(to)); 
+			      message.setSubject("Regarding Grievance  "); 
+			      message.setText("Dear Volunteer\n "
+			    		  +"\n\n Thank you for informing for this issue  "+grievanceDesc 
+			    		  +"\n Our Team Will look forward to resolve this issue." 
+			    		   +"\n\nThank You" 
+			    		  +"\nWarm Regards"
+			    		  +"\n\nPrismVMS"
+			    		   );
+			      
+			      Transport.send(message);
+			     // result = "Sent message successfully....";  
+			       
+			      response.sendRedirect("grievance.jsp");
+			   			  
+			  } 
+		    catch (MessagingException mex) {
+		      mex.printStackTrace();
+		      //result = "Error: unable to send message....";
+		   } 
+		}
+		catch (SQLException e) {
+			// TODO: handle exception
+		e.printStackTrace();
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			 e.printStackTrace();
+		}
+		finally {
+		 if(assingProjectPs!=null) {
+				try {
+					assingProjectPs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}  
+			}
+		} 	 
+	}	 
+ else{     
+	 response.sendRedirect("volunteerIndex.jsp?msg=LoginAgain");
+ 	}  
+	out.close();
+}
+public   ResultSet getGrievance( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+	Statement getTeamsSt =null;
+	ResultSet getTeamsRs = null;
+	 HttpSession session = request.getSession();
+		String volunteerId = (String)session.getAttribute("volunteerId");
+		if(volunteerId !=null) {
+		
+			try {  				
+					getTeamsSt = connection.createStatement();
+					String query = "select *   from grievance where   volunteer_registration_id='"+volunteerId+"'";
+					getTeamsRs = getTeamsSt.executeQuery(query);
+					 
+				} 
+			catch (SQLException e) {
+					// TODO: handle exception
+				e.printStackTrace();
+				}
+			 catch (Exception e) {
+					// TODO: handle exception
+					 e.printStackTrace();
+				}
+			finally {
+				
+				/*if(NgoDetailSt!=null)
+					try {
+						NgoDetailSt.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}*/
+		    	 
+			}
+		}
+	return getTeamsRs;
+
+}
+private void addVmsExperienceCategory( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	response.setContentType("text/html");
+    PrintWriter out = response.getWriter();
+    HttpSession session = request.getSession();
+	String adminId = (String)session.getAttribute("adminId");
+	if(adminId !=null) {
+	String category = request.getParameter("category");
+	Statement meetingTypeSt = null;
+	ResultSet meetingTypeRs = null;
+	 
+	try {
+			meetingTypeSt = connection.createStatement();
+			String checkQ ="select category from vms_experience_category where category ='"+category+"'";
+			meetingTypeRs = meetingTypeSt.executeQuery(checkQ);
+			
+			 if (meetingTypeRs.next())	{
+				 response.sendRedirect("admin/index.jsp?msg=VmsExperienceCategory");
+			 }
+			 else   {  
+				PreparedStatement addCategoryPs =null;
+				String query = "insert into vms_experience_category (category) values(?)";
+				addCategoryPs  =  connection.prepareStatement(query);
+				addCategoryPs.setString(1, category); 
+				addCategoryPs.executeUpdate();	
+				response.sendRedirect("admin/index.jsp");
+  
+ 				  } 
+		}  
+	 catch (SQLException e) {
+			// TODO: handle exception
+		e.printStackTrace(); 
+		}
+	 catch (Exception e) {
+			// TODO: handle exception
+			 e.printStackTrace();
+		}
+	 finally {
+		 
+	 }
+	}
+	else{
+		response.sendRedirect("volunteerIndex.jsp?action=LoginAgain");
+	}
+	 out.close(); 
+	 
+}
+public void submitVmsExperience( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	response.setContentType("text/html");
+    PrintWriter out = response.getWriter();   
+    PreparedStatement assingProjectPs =null;
+	HttpSession session = request.getSession();
+	String volunteerId = (String)session.getAttribute("volunteerId");
+	if(volunteerId !=null) {
+		try {  
+			String category = request.getParameter("category");
+			String experienceDesc = request.getParameter("experienceDesc");
+			 
+			Control ct = new Control();
+			String to = ct.getEmail(volunteerId);
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+ 			Date date = new Date(); 
+ 			 String status = "Unseen";
+	       // result = "Sent message successfully....";  
+			
+			String query = "insert into vms_experience  (category,description,request_status, volunteer_registration_id, submit_date)values(?,?,?,?,?)" ;
+			assingProjectPs = connection.prepareStatement(query);
+			assingProjectPs.setString(1, category); 
+			assingProjectPs.setString(2, experienceDesc); 
+			assingProjectPs.setString(3, status); 
+			assingProjectPs.setString(4, volunteerId); 
+			assingProjectPs.setString(5, dateFormat.format(date));  
+			assingProjectPs.executeUpdate();	
+	
+		  	String from = "kapil.thakur1496@gmail.com";
+   			Properties props = System.getProperties();
+   			props.setProperty("mail.smtp.host", "smtp.gmail.com");
+   			props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+   			props.setProperty("mail.smtp.socketFactory.fallback", "false");
+   			props.setProperty("mail.smtp.port", "465");
+   			props.setProperty("mail.smtp.socketFactory.port", "465");
+   			props.put("mail.smtp.auth", "true");
+   			props.put("mail.debug", "true");
+   			props.put("mail.store.protocol", "pop3");
+   			props.put("mail.transport.protocol", "smtp");
+   			final String username = "prismhack@gmail.com";
+   			final String password = "code2win";
+		       
+			   try{
+			   		Session mySession = Session.getInstance(props, new Authenticator(){
+			   			 
+			   			protected PasswordAuthentication getPasswordAuthentication() {
+			   				return new PasswordAuthentication(username, password);
+						} 
+			   			
+					});
+
+			      MimeMessage message = new MimeMessage(mySession); 
+			      message.setFrom(new InternetAddress(from)); 
+			      message.addRecipient(Message.RecipientType.TO,
+			                               new InternetAddress(to)); 
+			      message.setSubject("Regarding VMS Experience  "); 
+			      message.setText("Dear Volunteer\n "
+			    		  +"\n\n Thank you for your feedback We look forward to work on your ideas  "+experienceDesc 
+			    		  +"\n We will stay in touch with you regarding the same" 
+			    		   +"\n\nThank You" 
+			    		  +"\nWarm Regards"
+			    		  +"\n\nPrismVMS"
+			    		   );
+			      
+			      Transport.send(message);
+			     // result = "Sent message successfully....";  
+			       
+			      response.sendRedirect("grievance.jsp");
+			   			  
+			  } 
+		    catch (MessagingException mex) {
+		      mex.printStackTrace();
+		      //result = "Error: unable to send message....";
+		   } 
+		}
+		catch (SQLException e) {
+			// TODO: handle exception
+		e.printStackTrace();
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			 e.printStackTrace();
+		}
+		finally {
+		 if(assingProjectPs!=null) {
+				try {
+					assingProjectPs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}  
+			}
+		} 	 
+	}	 
+ else{     
+	 response.sendRedirect("volunteerIndex.jsp?msg=LoginAgain");
+ 	}  
+	out.close();
+}
+public   ResultSet getVmsExperience(HttpServletRequest request, HttpServletResponse response,int pageNumber, int nextRecordCount) throws ServletException, IOException { 
+	Statement getTeamProjectSt = null; 
+	ResultSet getTeamProjectRs = null;
+ 
+	 HttpSession session = request.getSession();
+		String volunteerId = (String)session.getAttribute("volunteerId");
+		if(volunteerId !=null) {
+		try {  				
+				getTeamProjectSt = connection.createStatement();
+				String query = "select *  from vms_experience where volunteer_registration_id = '"+volunteerId+"' limit "+(pageNumber*10)+","+nextRecordCount;
+				getTeamProjectRs = getTeamProjectSt.executeQuery(query);
+				  
+		} 
+	catch (SQLException e) {
+			// TODO: handle exception
+		e.printStackTrace();
+		}
+	 catch (Exception e) {
+			// TODO: handle exception
+			 e.printStackTrace();
+		}
+		finally {
+			
+			 /* if(getTeamProjectSt!=null)
+				try {
+					getTeamProjectSt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			 if(getTeamProjectRs!=null)
+					try {
+						getTeamProjectRs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} */
+			}
+		}
+		else
+		{
+			response.sendRedirect("volunteerIndex.jsp?action=LoginAgain");
+		}
+	return getTeamProjectRs;
+
+	}
+public   ResultSet getVmsExperienceComment(HttpServletRequest request, HttpServletResponse response,String id) throws ServletException, IOException { 
+	Statement getTeamProjectSt = null; 
+	ResultSet getTeamProjectRs = null;
+ 
+	 HttpSession session = request.getSession();
+		String volunteerId = (String)session.getAttribute("volunteerId");
+		if(volunteerId !=null) {
+		try {  				
+				getTeamProjectSt = connection.createStatement();
+				String query = "select *  from vms_experience_comment where vms_experince_id = '"+id+"' ";
+				getTeamProjectRs = getTeamProjectSt.executeQuery(query);
+				  
+		} 
+	catch (SQLException e) {
+			// TODO: handle exception
+		e.printStackTrace();
+		}
+	 catch (Exception e) {
+			// TODO: handle exception
+			 e.printStackTrace();
+		}
+		finally {
+			
+			 /* if(getTeamProjectSt!=null)
+				try {
+					getTeamProjectSt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			 if(getTeamProjectRs!=null)
+					try {
+						getTeamProjectRs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} */
+			}
+		}
+		else
+		{
+			response.sendRedirect("volunteerIndex.jsp?action=LoginAgain");
+		}
+	return getTeamProjectRs;
+
+	}
+
 }
  
  

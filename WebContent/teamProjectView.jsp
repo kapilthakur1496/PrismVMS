@@ -150,7 +150,7 @@ if(mentorStatus == 1){
 	volunteerCount = ct.volunteerCount();
 	pageCount= volunteerCount/10 +1;
 	teamProjectsRs = ct.getTeamProject(request, response,pageNumber-1, nextRecordCount);  
-	/* ct.teamVolunteerDetails(pageNumber-1, nextRecordCount,adminId,branchId); */
+	 
 	
  %>
  

@@ -67,8 +67,10 @@ h1 {
 <%@page import="java.lang.reflect.Array"%>
 <%@ page import ="javax.sql.*" %>
 <%@ page import="com.daniel.util.control.*"  %> 
-   
-  
+    
+<%
+    Connection connection=DbUtil.getConnection();
+%>
   
    <div class="outercontainer" style="margin-top:0px;">
 	<div class="header-bottom-w3ls">  
@@ -128,22 +130,32 @@ h1 {
 <% try{ %>
   
 <%!  
-	ResultSet ngoDetail=null;
+	ResultSet vmsExperinceRs=null,vmsExperinceCommentRs=null;
 	int volunteerStatus=0; 
-	String volunteerId=null;
+	String volunteerId=null,name=null;
 	ResultSet SubCategoryRs=null; 
+	int volunteerCount =0, pageCount = 0;
+	int pageNumber=0, nextRecordCount=10;	
 	Control ct = new Control();
+	 
 %>
 <% 
 	volunteerId = (String)session.getAttribute("volunteerId"); 
 	if(volunteerId == null)
 	{	
-		volunteerId = (String)session.getAttribute("NgoId"); 
+		volunteerId = (String)session.getAttribute("volunteerId"); 
 	} 
 	volunteerStatus  = ct.checkVolunteerStatus(request, response,volunteerId);  
 } catch (Exception e){ 	 	
 }
 if(volunteerStatus == 1){
+	 
+	pageNumber = Integer.parseInt(request.getParameter("pN")); 
+	volunteerCount = ct.volunteerCount();
+	pageCount= volunteerCount/10 +1;
+	vmsExperinceRs = ct.getVmsExperience(request, response,pageNumber-1, nextRecordCount);  
+	/* ct.teamVolunteerDetails(pageNumber-1, nextRecordCount,adminId,branchId); */
+	
 %>  	
  
 <div class="container" style="paddin:0px; margin-left:0px;">
@@ -216,7 +228,7 @@ if(volunteerStatus == 1){
                             <a class="nav-link" href="vmsExperience.jsp">Online Support</a>
                         </li>
                          <li   class="nav-item">
-                            <a class="nav-link" href="viewVmsExperience.jsp?pN=1">View Online Support</a>
+                            <a class="nav-link" href="viewVmsExperience.jsp">View Online Support</a>
                         </li>
                          
                          
@@ -226,13 +238,91 @@ if(volunteerStatus == 1){
                 </div> 
             </div> 
         </div>
-        <div class="col-md-10 col-lg-9">
-             
+        <div class="col-md-10 col-lg-9" style="padding:22px 10px;">
+              <ul class="collapsible" data-collapsible="accordion" style="list-style:none; margin-left:auto; margin-right:auto;">
+			  <% while(vmsExperinceRs.next()){%>
+					<li>
+						<div class="collapsible-header active"><p style="padding:10px; background-color:#66bdd7; font-size:14px;">
+							<span class="glyphicon glyphicon-pushpin" style="font-size:20px; color:#fff; font-size:22px; font-style: bold;"></span>&nbsp;&nbsp;
+							 <%=ct.getVolunteerName(vmsExperinceRs.getString("volunteer_registration_id"))%>
+							 
+					  		<span style="float: right; margin-right: 39px;" >
+						  		<span class="glyphicon glyphicon-record" style="color:#fff; font-size:18px;"></span> &nbsp;&nbsp; 
+							<%= vmsExperinceRs.getString("request_status") %>
+							</span> 		
+				 	 	</div> 
+						<div class="collapsible-body" style="background-color: #fff;">
+							<div class="col-lg-12" style="margin-left:90px;">
+							<br><%= vmsExperinceRs.getString("category") %>
+								<br><br>
+								<p style="font-size:16px;"><%=vmsExperinceRs.getString("description") %>  </p> 
+								<br><a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-tags" style="color:#fff; font-size:22px;  "></i> Assign Students </a>
+							</div> 
+					</div>
+					<%vmsExperinceCommentRs = ct.getVmsExperienceComment(request,response,vmsExperinceRs.getString("id"));%>
+					<div class="modal fade" id="myModal" role="dialog">
+					    <div class="modal-dialog">
+					    
+					      <!-- Modal content-->
+					      <div class="modal-content">
+					        <div class="modal-header">
+					          <button type="button" class="close" data-dismiss="modal">&times;</button>
+					          <h4 class="modal-title">Modal Header</h4>
+					        </div>
+					        <div class="modal-body">
+					        	<%while(vmsExperinceCommentRs.next()){  
+					        	if(vmsExperinceCommentRs.getString("volunteer_registration_id")!=null){%>
+					        <div style="width:100%;margin:2px; background: #e5e5e5; padding:5px; border-radius:2px; border: 1px solid #cccccc;-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);    -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;    -moz-transition: border linear 0.2s, box-shadow linear 0.2s;    -o-transition: border linear 0.2s, box-shadow linear 0.2s;    transition: border linear 0.2s, box-shadow linear 0.2s;  float:right; text-align:left;">
+	                                
+	                                <span>
+                                        <img src="DisplayVolunteerPic?name=<%=vmsExperinceCommentRs.getString("volunteer_registration_id")%>" align="left" style="width:40px; height:40px; border-radius: 50%;"> &nbsp; &nbsp;
+                                        <%=vmsExperinceCommentRs.getString("comment")%> <span></span>
+                                        <p style="text-align: right; padding:0px;" >
+                                            <span>
+                                              <%=vmsExperinceCommentRs.getString("comment_time")%>
+                                            </span>
+                                        </p>
+                                </div>
+                                <%}else if(vmsExperinceCommentRs.getString("admin_id")!=null){ %>
+                                <div style="width:100%;margin:2px; background: #e5e5e5; padding:5px; border-radius:2px; border: 1px solid #cccccc;-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);    -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;    -moz-transition: border linear 0.2s, box-shadow linear 0.2s;    -o-transition: border linear 0.2s, box-shadow linear 0.2s;    transition: border linear 0.2s, box-shadow linear 0.2s;  float:right; text-align:left;">
+	                                
+	                                <span>
+                                        <img src="DisplayMentorPic?name=<%=vmsExperinceCommentRs.getString("admin_id")%>" align="left" style="width:40px; height:40px; border-radius: 50%;"> &nbsp; &nbsp;
+                                        <%=vmsExperinceCommentRs.getString("comment")%> <span></span>
+                                        <p style="text-align: right; padding:0px;" >
+                                            <span>
+                                              <%=vmsExperinceCommentRs.getString("comment_time")%>
+                                            </span>
+                                        </p>
+                                </div>
+                                <%} }%>
+					        </div>
+					        <div class="modal-footer">
+					          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					        </div>
+					      </div>
+					      
+					    </div>
+  </div>
+				</li>
+				<%} %> 
+				 <div class="col-lg-12 text-center" style="margin-left:auto; margin-right:auto;">
+					<ul class="pagination " >
+						<% for( int k=1; k<=pageCount; k++){ %>
+					    	<li><a href="teamProjectView.jsp?pN=<%=k%>"><%=k%></a></li>
+					    <% } %> 
+				 	</ul>
+		 		</div>  
+	  		</ul>
+		 
+	 
+               
+               
+               
     	</div>
  	</div>
 </div>
-  
-<%} %>
+   <% } %>
 <br><br><br><br><br>
 		  
 <!-- newsletter -->
@@ -298,98 +388,28 @@ if(volunteerStatus == 1){
 		<p class="copy-right">© 2016 Fashion Club . All rights reserved | Design by <a href="#">Kapil Thakur & Rebecca John</a></p>
 	</div>
 </div>
+ 	 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
 
-	<!-- cart-js -->
-	<script src="js/minicart.js"></script>
-	<!-- <script>
-        w3ls1.render();
-
-        w3ls1.cart.on('w3sb1_checkout', function (evt) {
-        	var items, len, i;
-
-        	if (this.subtotal() > 0) {
-        		items = this.items();
-
-        		for (i = 0, len = items.length; i < len; i++) {
-        			items[i].set('shipping', 0);
-        			items[i].set('shipping2', 0);
-        		}
-        	}
-        });
-    </script> -->  
-	<!-- //cart-js -->  
-
-<%
-	String registered =request.getParameter("ngomsg");
-	if(registered != null){
-%>
-<div class="Message Message--green">
-  <div class="Message-icon">
-    <i class="fa fa-check "></i>
-  </div>
-  <div class="Message-body">
-    <p>Thank You for registering with us. Please check your mail to verify your account</p>   
-  </div>
-  <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
-</div>
-<%} %>
-
-
-	<!-- cart-js -->
-	<script src="js/minicart.js"></script>
-	<script>
-        w3ls1.render();
-
-        w3ls1.cart.on('w3sb1_checkout', function (evt) {
-        	var items, len, i;
-
-        	if (this.subtotal() > 0) {
-        		items = this.items();
-
-        		for (i = 0, len = items.length; i < len; i++) {
-        			items[i].set('shipping', 0);
-        			items[i].set('shipping2', 0);
-        		}
-        	}
-        });
-    </script>  
-	<!-- //cart-js -->  
-	
- 
 <script type="text/javascript">
 
-function closeMessage(el) {
-	  el.addClass('is-hidden');
-	}
-
-	$('.js-messageClose').on('click', function(e) {
-	  closeMessage($(this).closest('.Message'));
+(function($) {
+	
+	$(window).scroll(function() {
+		
+		$(window).scroll(function() {
+			space = $(window).innerHeight() - $('.fab').offsetTop + $('.fab').offsetHeight;
+			if(space < 200){
+				$('.fab').css('margin-bottom', '150px');
+			}
+		})
+		
 	});
-
-	$('#js-helpMe').on('click', function(e) {
-	  alert('Help you we will, young padawan');
-	  closeMessage($(this).closest('.Message'));
-	});
-
-	$('#js-authMe').on('click', function(e) {
-	  alert('Okelidokeli, requesting data transfer.');
-	  closeMessage($(this).closest('.Message'));
-	});
-
-	$('#js-showMe').on('click', function(e) {
-	  alert("You're off to our help section. See you later!");
-	  closeMessage($(this).closest('.Message'));
-	});
-
-	$(document).ready(function() {
-	  setTimeout(function() {
-	    closeMessage($('#js-timer'));
-	  }, 5000);
-	});
-
+	
+})(jQuery);
 
 </script>
-
+ 
 	  
 </body>
 </html>
