@@ -64,7 +64,8 @@ h1 {
    
   
   
-<div class="outercontainer" style="margin-top:0px; height:100px; background-color: #f8f8f8;">
+
+   <div class="outercontainer" style="margin-top:0px; height:100px; background-color: #f8f8f8;">
 	<div class="header-bottom-w3ls" style="padding:22px;">  
 		<div class="row">
 			<div class="col-md-2 logo-w3">
@@ -82,28 +83,37 @@ h1 {
 		</div>
 	</div>
 </div> 
-
-
 <% try{ %>
   
 <%!  
-	ResultSet ngoDetail=null;
+	ResultSet monthlyReportRs=null,branchRs=null;
 	int volunteerStatus=0; 
-	String volunteerId=null,  PhoneNumber =null; ;
-	ResultSet SubCategoryRs=null; 
+	String volunteerId =null;
+	ResultSet teamsRs=null; 
+	int volunteerCount =0, pageCount = 0;
+	int pageNumber=0, nextRecordCount=10;	
 	Control ct = new Control();
 %>
 <% 
-	volunteerId = (String)session.getAttribute("volunteerId"); 
+volunteerId = (String)session.getAttribute("volunteerId"); 
 	if(volunteerId == null)
 	{	
-		volunteerId = (String)session.getAttribute("NgoId"); 
+		volunteerId = (String)session.getAttribute("adminId"); 
 	} 
 	volunteerStatus  = ct.checkVolunteerStatus(request, response,volunteerId);  
 } catch (Exception e){ 	 	
 }
+finally
+{
+
+}
 if(volunteerStatus == 1){
-%>  	
+String id = request.getParameter("id"); 
+
+
+%>
+ 
+ 	
  
 <div class="container" style="paddin:0px; margin-left:0px;">
     <div class="row">
@@ -113,7 +123,7 @@ if(volunteerStatus == 1){
 	 
  
                 <div   id="collapseExample"style="paddin:0px; margin-left:0px;" >
-                    <ul class="nav flex-column" id="exCollapsingNavbar3">
+                      <ul class="nav flex-column" id="exCollapsingNavbar3">
 	                    <li   class="nav-item" style="text-algin:center">
 	                    	<div class="center">
 	                     <img src="DisplayVolunteerPic?name=<%=volunteerId %>" align="middle" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 80px;height: 80px;border-radius: 50%;">
@@ -185,64 +195,77 @@ if(volunteerStatus == 1){
             </div> 
         </div>
         <div class="col-md-10 col-lg-9" style="padding:22px 10px;">
-        
-        <%   PhoneNumber = ct.getPhone(volunteerId);  
-        
-        	 
-        %>
-   	<div class="container">
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h3 class="modal-title" >Edit Details</h3>
-                        <h6 style="margin-bottom: 0;margin-top: 0">(Double click field to edit)</h6>
-                    </div>
-                    <form  name="f1" enctype="multipart/form-data"  action="VolunteerEditDetails" method="post" onSubmit="return validate()">
+	 	 
+			 <%monthlyReportRs = ct.getVolunteerMonthlyReportGrades(request, response , id); %>
+				<div class="data">
+				<%while(monthlyReportRs.next()){ %>
+					<table id="table1">
+					
 
-                    <div class="modal-body" style="margin-left: 18%">
-                        <div class="container">
 
-                        <div>
-                             <div  class="btn btn-default" style="margin-left:0; margin-right: 0;margin-top: 0;">
-                                 <label>Profile Picture: </label>
-                                <input type="file" id="profile_pic" style="opacity:1; margin-top:-15px; margin-left:2px;"  name="playerphoto"  accept="image/*"  onchange="loadFile(event)">
-                                </div>
-                                <img id="output"/>
-                        </div>
-                            <br>
-                            <table>
 
-                            
-                            <div>
-                                <td><label>Contact Number : </label></td>
-                                <td><input name=current_conact type="text" style="opacity:1; width:250px; margin-top:-22px;"  class="" readonly="true" value="<%=PhoneNumber%>" ondblclick="this.readOnly='';"></td>
-                            </div>
-                                 
-                           
-                                
-                            </table>
-                        </div>
-                        </div>
 
-                    <div class="modal-footer">
-                        <span><p id="msg" style="color: red; font-size:17px; display: inline-block;" > </p></span>
-                        <br> <input  type="submit"  class="btn btn-info" style="margin-top: -1px; margin-left:-105px; width:100px; opacity:1; margin-right: 0 "  value="Update" >
-                    
-                        <button type="button" class="btn btn-default" style="margin-top: 0; margin-right: 0" data-dismiss="modal">Close</button>
-                        <%--<div class=" form-row col-lg-12 text-center" style="" >--%>
-                            <%--<br><br>--%>
-                               <%--</div>--%>
-                    </div>
-                    </form>
-                </div>
 
-            </div>
-        </div>
-    </div>
-    <a href="#"  data-toggle="modal" data-target="#myModal" class="btn btn-info"> Edit Profile</a>
-            
+
+
+
+
+
+
+						<tbody>
+							<tr>
+							<td><p>Creativity </p></td>
+							<td><%=monthlyReportRs.getString("creativity") %></td>
+							<td><p>Punctuality </p></td>
+							<td><%=monthlyReportRs.getString("Punctuality") %></td>
+							
+							<td><p>Work Ethics</p></td>
+							<td><%=monthlyReportRs.getString("work_ethics") %> </td>
+						</tr>
+							<tr>
+							<td><p>Quality of Work</p></td>
+							<td><%=monthlyReportRs.getString("quality_work") %> </td>
+							
+							<td><p>Reliability</p></td>
+							<td> <%=monthlyReportRs.getString("reliability") %></td>
+							
+							<td><p>Decision Making</p></td>
+							<td><%=monthlyReportRs.getString("decision_making") %> </td>
+						</tr>
+						<tr>
+						<td><p>Promptness</p></td>
+						<td><%=monthlyReportRs.getString("promptness") %> </td>
+						
+						<td><p>Involvement </p></td>
+						<td><%=monthlyReportRs.getString("involvement") %> </td>
+						
+						<td><p>Upgradation of skills</p></td>
+						<td><%=monthlyReportRs.getString("upgradation_of_skills") %> </td>
+						</tr>
+						<tr>
+						<td><p>Overall Growth</p></td>
+						<td><%=monthlyReportRs.getString("overall_growth") %> </td>
+						
+							<td><p>Total</p></td>
+							<td> <%=monthlyReportRs.getString("total") %></td>
+							<td><p>Comment</p>
+							<td><textarea><%=monthlyReportRs.getString("comment") %></textarea></td>
+						</tr>
+						
+						</tbody>
+					</table>
+					
+					<table id="table2">
+						<tbody>
+							<tr>
+							
+						</tbody>
+					</table>
+					<%} %>
+					 </div>
+			 
+	 	 
+	 	   
     	</div>
  	</div>
 </div>
@@ -252,8 +275,6 @@ if(volunteerStatus == 1){
 <div class="footer" style="background-color:#f8f8f8;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
-	  
-
-	  
+	   
 </body>
 </html>

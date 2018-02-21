@@ -62,69 +62,30 @@ h1 {
 <%@ page import ="javax.sql.*" %>
 <%@ page import="com.daniel.util.control.*"  %> 
    
-  
-  
-   <div class="outercontainer" style="margin-top:0px;">
-	<div class="header-bottom-w3ls">  
+<div class="outercontainer" style="margin-top:0px; height:100px; background-color: #f8f8f8;">
+	<div class="header-bottom-w3ls" style="padding:22px;">  
 		<div class="row">
 			<div class="col-md-2 logo-w3">
-				<a href="index.jsp"><img src="images/logo2.png" alt=" " /> </a>
+				<a href="mentorIndex.jsp"><img src="images/logo2.png" alt=" " /> </a>
 				<div class="clearfix"></div>
-			</div> 
-			<div class="col-md-7 navigation-agileits" style=" text-align: center;">
-				<nav class="navbar navbar-default">
-					<div class="navbar-header nav_2">
-						<button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-					</div> 
-					<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
-						<ul class="nav navbar-nav ">
-							<li class=" active"><a href="index.jsp" class="hyper "><span>Home</span></a></li>	
-							<li><a href="contact.html" class="hyper"><span>Services</span></a></li>	
-							<li><a href="about.html" class="hyper"><span>About</span></a></li>						
-							<li><a href="contact.html" class="hyper"><span>Contact Us</span></a></li>
-						</ul>
-					</div>
-				</nav>
-			</div>
-		  	<script>
-				$(document).ready(function(){
-					$(".dropdown").hover(            
-						function() {
-							$('.dropdown-menu', this).stop( true, true ).slideDown("fast");
-							$(this).toggleClass('open');        
-						},
-						function() {
-							$('.dropdown-menu', this).stop( true, true ).slideUp("fast");
-							$(this).toggleClass('open');       
-						}
-					);
-				});
-			</script>  
-			<div class="col-md-1 cart-wthree">  
-				 <a href="CustomerRegister.html"> <i class="fa fa-user" aria-hidden="true"></i><br>Register</a>	 
-				   	 
+			</div>  
+			<div class="col-md-8 cart-wthree">  
 			</div>
 			<div class="col-md-2 cart-wthree">  
-				<form action="ngoPreLogout.jsp" method="post"  style="float: right; margin-top:10px; display: inline-block; margin-right:40px;    "  > 
 				 
-					<button class="w3view-cart"  style="color:#66bdd7;" type="submit" name="submit"  > Sign Out </button>
-				</form>   	 
+					<a href="mentorLogout.jsp" class="w3view-cart"  style="color:#66bdd7;" ><br> Sign Out </a>
+				  	 
 			</div>
 			<div class="clearfix"></div>
 		</div>
 	</div>
-</div> 
+</div>   
 <% try{ %>
   
 <%!  
 	ResultSet ngoDetail=null;
 	int mentorStatus=0; 
-	String adminId =null;
+	String adminId =null,PhoneNumber=null;
 	ResultSet SubCategoryRs=null; 
 	Control ct = new Control();
 %>
@@ -148,21 +109,23 @@ if(mentorStatus == 1){
  
                 <div   id="collapseExample"style="paddin:0px; margin-left:0px;" >
                     <ul class="nav flex-column" id="exCollapsingNavbar3">
-	                    <li   class="nav-item" style="text-algin:center">
-	                     <img src="images/logo2.png" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 63px;height: 80px;border-radius: 50%;">
+	                   <li   class="nav-item" style="text-algin:center">
+	                    	<div class="center">
+	                     <img src="DisplayMentorPic?name=<%=adminId%>" align="middle" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 80px;height: 80px;border-radius: 50%;">
+	                 	</div>
 	                 	</li>
-                       <li class="nav-item">
-                         <form action="#" method="post">
-								<div class="key" style="margin:10px;">
-									<input  type="text" style="opacity:1;"  name="productPrice" required="" placeholder="Search Feature">
+                      	<li class="nav-item" style="margin-bottom:17px;">
+                         	<form action="#" method="post">
+								<div    >
+									<input  type="text" style="opacity:1; cursor:text; height:40px;"  name="productPrice" required="" placeholder="Search Feature">
 									<div class="clearfix"></div>
 								</div>
-								<button type="submit" class="btn btn-default search" aria-label="Left Align">
+								<button type="submit" style="height:40px; margin-top:6px;" class="btn btn-default search" aria-label="Left Align">
 									<i class="fa fa-search" aria-hidden="true"> </i>
 								</button> 
 							</form>	
-                    	</li>
-                    		
+							<br><br>
+                    	</li > 
                        	<li   class="nav-item">
                          	<a class="nav-link" href="mentorIndex.jsp">Home</a>
                         </li>
@@ -195,30 +158,74 @@ if(mentorStatus == 1){
                         </li>
                         <li  class="nav-item">
                             <a class="nav-link" href="branchProjectEnrollRequestView.jsp?pN=1"> Branch Project Enroll Request</a>
-                        </li>
-                         <li   class="nav-item">
-                            <a class="nav-link" href="projectAssigned.jsp">Meeting Report</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link  " href="teamProject.jsp">Team Project</a>
+                        </li>   
+                        <li   class="nav-item">
+                            <a class="nav-link" href="viewMonthlyReport.jsp?pN=1">View Monthly Report</a>
+                        </li>  
+                        <li   class="nav-item">
+                            <a class="nav-link" href="mentorVmsExperience.jsp">VMS Feedback</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="branchProject.jsp">Branch Project</a>
+                            <a class="nav-link" href="mentorVmsExperienceView.jsp?pN=1">View VMS Feedback</a>
                         </li> 
-                        <li   class="nav-item">
-                            <a class="nav-link" href="vmsExperience.jsp">VMS Feedback</a>
-                        </li>
-                         
-                         
-                          
-                        
                     </ul>
                 </div> 
             </div> 
         </div>
-        <div class="col-md-10 col-lg-9">
-             
-    	</div>
+         <%   PhoneNumber = ct.getMentorPhone(adminId);   %>
+        <div class="col-md-10 col-lg-9" style="padding:22px 10px;">
+             <div class="container">
+		        <div class="modal fade" id="myModal" role="dialog">
+		            <div class="modal-dialog">
+		                <div class="modal-content">
+		                    <div class="modal-header">
+		                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		                        <h3 class="modal-title" >Edit Details</h3>
+		                        <h6 style="margin-bottom: 0;margin-top: 0">(Double click field to edit)</h6>
+		                    </div>
+		                    <form  name="f1" enctype="multipart/form-data"  action="MentorEditDetails" method="post" onSubmit="return validate()">
+		
+		                    <div class="modal-body" style="margin-left: 18%">
+		                        <div class="container">
+		
+		                        <div>
+		                             <div  class="btn btn-default" style="margin-left:0; margin-right: 0;margin-top: 0;">
+		                                 <label>Profile Picture: </label>
+		                                <input type="file" id="profile_pic" style="opacity:1; margin-top:-15px; margin-left:2px;"  name="playerphoto"  accept="image/*"  onchange="loadFile(event)">
+		                                </div>
+		                                <img id="output"/>
+		                        </div>
+		                            <br>
+		                            <table>
+		
+		                            
+		                            <div>
+		                                <td><label>Contact Number : </label></td>
+		                                <td><input name=current_conact type="text" style="opacity:1; width:250px; margin-top:-22px;"  class="" readonly="true" value="<%=PhoneNumber%>" ondblclick="this.readOnly='';"></td>
+		                            </div>
+		                                 
+		                           
+		                                
+		                            </table>
+		                        </div>
+		                        </div>
+		
+		                    <div class="modal-footer">
+		                        <span><p id="msg" style="color: red; font-size:17px; display: inline-block;" > </p></span>
+		                        <br> <input  type="submit"  class="btn btn-info" style="margin-top: -1px; margin-left:-105px; width:100px; opacity:1; margin-right: 0 "  value="Update" >
+		                    
+		                        <button type="button" class="btn btn-default" style="margin-top: 0; margin-right: 0" data-dismiss="modal">Close</button>
+		                        <%--<div class=" form-row col-lg-12 text-center" style="" >--%>
+		                            <%--<br><br>--%>
+		                               <%--</div>--%>
+		                    </div>
+		                    </form>
+		                </div> 
+		            </div>
+		        </div>
+    		</div>
+    		<a href="#"  data-toggle="modal" data-target="#myModal" class="btn btn-info"> Edit Profile</a>
+         </div>
  	</div>
 </div>
   

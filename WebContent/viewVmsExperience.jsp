@@ -114,7 +114,7 @@ h1 {
 if(volunteerStatus == 1){
 	 
 	pageNumber = Integer.parseInt(request.getParameter("pN")); 
-	volunteerCount = ct.volunteerCount();
+	volunteerCount = ct.volunteerVmsExperienceCount(volunteerId);
 	pageCount= volunteerCount/10 +1;
 	vmsExperinceRs = ct.getVmsExperience(request, response,pageNumber-1, nextRecordCount);  
 	/* ct.teamVolunteerDetails(pageNumber-1, nextRecordCount,adminId,branchId); */

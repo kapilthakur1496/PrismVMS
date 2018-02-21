@@ -63,6 +63,7 @@ h1 {
 <%@ page import="com.daniel.util.control.*"  %> 
    
   
+  
 <div class="outercontainer" style="margin-top:0px; height:100px; background-color: #f8f8f8;">
 	<div class="header-bottom-w3ls" style="padding:22px;">  
 		<div class="row">
@@ -119,9 +120,7 @@ if(mentorStatus == 1){
         <div class="col-md-2 col-lg-3" >
 
             <div class="bootstrap-vertical-nav" >
-	 
- 
-                <div   id="collapseExample"style="paddin:0px; margin-left:0px;" >
+	  			 <div   id="collapseExample"style="paddin:0px; margin-left:0px;" >
                     <ul class="nav flex-column" id="exCollapsingNavbar3">
 	                   <li   class="nav-item" style="text-algin:center">
 	                    	<div class="center">
@@ -190,7 +189,7 @@ if(mentorStatus == 1){
         
             <%while(volunteerDetailsRs.next()) {%> 
 				<ul> 
-					<a href="individualAssignProjects.jsp?vId=<%=volunteerDetailsRs.getString("id")%>" style="color:#333; text-decoration:none;">
+					<a href="viewVolunteerMonthlyReport.jsp?vId=<%=volunteerDetailsRs.getString("id")%>" style="color:#333; text-decoration:none;">
 						<li style="list-style:none;" >
 							<div class="collapsible-header active" style="background:#66bdd7;"><p style="padding:5px; font-size:14px;">
 							  	<img style="display:inline-block; width:50px; height:50px; border-radius:50%; margin-lefT:10px; border-style:none; "  src="images/person.jpg" >&nbsp;&nbsp;
@@ -203,18 +202,20 @@ if(mentorStatus == 1){
 						</li>
 					</a>
 				</ul>
-             <% }  %> 
+             <% }  %>
+             
+             
+             
     	</div>
  	</div>
 </div>
   
 <%} %>
-
 <br><br><br>  
 <div class="footer" style="background-color:#f8f8f8;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
-	  
+	 
 	 
 </body>
 </html>

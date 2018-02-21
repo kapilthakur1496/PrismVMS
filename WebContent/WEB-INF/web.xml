@@ -53,6 +53,23 @@
     <servlet-name>DisplayVolunteerPic</servlet-name>
     <url-pattern>/DisplayVolunteerPic</url-pattern>
   </servlet-mapping> 
+  <servlet>
+    <servlet-name>MentorEditDetails</servlet-name>
+    <servlet-class>MentorEditDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MentorEditDetails</servlet-name>
+    <url-pattern>/MentorEditDetails</url-pattern>
+  </servlet-mapping> 
+  
+  <servlet>
+    <servlet-name>DisplayMentorPic</servlet-name>
+    <servlet-class>DisplayMentorPic</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DisplayMentorPic</servlet-name>
+    <url-pattern>/DisplayMentorPic</url-pattern>
+  </servlet-mapping> 
   
 <context-param>
   <param-name>EncryptionKey</param-name>

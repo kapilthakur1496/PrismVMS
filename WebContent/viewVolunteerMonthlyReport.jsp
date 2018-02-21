@@ -81,11 +81,11 @@ h1 {
 			<div class="clearfix"></div>
 		</div>
 	</div>
-</div>  
+</div> 
 <% try{ %>
   
 <%!  
-	ResultSet vmsExperienceRs=null,branchRs=null;
+	ResultSet monthlyReportRs=null,branchRs=null;
 	int mentorStatus=0; 
 	String adminId =null;
 	ResultSet teamsRs=null; 
@@ -106,8 +106,13 @@ finally
 {
 
 }
-if(mentorStatus == 1){ 
-%> 
+if(mentorStatus == 1){
+String id = request.getParameter("vId");
+
+%>
+ 
+ 	
+ 
 <div class="container" style="paddin:0px; margin-left:0px;">
     <div class="row">
         <div class="col-md-2 col-lg-3" >
@@ -116,7 +121,7 @@ if(mentorStatus == 1){
 	 
  
                 <div   id="collapseExample"style="paddin:0px; margin-left:0px;" >
-                    <ul class="nav flex-column" id="exCollapsingNavbar3">
+                     <ul class="nav flex-column" id="exCollapsingNavbar3">
 	                    <li   class="nav-item" style="text-algin:center">
 	                    	<div class="center">
 	                     <img src="DisplayMentorPic?name=<%=adminId %>" align="middle" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 80px;height: 80px;border-radius: 50%;">
@@ -178,30 +183,58 @@ if(mentorStatus == 1){
                             <a class="nav-link" href="grievanceView.jsp">View Grievance  </a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="mentorVmsExperience.jsp">VMS Feedback</a>
+                            <a class="nav-link" href="vmsExperience.jsp">VMS Feedback</a>
                         </li>
-                        <li   class="nav-item">
-                           <a class="nav-link" href="viewVmsExperience.jsp?pN=1">View VMS Feedback</a>
-                       </li> 
+                         <li   class="nav-item">
+                            <a class="nav-link" href="viewVmsExperience.jsp?pN=1">View VMS Feedback</a>
+                        </li> 
                     </ul>
                 </div> 
             </div> 
         </div>
         <div class="col-md-10 col-lg-9" style="padding:22px 10px;">
-	 	  <% String id= request.getParameter("id");
-	 	  String name= request.getParameter("name");%> 
-	 	  <form action="Control?action=submitVmsExperience" method="post">
-			  <br><br><select name="category" >
-			<option value="0">Select Category</option>
-			<% vmsExperienceRs = ct.getVmsCategory();  
-				while(vmsExperienceRs.next()){
-			%>
-			 	<option value="<%=vmsExperienceRs.getString("category")%>"><%=vmsExperienceRs.getString("category")%></option>
-				<%} %>
-			</select>
-			<br><br><textarea  name="experienceDesc" placeholder="Enter Your Experience"></textarea>
-			<br><br><input type="submit" style="opacity:1;"  value="Submit Grievance">
-				</form>
+	 	  <%  
+	 	 monthlyReportRs = ct.getVolunteerMonthlyReport(request, response,id);
+ 	  		 
+	 	  %> 
+	 	  <table>
+	 	  	<thead>
+	 	  	<tr>
+	 	  		<th>#</th>
+	 	  		<th>Submit Date</th>
+	 	  		<th>From Date</th>
+	 	  		<th>To Date</th>
+	 	  		<th>Skills Acquired</th>  
+				<th>Progress</th>
+				<th>Challenges</th>
+				<th>Future Prospects</th>
+				<th>Status</th>
+				<th>Grades</th>
+	 	  	</tr>
+	 	  	</thead>
+	 	  	<tbody>
+	 	  	  <%!int i=1; %>  
+	 	  	 <% while(monthlyReportRs.next()) { %>  
+	 	  	  	<tr>
+	 	  			<td><%=i %></td>
+	 	  			<td><%=monthlyReportRs.getString("submit_date").substring(0,10) %></td>
+	 	  			<td><%=monthlyReportRs.getString("from_date") %></td>
+	 	  			<td><%=monthlyReportRs.getString("to_date") %></td>
+	 	  			<td><%=monthlyReportRs.getString("skillaacquired") %></td> 
+ 	  				<td><%=monthlyReportRs.getString("progress")%></td> 
+ 	  				<td><%=monthlyReportRs.getString("challenges") %></td>
+ 	  				<td><%=monthlyReportRs.getString("future_prospects") %></td>
+ 	  				<td><%=monthlyReportRs.getString("report_status") %></td> 
+ 	  				<% if(monthlyReportRs.getString("report_status").equals("Graded")){ %>
+ 	  				<td><a href="monthlyReportGradeView.jsp?id=<%=monthlyReportRs.getString("month_work_id") %>">View</a> </td> 
+ 	  				<%} else { %>
+ 	  				<td><a href="monthlyReportGrade.jsp?vIds=<%=monthlyReportRs.getString("volunteer_registration_id")%>&email=<%=ct.getEmail(monthlyReportRs.getString("volunteer_registration_id")) %>&id=<%=monthlyReportRs.getString("month_work_id") %>">Grade</a> </td> 
+ 	  				<%} %>
+ 	  			</tr>
+ 	  			
+	 	   	<%i++;} %>   
+	 	  	</tbody> 
+	 	  </table> 
     	</div>
  	</div>
 </div>

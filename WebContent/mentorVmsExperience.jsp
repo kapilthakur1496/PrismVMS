@@ -63,7 +63,7 @@ h1 {
 <%@ page import="com.daniel.util.control.*"  %> 
    
   
-<div class="outercontainer" style="margin-top:0px; height:100px; background-color: #f8f8f8;">
+  <div class="outercontainer" style="margin-top:0px; height:100px; background-color: #f8f8f8;">
 	<div class="header-bottom-w3ls" style="padding:22px;">  
 		<div class="row">
 			<div class="col-md-2 logo-w3">
@@ -80,14 +80,16 @@ h1 {
 			<div class="clearfix"></div>
 		</div>
 	</div>
-</div>  
+</div>   
 <% try{ %>
   
 <%!  
-	ResultSet volunteerDetails=null;
+	ResultSet vmsExperienceRs=null,branchRs=null;
 	int mentorStatus=0; 
 	String adminId =null;
-	ResultSet SubCategoryRs=null; 
+	ResultSet teamsRs=null; 
+	int volunteerCount =0, pageCount = 0;
+	int pageNumber=0, nextRecordCount=10;	
 	Control ct = new Control();
 %>
 <% 
@@ -99,21 +101,12 @@ h1 {
 	mentorStatus  = ct.checkMentorStatus(request, response,adminId);  
 } catch (Exception e){ 	 	
 }
-if(mentorStatus == 1){
- %>
-<%!
-	ResultSet volunteerDetailsRs=null,teamRs=null;
- 	int volunteerCount =0, pageCount = 0;
-	int pageNumber=0, nextRecordCount=10;	
-%>
-<%  
- 	pageNumber = Integer.parseInt(request.getParameter("pN")); 
-	volunteerCount = ct.volunteerTeamCount(adminId);
-	pageCount= volunteerCount/10 +1;
-	String branchId = ct.getMenorBranch(adminId);
-	volunteerDetailsRs = ct.teamVolunteerDetails(pageNumber-1, nextRecordCount,adminId,branchId);	
-%>  	
- 
+finally
+{
+
+}
+if(mentorStatus == 1){ 
+%> 
 <div class="container" style="paddin:0px; margin-left:0px;">
     <div class="row">
         <div class="col-md-2 col-lg-3" >
@@ -122,7 +115,7 @@ if(mentorStatus == 1){
 	 
  
                 <div   id="collapseExample"style="paddin:0px; margin-left:0px;" >
-                    <ul class="nav flex-column" id="exCollapsingNavbar3">
+                   <ul class="nav flex-column" id="exCollapsingNavbar3">
 	                   <li   class="nav-item" style="text-algin:center">
 	                    	<div class="center">
 	                     <img src="DisplayMentorPic?name=<%=adminId%>" align="middle" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 80px;height: 80px;border-radius: 50%;">
@@ -187,34 +180,51 @@ if(mentorStatus == 1){
             </div> 
         </div>
         <div class="col-md-10 col-lg-9" style="padding:22px 10px;">
-        
-            <%while(volunteerDetailsRs.next()) {%> 
-				<ul> 
-					<a href="individualAssignProjects.jsp?vId=<%=volunteerDetailsRs.getString("id")%>" style="color:#333; text-decoration:none;">
-						<li style="list-style:none;" >
-							<div class="collapsible-header active" style="background:#66bdd7;"><p style="padding:5px; font-size:14px;">
-							  	<img style="display:inline-block; width:50px; height:50px; border-radius:50%; margin-lefT:10px; border-style:none; "  src="images/person.jpg" >&nbsp;&nbsp;
-								<%= volunteerDetailsRs.getString("volunteer_name") %>
-							 	<span style="float: right; margin-top:10px; margin-right:10px;" ><span class="fa fa-users" style="text-align: right; font-size:22px;  font-style: bold; "> </span> &nbsp;&nbsp; 
-							 		<%= volunteerDetailsRs.getString("team") %>
-								</span> 
-												
-						  	</div> 
-						</li>
-					</a>
-				</ul>
-             <% }  %> 
+	 	  <% String id= request.getParameter("id");
+	 	  String name= request.getParameter("name");%> 
+	 	  <form action="Control?action=mentorVmsExperience" method="post">
+			  <br><br><select name="category" >
+			<option value="0">Select Category</option>
+			<% vmsExperienceRs = ct.getVmsCategory();  
+				while(vmsExperienceRs.next()){
+			%>
+			 	<option value="<%=vmsExperienceRs.getString("category")%>"><%=vmsExperienceRs.getString("category")%></option>
+				<%} %>
+			</select>
+			<br><br><textarea  name="experienceDesc" placeholder="Enter Your Experience"></textarea>
+			<br><br><input type="submit" style="opacity:1;"  value="Submit Grievance">
+				</form>
     	</div>
  	</div>
 </div>
   
 <%} %>
-
-<br><br><br>  
+<br><br><br> 
 <div class="footer" style="background-color:#f8f8f8;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
 	  
-	 
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+
+<script type="text/javascript">
+
+(function($) {
+	
+	$(window).scroll(function() {
+		
+		$(window).scroll(function() {
+			space = $(window).innerHeight() - $('.fab').offsetTop + $('.fab').offsetHeight;
+			if(space < 200){
+				$('.fab').css('margin-bottom', '150px');
+			}
+		})
+		
+	});
+	
+})(jQuery);
+
+</script>
 </body>
 </html>

@@ -1,9 +1,3 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <%@page import="java.util.ArrayList"%>
 <html lang="en">
@@ -70,61 +64,25 @@ h1 {
    
   
   
-   <div class="outercontainer" style="margin-top:0px;">
-	<div class="header-bottom-w3ls">  
+
+<div class="outercontainer" style="margin-top:0px; height:100px; background-color: #f8f8f8;">
+	<div class="header-bottom-w3ls" style="padding:22px;">  
 		<div class="row">
 			<div class="col-md-2 logo-w3">
-				<a href="index.jsp"><img src="images/logo2.png" alt=" " /> </a>
+				<a href="mentorIndex.jsp"><img src="images/logo2.png" alt=" " /> </a>
 				<div class="clearfix"></div>
-			</div> 
-			<div class="col-md-7 navigation-agileits" style=" text-align: center;">
-				<nav class="navbar navbar-default">
-					<div class="navbar-header nav_2">
-						<button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-					</div> 
-					<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
-						<ul class="nav navbar-nav ">
-							<li class=" active"><a href="index.jsp" class="hyper "><span>Home</span></a></li>	
-							<li><a href="contact.html" class="hyper"><span>Services</span></a></li>	
-							<li><a href="about.html" class="hyper"><span>About</span></a></li>						
-							<li><a href="contact.html" class="hyper"><span>Contact Us</span></a></li>
-						</ul>
-					</div>
-				</nav>
-			</div>
-		  	<script>
-				$(document).ready(function(){
-					$(".dropdown").hover(            
-						function() {
-							$('.dropdown-menu', this).stop( true, true ).slideDown("fast");
-							$(this).toggleClass('open');        
-						},
-						function() {
-							$('.dropdown-menu', this).stop( true, true ).slideUp("fast");
-							$(this).toggleClass('open');       
-						}
-					);
-				});
-			</script>  
-			<div class="col-md-1 cart-wthree">  
-				 <a href="CustomerRegister.html"> <i class="fa fa-user" aria-hidden="true"></i><br>Register</a>	 
-				   	 
+			</div>  
+			<div class="col-md-8 cart-wthree">  
 			</div>
 			<div class="col-md-2 cart-wthree">  
-				<form action="ngoPreLogout.jsp" method="post"  style="float: right; margin-top:10px; display: inline-block; margin-right:40px;    "  > 
 				 
-					<button class="w3view-cart"  style="color:#66bdd7;" type="submit" name="submit"  > Sign Out </button>
-				</form>   	 
+					<a href="mentorLogout.jsp" class="w3view-cart"  style="color:#66bdd7;" ><br> Sign Out </a>
+				  	 
 			</div>
 			<div class="clearfix"></div>
 		</div>
 	</div>
-</div> 
+</div>   
 <% try{ %>
   
 <%!  
@@ -153,9 +111,7 @@ if(mentorStatus == 1){
 	String branch_id = ct.getMentorBranch(adminId);
 	String branch = ct.getBranchName(branch_id);
  %>
- 
- 	
- 
+   
 <div class="container" style="paddin:0px; margin-left:0px;">
     <div class="row">
         <div class="col-md-2 col-lg-3" >
@@ -165,26 +121,37 @@ if(mentorStatus == 1){
  
                 <div   id="collapseExample"style="paddin:0px; margin-left:0px;" >
                     <ul class="nav flex-column" id="exCollapsingNavbar3">
-	                    <li   class="nav-item" style="text-algin:center">
-	                     <img src="images/logo2.png" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 63px;height: 80px;border-radius: 50%;">
+	                   <li   class="nav-item" style="text-algin:center">
+	                    	<div class="center">
+	                     <img src="DisplayMentorPic?name=<%=adminId%>" align="middle" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 80px;height: 80px;border-radius: 50%;">
+	                 	</div>
 	                 	</li>
-                       <li class="nav-item">
-                         <form action="#" method="post">
-								<div class="key" style="margin:10px;">
-									<input  type="text"   name="productPrice" required="" placeholder="Search Feature">
+                      	<li class="nav-item" style="margin-bottom:17px;">
+                         	<form action="#" method="post">
+								<div    >
+									<input  type="text" style="opacity:1; cursor:text; height:40px;"  name="productPrice" required="" placeholder="Search Feature">
 									<div class="clearfix"></div>
 								</div>
-								<button type="submit" class="btn btn-default search" aria-label="Left Align">
+								<button type="submit" style="height:40px; margin-top:6px;" class="btn btn-default search" aria-label="Left Align">
 									<i class="fa fa-search" aria-hidden="true"> </i>
 								</button> 
 							</form>	
-                    	</li>
-                    		
-                       	<li  class="nav-item">
-                         	<a class="nav-link " href="mentorIndex.jsp">Home</a>
+							<br><br>
+                    	</li > 
+                       	<li   class="nav-item">
+                         	<a class="nav-link" href="mentorIndex.jsp">Home</a>
                         </li>
+                        <li   class="nav-item">
+                         	<a class="nav-link" href="mentorVolunteerWorkDiary.jsp?pN=1">Work Diary</a>
+                        </li>
+                        <li   class="nav-item">
+                         	<a class="nav-link" href="mentorVolunteerMeeting.jsp?pN=1">Work Meeting</a>
+                        </li>
+                        <li   class="nav-item">
+                         	<a class="nav-link" href="mentorVolunteerTraining.jsp?pN=1">Work Training</a>
+                        </li>                       	 
                         <li  class="nav-item">
-                            <a class="nav-link active" href="individualProject.jsp">Individual Projects</a>
+                            <a class="nav-link" href="individualProject.jsp?pN=1">Individual Projects</a>
                         </li> 
                         <li  class="nav-item">
                             <a class="nav-link" href="teamProject.jsp">Team Projects</a>
@@ -192,28 +159,27 @@ if(mentorStatus == 1){
                         <li  class="nav-item">
                             <a class="nav-link" href="teamProjectView.jsp?pN=1">View Team Projects</a>
                         </li>
-                        <li   class="nav-item">
-                            <a class="nav-link" href="workTraining.jsp">Branch Projects</a>
-                        </li>
-                         <li   class="nav-item">
-                            <a class="nav-link" href="projectAssigned.jsp">Meeting Report</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link  " href="teamProject.jsp">Team Project</a>
+                        <li  class="nav-item">
+                            <a class="nav-link" href="teamProjectEnrollRequestView.jsp?pN=1"> Team Project Enroll Request</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="branchProject.jsp">Branch Project</a>
+                            <a class="nav-link" href="branchProject.jsp">Branch Projects</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="branchProject.jsp">Grievance</a>
+                            <a class="nav-link" href="branchProjectView.jsp?pN=1">View Branch Projects</a>
+                        </li>
+                        <li  class="nav-item">
+                            <a class="nav-link" href="branchProjectEnrollRequestView.jsp?pN=1"> Branch Project Enroll Request</a>
+                        </li>   
+                        <li   class="nav-item">
+                            <a class="nav-link" href="viewMonthlyReport.jsp?pN=1">View Monthly Report</a>
+                        </li>  
+                        <li   class="nav-item">
+                            <a class="nav-link" href="mentorVmsExperience.jsp">VMS Feedback</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="support.jsp">Online Support</a>
-                        </li>
-                         
-                         
-                          
-                        
+                            <a class="nav-link" href="mentorVmsExperienceView.jsp?pN=1">View VMS Feedback</a>
+                        </li> 
                     </ul>
                 </div> 
             </div> 
@@ -288,7 +254,7 @@ if(mentorStatus == 1){
 				 <div class="col-lg-12 text-center" >
 					<ul class="pagination " >
 						<% for( int k=1; k<=pageCount; k++){ %>
-					    	<li><a href="teamProjectView.jsp?pN=<%=k%>"><%=k%></a></li>
+					    	<li><a href="branchProjectEnrollRequestView.jsp?pN=<%=k%>"><%=k%></a></li>
 					    <% } %> 
 				 	</ul>
 		 		</div>  
@@ -304,73 +270,13 @@ if(mentorStatus == 1){
 </div>
   
 <%} %>
-<br><br><br><br><br>
-		  
-<!-- newsletter -->
-<div class="newsletter">
-	<div class="container">
-		<div class="col-md-6 w3agile_newsletter_left">
-			<h2>Newsletter</h2>
-			<p>Excepteur sint occaecat cupidatat non proident, sunt.</p>
-		</div>
-		<div class="col-md-6 w3agile_newsletter_right">
-			<form action="Control?action=subscription" method="post">
-				<input type="email" name="email" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-				<input type="submit" value="Subscribe" />
-			</form>
-		</div>
-		<div class="clearfix"> </div>
-	</div>
-</div>
-<!-- //newsletter -->
-<div class="footer">
-	<div class="container">
-		<div class="col-md-3 footer-grids fgd1">
-		<a href="index.jsp"><img src="images/logo2.png" alt=" " /> </a>
-		<ul>
-			<li>1234k Avenue, 4th block,</li>
-			<li>Bangalore.</li>
-			<li><a href="mailto:info@example.com">info@example.com</a></li>
-			<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-		</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd2">
-			<h4>Information</h4> 
-			<ul>
-				<li><a href="contact.html">Contact Us</a></li>
-				<li><a href="icons.html">Web Icons</a></li>
-				<li><a href="typography.html">Typography</a></li>
-				<li><a href="faq.html">FAQ's</a></li>
-			</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd3">
-			<h4>Shop</h4> 
-			<ul>
-				<li><a href="jewellery.html">Jewellery</a></li>
-				<li><a href="cosmetics.html">Cosmetics</a></li>
-				<li><a href="Shoes.html">Shoes</a></li>
-				<li><a href="deos.html">Deos</a></li>
-			</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd4">
-			<h4>My Account</h4> 
-			<ul>
-				
-				<li><a href="login.html">Login</a></li>
-				<li><a href="NgoRegister.jsp">Register</a></li>
-				<li><a href="recommended.html">Recommended </a></li>
-				<li><a href="payment.html">Payments</a></li>
-			</ul>
-		</div>
-		<div class="clearfix"></div>
-		<p class="copy-right">© 2016 Fashion Club . All rights reserved | Design by <a href="#">Kapil Thakur & Rebecca John</a></p>
-	</div>
-</div>
 
-	 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<br><br><br>  
+<div class="footer" style="background-color:#f8f8f8;   height:50px;">
+	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
+</div> 
+	  
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
 
 <script type="text/javascript">

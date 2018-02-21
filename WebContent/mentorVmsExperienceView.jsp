@@ -61,7 +61,10 @@ h1 {
 <%@page import="java.lang.reflect.Array"%>
 <%@ page import ="javax.sql.*" %>
 <%@ page import="com.daniel.util.control.*"  %> 
-   
+    
+<%
+    Connection connection=DbUtil.getConnection();
+%>
   
 <div class="outercontainer" style="margin-top:0px; height:100px; background-color: #f8f8f8;">
 	<div class="header-bottom-w3ls" style="padding:22px;">  
@@ -84,11 +87,14 @@ h1 {
 <% try{ %>
   
 <%!  
-	ResultSet volunteerDetails=null;
-	int mentorStatus=0; 
-	String adminId =null;
+	ResultSet vmsExperinceRs=null,vmsExperinceCommentRs=null;
+	int volunteerStatus=0; 
+	String adminId = null,name=null,comment=null;
 	ResultSet SubCategoryRs=null; 
+	int volunteerCount =0, pageCount = 0;
+	int pageNumber=0, nextRecordCount=10;	
 	Control ct = new Control();
+	 
 %>
 <% 
 	adminId = (String)session.getAttribute("adminId"); 
@@ -96,22 +102,16 @@ h1 {
 	{	
 		adminId = (String)session.getAttribute("adminId"); 
 	} 
-	mentorStatus  = ct.checkMentorStatus(request, response,adminId);  
-} catch (Exception e){ 	 	
-}
-if(mentorStatus == 1){
- %>
-<%!
-	ResultSet volunteerDetailsRs=null,teamRs=null;
- 	int volunteerCount =0, pageCount = 0;
-	int pageNumber=0, nextRecordCount=10;	
-%>
-<%  
- 	pageNumber = Integer.parseInt(request.getParameter("pN")); 
-	volunteerCount = ct.volunteerTeamCount(adminId);
+	volunteerStatus  = ct.checkMentorStatus(request, response,adminId);  
+
+if(volunteerStatus == 1){
+	 
+	pageNumber = Integer.parseInt(request.getParameter("pN")); 
+	volunteerCount = ct.mentorVmsExperienceCount(adminId);
 	pageCount= volunteerCount/10 +1;
-	String branchId = ct.getMenorBranch(adminId);
-	volunteerDetailsRs = ct.teamVolunteerDetails(pageNumber-1, nextRecordCount,adminId,branchId);	
+	vmsExperinceRs = ct.getMentorVmsExperience(request, response,pageNumber-1, nextRecordCount);  
+	/* ct.teamVolunteerDetails(pageNumber-1, nextRecordCount,adminId,branchId); */
+	
 %>  	
  
 <div class="container" style="paddin:0px; margin-left:0px;">
@@ -122,7 +122,7 @@ if(mentorStatus == 1){
 	 
  
                 <div   id="collapseExample"style="paddin:0px; margin-left:0px;" >
-                    <ul class="nav flex-column" id="exCollapsingNavbar3">
+                     <ul class="nav flex-column" id="exCollapsingNavbar3">
 	                   <li   class="nav-item" style="text-algin:center">
 	                    	<div class="center">
 	                     <img src="DisplayMentorPic?name=<%=adminId%>" align="middle" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 80px;height: 80px;border-radius: 50%;">
@@ -187,34 +187,132 @@ if(mentorStatus == 1){
             </div> 
         </div>
         <div class="col-md-10 col-lg-9" style="padding:22px 10px;">
-        
-            <%while(volunteerDetailsRs.next()) {%> 
-				<ul> 
-					<a href="individualAssignProjects.jsp?vId=<%=volunteerDetailsRs.getString("id")%>" style="color:#333; text-decoration:none;">
-						<li style="list-style:none;" >
-							<div class="collapsible-header active" style="background:#66bdd7;"><p style="padding:5px; font-size:14px;">
-							  	<img style="display:inline-block; width:50px; height:50px; border-radius:50%; margin-lefT:10px; border-style:none; "  src="images/person.jpg" >&nbsp;&nbsp;
-								<%= volunteerDetailsRs.getString("volunteer_name") %>
-							 	<span style="float: right; margin-top:10px; margin-right:10px;" ><span class="fa fa-users" style="text-align: right; font-size:22px;  font-style: bold; "> </span> &nbsp;&nbsp; 
-							 		<%= volunteerDetailsRs.getString("team") %>
-								</span> 
-												
-						  	</div> 
-						</li>
-					</a>
-				</ul>
-             <% }  %> 
+              <ul class="collapsible" data-collapsible="accordion" style="list-style:none; margin-left:auto; margin-right:auto;">
+			 <%!int j=1; %>
+			  <% while(vmsExperinceRs.next()){%>
+					<li>
+						<div class="collapsible-header active"><p style="padding:10px; background-color:#66bdd7; font-size:14px;">
+							<span class="glyphicon glyphicon-pushpin" style="font-size:20px; color:#fff; font-size:22px; font-style: bold;"></span>&nbsp;&nbsp;
+							 <%=ct.getMentorName(vmsExperinceRs.getString("admin_id"))%>
+							 
+					  		<span style="float: right; margin-right: 39px;" >
+						  		<span class="glyphicon glyphicon-record" style="color:#fff; font-size:18px;"></span> &nbsp;&nbsp; 
+							<%= vmsExperinceRs.getString("request_status") %>
+							</span> 		
+				 	 	</div> 
+						<div class="collapsible-body" style="background-color: #fff;">
+							<div class="col-lg-12" style="margin-left:8px;">
+							<br><%= vmsExperinceRs.getString("category") %>
+								<br><br>
+								<p style="font-size:16px;"><%=vmsExperinceRs.getString("description") %>  </p> 
+								<br>
+								<div style="text-align:center;">
+									<a href="#" data-toggle="modal" data-target="#myModal<%=j%>" style="margin-left:auto; margin-right:auto;"><i class="	fa fa-comments-o" style="color:#fff; font-size:22px;  "></i> Chat</a>
+								</div>
+							</div> 
+					</div>
+					<%comment = vmsExperinceRs.getString("id");%> 
+					<%vmsExperinceCommentRs = ct.getVolunteerVmsExperienceComment(request,response,vmsExperinceRs.getString("id"));%>
+					<div class="modal fade" id="myModal<%=j%>" role="dialog">
+					    <div class="modal-dialog">
+					    
+					      <!-- Modal content-->
+					      <div class="modal-content">
+					        <div class="modal-header">
+					          <button type="button" class="close" data-dismiss="modal">&times;</button>
+					          <h4 class="modal-title">VMS Experience Chat Box</h4>
+					        </div>
+					        <div class="modal-body">
+					        	<%
+					        	if(!vmsExperinceCommentRs.next()){
+					        	
+					        	}
+					        	else{while(vmsExperinceCommentRs.next()){%>
+					         
+                               <% if(vmsExperinceCommentRs.getString("admin_id")!=null){ %>  
+                                <div style="width:100%;margin:2px; background: #e5e5e5; padding:5px; border-radius:2px; border: 1px solid #cccccc;-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);    -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;    -moz-transition: border linear 0.2s, box-shadow linear 0.2s;    -o-transition: border linear 0.2s, box-shadow linear 0.2s;    transition: border linear 0.2s, box-shadow linear 0.2s;  float:right; text-align:left;">
+	                                
+	                                <span>
+                                        <img src="DisplayMentorPic?name=<%=vmsExperinceCommentRs.getString("admin_id")%>" align="left" style="width:40px; height:40px; border-radius: 50%;"> &nbsp; &nbsp;
+                                        <%=vmsExperinceCommentRs.getString("comment")%> <span></span>
+                                        <p style="text-align: right; padding:0px;" >
+                                            <span>
+                                              <%=vmsExperinceCommentRs.getString("comment_time")%>
+                                              
+                                               
+                                            </span>
+                                        </p>
+                                </div>
+                                <%  }  
+                                } }%>
+                                
+                                 <div class="row" style=" float:left; text-align:center; bottom:0px;width:100%;">
+                                    <form style="width:100%" method="post" action="Control?action=addMentorVmsExperienceComment">
+                                        <input type="hidden" name="id" value="<%=comment%>">
+                                        <textarea  placeholder='Comment Box'     style="  background: #ddd;  padding:5x; color:#333; width:89.5%; border-radius: 2px;
+border: 1px solid #cccccc;" required name="comment" rows="3" cols="80"></textarea>
+                                        <input type="submit"  style="background:transparent;width: 38px;
+    margin-top: 88px; opacity:1; color:#337ab7; display: inine-block; font-size: 36px; height:48px; border: none;"   class=" glyphicon"  value="&#xe171;"> </input>
+                                    </form>
+                                </div>
+					        </div>
+					        <div class="modal-footer">
+					          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					        </div>
+					      </div>
+					      
+					    </div>
+  </div>
+				</li>
+				<%} %> 
+				 <div class="col-lg-12 text-center" style="margin-left:auto; margin-right:auto;">
+					<ul class="pagination " >
+						<% for( int k=1; k<=pageCount; k++){ %>
+					    	<li><a href="teamProjectView.jsp?pN=<%=k%>"><%=k%></a></li>
+					    <% } %> 
+				 	</ul>
+		 		</div>  
+	  		</ul>
+		 
+	 
+               
+               
+               
     	</div>
  	</div>
 </div>
-  
-<%} %>
+   <% } } catch (Exception e){ 	 	
+}%> 
 
 <br><br><br>  
 <div class="footer" style="background-color:#f8f8f8;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
 	  
-	 
+ 
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+
+<script type="text/javascript">
+
+(function($) {
+	
+	$(window).scroll(function() {
+		
+		$(window).scroll(function() {
+			space = $(window).innerHeight() - $('.fab').offsetTop + $('.fab').offsetHeight;
+			if(space < 200){
+				$('.fab').css('margin-bottom', '150px');
+			}
+		})
+		
+	});
+	
+})(jQuery);
+
+</script>
+ 
+	  
 </body>
 </html>
