@@ -1,9 +1,3 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <%@page import="java.util.ArrayList"%>
 <html lang="en">
@@ -70,7 +64,7 @@ h1 {
    
   
   
-   <div class="outercontainer" style="margin-top:0px; height:100px; background-color: #f8f8f8;">
+<div class="outercontainer" style="margin-top:0px; height:100px; background-color: #f8f8f8;">
 	<div class="header-bottom-w3ls" style="padding:22px;">  
 		<div class="row">
 			<div class="col-md-2 logo-w3">
@@ -87,28 +81,33 @@ h1 {
 			<div class="clearfix"></div>
 		</div>
 	</div>
-</div> 
+</div>  
 <% try{ %>
   
 <%!  
-	ResultSet ngoDetail=null;
-	int volunteerStatus=0; 
-	String volunteerId=null,  PhoneNumber =null; ;
-	ResultSet SubCategoryRs=null; 
+	ResultSet vmsExperienceRs=null,branchRs=null;
+	int mentorStatus=0; 
+	String adminId =null;
+	ResultSet teamsRs=null; 
+	int volunteerCount =0, pageCount = 0;
+	int pageNumber=0, nextRecordCount=10;	
 	Control ct = new Control();
 %>
 <% 
-	volunteerId = (String)session.getAttribute("volunteerId"); 
-	if(volunteerId == null)
+	adminId = (String)session.getAttribute("adminId"); 
+	if(adminId == null)
 	{	
-		volunteerId = (String)session.getAttribute("NgoId"); 
+		adminId = (String)session.getAttribute("adminId"); 
 	} 
-	volunteerStatus  = ct.checkVolunteerStatus(request, response,volunteerId);  
+	mentorStatus  = ct.checkMentorStatus(request, response,adminId);  
 } catch (Exception e){ 	 	
 }
-if(volunteerStatus == 1){
-%>  	
- 
+finally
+{
+
+}
+if(mentorStatus == 1){ 
+%> 
 <div class="container" style="paddin:0px; margin-left:0px;">
     <div class="row">
         <div class="col-md-2 col-lg-3" >
@@ -120,13 +119,13 @@ if(volunteerStatus == 1){
                     <ul class="nav flex-column" id="exCollapsingNavbar3">
 	                    <li   class="nav-item" style="text-algin:center">
 	                    	<div class="center">
-	                     <img src="DisplayVolunteerPic?name=<%=volunteerId %>" align="middle" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 80px;height: 80px;border-radius: 50%;">
+	                     <img src="DisplayMentorPic?name=<%=adminId %>" align="middle" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 80px;height: 80px;border-radius: 50%;">
 	                 	</div>
 	                 	</li>
                        <li class="nav-item" style="margin-bottom:17px;">
                          <form action="#" method="post">
 								<div    >
-									<input  type="text" style="opacity:1; cursor:text; height:40px;"  name="productPrice" required="" placeholder="Search Feature">
+									<input  type="text" style="opacity:1; height:40px;"  name="productPrice" required="" placeholder="Search Feature">
 									<div class="clearfix"></div>
 								</div>
 								<button type="submit" style="height:40px; margin-top:6px;" class="btn btn-default search" aria-label="Left Align">
@@ -179,74 +178,30 @@ if(volunteerStatus == 1){
                             <a class="nav-link" href="grievanceView.jsp">View Grievance  </a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="mentotVmsExperience.jsp">VMS Feedback</a>
+                            <a class="nav-link" href="mentorVmsExperience.jsp">VMS Feedback</a>
                         </li>
-                         <li   class="nav-item">
-                            <a class="nav-link" href="viewVmsExperience.jsp?pN=1">View VMS Feedback</a>
-                        </li> 
+                        <li   class="nav-item">
+                           <a class="nav-link" href="viewVmsExperience.jsp?pN=1">View VMS Feedback</a>
+                       </li> 
                     </ul>
                 </div> 
             </div> 
         </div>
         <div class="col-md-10 col-lg-9" style="padding:22px 10px;">
-        
-        <%   PhoneNumber = ct.getPhone(volunteerId);  
-        
-        	 
-        %>
-              <div class="container">
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h3 class="modal-title" >Edit Details</h3>
-                        <h6 style="margin-bottom: 0;margin-top: 0">(Double click field to edit)</h6>
-                    </div>
-                    <form  name="f1" enctype="multipart/form-data"  action="VolunteerEditDetails" method="post" onSubmit="return validate()">
-
-                    <div class="modal-body" style="margin-left: 18%">
-                        <div class="container">
-
-                        <div>
-                             <div  class="btn btn-default" style="margin-left:0; margin-right: 0;margin-top: 0;">
-                                 <label>Profile Picture: </label>
-                                <input type="file" id="profile_pic" style="opacity:1; margin-top:-15px; margin-left:2px;"  name="playerphoto"  accept="image/*"  onchange="loadFile(event)">
-                                </div>
-                                <img id="output"/>
-                        </div>
-                            <br>
-                            <table>
-
-                            
-                            <div>
-                                <td><label>Contact Number : </label></td>
-                                <td><input name=current_conact type="text" style="opacity:1; width:250px; margin-top:-22px;"  class="" readonly="true" value="<%=PhoneNumber%>" ondblclick="this.readOnly='';"></td>
-                            </div>
-                                 
-                           
-                                
-                            </table>
-                        </div>
-                        </div>
-
-                    <div class="modal-footer">
-                        <span><p id="msg" style="color: red; font-size:17px; display: inline-block;" > </p></span>
-                        <br> <input  type="submit"  class="btn btn-info" style="margin-top: -1px; margin-left:-105px; width:100px; opacity:1; margin-right: 0 "  value="Update" >
-                    
-                        <button type="button" class="btn btn-default" style="margin-top: 0; margin-right: 0" data-dismiss="modal">Close</button>
-                        <%--<div class=" form-row col-lg-12 text-center" style="" >--%>
-                            <%--<br><br>--%>
-                               <%--</div>--%>
-                    </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <a href="#"  data-toggle="modal" data-target="#myModal" class="btn btn-info"> Edit Profile</a>
-            
+	 	  <% String id= request.getParameter("id");
+	 	  String name= request.getParameter("name");%> 
+	 	  <form action="Control?action=submitVmsExperience" method="post">
+			  <br><br><select name="category" >
+			<option value="0">Select Category</option>
+			<% vmsExperienceRs = ct.getVmsCategory();  
+				while(vmsExperienceRs.next()){
+			%>
+			 	<option value="<%=vmsExperienceRs.getString("category")%>"><%=vmsExperienceRs.getString("category")%></option>
+				<%} %>
+			</select>
+			<br><br><textarea  name="experienceDesc" placeholder="Enter Your Experience"></textarea>
+			<br><br><input type="submit" style="opacity:1;"  value="Submit Grievance">
+				</form>
     	</div>
  	</div>
 </div>
@@ -258,6 +213,26 @@ if(volunteerStatus == 1){
 </div> 
 	  
 
-	  
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+
+<script type="text/javascript">
+
+(function($) {
+	
+	$(window).scroll(function() {
+		
+		$(window).scroll(function() {
+			space = $(window).innerHeight() - $('.fab').offsetTop + $('.fab').offsetHeight;
+			if(space < 200){
+				$('.fab').css('margin-bottom', '150px');
+			}
+		})
+		
+	});
+	
+})(jQuery);
+
+</script>
 </body>
 </html>

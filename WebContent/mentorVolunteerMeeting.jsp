@@ -128,12 +128,10 @@ h1 {
 <% try{ %>
   
 <%!  
-	ResultSet branchProjectsRs=null,branchRs=null;
+	ResultSet volunteerDetails=null;
 	int mentorStatus=0; 
 	String adminId =null;
-	ResultSet teamsRs=null; 
-	int volunteerCount =0, pageCount = 0;
-	int pageNumber=0, nextRecordCount=10;	
+	ResultSet SubCategoryRs=null; 
 	Control ct = new Control();
 %>
 <% 
@@ -146,16 +144,19 @@ h1 {
 } catch (Exception e){ 	 	
 }
 if(mentorStatus == 1){
-	pageNumber = Integer.parseInt(request.getParameter("pN")); 
-	volunteerCount = ct.volunteerCount();
-	pageCount= volunteerCount/10 +1;
-	branchProjectsRs = ct.getBranchProjectEnrollment(request, response,pageNumber-1, nextRecordCount);  
-	/* ct.teamVolunteerDetails(pageNumber-1, nextRecordCount,adminId,branchId); */
- 	String branch_id = ct.getMentorBranch(adminId);
-	String branch = ct.getBranchName(branch_id);
  %>
- 
- 	
+<%!
+	ResultSet volunteerDetailsRs=null,teamRs=null;
+ 	int volunteerCount =0, pageCount = 0;
+	int pageNumber=0, nextRecordCount=10;	
+%>
+<%  
+ 	pageNumber = Integer.parseInt(request.getParameter("pN")); 
+	volunteerCount = ct.volunteerTeamCount(adminId);
+	pageCount= volunteerCount/10 +1;
+	String branchId = ct.getMenorBranch(adminId);
+	volunteerDetailsRs = ct.teamVolunteerDetails(pageNumber-1, nextRecordCount,adminId,branchId);	
+%>  	
  
 <div class="container" style="paddin:0px; margin-left:0px;">
     <div class="row">
@@ -181,17 +182,14 @@ if(mentorStatus == 1){
 							</form>	
                     	</li>
                     		
-                       	<li  class="nav-item">
+                       	<li   class="nav-item">
                          	<a class="nav-link " href="mentorIndex.jsp">Home</a>
                         </li>
                         <li  class="nav-item">
                             <a class="nav-link active" href="individualProject.jsp">Individual Projects</a>
                         </li> 
                         <li  class="nav-item">
-                            <a class="nav-link" href="teamProject.jsp">Team Projects</a>
-                        </li>
-                        <li  class="nav-item">
-                            <a class="nav-link" href="teamProjectView.jsp?pN=1">View Team Projects</a>
+                            <a class="nav-link" href="workMeeting.jsp">Team Projects</a>
                         </li>
                         <li   class="nav-item">
                             <a class="nav-link" href="workTraining.jsp">Branch Projects</a>
@@ -211,148 +209,37 @@ if(mentorStatus == 1){
                         <li   class="nav-item">
                             <a class="nav-link" href="support.jsp">Online Support</a>
                         </li>
+                         
+                         
                           
                         
                     </ul>
                 </div> 
             </div> 
         </div>
-        <div class="col-md-10 col-lg-9" style="padding:22px 10px;">
-	 	  
-				<ul class="collapsible" data-collapsible="accordion" style="list-style:none; margin-left:auto; margin-right:auto;">
-			 
-				 <%while(branchProjectsRs.next()){ %>
-					<li>
-						<div class="collapsible-header active"><p style="padding:10px; background-color:#66bdd7; font-size:14px;">
-							<span class="glyphicon glyphicon-pushpin" style="font-size:20px; color:#fff; font-size:22px; font-style: bold;"></span>&nbsp;&nbsp;
-							<%=branchProjectsRs.getString("bproject_title") %>
-							 
-					  		 <span style="float: right; margin-right: 39px;" >
-						  		<i class="fa fa fa-building	"  style="text-align: right; color:#fff; font-size:22px; font-style: bold;"> </i> &nbsp;&nbsp; 
-							 	<%=branch %> 
-							 	
-							</span>  	
-				 	 	</div> 
-						<div class="collapsible-body" style="background-color: #fff;">
-							<div class="col-lg-12" style="margin-left:90px;">
-								<div class="row"  >
-									<div class="col-lg-6" style="padding:5px;  "> 
-										<div class="info">
-					 			 			<p><strong><i class="fa fa-calendar-o" style="font-size:20px;  "></i>  &nbsp;  &nbsp;  Start Date</strong> &nbsp; <%=branchProjectsRs.getString("bpro_start_date") %>      </p>
-										</div>
-									</div>
-									<div class="col-lg-6" style="padding:5px;  "> 
-										<div class="info">
-					 			 			<p><strong><i class="fa fa-calendar-o" style="font-size:20px;  "></i> &nbsp;  &nbsp; End Date</strong> &nbsp; <%=branchProjectsRs.getString("bpro_end_date") %>   </p>
-										</div>
-									</div>
-								</div>
-								<br>
-								<p style="   font-size:16px;"><%=branchProjectsRs.getString("bproject_desc") %>  </p> 
-								<br><a href="assignBranchProjects.jsp?projectId=<%=branchProjectsRs.getString("id")%>"><i class="fa fa-tags" style="color:#fff; font-size:22px;  "></i> Assign Students </a>
-							</div> 
-					</div>
-				</li>
-				<%} %> 
-				 <div class="col-lg-12 text-center" style="margin-left:auto; margin-right:auto;">
-					<ul class="pagination " >
-						<% for( int k=1; k<=pageCount; k++){ %>
-					    	<li><a href="teamProjectView.jsp?pN=<%=k%>"><%=k%></a></li>
-					    <% } %> 
-				 	</ul>
-		 		</div>  
-	  		</ul> 
+        <div class="col-md-10 col-lg-9" style="padding:22px 10px;"> 
+            <%while(volunteerDetailsRs.next()) {%> 
+				<ul> 
+					<a href="mentorVolunteerMeetingView.jsp?vId=<%=volunteerDetailsRs.getString("id")%>" style="color:#333; text-decoration:none;">
+						<li style="list-style:none;" >
+							<div class="collapsible-header active" style="background:#66bdd7;"><p style="padding:5px; font-size:14px;">
+							  	<img style="display:inline-block; width:50px; height:50px; border-radius:50%; margin-lefT:10px; border-style:none; "  src="images/person.jpg" >&nbsp;&nbsp;
+								<%= volunteerDetailsRs.getString("volunteer_name") %>
+							 	<span style="float: right; margin-top:10px; margin-right:10px;" ><span class="fa fa-users" style="text-align: right; font-size:22px;  font-style: bold; "> </span> &nbsp;&nbsp; 
+							 		<%= volunteerDetailsRs.getString("team") %>
+								</span> 		
+						  	</div> 
+						</li>
+					</a>
+				</ul>
+             <% }  %> 
     	</div>
  	</div>
 </div>
   
 <%} %>
-<br><br><br><br><br>
-		  
-<!-- newsletter -->
-<div class="newsletter">
-	<div class="container">
-		<div class="col-md-6 w3agile_newsletter_left">
-			<h2>Newsletter</h2>
-			<p>Excepteur sint occaecat cupidatat non proident, sunt.</p>
-		</div>
-		<div class="col-md-6 w3agile_newsletter_right">
-			<form action="Control?action=subscription" method="post">
-				<input type="email" name="email" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-				<input type="submit" value="Subscribe" />
-			</form>
-		</div>
-		<div class="clearfix"> </div>
-	</div>
-</div>
-<!-- //newsletter -->
-<div class="footer">
-	<div class="container">
-		<div class="col-md-3 footer-grids fgd1">
-		<a href="index.jsp"><img src="images/logo2.png" alt=" " /> </a>
-		<ul>
-			<li>1234k Avenue, 4th block,</li>
-			<li>Bangalore.</li>
-			<li><a href="mailto:info@example.com">info@example.com</a></li>
-			<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-		</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd2">
-			<h4>Information</h4> 
-			<ul>
-				<li><a href="contact.html">Contact Us</a></li>
-				<li><a href="icons.html">Web Icons</a></li>
-				<li><a href="typography.html">Typography</a></li>
-				<li><a href="faq.html">FAQ's</a></li>
-			</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd3">
-			<h4>Shop</h4> 
-			<ul>
-				<li><a href="jewellery.html">Jewellery</a></li>
-				<li><a href="cosmetics.html">Cosmetics</a></li>
-				<li><a href="Shoes.html">Shoes</a></li>
-				<li><a href="deos.html">Deos</a></li>
-			</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd4">
-			<h4>My Account</h4> 
-			<ul>
-				
-				<li><a href="login.html">Login</a></li>
-				<li><a href="NgoRegister.jsp">Register</a></li>
-				<li><a href="recommended.html">Recommended </a></li>
-				<li><a href="payment.html">Payments</a></li>
-			</ul>
-		</div>
-		<div class="clearfix"></div>
-		<p class="copy-right">© 2016 Fashion Club . All rights reserved | Design by <a href="#">Kapil Thakur & Rebecca John</a></p>
-	</div>
-</div>
+<br><br><br> 
 
-	 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
-
-<script type="text/javascript">
-
-(function($) {
-	
-	$(window).scroll(function() {
-		
-		$(window).scroll(function() {
-			space = $(window).innerHeight() - $('.fab').offsetTop + $('.fab').offsetHeight;
-			if(space < 200){
-				$('.fab').css('margin-bottom', '150px');
-			}
-		})
-		
-	});
-	
-})(jQuery);
-
-</script>
+	 
 </body>
 </html>

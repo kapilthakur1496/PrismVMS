@@ -1,9 +1,3 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <%@page import="java.util.ArrayList"%>
 <html lang="en">
@@ -151,7 +145,6 @@ if(mentorStatus == 1){
         <div class="col-md-2 col-lg-3" >
 
             <div class="bootstrap-vertical-nav" >
-	 
  
                 <div   id="collapseExample"style="paddin:0px; margin-left:0px;" >
                     <ul class="nav flex-column" id="exCollapsingNavbar3">
@@ -171,10 +164,19 @@ if(mentorStatus == 1){
                     	</li>
                     		
                        	<li   class="nav-item">
-                         	<a class="nav-link " href="mentorIndex.jsp">Home</a>
+                         	<a class="nav-link" href="mentorIndex.jsp">Home</a>
                         </li>
+                        <li   class="nav-item">
+                         	<a class="nav-link" href="mentorVolunteerWorkDiary.jsp?pN=1">Work Diary</a>
+                        </li>
+                        <li   class="nav-item">
+                         	<a class="nav-link" href="mentorVolunteerMeeting.jsp?pN=1">Work Meeting</a>
+                        </li>
+                        <li   class="nav-item">
+                         	<a class="nav-link" href="mentorVolunteerTraining.jsp?pN=1">Work Training</a>
+                        </li>                       	 
                         <li  class="nav-item">
-                            <a class="nav-link active" href="individualProject.jsp?pN=1">Individual Projects</a>
+                            <a class="nav-link" href="individualProject.jsp?pN=1">Individual Projects</a>
                         </li> 
                         <li  class="nav-item">
                             <a class="nav-link" href="teamProject.jsp">Team Projects</a>
@@ -182,11 +184,17 @@ if(mentorStatus == 1){
                         <li  class="nav-item">
                             <a class="nav-link" href="teamProjectView.jsp?pN=1">View Team Projects</a>
                         </li>
+                        <li  class="nav-item">
+                            <a class="nav-link" href="teamProjectEnrollRequestView.jsp?pN=1"> Team Project Enroll Request</a>
+                        </li>
                         <li   class="nav-item">
                             <a class="nav-link" href="branchProject.jsp">Branch Projects</a>
                         </li>
                         <li   class="nav-item">
                             <a class="nav-link" href="branchProjectView.jsp?pN=1">View Branch Projects</a>
+                        </li>
+                        <li  class="nav-item">
+                            <a class="nav-link" href="branchProjectEnrollRequestView.jsp?pN=1"> Branch Project Enroll Request</a>
                         </li>
                          <li   class="nav-item">
                             <a class="nav-link" href="projectAssigned.jsp">Meeting Report</a>
@@ -196,12 +204,9 @@ if(mentorStatus == 1){
                         </li>
                         <li   class="nav-item">
                             <a class="nav-link" href="branchProject.jsp">Branch Project</a>
-                        </li>
+                        </li> 
                         <li   class="nav-item">
-                            <a class="nav-link" href="branchProject.jsp">Grievance</a>
-                        </li>
-                        <li   class="nav-item">
-                            <a class="nav-link" href="support.jsp">Online Support</a>
+                            <a class="nav-link" href="vmsExperience.jsp">VMS Feedback</a>
                         </li>
                          
                          
@@ -218,72 +223,12 @@ if(mentorStatus == 1){
 </div>
   
 <%} %>
-<br><br><br><br><br>
-		  
-<!-- newsletter -->
-<div class="newsletter">
-	<div class="container">
-		<div class="col-md-6 w3agile_newsletter_left">
-			<h2>Newsletter</h2>
-			<p>Excepteur sint occaecat cupidatat non proident, sunt.</p>
-		</div>
-		<div class="col-md-6 w3agile_newsletter_right">
-			<form action="Control?action=subscription" method="post">
-				<input type="email" name="email" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-				<input type="submit" value="Subscribe" />
-			</form>
-		</div>
-		<div class="clearfix"> </div>
-	</div>
-</div>
-<!-- //newsletter -->
-<div class="footer">
-	<div class="container">
-		<div class="col-md-3 footer-grids fgd1">
-		<a href="index.jsp"><img src="images/logo2.png" alt=" " /> </a>
-		<ul>
-			<li>1234k Avenue, 4th block,</li>
-			<li>Bangalore.</li>
-			<li><a href="mailto:info@example.com">info@example.com</a></li>
-			<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-		</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd2">
-			<h4>Information</h4> 
-			<ul>
-				<li><a href="contact.html">Contact Us</a></li>
-				<li><a href="icons.html">Web Icons</a></li>
-				<li><a href="typography.html">Typography</a></li>
-				<li><a href="faq.html">FAQ's</a></li>
-			</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd3">
-			<h4>Shop</h4> 
-			<ul>
-				<li><a href="jewellery.html">Jewellery</a></li>
-				<li><a href="cosmetics.html">Cosmetics</a></li>
-				<li><a href="Shoes.html">Shoes</a></li>
-				<li><a href="deos.html">Deos</a></li>
-			</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd4">
-			<h4>My Account</h4> 
-			<ul>
-				
-				<li><a href="login.html">Login</a></li>
-				<li><a href="NgoRegister.jsp">Register</a></li>
-				<li><a href="recommended.html">Recommended </a></li>
-				<li><a href="payment.html">Payments</a></li>
-			</ul>
-		</div>
-		<div class="clearfix"></div>
-		<p class="copy-right">© 2016 Fashion Club . All rights reserved | Design by <a href="#">Kapil Thakur & Rebecca John</a></p>
-	</div>
-</div>
-
+<br><br><br>  
+<div class="footer" style="background-color:#f8f8f8;   height:50px;">
+	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
+</div> 
+	  
+ 
 	 
 </body>
 </html>

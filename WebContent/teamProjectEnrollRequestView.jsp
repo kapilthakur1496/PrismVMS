@@ -128,7 +128,7 @@ h1 {
 <% try{ %>
   
 <%!  
-	ResultSet branchProjectsRs=null,branchRs=null;
+	ResultSet teamProjectsRs=null;
 	int mentorStatus=0; 
 	String adminId =null;
 	ResultSet teamsRs=null; 
@@ -147,12 +147,9 @@ h1 {
 }
 if(mentorStatus == 1){
 	pageNumber = Integer.parseInt(request.getParameter("pN")); 
-	volunteerCount = ct.volunteerCount();
+	volunteerCount = ct.getTeamProjectEnrollRequestCount(adminId);
 	pageCount= volunteerCount/10 +1;
-	branchProjectsRs = ct.getBranchProjectEnrollment(request, response,pageNumber-1, nextRecordCount);  
-	/* ct.teamVolunteerDetails(pageNumber-1, nextRecordCount,adminId,branchId); */
- 	String branch_id = ct.getMentorBranch(adminId);
-	String branch = ct.getBranchName(branch_id);
+	teamProjectsRs = ct.getTeamProjectEnrollment(request, response,pageNumber-1, nextRecordCount);  
  %>
  
  	
@@ -211,57 +208,95 @@ if(mentorStatus == 1){
                         <li   class="nav-item">
                             <a class="nav-link" href="support.jsp">Online Support</a>
                         </li>
+                         
+                         
                           
                         
                     </ul>
                 </div> 
             </div> 
         </div>
-        <div class="col-md-10 col-lg-9" style="padding:22px 10px;">
-	 	  
+        <div class="col-md-10 col-lg-9" style="padding:22px 10px;"> 
 				<ul class="collapsible" data-collapsible="accordion" style="list-style:none; margin-left:auto; margin-right:auto;">
 			 
-				 <%while(branchProjectsRs.next()){ %>
+				 <%while(teamProjectsRs.next()){ %>
 					<li>
 						<div class="collapsible-header active"><p style="padding:10px; background-color:#66bdd7; font-size:14px;">
 							<span class="glyphicon glyphicon-pushpin" style="font-size:20px; color:#fff; font-size:22px; font-style: bold;"></span>&nbsp;&nbsp;
-							<%=branchProjectsRs.getString("bproject_title") %>
+							<%=teamProjectsRs.getString("t.tproject_title") %>
 							 
-					  		 <span style="float: right; margin-right: 39px;" >
-						  		<i class="fa fa fa-building	"  style="text-align: right; color:#fff; font-size:22px; font-style: bold;"> </i> &nbsp;&nbsp; 
-							 	<%=branch %> 
-							 	
-							</span>  	
+					  		<span style="float: right; margin-right: 39px;" >
+						  		<i class="fa fa-users"  style="text-align: right; color:#fff; font-size:22px; font-style: bold;"> </i> &nbsp;&nbsp; 
+							 	<%=teamProjectsRs.getString("v.team") %>  
+							</span> 		
 				 	 	</div> 
 						<div class="collapsible-body" style="background-color: #fff;">
-							<div class="col-lg-12" style="margin-left:90px;">
+							<div class="col-lg-12"  >
+							<div class="row"  >
+									<div class="col-lg-4" style="padding:5px;  "> 
+										<div class="info">
+					 			 			<p><strong><i class="fa fa-user" style="font-size:20px; color:#fff;  "></i>  &nbsp;  &nbsp; Name</strong> &nbsp; <%=teamProjectsRs.getString("v.volunteer_name") %>      </p>
+										</div>
+									</div>
+									<div class="col-lg-4" style="padding:5px;  "> 
+										<div class="info">
+					 			 			<p><strong><i class="fa phone" style="font-size:20px;  color:#fff;"></i> &nbsp;  &nbsp; Phone</strong> &nbsp; <%=teamProjectsRs.getString("v.contact_num") %>   </p>
+										</div>
+									</div>
+									<div class="col-lg-4" style="padding:5px;  "> 
+										<div class="info">
+					 			 			<p><strong><i class="fa fa-fa-envelope" style="font-size:20px; color:#fff; "></i> &nbsp;  &nbsp; Email</strong> &nbsp; <%=teamProjectsRs.getString("v.email_id") %>   </p>
+										</div>
+									</div>
+								</div>
 								<div class="row"  >
 									<div class="col-lg-6" style="padding:5px;  "> 
 										<div class="info">
-					 			 			<p><strong><i class="fa fa-calendar-o" style="font-size:20px;  "></i>  &nbsp;  &nbsp;  Start Date</strong> &nbsp; <%=branchProjectsRs.getString("bpro_start_date") %>      </p>
+					 			 			<p><strong><i class="fa fa-calendar-o" style="font-size:20px;  "></i>  &nbsp;  &nbsp;  Start Date</strong> &nbsp; <%=teamProjectsRs.getString("t.tpro_start_date") %>      </p>
 										</div>
 									</div>
 									<div class="col-lg-6" style="padding:5px;  "> 
 										<div class="info">
-					 			 			<p><strong><i class="fa fa-calendar-o" style="font-size:20px;  "></i> &nbsp;  &nbsp; End Date</strong> &nbsp; <%=branchProjectsRs.getString("bpro_end_date") %>   </p>
+					 			 			<p><strong><i class="fa fa-calendar-o" style="font-size:20px;  "></i> &nbsp;  &nbsp; End Date</strong> &nbsp; <%=teamProjectsRs.getString("t.tpro_end_date") %>   </p>
 										</div>
 									</div>
 								</div>
 								<br>
-								<p style="   font-size:16px;"><%=branchProjectsRs.getString("bproject_desc") %>  </p> 
-								<br><a href="assignBranchProjects.jsp?projectId=<%=branchProjectsRs.getString("id")%>"><i class="fa fa-tags" style="color:#fff; font-size:22px;  "></i> Assign Students </a>
+								<p style="font-size:16px;"><%=teamProjectsRs.getString("t.tproject_desc") %>  </p> 
+								<br>
+								<div style="text-align:center;  margin-left:-120px;"   >
+								 	
+								 	<form action="Control?action=teamProjectApproval" method="post">
+								 		<input type="hidden" name="projectId" value="<%=teamProjectsRs.getString("t.id")%>">
+								 		<input type="hidden" name="enrollId" value="<%=teamProjectsRs.getString("te.id")%>">
+								  		<input type="hidden" name="vIds" value="<%=teamProjectsRs.getString("v.id")%>">
+								  		
+									  	<input type="submit"   ><i class="fa fa-check" style="color:#fff; font-size:22px;  "></i>Approve  
+										&nbsp;&nbsp;&nbsp;&nbsp; 
+								 	</form>
+								 	
+								 	<br>
+									<a href="branchProjectEnrollRequestStatus.jsp?projectId=<%=teamProjectsRs.getString("te.id")%>&project=<%=teamProjectsRs.getString("t.tproject_title") %>&email=<%=teamProjectsRs.getString("v.email_id")%>"  ><i class="fa fa-close"   style="color:#fff; font-size:22px;  "></i>Reject </a>
+								  
+								</div>
 							</div> 
 					</div>
 				</li>
 				<%} %> 
-				 <div class="col-lg-12 text-center" style="margin-left:auto; margin-right:auto;">
+				 <div class="col-lg-12 text-center" >
 					<ul class="pagination " >
 						<% for( int k=1; k<=pageCount; k++){ %>
 					    	<li><a href="teamProjectView.jsp?pN=<%=k%>"><%=k%></a></li>
 					    <% } %> 
 				 	</ul>
 		 		</div>  
-	  		</ul> 
+	  		</ul>
+		 
+	 
+	 	 
+	 
+  
+ 			 
     	</div>
  	</div>
 </div>

@@ -1,9 +1,3 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <%@page import="java.util.ArrayList"%>
 <html lang="en">
@@ -128,8 +122,8 @@ h1 {
 <% try{ %>
   
 <%!  
-	ResultSet branchProjectsRs=null,branchRs=null;
-	int mentorStatus=0; 
+	ResultSet workTrainingRs=null,branchRs=null;
+	int volunteerStatus=0; 
 	String adminId =null;
 	ResultSet teamsRs=null; 
 	int volunteerCount =0, pageCount = 0;
@@ -142,18 +136,17 @@ h1 {
 	{	
 		adminId = (String)session.getAttribute("adminId"); 
 	} 
-	mentorStatus  = ct.checkMentorStatus(request, response,adminId);  
+	volunteerStatus  = ct.checkMentorStatus(request, response,adminId);  
 } catch (Exception e){ 	 	
 }
-if(mentorStatus == 1){
-	pageNumber = Integer.parseInt(request.getParameter("pN")); 
-	volunteerCount = ct.volunteerCount();
-	pageCount= volunteerCount/10 +1;
-	branchProjectsRs = ct.getBranchProjectEnrollment(request, response,pageNumber-1, nextRecordCount);  
-	/* ct.teamVolunteerDetails(pageNumber-1, nextRecordCount,adminId,branchId); */
- 	String branch_id = ct.getMentorBranch(adminId);
-	String branch = ct.getBranchName(branch_id);
- %>
+finally
+{
+
+}
+if(volunteerStatus == 1){
+
+
+%>
  
  	
  
@@ -218,141 +211,57 @@ if(mentorStatus == 1){
             </div> 
         </div>
         <div class="col-md-10 col-lg-9" style="padding:22px 10px;">
+	 	  <% String id= request.getParameter("vId");
+	 	 	workTrainingRs = ct.getVolunteerWorkTraining(request, response,id);
+ 	  		 String projectName=null;
 	 	  
-				<ul class="collapsible" data-collapsible="accordion" style="list-style:none; margin-left:auto; margin-right:auto;">
-			 
-				 <%while(branchProjectsRs.next()){ %>
-					<li>
-						<div class="collapsible-header active"><p style="padding:10px; background-color:#66bdd7; font-size:14px;">
-							<span class="glyphicon glyphicon-pushpin" style="font-size:20px; color:#fff; font-size:22px; font-style: bold;"></span>&nbsp;&nbsp;
-							<%=branchProjectsRs.getString("bproject_title") %>
-							 
-					  		 <span style="float: right; margin-right: 39px;" >
-						  		<i class="fa fa fa-building	"  style="text-align: right; color:#fff; font-size:22px; font-style: bold;"> </i> &nbsp;&nbsp; 
-							 	<%=branch %> 
-							 	
-							</span>  	
-				 	 	</div> 
-						<div class="collapsible-body" style="background-color: #fff;">
-							<div class="col-lg-12" style="margin-left:90px;">
-								<div class="row"  >
-									<div class="col-lg-6" style="padding:5px;  "> 
-										<div class="info">
-					 			 			<p><strong><i class="fa fa-calendar-o" style="font-size:20px;  "></i>  &nbsp;  &nbsp;  Start Date</strong> &nbsp; <%=branchProjectsRs.getString("bpro_start_date") %>      </p>
-										</div>
-									</div>
-									<div class="col-lg-6" style="padding:5px;  "> 
-										<div class="info">
-					 			 			<p><strong><i class="fa fa-calendar-o" style="font-size:20px;  "></i> &nbsp;  &nbsp; End Date</strong> &nbsp; <%=branchProjectsRs.getString("bpro_end_date") %>   </p>
-										</div>
-									</div>
-								</div>
-								<br>
-								<p style="   font-size:16px;"><%=branchProjectsRs.getString("bproject_desc") %>  </p> 
-								<br><a href="assignBranchProjects.jsp?projectId=<%=branchProjectsRs.getString("id")%>"><i class="fa fa-tags" style="color:#fff; font-size:22px;  "></i> Assign Students </a>
-							</div> 
-					</div>
-				</li>
-				<%} %> 
-				 <div class="col-lg-12 text-center" style="margin-left:auto; margin-right:auto;">
-					<ul class="pagination " >
-						<% for( int k=1; k<=pageCount; k++){ %>
-					    	<li><a href="teamProjectView.jsp?pN=<%=k%>"><%=k%></a></li>
-					    <% } %> 
-				 	</ul>
-		 		</div>  
-	  		</ul> 
+	 	  %> 
+	 	  <table>
+	 	  	<thead>
+	 	  	<tr>
+	 	  		<th>#</th>
+	 	  		<th>Training Type</th>
+	 	  		<th>training Date</th>
+	 	  		<th>Training Duration</th>
+	 	  		<th>Training learnings</th>
+	 	  		<th>Comment</th>   
+	 	  	</tr>
+	 	  	</thead>
+	 	  	<tbody>
+	 	  	<%!int i=1; %>
+	 	  	<% while(workTrainingRs.next()) { %>
+	 	  	  	<tr>
+	 	  	  	<form action="Control?action=addWorkTrainingComment" method="post">  
+	 	  			<td><%=i %></td>
+	 	  			<input type="hidden" name="wId" value="<%=workTrainingRs.getString("id")%>">
+	 	  			<input type="hidden" name="trainingType" style="opacity:1;" value="<%=workTrainingRs.getString("train_type") %>">
+	 	  			<td><%=workTrainingRs.getString("train_type") %></td>
+	 	  			 
+	 	  			<td><%=workTrainingRs.getString("train_date") %></td>
+	 	  			<td><%=workTrainingRs.getString("train_time") %></td> 
+ 	  				<td><%=workTrainingRs.getString("train_topic") %></td>
+ 	  				<%if(workTrainingRs.getString("comment")==null) {%>
+	 	  				<td><textarea style="width:300px;" required name="comment" placeholder="Enter Your Comment"></textarea></td>
+		 	  			<td><input type="submit" style="opacity:1; margin-left:10px; width:100px;" value="Submit"></td>
+ 	  				<%} else if(workTrainingRs.getString("comment")!=null){ %>
+	 	  				
+	 	  				<td><textarea style="width:300px;" required name="comment"><%=workTrainingRs.getString("comment") %></textarea></td>
+ 	  				<%} %>
+ 	  				</form>
+ 	  			</tr>
+ 	  			
+	 	  	<%i++;} %>
+	 	  	
+	 	  	</tbody>
+	 	  
+	 	  </table>
+	 	   
     	</div>
  	</div>
 </div>
   
 <%} %>
-<br><br><br><br><br>
-		  
-<!-- newsletter -->
-<div class="newsletter">
-	<div class="container">
-		<div class="col-md-6 w3agile_newsletter_left">
-			<h2>Newsletter</h2>
-			<p>Excepteur sint occaecat cupidatat non proident, sunt.</p>
-		</div>
-		<div class="col-md-6 w3agile_newsletter_right">
-			<form action="Control?action=subscription" method="post">
-				<input type="email" name="email" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-				<input type="submit" value="Subscribe" />
-			</form>
-		</div>
-		<div class="clearfix"> </div>
-	</div>
-</div>
-<!-- //newsletter -->
-<div class="footer">
-	<div class="container">
-		<div class="col-md-3 footer-grids fgd1">
-		<a href="index.jsp"><img src="images/logo2.png" alt=" " /> </a>
-		<ul>
-			<li>1234k Avenue, 4th block,</li>
-			<li>Bangalore.</li>
-			<li><a href="mailto:info@example.com">info@example.com</a></li>
-			<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-		</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd2">
-			<h4>Information</h4> 
-			<ul>
-				<li><a href="contact.html">Contact Us</a></li>
-				<li><a href="icons.html">Web Icons</a></li>
-				<li><a href="typography.html">Typography</a></li>
-				<li><a href="faq.html">FAQ's</a></li>
-			</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd3">
-			<h4>Shop</h4> 
-			<ul>
-				<li><a href="jewellery.html">Jewellery</a></li>
-				<li><a href="cosmetics.html">Cosmetics</a></li>
-				<li><a href="Shoes.html">Shoes</a></li>
-				<li><a href="deos.html">Deos</a></li>
-			</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd4">
-			<h4>My Account</h4> 
-			<ul>
-				
-				<li><a href="login.html">Login</a></li>
-				<li><a href="NgoRegister.jsp">Register</a></li>
-				<li><a href="recommended.html">Recommended </a></li>
-				<li><a href="payment.html">Payments</a></li>
-			</ul>
-		</div>
-		<div class="clearfix"></div>
-		<p class="copy-right">© 2016 Fashion Club . All rights reserved | Design by <a href="#">Kapil Thakur & Rebecca John</a></p>
-	</div>
-</div>
-
-	 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
-
-<script type="text/javascript">
-
-(function($) {
-	
-	$(window).scroll(function() {
-		
-		$(window).scroll(function() {
-			space = $(window).innerHeight() - $('.fab').offsetTop + $('.fab').offsetHeight;
-			if(space < 200){
-				$('.fab').css('margin-bottom', '150px');
-			}
-		})
-		
-	});
-	
-})(jQuery);
-
-</script>
+<br><br><br> 
+ 
 </body>
 </html>

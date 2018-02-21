@@ -144,6 +144,7 @@
 								<option>Under Process</option>
 								<option>Rejected </option> 
 								<option>Pending</option>
+								<option>Archived</option>
 							</select>
 						</div>  
 						<div  class="col-lg-5">

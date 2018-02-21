@@ -1,9 +1,3 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <%@page import="java.util.ArrayList"%>
 <html lang="en">
@@ -236,10 +230,12 @@ if(volunteerStatus == 1){
 	 	  	</tr>
 	 	  	</thead>
 	 	  	<tbody>
+	 	  	 
 	 	  	<%!int i=1; %>
 	 	  	<% while(workDiaryRs.next()) { %>
+	 	  	 
 	 	  	  	<tr>
-	 	  			<td><%=i %></td>
+	 	  			<td></td>
 	 	  			<td><% projectName= ct.getProjectName(workDiaryRs.getString("project_id"));  %>
 	 	  			<%=projectName %></td>
 	 	  			<td><%=workDiaryRs.getString("wdate") %></td>
@@ -354,5 +350,6 @@ if(volunteerStatus == 1){
 })(jQuery);
 
 </script>
+ 
 </body>
 </html>
