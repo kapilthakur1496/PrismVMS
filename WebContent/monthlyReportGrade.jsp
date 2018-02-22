@@ -120,20 +120,18 @@ String email = request.getParameter("email");
     <div class="row">
         <div class="col-md-2 col-lg-3" >
 
-            <div class="bootstrap-vertical-nav" >
-	 
- 
+            <div class="bootstrap-vertical-nav" > 
                 <div   id="collapseExample"style="paddin:0px; margin-left:0px;" >
                      <ul class="nav flex-column" id="exCollapsingNavbar3">
-	                    <li   class="nav-item" style="text-algin:center">
+	                   <li   class="nav-item" style="text-algin:center">
 	                    	<div class="center">
-	                     <img src="DisplayMentorPic?name=<%=adminId %>" align="middle" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 80px;height: 80px;border-radius: 50%;">
+	                     <img src="DisplayMentorPic?name=<%=adminId%>" align="middle" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 80px;height: 80px;border-radius: 50%;">
 	                 	</div>
 	                 	</li>
-                       <li class="nav-item" style="margin-bottom:17px;">
-                         <form action="#" method="post">
+                      	<li class="nav-item" style="margin-bottom:17px;">
+                         	<form action="#" method="post">
 								<div    >
-									<input  type="text" style="opacity:1; height:40px;"  name="productPrice" required="" placeholder="Search Feature">
+									<input  type="text" style="opacity:1; cursor:text; height:40px;"  name="productPrice" required="" placeholder="Search Feature">
 									<div class="clearfix"></div>
 								</div>
 								<button type="submit" style="height:40px; margin-top:6px;" class="btn btn-default search" aria-label="Left Align">
@@ -141,55 +139,48 @@ String email = request.getParameter("email");
 								</button> 
 							</form>	
 							<br><br>
-                    	</li >
-                    		
+                    	</li > 
                        	<li   class="nav-item">
-                         	<a class="nav-link active" href="volunteerIndex.jsp">Home</a>
+                         	<a class="nav-link" href="mentorIndex.jsp">Home</a>
+                        </li>
+                        <li   class="nav-item">
+                         	<a class="nav-link" href="mentorVolunteerWorkDiary.jsp?pN=1">Work Diary</a>
+                        </li>
+                        <li   class="nav-item">
+                         	<a class="nav-link" href="mentorVolunteerMeeting.jsp?pN=1">Work Meeting</a>
+                        </li>
+                        <li   class="nav-item">
+                         	<a class="nav-link" href="mentorVolunteerTraining.jsp?pN=1">Work Training</a>
+                        </li>                       	 
+                        <li  class="nav-item">
+                            <a class="nav-link" href="individualProject.jsp?pN=1">Individual Projects</a>
+                        </li> 
+                        <li  class="nav-item">
+                            <a class="nav-link" href="teamProject.jsp">Team Projects</a>
                         </li>
                         <li  class="nav-item">
-                            <a class="nav-link" href="workDiary.jsp">Work Diary</a>
-                        </li> 
-                         <li  class="nav-item">
-                            <a class="nav-link" href="workDiaryView.jsp">View Work Diary</a>
-                        </li> 
+                            <a class="nav-link" href="teamProjectView.jsp?pN=1">View Team Projects</a>
+                        </li>
                         <li  class="nav-item">
-                            <a class="nav-link" href="workMeeting.jsp">Work Meeting</a>
-                        </li>
-                         <li  class="nav-item">
-                            <a class="nav-link" href="meetingView.jsp">View Work Meeting</a>
+                            <a class="nav-link" href="teamProjectEnrollRequestView.jsp?pN=1"> Team Project Enroll Request</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="workTraining.jsp">Work Training</a>
+                            <a class="nav-link" href="branchProject.jsp">Branch Projects</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="trainingView.jsp">View Work Training</a>
+                            <a class="nav-link" href="branchProjectView.jsp?pN=1">View Branch Projects</a>
                         </li>
-                         <li   class="nav-item">
-                            <a class="nav-link" href="projectAssigned.jsp?pN=1">Project Assigned</a>
+                        <li  class="nav-item">
+                            <a class="nav-link" href="branchProjectEnrollRequestView.jsp?pN=1"> Branch Project Enroll Request</a>
+                        </li>   
+                        <li   class="nav-item">
+                            <a class="nav-link" href="viewMonthlyReport.jsp?pN=1">View Monthly Report</a>
+                        </li>  
+                        <li   class="nav-item">
+                            <a class="nav-link" href="mentorVmsExperience.jsp">VMS Feedback</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="monthlyReport.jsp">Monthly Report</a>
-                        </li>
-                        <li   class="nav-item">
-                            <a class="nav-link" href="monthlyReportView.jsp">View Monthly Report </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link  " href="viewTeamProject.jsp">View Team Project</a>
-                        </li>
-                        <li   class="nav-item">
-                            <a class="nav-link" href="viewBranchProject.jsp">Branch Project</a>
-                        </li>
-                        <li   class="nav-item">
-                            <a class="nav-link" href="grievance.jsp">Grievance</a>
-                        </li>
-                        <li   class="nav-item">
-                            <a class="nav-link" href="grievanceView.jsp">View Grievance  </a>
-                        </li>
-                        <li   class="nav-item">
-                            <a class="nav-link" href="vmsExperience.jsp">VMS Feedback</a>
-                        </li>
-                         <li   class="nav-item">
-                            <a class="nav-link" href="viewVmsExperience.jsp?pN=1">View VMS Feedback</a>
+                            <a class="nav-link" href="mentorVmsExperienceView.jsp?pN=1">View VMS Feedback</a>
                         </li> 
                     </ul>
                 </div> 
@@ -402,11 +393,10 @@ String email = request.getParameter("email");
 </div>
   
 <%} %>
-<br><br><br> 
+<br><br><br>  
 <div class="footer" style="background-color:#f8f8f8;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
-	  
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
