@@ -72,14 +72,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 </div> 
-	<div class="login">
-	
+	<div class="login"> 
 		<div class="main-agileits">
 				<div class="form-w3agile">
 				<% String action = request.getParameter("action");%>
-						<%	   if(action == null){ %>
+						<%if(action == null){ %>
 					<h3>Verify Email</h3>
-					<form action="Control?action=mentorVarification" method="post">
+					<form action="Control?action=mentorForgotPassword" method="post">
 					
 						<div class="key">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
@@ -93,24 +92,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							
 						%>
 						<h3>Set Password</h3>
-						<form action="Control?action=otpVerification" method="post">
+						<form action="Control?action=forgotOtpVerification" method="post">
 							<div class="key">
 								<i class="fa fa-envelope" aria-hidden="true"></i>
 								<input  type="text" readonly name="email" value="<%=email%>" required="true" placeholder="Email">
 								<div class="clearfix"></div>
 							</div>
 							<div class="key">
-								<i class="fa fa-envelope" aria-hidden="true"></i>
+								<i class="fa fa-mobile-phone" aria-hidden="true"></i>
 								<input  type="text" name="otp" required="true" placeholder="OTP">
 								<div class="clearfix"></div>
 							</div>
 							<div class="key">
-								<i class="fa fa-envelope" aria-hidden="true"></i>
+								<i class="fa fa-lock" aria-hidden="true"></i>
 								<input  type="password" name="password" required="true" placeholder="New Password">
 								<div class="clearfix"></div>
 							</div>
 							<div class="key">
-								<i class="fa fa-envelope" aria-hidden="true"></i>
+								<i class="fa fa-lock" aria-hidden="true"></i>
 								<input  type="password" name="confirmPassword" required="true" placeholder="Confrim Password">
 								<div class="clearfix"></div>
 							</div>
@@ -121,8 +120,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</form>
 				</div>
 				<div class="forg">
-					<a href="#" class="forg-left">Forgot Password</a>
-					<a href="NgoRegister.jsp" class="forg-right">Register</a>
+					<a href="AdminLogin.jsp" class="forg-left">Login</a>
+					 
 				<div class="clearfix"></div>
 				</div>
 			</div>
@@ -133,7 +132,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
 	  
-
+<div id="snackbar"></div>
+ <%  
+ if(action==null){
+ 
+ }else if(action!=null)
+ { 
+  
+  if(action.equals("useNewPassword")){ 
+ %>
+<script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Use New Password to Login";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}%>
+  
+<% } %>
 	 
 </body>
 </html>

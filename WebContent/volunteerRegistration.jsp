@@ -166,7 +166,7 @@ body
 				</form> 
 				</div>
 				<div class="forg">
-					 <a href="#" class="forg-left">Forgot Password</a> 
+					  
 					<a href="volunteerLogin.jsp" class="forg-right">Sign In</a>
 					 
 				<div class="clearfix"></div>
@@ -302,6 +302,27 @@ function fixStepIndicator(n) {
   x[n].className += " active";
 }
 </script>
+<div id="snackbar"></div>
+
+ <% 
+ String action =request.getParameter("action");
+ if(action==null){
+ 
+ }else if(action!=null)
+ {
+	 
+  
+  %><%if(action.equals("AlreadyRegistered")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="You have already register with us";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}}%>
 	
 </body>
 </html>

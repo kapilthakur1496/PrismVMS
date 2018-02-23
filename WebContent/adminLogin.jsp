@@ -24,6 +24,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 body {
 	overflow-x:hidden;
 } 
+ 
 </style>
 </head>
 <body>
@@ -106,7 +107,79 @@ body {
 				</div>
 			</div>
 		</div>
-	 
+		
+<div id="snackbar"></div>
+
+ <% 
+ String action =request.getParameter("action");
+ if(action==null){
  
+ }else if(action!=null)
+ {
+	 
+  
+  %><%if(action.equals("useNewPassword")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Use New Password to Login";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("AccountDoesNotExist")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Your Account Does not Exist";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("PasswordAlreadySetUseForgotOption")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="You Have Already Set Your Password Please Use Forgot Password Option";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script> 
+<%}else if(action.equals("notAdmin")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="You are not an Admin";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script> 
+<%}else if(action.equals("LoginAgain")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Sorry, Session Expired Please Login Again";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>  
+<%}else if(action.equals("NotMentor")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="You are not a Mentor";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>  
+<%}%>
+  
+<% } %>
 </body>
 </html>
