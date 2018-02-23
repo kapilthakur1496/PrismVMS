@@ -150,5 +150,46 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div> 
 	  
 
+<div id="snackbar"></div>
+ <%  
+ if(action==null){
+ 
+ }else if(action!=null)
+ { 
+  
+  if(action.equals("PasswordAndConfirmPasswordNotMactched")){ 
+ %>
+<script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Password and Confrim Password Does not Match";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%} else if(action.equals("otpIsNotCorrect")){ 
+ %>
+<script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="OTP Is Invalid";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script> 
+<%} else if(action.equals("otpVarification")){ 
+	 %>
+	 <script>
+	  
+	     var x = document.getElementById("snackbar")
+	     x.className = "show";
+	     x.innerHTML="Please Check Your Registred Email for OTP";
+	     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+	  
+	 </script> 
+	 <%}%>
+  
+  
+<% } %>
 </body>
 </html>

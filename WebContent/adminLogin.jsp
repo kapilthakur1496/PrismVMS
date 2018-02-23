@@ -23,7 +23,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <style type="text/css"> 
 body {
 	overflow-x:hidden;
-} 
+}
 </style>
 </head>
 <body>
@@ -106,42 +106,84 @@ body {
 				</div>
 			</div>
 		</div>
-	 
- <!-- //newsletter -->
-<div class="footer">
-	<div class="container">
-		<div class="col-md-3 footer-grids fgd1">
-		<a href="index.jsp"><img src="images/logo2.png" alt=" " /> </a>
-		<ul>
-			<li>Christ University</li>
-			<li>Bangalore-560029</li>
-			<li><a href="mailto:info@example.com">info@sarvahitkari.com</a></li>
-			<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-		</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd2">
-			<h4>Information</h4> 
-			<ul>
-				<li><a href="contact.jsp">Contact Us</a></li>
-				<li><a href="about.html">About</a></li>
-				<li><a href="faq.jsp">FAQ's</a></li>
-			</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd4">
-			<h4>My Account</h4> 
-			<ul>
-				<li><a href="NgoRegister.jsp">NGO Registration</a></li>
-				<li><a href="ngoLogin.jsp">NGO Login</a></li>
-				<li><a href="CustomerRegister.html">Customer Registration </a></li>
-				<li><a href="userLogin.jsp">Customer Login</a></li>
-			</ul>
-		</div>
-		<div class="clearfix"></div>
-		<p class="copy-right">© 2018 Sarvahitkari . All rights reserved | Design by <a href="#">Kapil Thakur & Rebecca John</a></p>
-	</div>
-</div>
+ <br><br><br> 
+<div class="footer" style="background-color:#f8f8f8;   height:50px;">
+	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
+</div> 
+	  
+		
+<div id="snackbar"></div>
+
+ <% 
+ String action =request.getParameter("action");
+ if(action==null){
  
+ }else if(action!=null)
+ {
+	 
+  
+  %><%if(action.equals("useNewPassword")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Use New Password to Login";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("AccountDoesNotExist")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Your Account Does not Exist";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("PasswordAlreadySetUseForgotOption")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="You Have Already Set Your Password Please Use Forgot Password Option";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script> 
+<%}else if(action.equals("notAdmin")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="You are not an Admin";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script> 
+<%}else if(action.equals("LoginAgain")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Sorry, Session Expired Please Login Again";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>  
+<%}else if(action.equals("NotMentor")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="You are not a Mentor";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>  
+<%}%>
+  
+<% } %>
 </body>
 </html>

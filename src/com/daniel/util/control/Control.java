@@ -230,7 +230,14 @@ public class Control extends HttpServlet {
 		{   
 			gradeMonthlyReport(request, response);
 		}
-		 
+		else if(action.equals("mentorForgotPassword"))
+		{   
+			mentorForgotPassword(request,response);
+		}
+		else if(action.equals("forgotOtpVerification"))
+		{   
+			forgotOtpVerification(request,response);
+		}
 		  
 		  
 	}
@@ -928,6 +935,7 @@ private void addInterViewSlot( HttpServletRequest request, HttpServletResponse r
 	 out.close(); 
 	 
 }
+@SuppressWarnings("resource")
 private void volunteerRegistration( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 	response.setContentType("text/html");
@@ -937,17 +945,18 @@ private void volunteerRegistration( HttpServletRequest request, HttpServletRespo
     String email=request.getParameter("email");  
 	Statement checkVolunteerSt = null;
 	ResultSet checkVolunteerRs = null;
-		 
+	Statement volunteerIdSt = null;
+	ResultSet volunteerIdRs = null;
+	PreparedStatement addVolunteerps =null;
 	try {
-			Statement volunteerIdSt = null;
-			ResultSet volunteerIdRs = null;
+			
 			volunteerIdSt = connection.createStatement();
 			String volunteerId=null;
 		 	String checkQ = "select email_id   from volunteer_registration  where email_id ='"+email+"' ";
 		 	volunteerIdRs = volunteerIdSt.executeQuery(checkQ);
 			
 		 	if (volunteerIdRs.next()) {
-				 response.sendRedirect("admin/index.jsp?msg=AlreadyRegistered");
+				 response.sendRedirect("volunteerRegistration.jsp?action=AlreadyRegistered");
 			 }
 			 else   {    
 					 String fullName=request.getParameter("fullName");
@@ -966,7 +975,7 @@ private void volunteerRegistration( HttpServletRequest request, HttpServletRespo
 			 			}
 			 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 			 			Date date = new Date(); 
-						PreparedStatement addVolunteerps =null;
+					
 						String 	query = "insert into volunteer_registration (id,volunteer_name,password,contact_num,email_id,why_volunteer,gender,registration_date) values (?,?,?,?,?,?,?,?)";
 						addVolunteerps = connection.prepareStatement(query);
 						addVolunteerps.setString(1, volunteerId);
@@ -993,7 +1002,35 @@ private void volunteerRegistration( HttpServletRequest request, HttpServletRespo
 			 e.printStackTrace();
 		}
 	 finally {
-		 
+		  if(volunteerIdSt!=null)
+			try {
+				volunteerIdSt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		  if(volunteerIdRs!=null)
+				try {
+					volunteerIdRs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+		  if(checkVolunteerSt!=null)
+				try {
+					checkVolunteerSt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}  
+		  if(addVolunteerps!=null)
+				try {
+					addVolunteerps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}  
+ 	 
 	 }
 	 
 	 out.close(); 
@@ -2087,7 +2124,7 @@ public void mentorVarification( HttpServletRequest request, HttpServletResponse 
 					
 		 	}
 		 else{     
-			 response.sendRedirect("admin/index.jsp?msg=PasswordAlreadySetUseForgotOption");
+			 response.sendRedirect("adminLogon.jsp?action=PasswordAlreadySetUseForgotOption");
 		 }
 			 
 		}  
@@ -2159,7 +2196,7 @@ public   void otpVerification(HttpServletRequest request, HttpServletResponse re
 						updatePassDatePs.setString(2, dateFormat.format(date));  
 						
 						updatePassDatePs.executeUpdate();	
-						response.sendRedirect("adminLogin.jsp");
+						response.sendRedirect("adminLogin.jsp?action=useNewPassword");
 					
 					}
 		        }else
@@ -2249,11 +2286,11 @@ public   int getAdminType(HttpServletRequest request, HttpServletResponse respon
 		}
 	else
 	{
-		response.sendRedirect("adminLogin.jsp"); 
+		response.sendRedirect("adminLogin.jsp?action=notAdmin"); 
 	}
 		}else
 		{
-			response.sendRedirect("adminLogin.jsp"); 
+			response.sendRedirect("adminLogin.jsp?action=LoginAgain"); 
 		}
 	return 0; 
 }
@@ -2303,7 +2340,7 @@ public   int checkMentorStatus(HttpServletRequest request, HttpServletResponse r
 		}
 	else
 	{
-		response.sendRedirect("adminLogin.jsp"); 
+		response.sendRedirect("adminLogin.jsp?action=NotMentor"); 
 	}
 	return 0; 
 }
@@ -2450,7 +2487,7 @@ public void assignIndividualProject( HttpServletRequest request, HttpServletResp
 		} 	 
 	}	 
  else{     
-	 response.sendRedirect("mentorIndex.jsp?msg=LoginAgain");
+	 response.sendRedirect("adminLogin?action=LoginAgain");
  	}  
 	out.close();
 }
@@ -2789,7 +2826,7 @@ public void createTeamProject( HttpServletRequest request, HttpServletResponse r
 	}
 }	 
  else{     
-	 response.sendRedirect("mentorIndex.jsp?msg=LoginAgain");
+	 response.sendRedirect("adminLogin?action=LoginAgain");
  	}  
 	out.close();
 	}
@@ -3033,7 +3070,7 @@ public void assignTeamProject( HttpServletRequest request, HttpServletResponse r
 		} 	 
 	}	 
  else{     
-	 response.sendRedirect("mentorIndex.jsp?msg=LoginAgain");
+	 response.sendRedirect("adminLogin.jsp?action=LoginAgain");
  	}  
 	out.close();
 }
@@ -3247,7 +3284,7 @@ public void createBranchProject( HttpServletRequest request, HttpServletResponse
 	}
 }	 
  else{     
-	 response.sendRedirect("mentorIndex.jsp?msg=LoginAgain");
+	 response.sendRedirect("adminLogin.jsp?action=LoginAgain");
  	}  
 	out.close();
 	}
@@ -3527,7 +3564,7 @@ public void assignBranchProject( HttpServletRequest request, HttpServletResponse
 		} 	 
 	}	 
  else{     
-	 response.sendRedirect("mentorIndex.jsp?msg=LoginAgain");
+	 response.sendRedirect("adminLogin.jsp?action=LoginAgain");
  	}  
 	out.close();
 }
@@ -3758,7 +3795,7 @@ public void submitWorkDiary( HttpServletRequest request, HttpServletResponse res
 		} 	 
 	}	 
  else{     
-	 response.sendRedirect("mentorIndex.jsp?msg=LoginAgain");
+	 response.sendRedirect("adminLogin.jsp?action=LoginAgain");
  	}  
 	out.close();
 }
@@ -3966,7 +4003,7 @@ public void submitWorkDiaryForProject( HttpServletRequest request, HttpServletRe
 		} 	 
 	}	 
  else{     
-	 response.sendRedirect("volunteerIndex.jsp?msg=LoginAgain");
+	 response.sendRedirect("volunteerLogin.jsp?action=LoginAgain");
  	}  
 	out.close();
 }
@@ -4054,7 +4091,7 @@ public void submitMeeting( HttpServletRequest request, HttpServletResponse respo
 		} 	 
 	}	 
  else{     
-	 response.sendRedirect("volunteerIndex.jsp?msg=LoginAgain");
+	 response.sendRedirect("volunteerLogin.jsp?action=LoginAgain");
  	}  
 	out.close();
 }
@@ -4344,7 +4381,7 @@ public void submitTraining( HttpServletRequest request, HttpServletResponse resp
 		} 	 
 	}	 
  else{     
-	 response.sendRedirect("volunteerIndex.jsp?msg=LoginAgain");
+	 response.sendRedirect("volunteerLogin.jsp?action=LoginAgain");
  	}  
 	out.close();
 }
@@ -4404,7 +4441,7 @@ public void monthWorkDiray( HttpServletRequest request, HttpServletResponse resp
 		} 	 
 	}	 
  else{     
-	 response.sendRedirect("volunteerIndex.jsp?msg=LoginAgain");
+	 response.sendRedirect("volunteerLogin.jsp?action=LoginAgain");
  	}  
 	out.close();
 }
@@ -5100,7 +5137,7 @@ public void submitGrievance( HttpServletRequest request, HttpServletResponse res
 		} 	 
 	}	 
  else{     
-	 response.sendRedirect("volunteerIndex.jsp?msg=LoginAgain");
+	 response.sendRedirect("volunteerLogin.jsp?action=LoginAgain");
  	}  
 	out.close();
 }
@@ -5282,7 +5319,7 @@ public void submitVmsExperience( HttpServletRequest request, HttpServletResponse
 		} 	 
 	}	 
  else{     
-	 response.sendRedirect("volunteerIndex.jsp?msg=LoginAgain");
+	 response.sendRedirect("volunteerLogin.jsp?action=LoginAgain");
  	}  
 	out.close();
 }
@@ -5517,7 +5554,7 @@ public void addVmsExperienceComment( HttpServletRequest request, HttpServletResp
 		} 	 
 	}	 
  else{     
-	 response.sendRedirect("volunteerIndex.jsp?msg=LoginAgain");
+	 response.sendRedirect("volunteerLogin.jsp?action=LoginAgain");
  	}  
 	out.close();
 }
@@ -5664,7 +5701,7 @@ public void addWorkDiaryComment( HttpServletRequest request, HttpServletResponse
 		} 	 
 	}	 
  else{     
-	 response.sendRedirect("mentorIndex.jsp?msg=LoginAgain");
+	 response.sendRedirect("adminLogin.jsp?action=LoginAgain");
  	}  
 	out.close();
 }
@@ -5807,7 +5844,7 @@ public void addWorkMeetingComment( HttpServletRequest request, HttpServletRespon
 		} 	 
 	}	 
  else{     
-	 response.sendRedirect("mentorIndex.jsp?msg=LoginAgain");
+	 response.sendRedirect("adminLogin.jsp?action=LoginAgain");
  	}  
 	out.close();
 }
@@ -5949,7 +5986,7 @@ public void addWorkTrainingComment( HttpServletRequest request, HttpServletRespo
 		} 	 
 	}	 
  else{     
-	 response.sendRedirect("mentorIndex.jsp?msg=LoginAgain");
+	 response.sendRedirect("adminLogin.jsp?action=LoginAgain");
  	}  
 	out.close();
 }
@@ -6281,7 +6318,7 @@ public void branchProjectApproval ( HttpServletRequest request, HttpServletRespo
 		} 	 
 	}	 
  else{     
-	 response.sendRedirect("mentorIndex.jsp?msg=LoginAgain");
+	 response.sendRedirect("adminLogin.jsp?action=LoginAgain");
  	}  
 	out.close();
 }
@@ -6404,7 +6441,7 @@ public void teamProjectApproval( HttpServletRequest request, HttpServletResponse
 		} 	 
 	}	 
  else{     
-	 response.sendRedirect("mentorIndex.jsp?msg=LoginAgain");
+	 response.sendRedirect("adminLogin.jsp?action=LoginAgain");
  	}  
 	out.close();
 }
@@ -6503,7 +6540,7 @@ public void mentorVmsExperience( HttpServletRequest request, HttpServletResponse
 		} 	 
 	}	 
  else{     
-	 response.sendRedirect("mentorIndex.jsp?msg=LoginAgain");
+	 response.sendRedirect("adminLogin.jsp?action=LoginAgain");
  	}  
 	out.close();
 }
@@ -6738,7 +6775,7 @@ public void addMentorVmsExperienceComment( HttpServletRequest request, HttpServl
 		} 	 
 	}	 
  else{     
-	 response.sendRedirect("mentorIndex.jsp?msg=LoginAgain");
+	 response.sendRedirect("adminLLogin.jsp?action=LoginAgain");
  	}  
 	out.close();
 }
@@ -6853,9 +6890,206 @@ public void gradeMonthlyReport( HttpServletRequest request, HttpServletResponse 
 		} 	 
 	}	 
  else{     
-	 response.sendRedirect("mentorIndex.jsp?msg=LoginAgain");
+	 response.sendRedirect("adminLogin.jsp?action=LoginAgain");
  	}  
 	out.close();
+}
+public void mentorForgotPassword( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	response.setContentType("text/html");
+    PrintWriter out = response.getWriter();   
+    String email=request.getParameter("email");  
+	Statement checkMentorSt = null;
+	ResultSet checkMentorRs = null; 
+	PreparedStatement updatePassDatePs =null;
+try {  
+	checkMentorSt = connection.createStatement();
+	String mentorId=null;
+ 	String checkQ = "select id as mentorId from admin  where email ='"+email+"' and approve_status= 'Approved'  ";
+ 	checkMentorRs = checkMentorSt.executeQuery(checkQ);
+	
+ 	if (checkMentorRs.next()) { 
+ 	 mentorId = checkMentorRs.getString("mentorId");
+ 	 Random rnd = new Random();
+	 int rand = 100000 + rnd.nextInt(90000); 
+	 
+	 String otp = Integer.toString(rand);
+	 
+	 
+			  
+			     // result = "Sent message successfully....";  
+			String to = email;
+			  	String from = "prismhack@gmail.com";
+   			Properties props = System.getProperties();
+   			props.setProperty("mail.smtp.host", "smtp.gmail.com");
+   			props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+   			props.setProperty("mail.smtp.socketFactory.fallback", "false");
+   			props.setProperty("mail.smtp.port", "465");
+   			props.setProperty("mail.smtp.socketFactory.port", "465");
+   			props.put("mail.smtp.auth", "true");
+   			props.put("mail.debug", "true");
+   			props.put("mail.store.protocol", "pop3");
+   			props.put("mail.transport.protocol", "smtp");
+   			final String username = "prismhack@gmail.com";
+   			final String password = "code2win";
+		       
+			   try{
+			   		Session mySession = Session.getInstance(props, new Authenticator(){
+			   			 
+			   			protected PasswordAuthentication getPasswordAuthentication() {
+			   				return new PasswordAuthentication(username, password);
+						} 
+			   			
+					});
+
+			      MimeMessage message = new MimeMessage(mySession); 
+			      message.setFrom(new InternetAddress(from)); 
+			      message.addRecipient(Message.RecipientType.TO,
+			                               new InternetAddress(to)); 
+			      message.setSubject("PrismVMS Update Password"); 
+			      message.setText("Dear Sir/Ma'am\n "
+			    		  +"\n\n Your otp is "+otp
+			    		    +"\n\nThank You" 
+			    		  +"\nWarm Regards"
+			    		  +"\n\nPrismVMS"
+			    		   );
+			      
+			      Transport.send(message);
+			     // result = "Sent message successfully....";  
+			      
+			   DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+ 			Date date = new Date(); 
+ 			 HttpSession session = request.getSession(); 
+			 session.setAttribute("otp", otp); 
+			String query = "update admin set password_set=? where id = "+mentorId;
+			updatePassDatePs  =  connection.prepareStatement(query);
+			updatePassDatePs.setString(1,  dateFormat.format(date));  
+			updatePassDatePs.executeUpdate(); 
+			      
+			   response.sendRedirect("mentorForgotPassword.jsp?action=otpVarification&email="+email);
+			  
+	   						  
+			  } 
+		    catch (MessagingException mex) {
+		      mex.printStackTrace();
+		      //result = "Error: unable to send message....";
+		   }
+   		 
+			
+ 	}
+ else{     
+	 response.sendRedirect("adminLogin.jsp?action=AccountDoesNotExist");
+ }
+	 
+}  
+catch (SQLException e) {
+	// TODO: handle exception
+e.printStackTrace();
+}
+catch (Exception e) {
+	// TODO: handle exception
+	 e.printStackTrace();
+}
+finally {
+ if(checkMentorSt!=null) {
+		try {
+			checkMentorSt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		}
+ if(checkMentorRs!=null) {
+		try {
+			checkMentorRs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+	 
+	 
+	if(updatePassDatePs!=null) {
+		try {
+			updatePassDatePs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+	
+}
+out.close();
+}
+
+public   void forgotOtpVerification(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+	Statement volunteerCountSt =null;
+	ResultSet volunteerCountRs = null;
+	 try {  				
+			String otp = request.getParameter("otp");
+			String email = request.getParameter("email");
+			
+			HttpSession session = request.getSession();   
+	        String checkOtp = (String)session.getAttribute("otp");
+	        
+	        if(checkOtp.equals(otp)) {
+	        
+				volunteerCountSt = connection.createStatement();
+				volunteerCountRs = volunteerCountSt.executeQuery("select id  from admin where email ='"+email+"' ");
+				PreparedStatement updatePassDatePs =null;
+				String password = request.getParameter("password");
+				String confirmPassword = request.getParameter("confirmPassword");
+				DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	 			Date date = new Date(); 
+		 			
+				if(password.equals(confirmPassword) ) { 
+					if(volunteerCountRs.next()) {
+					
+						String query = "update admin  set password=?,password_set=? where id = "+volunteerCountRs.getString("id");
+						updatePassDatePs  =  connection.prepareStatement(query);
+						updatePassDatePs.setString(1, password);  
+						updatePassDatePs.setString(2, dateFormat.format(date));  
+						
+						updatePassDatePs.executeUpdate();	
+						response.sendRedirect("adminLogin.jsp?action=useNewPassword");
+					
+					}
+		        }else
+		        {
+		        	response.sendRedirect("mentorForgotPassword.jsp?action=PasswordAndConfirmPasswordNotMactched");
+		        } 
+	        }else
+	        {
+				 response.sendRedirect("mentorForgotPassword.jsp?action=otpIsNotCorrect");
+	        }
+	         
+		} 
+		catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	 catch (Exception e) {
+			// TODO: handle exception
+			 e.printStackTrace();
+		}
+		finally {
+			
+			 if(volunteerCountSt!=null)
+				try {
+					volunteerCountSt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			 if(volunteerCountRs!=null)
+					try {
+						volunteerCountRs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+		}  
+		
 }
 }
  
