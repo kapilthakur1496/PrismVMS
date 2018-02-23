@@ -1699,9 +1699,7 @@ button:hover {
   opacity: 0.8;
 }
 
-#prevBtn {
-  background-color: #66bdd7;
-}
+
 
 /* Make circles that indicate the steps of the form: */
 .step {
@@ -1905,7 +1903,7 @@ button:hover {
     border-radius: 2px;
     padding: 16px;
     position: fixed;
-    z-index: 1;
+    z-index: 10;
     left: 50%;
     bottom: 30px;
     font-size: 17px;
