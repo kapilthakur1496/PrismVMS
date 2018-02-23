@@ -100,7 +100,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</form>
 				</div>
 				<div class="forg">
-					<a href="#" class="forg-left">Forgot Password</a>
+					<a href="volunteerForgotPassword.jsp" class="forg-left">Forgot Password</a>
 					<a href="volunteerRegistration.jsp" class="forg-right">Register</a>
 				<div class="clearfix"></div>
 				</div>
@@ -112,6 +112,49 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
 	  
+<div id="snackbar"></div>
+
+ <% 
+ String action =request.getParameter("action");
+ if(action==null){
+ 
+ }else if(action!=null)
+ {
+	 
+  
+  %><%if(action.equals("useNewPassword")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Use New Password to Login";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("AccountDoesNotExist")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Your Account Does not Exist";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("UserNotValid")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Email or Password is Incorrect";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}%>
+  
+ <%}%>
 
 </body>
 </html>

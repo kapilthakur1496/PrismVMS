@@ -19,6 +19,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 </head>
+<style>
+body{
+overflow-x:hidden;
+}
+
+</style>
 <body>
   <div class="outercontainer">
 	<div class="header-bottom-w3ls">  
@@ -87,7 +93,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 						<input type="submit" value="Get OTP">
 						 </form>
-						<%}else if(action.equals("otpVarification")){
+						<%}else if(action.equals("otpVarification") || action.equals("otpIsNotCorrect")){
 							String email = request.getParameter("email");
 							
 						%>
@@ -120,7 +126,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</form>
 				</div>
 				<div class="forg">
-					<a href="AdminLogin.jsp" class="forg-left">Login</a>
+					<a href="adminLogin.jsp" class="forg-left">Login</a>
 					 
 				<div class="clearfix"></div>
 				</div>
@@ -139,19 +145,50 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
  }else if(action!=null)
  { 
   
-  if(action.equals("useNewPassword")){ 
+  if(action.equals("PasswordAndConfirmPasswordNotMactched")){ 
  %>
 <script>
  
     var x = document.getElementById("snackbar")
     x.className = "show";
-    x.innerHTML="Use New Password to Login";
+    x.innerHTML="Password and Confrim Password Does Not Match";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("otpVarification")){ 
+	 %>
+	 <script>
+	  
+	     var x = document.getElementById("snackbar")
+	     x.className = "show";
+	     x.innerHTML="Please check OTP on Your Registered Email Id";
+	     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+	  
+	 </script>
+	 <%}else if(action.equals("otpIsNotCorrect")){ 
+ %>
+<script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="OTP is Wrong";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%} else if(action.equals("OtpExpired")){ 
+ %>
+<script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Your OTP is Expired";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
  
 </script>
 <%}%>
   
 <% } %>
+   
 	 
 </body>
 </html>

@@ -51,7 +51,7 @@ public class VolunteerLogin extends HttpServlet {
 			}
 			else
 			{
-				response.sendRedirect("volunteerLogin.jsp?msg3=fail"); 
+				response.sendRedirect("volunteerLogin.jsp?action=UserNotValid"); 
 			}
 		}
 	 catch(SQLException se){

@@ -66,7 +66,7 @@ public class AdminLogin extends HttpServlet {
 				}  
 				else
 				{
-					response.sendRedirect("adminLogin.jsp?msg3=fail");
+					response.sendRedirect("adminLogin.jsp?action=UserNotValid");
 				}
 		}
 		 catch(SQLException se){

@@ -1,4 +1,3 @@
-  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +19,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 </head>
+<style>
+body{
+overflow-x:hidden;
+}
+
+</style>
 <body>
   <div class="outercontainer">
 	<div class="header-bottom-w3ls">  
@@ -73,105 +78,126 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 </div> 
-	<div class="login">
-	
+	<div class="login"> 
 		<div class="main-agileits">
 				<div class="form-w3agile">
-					<h3>Login</h3>
-					<form action="UserLogin" method="post">
-					<div class="key">
+				<% String action = request.getParameter("action");%>
+						<%if(action == null){ %>
+					<h3>Verify Email</h3>
+					<form action="Control?action=volunteerForgotPassword" method="post">
+					
+						<div class="key">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
-							<input  type="text" name="email" required="" placeholder="Email">
+							<input  type="text" name="email" required="true" placeholder="Email">
 							<div class="clearfix"></div>
 						</div>
-						 
-						<div class="key">
-							<i class="fa fa-lock" aria-hidden="true"></i>
-							<input  type="password" name="password" required="" placeholder="Password">
-							<div class="clearfix"></div>
-						</div> 
-						<input type="submit" value="Sign In">
+						<input type="submit" value="Get OTP">
+						 </form>
+						<%}else if(action.equals("otpVarification") || action.equals("otpIsNotCorrect")  ){
+							String email = request.getParameter("email");
+							
+						%>
+						<h3>Set Password</h3>
+						<form action="Control?action=volunteerForgotOtpVerification" method="post">
+							<div class="key">
+								<i class="fa fa-envelope" aria-hidden="true"></i>
+								<input  type="text" readonly name="email" value="<%=email%>" required="true" placeholder="Email">
+								<div class="clearfix"></div>
+							</div>
+							<div class="key">
+								<i class="fa fa-mobile-phone" aria-hidden="true"></i>
+								<input  type="text" name="otp" required="true" placeholder="OTP">
+								<div class="clearfix"></div>
+							</div>
+							<div class="key">
+								<i class="fa fa-lock" aria-hidden="true"></i>
+								<input  type="password" name="password" required="true" placeholder="New Password">
+								<div class="clearfix"></div>
+							</div>
+							<div class="key">
+								<i class="fa fa-lock" aria-hidden="true"></i>
+								<input  type="password" name="confirmPassword" required="true" placeholder="Confrim Password">
+								<div class="clearfix"></div>
+							</div>
+							
+						
+						<input type="submit" value="Set Password">
+					  <%} %>
 					</form>
 				</div>
 				<div class="forg">
-					<a href="#" class="forg-left">Forgot Password</a>
-					<a href="NgoRegister.jsp" class="forg-right">Register</a>
+					<a href="volunteerLogin.jsp" class="forg-left">Login</a>
+					 
 				<div class="clearfix"></div>
 				</div>
 			</div>
 		</div>
-		<!-- newsletter -->
-	<div class="newsletter">
-				<div class="container">
-					<div class="col-md-6 w3agile_newsletter_left">
-						<h2>Newsletter</h2>
-						<p>Subscribe to our newsletter to be updated about all our features</p>
-					</div>
-					 
-					<div class="col-md-6 w3agile_newsletter_right">
-						<form action="Control?action=subscription" method="post">
-							<input type="email" name="email" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-							<input type="submit" value="Subscribe" />
-						</form>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-			</div>
-<!-- //newsletter -->
-<div class="footer">
-	<div class="container">
-		<div class="col-md-3 footer-grids fgd1">
-		<a href="index.jsp"><img src="images/logo2.png" alt=" " /> </a>
-		<ul>
-			<li>Christ University</li>
-			<li>Bangalore-560029</li>
-			<li><a href="mailto:info@example.com">info@sarvahitkari.com</a></li>
-			<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-		</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd2">
-			<h4>Information</h4> 
-			<ul>
-				<li><a href="contact.jsp">Contact Us</a></li>
-				<li><a href="about.html">About</a></li>
-				<li><a href="faq.jsp">FAQ's</a></li>
-			</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd4">
-			<h4>My Account</h4> 
-			<ul>
-				<li><a href="NgoRegister.jsp">NGO Registration</a></li>
-				<li><a href="ngoLogin.jsp">NGO Login</a></li>
-				<li><a href="CustomerRegister.html">Customer Registration </a></li>
-				<li><a href="userLogin.jsp">Customer Login</a></li>
-			</ul>
-		</div>
-		<div class="clearfix"></div>
-		<p class="copy-right">© 2018 Sarvahitkari . All rights reserved | Design by <a href="#">Kapil Thakur & Rebecca John</a></p>
-	</div>
-</div>
 
-
-	<!-- cart-js -->
-	<script src="js/minicart.js"></script>
-	<!-- <script>
-        w3ls1.render();
-
-        w3ls1.cart.on('w3sb1_checkout', function (evt) {
-        	var items, len, i;
-
-        	if (this.subtotal() > 0) {
-        		items = this.items();
-
-        		for (i = 0, len = items.length; i < len; i++) {
-        			items[i].set('shipping', 0);
-        			items[i].set('shipping2', 0);
-        		}
-        	}
-        });
-    </script> -->  
-	<!-- //cart-js -->  
+<br><br><br> 
+<div class="footer" style="background-color:#f8f8f8;   height:50px;">
+	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
+</div> 
+	  
+<div id="snackbar"></div>
+ <%  
+ if(action==null){
+ 
+ }else if(action!=null)
+ { 
+  
+  if(action.equals("useNewPassword")){ 
+ %>
+<script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Use New Password to Login";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%} else if(action.equals("otpVarification")){ 
+ %>
+<script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Please check OTP on Your Registered Email Id";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("PasswordAndConfirmPasswordNotMactched")){ 
+ %>
+<script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Password and Confrim Password Does Not Match";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("otpIsNotCorrect")){ 
+ %>
+<script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="OTP is Wrong";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}  else if(action.equals("OtpExpired")){ 
+ %>
+<script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Your OTP is Expired";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}%>
+  
+<% } %>
+	 
 </body>
 </html>

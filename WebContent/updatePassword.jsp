@@ -187,9 +187,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 	  
 	 </script> 
-	 <%}%>
+	 <%}else if(action.equals("OtpExpired")){ 
+ %>
+<script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Your OTP is Expired";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}%>
   
   
-<% } %>
+<% }  %>
 </body>
 </html>

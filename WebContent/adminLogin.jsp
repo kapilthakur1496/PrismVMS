@@ -100,8 +100,8 @@ body {
 					</form>
 				</div>
 				<div class="forg">
-					<a href="#" class="forg-left">Forgot Password</a>
-					<a href="NgoRegister.jsp" class="forg-right">Register</a>
+					<a href="mentorForgotPassword.jsp" class="forg-left">Forgot Password</a>
+					 
 				<div class="clearfix"></div>
 				</div>
 			</div>
@@ -182,6 +182,16 @@ body {
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
  
 </script>  
+<%}else if(action.equals("UserNotValid")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Email or Password is Incorrect";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
 <%}%>
   
 <% } %>

@@ -234,7 +234,72 @@ if(mentorStatus == 1){
 <div class="footer" style="background-color:#f8f8f8;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
-	  
+
+<script type="text/javascript">
+    function validate()
+    {
+
+        var fld = document.f1.current_conact.value;
+
+        if (isNaN(fld)) {
+             
+            document.getElementById('msg').innerHTML = "Contact number is not valid";
+
+
+            return false;
+        }
+        else if (!(fld.length == 10)) {
+             
+            document.getElementById('msg').innerHTML = "Contact number is not valid";
+            return false;
+        }
+
+        var fuData = document.getElementById('profile_pic');
+        var FileUploadPath = fuData.value;
+
+        var Extension = FileUploadPath.substring(FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+
+
+        if(FileUploadPath == '')
+        {
+            return true
+        }
+        else {
+
+            if (Extension == "gif" || Extension == "png" || Extension == "bmp"
+                || Extension == "jpeg" || Extension == "jpg") {
+
+
+                if (fuData.files && fuData.files[0]) {
+
+                    var size = fuData.files[0].size;
+
+                    if(size >500000 ){
+                        
+                        document.getElementById('msg').innerHTML = "File too large (Max Picture Size 500KB)";
+
+                        return false;
+                    }else{
+                        var reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            $('#blah').attr('src', e.target.result);
+                        };
+
+                        reader.readAsDataURL(fuData.files[0]);
+                    }
+                }
+
+            }
+            else {
+                document.getElementById('msg').innerHTML = "Photo only allows file types of GIF, PNG, JPG, JPEG and BMP.";
+                return false;
+            }}
+
+
+    }
+
+</script>
  
 	 
 </body>
