@@ -56,6 +56,9 @@ ResultSet contactDetails=null;
 	if(adminId == null)
 	{	
 		adminId = (String)session.getAttribute("adminId"); 
+		if(adminId==null){ 
+			response.sendRedirect("adminLogin.jsp?action=LoginAgain"); 
+		}
 	} 
 	Control ct = new Control();
 /* 	adminStatus= ct.getAdminType(request, response,adminId); */

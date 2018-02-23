@@ -246,6 +246,14 @@ public class Control extends HttpServlet {
 		{   
 			volunteerForgotOtpVerification(request,response);
 		}
+		else if(action.equals("preVolunteerForgotPassword"))
+		{   
+			preVolunteerForgotPassword(request,response);
+		}
+		else if(action.equals("preVolunteerForgotOtpVerification"))
+		{   
+			preVolunteerForgotOtpVerification(request,response);
+		}
 		  
 		  
 	}
@@ -1714,7 +1722,7 @@ public   int checkVolunteerStatus(HttpServletRequest request, HttpServletRespons
 				}
 				else
 				{
-					return 0;
+					response.sendRedirect("volunteerLogin.jsp?action=NotVolunteer"); 
 				}
 				 
 			} 
@@ -1746,7 +1754,7 @@ public   int checkVolunteerStatus(HttpServletRequest request, HttpServletRespons
 		}
 	else
 	{
-		response.sendRedirect("volunteerLogin.jsp"); 
+		response.sendRedirect("volunteerLogin.jsp?action=LoginAgain"); 
 	}
 	return 0; 
 }
@@ -2318,7 +2326,7 @@ public   int checkMentorStatus(HttpServletRequest request, HttpServletResponse r
 				}
 				else
 				{
-					return 0;
+					response.sendRedirect("adminLogin.jsp?action=NotMentor"); 
 				}
 				 
 			} 
@@ -2350,7 +2358,7 @@ public   int checkMentorStatus(HttpServletRequest request, HttpServletResponse r
 		}
 	else
 	{
-		response.sendRedirect("adminLogin.jsp?action=NotMentor"); 
+		response.sendRedirect("adminLogin.jsp?action=LoginAgain"); 
 	}
 	return 0; 
 }
@@ -7272,6 +7280,205 @@ public   void volunteerForgotOtpVerification(HttpServletRequest request, HttpSer
 	        }else
 	        {
 				 response.sendRedirect("volunteerForgotPassword.jsp?action=otpIsNotCorrect&email="+email);
+	        }
+	         
+		} 
+		catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	 catch (Exception e) {
+			// TODO: handle exception
+			 e.printStackTrace();
+		}
+		finally {
+			
+			 if(volunteerCountSt!=null)
+				try {
+					volunteerCountSt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			 if(volunteerCountRs!=null)
+					try {
+						volunteerCountRs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+		}  
+		
+}
+
+public void preVolunteerForgotPassword( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	response.setContentType("text/html");
+    PrintWriter out = response.getWriter();   
+    String email=request.getParameter("email");  
+	Statement checkMentorSt = null;
+	ResultSet checkMentorRs = null; 
+	PreparedStatement updatePassDatePs =null;
+try {  
+	checkMentorSt = connection.createStatement();
+	String mentorId=null;
+ 	String checkQ = "select id as volunteerId from volunteer_registration  where email_id ='"+email+"'    ";
+ 	checkMentorRs = checkMentorSt.executeQuery(checkQ);
+	
+ 	if (checkMentorRs.next()) { 
+ 	 mentorId = checkMentorRs.getString("volunteerId");
+ 	 Random rnd = new Random();
+	 int rand = 100000 + rnd.nextInt(90000); 
+	 
+	 String otp = Integer.toString(rand);
+	 
+	 
+			  
+			     // result = "Sent message successfully....";  
+			String to = email;
+			  	String from = "prismhack@gmail.com";
+   			Properties props = System.getProperties();
+   			props.setProperty("mail.smtp.host", "smtp.gmail.com");
+   			props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+   			props.setProperty("mail.smtp.socketFactory.fallback", "false");
+   			props.setProperty("mail.smtp.port", "465");
+   			props.setProperty("mail.smtp.socketFactory.port", "465");
+   			props.put("mail.smtp.auth", "true");
+   			props.put("mail.debug", "true");
+   			props.put("mail.store.protocol", "pop3");
+   			props.put("mail.transport.protocol", "smtp");
+   			final String username = "prismhack@gmail.com";
+   			final String password = "code2win";
+		       
+			   try{
+			   		Session mySession = Session.getInstance(props, new Authenticator(){
+			   			 
+			   			protected PasswordAuthentication getPasswordAuthentication() {
+			   				return new PasswordAuthentication(username, password);
+						} 
+			   			
+					});
+
+			      MimeMessage message = new MimeMessage(mySession); 
+			      message.setFrom(new InternetAddress(from)); 
+			      message.addRecipient(Message.RecipientType.TO,
+			                               new InternetAddress(to)); 
+			      message.setSubject("PrismVMS Update Password"); 
+			      message.setText("Dear Applicant\n "
+			    		  +"\n\n Your otp is "+otp
+			    		    +"\n\nThank You" 
+			    		  +"\nWarm Regards"
+			    		  +"\n\nPrismVMS"
+			    		   );
+			      
+			      Transport.send(message);
+			     // result = "Sent message successfully....";  
+			      
+			   DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+ 			Date date = new Date(); 
+ 			 HttpSession session = request.getSession(); 
+			 session.setAttribute("otp", otp); 
+			String query = "update volunteer_registration set pasword_set=? where id = "+mentorId;
+			updatePassDatePs  =  connection.prepareStatement(query);
+			updatePassDatePs.setString(1,  dateFormat.format(date));  
+			updatePassDatePs.executeUpdate(); 
+			      
+		   response.sendRedirect("volunteerPreForgotPassword.jsp?action=otpVarification&email="+email);
+			   		  
+			  } 
+		    catch (MessagingException mex) {
+		      mex.printStackTrace();
+		      //result = "Error: unable to send message....";
+		   }
+   		 
+			
+ 	}
+ else{     
+	 response.sendRedirect("volunteerPreLogin.jsp?action=AccountDoesNotExist");
+ }
+	 
+}  
+catch (SQLException e) {
+	// TODO: handle exception
+e.printStackTrace();
+}
+catch (Exception e) {
+	// TODO: handle exception
+	 e.printStackTrace();
+}
+finally {
+ if(checkMentorSt!=null) {
+		try {
+			checkMentorSt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		}
+ if(checkMentorRs!=null) {
+		try {
+			checkMentorRs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+	 
+	 
+	if(updatePassDatePs!=null) {
+		try {
+			updatePassDatePs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+	
+}
+out.close();
+}
+public   void preVolunteerForgotOtpVerification(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+	Statement volunteerCountSt =null;
+	ResultSet volunteerCountRs = null;
+	 try {  				
+			String otp = request.getParameter("otp");
+			String email = request.getParameter("email");
+			
+			HttpSession session = request.getSession();   
+	        String checkOtp = (String)session.getAttribute("otp");
+	        if(checkOtp==null) {
+	        	response.sendRedirect("volunteerPreForgotPassword.jsp?action=OtpExpired");
+	        }
+	        
+	        if(checkOtp.equals(otp)) {
+	        
+				volunteerCountSt = connection.createStatement();
+				volunteerCountRs = volunteerCountSt.executeQuery("select id  from volunteer_registration where email_id ='"+email+"' ");
+				PreparedStatement updatePassDatePs =null;
+				String password = request.getParameter("password");
+				String confirmPassword = request.getParameter("confirmPassword");
+				DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	 			Date date = new Date(); 
+		 			
+				if(password.equals(confirmPassword) ) { 
+					if(volunteerCountRs.next()) {
+					
+						String query = "update volunteer_registration  set password=?,pasword_set=? where id = "+volunteerCountRs.getString("id");
+						updatePassDatePs  =  connection.prepareStatement(query);
+						updatePassDatePs.setString(1, password);  
+						updatePassDatePs.setString(2, dateFormat.format(date));  
+						
+						updatePassDatePs.executeUpdate();	
+						response.sendRedirect("volunteerPreLogin.jsp?action=useNewPassword");
+					
+					}
+		        }else
+		        {
+		        	response.sendRedirect("volunteerPreForgotPassword.jsp?action=PasswordAndConfirmPasswordNotMactched");
+		        } 
+	        }else
+	        {
+				 response.sendRedirect("volunteerPreForgotPassword.jsp?action=otpIsNotCorrect&email="+email);
 	        }
 	         
 		} 

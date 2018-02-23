@@ -19,6 +19,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 </head>
+<style>
+body{
+overflow-x:hidden;
+}
+
+</style>
 <body>
   <div class="outercontainer">
 	<div class="header-bottom-w3ls">  
@@ -27,9 +33,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<a href="index.jsp"><img src="images/logo2.png" alt=" " /> </a>
 				<div class="clearfix"></div>
 			</div>
-			 
-			
-		 
+			  
 			<div class="col-md-8 navigation-agileits" style=" text-align: center;">
 				<nav class="navbar navbar-default">
 					<div class="navbar-header nav_2">
@@ -64,7 +68,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				});
 			</script>  
 			<div class="col-md-2 cart-wthree">  
-				<form action="NgoRegister.jsp" method="post"  style="float: right; display: inline-block; margin-right:40px;    "  > 
+				<form action="CustomerRegister.html" method="post"  style="float: right; display: inline-block; margin-right:40px;    "  > 
 					<input type="hidden" name="cmd" value="_cart" />
 					<input type="hidden" name="display" value="1" />
 					<button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-user-plus" aria-hidden="true"></i></button>
@@ -74,46 +78,76 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 </div> 
-	<div class="login">
+	<div class="login"> 
 		<div class="main-agileits">
 				<div class="form-w3agile">
-					<h3>Login</h3>
-					<form action="VolunteerPreLogin" method="post">
+				<% String action = request.getParameter("action");%>
+						<%if(action == null){ %>
+					<h3>Verify Email</h3>
+					<form action="Control?action=preVolunteerForgotPassword" method="post">
+					
 						<div class="key">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
-							<input  type="text" name="email" required="" placeholder="Email">
+							<input  type="text" name="email" required="true" placeholder="Email">
 							<div class="clearfix"></div>
 						</div>
-						<div class="key">
-							<i class="fa fa-lock" aria-hidden="true"></i>
-							<input  type="password" name="password" required="" placeholder="Password">
-							<div class="clearfix"></div>
-						</div>
-						<input type="submit" value="Login">
+						<input type="submit" value="Get OTP">
+						 </form>
+						<%}else if(action.equals("otpVarification") || action.equals("otpIsNotCorrect")  ){
+							String email = request.getParameter("email");
+							
+						%>
+						<h3>Set Password</h3>
+						<form action="Control?action=preVolunteerForgotOtpVerification" method="post">
+							<div class="key">
+								<i class="fa fa-envelope" aria-hidden="true"></i>
+								<input  type="text" readonly name="email" value="<%=email%>" required="true" placeholder="Email">
+								<div class="clearfix"></div>
+							</div>
+							<div class="key">
+								<i class="fa fa-mobile-phone" aria-hidden="true"></i>
+								<input  type="text" name="otp" required="true" placeholder="OTP">
+								<div class="clearfix"></div>
+							</div>
+							<div class="key">
+								<i class="fa fa-lock" aria-hidden="true"></i>
+								<input  type="password" name="password" required="true" placeholder="New Password">
+								<div class="clearfix"></div>
+							</div>
+							<div class="key">
+								<i class="fa fa-lock" aria-hidden="true"></i>
+								<input  type="password" name="confirmPassword" required="true" placeholder="Confrim Password">
+								<div class="clearfix"></div>
+							</div>
+							
+						
+						<input type="submit" value="Set Password">
+					  <%} %>
 					</form>
 				</div>
 				<div class="forg">
-					<a href="volunteerPreForgotPassword.jsp" class="forg-left">Forgot Password</a> 
+					<a href="volunteerPreLogin.jsp" class="forg-left">Login</a>
+					 
 				<div class="clearfix"></div>
 				</div>
 			</div>
 		</div>
- 
- 
- 
- <div id="snackbar"></div>
- 
- <% 
- String action =request.getParameter("action");
+
+<br><br><br> 
+<div class="footer" style="background-color:#f8f8f8;   height:50px;">
+	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
+</div> 
+	  
+<div id="snackbar"></div>
+ <%  
  if(action==null){
  
  }else if(action!=null)
- {
-	 
+ { 
   
-  %><%if(action.equals("useNewPassword")){ 
+  if(action.equals("useNewPassword")){ 
  %>
-	 <script>
+<script>
  
     var x = document.getElementById("snackbar")
     x.className = "show";
@@ -121,57 +155,49 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
  
 </script>
-<%}else if(action.equals("AccountDoesNotExist")){ 
+<%} else if(action.equals("otpVarification")){ 
  %>
-	 <script>
+<script>
  
     var x = document.getElementById("snackbar")
     x.className = "show";
-    x.innerHTML="Your Account Does not Exist";
+    x.innerHTML="Please check OTP on Your Registered Email Id";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
  
 </script>
-<%}else if(action.equals("UserNotValid")){ 
+<%}else if(action.equals("PasswordAndConfirmPasswordNotMactched")){ 
  %>
-	 <script>
+<script>
  
     var x = document.getElementById("snackbar")
     x.className = "show";
-    x.innerHTML="Email or Password is Incorrect";
+    x.innerHTML="Password and Confrim Password Does Not Match";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
  
 </script>
-<%}else if(action.equals("NotVolunteer")){ 
+<%}else if(action.equals("otpIsNotCorrect")){ 
  %>
-	 <script>
+<script>
  
     var x = document.getElementById("snackbar")
     x.className = "show";
-    x.innerHTML="Your Account has been Archived. Please Check with Adminstrator";
+    x.innerHTML="OTP is Wrong";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
  
 </script>
-<%}else if(action.equals("LoginAgain")){ 
+<%}  else if(action.equals("OtpExpired")){ 
  %>
-	 <script>
+<script>
  
     var x = document.getElementById("snackbar")
     x.className = "show";
-    x.innerHTML="Your Session has been Expired Please Login Again!";
+    x.innerHTML="Your OTP is Expired";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
  
 </script>
 <%}%>
   
- <%}%>
- 
- 
- 
- 
- 
- 
- 
- 
- 
+<% } %>
+	 
 </body>
 </html>

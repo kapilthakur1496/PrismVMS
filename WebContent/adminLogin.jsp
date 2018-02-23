@@ -178,7 +178,7 @@ body {
  
     var x = document.getElementById("snackbar")
     x.className = "show";
-    x.innerHTML="You are not a Mentor";
+    x.innerHTML="Your Account has been Archived. Please Check with Adminstrator";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
  
 </script>  

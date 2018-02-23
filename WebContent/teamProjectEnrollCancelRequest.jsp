@@ -17,6 +17,9 @@ Connection connection=DbUtil.getConnection();
 
 
 String volunteerId=(String)session.getAttribute("volunteerId"); 
+if(volunteerId==null){ 
+	response.sendRedirect("volunteerLogin.jsp?action=LoginAgain"); 
+}
 String projectId=request.getParameter("projectId");
  String q1="";
 String query ="select id from team_project_enrollment where volunteer_registrationg_id = '"+volunteerId+"' and team_project_id='"+projectId+"'";

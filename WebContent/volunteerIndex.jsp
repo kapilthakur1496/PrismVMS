@@ -97,7 +97,11 @@ h1 {
 	volunteerId = (String)session.getAttribute("volunteerId"); 
 	if(volunteerId == null)
 	{	
-		volunteerId = (String)session.getAttribute("NgoId"); 
+		volunteerId = (String)session.getAttribute("volunteerId");
+		if(volunteerId==null){ 
+			response.sendRedirect("volunteerLogin.jsp?action=LoginAgain"); 
+		}
+		 
 	} 
 	volunteerStatus  = ct.checkVolunteerStatus(request, response,volunteerId);  
 } catch (Exception e){ 	 	
@@ -186,10 +190,7 @@ if(volunteerStatus == 1){
         </div>
         <div class="col-md-10 col-lg-9" style="padding:22px 10px;">
         
-        <%   PhoneNumber = ct.getPhone(volunteerId);  
-        
-        	 
-        %>
+        <%   PhoneNumber = ct.getPhone(volunteerId);  %>
    	<div class="container">
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
@@ -247,7 +248,7 @@ if(volunteerStatus == 1){
  	</div>
 </div>
   
-<%} %>
+<%}%>
 <br><br><br> 
 <div class="footer" style="background-color:#f8f8f8;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>

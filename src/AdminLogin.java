@@ -55,12 +55,10 @@ public class AdminLogin extends HttpServlet {
 					session.setAttribute("adminId", adminId); 
 					session.setAttribute("adminType", adminType); 
 					session.setMaxInactiveInterval(1800); 
-					if(adminType.equals("Admin"))
-					{
+					if(adminType.equals("Admin")) {
 						response.sendRedirect("admin/index.jsp"); 
 					}
-					else if(adminType.equals("Mentor"))
-					{
+					else if(adminType.equals("Mentor")) {
 						response.sendRedirect("mentorIndex.jsp"); 
 					} 
 				}  

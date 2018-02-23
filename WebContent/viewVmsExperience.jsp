@@ -107,6 +107,9 @@ h1 {
 	if(volunteerId == null)
 	{	
 		volunteerId = (String)session.getAttribute("volunteerId"); 
+		if(volunteerId==null){ 
+			response.sendRedirect("volunteerLogin.jsp?action=LoginAgain"); 
+		}
 	} 
 	volunteerStatus  = ct.checkVolunteerStatus(request, response,volunteerId);  
 } catch (Exception e){ 	 	

@@ -40,8 +40,10 @@ public class VolunteerEditDetails extends HttpServlet {
             HttpSession session = request.getSession();
 
             String volunteerId=(String)session.getAttribute("volunteerId");
-
-            
+            if(volunteerId==null)
+            		{
+                	response.sendRedirect("volunteerIndex.jsp?action=DetailsUpdated");
+            		}
             Part pcurrent_conact = request.getPart("current_conact");
 
  

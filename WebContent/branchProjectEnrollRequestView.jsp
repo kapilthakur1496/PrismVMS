@@ -99,6 +99,9 @@ h1 {
 	if(adminId == null)
 	{	
 		adminId = (String)session.getAttribute("adminId"); 
+		if(adminId==null){ 
+			response.sendRedirect("adminLogin.jsp?action=LoginAgain"); 
+		}
 	} 
 	mentorStatus  = ct.checkMentorStatus(request, response,adminId);  
 } catch (Exception e){ 	 	
