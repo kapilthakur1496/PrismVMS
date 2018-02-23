@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<title> PrimsVMS</title>
+<title>Fashion Club an Ecommerce Online Shopping Category  Flat Bootstrap responsive Website Template | Login :: w3layouts</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Fashion Club Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -20,11 +18,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //font -->
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
-<style type="text/css"> 
-body {
-	overflow-x:hidden;
-} 
-</style>
 </head>
 <body>
   <div class="outercontainer">
@@ -83,30 +76,64 @@ body {
 	
 		<div class="main-agileits">
 				<div class="form-w3agile">
-					<h3>Login</h3>
-					<form action="AdminLogin" method="post">
-					<div class="key">
+				<% String action = request.getParameter("action");%>
+						<%	   if(action == null){ %>
+					<h3>Verify Email</h3>
+					<form action="Control?action=mentorVarification" method="post">
+					
+						<div class="key">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
-							<input  type="text" name="email" required="" placeholder="Email">
+							<input  type="text" name="email" required="true" placeholder="Email">
 							<div class="clearfix"></div>
 						</div>
-						 
-						<div class="key">
-							<i class="fa fa-lock" aria-hidden="true"></i>
-							<input  type="password" name="password" required="" placeholder="Password">
-							<div class="clearfix"></div>
-						</div> 
-						<input type="submit" value="Sign In">
+						<input type="submit" value="Get OTP">
+						 </form>
+						<%}else if(action.equals("otpVarification")){
+							String email = request.getParameter("email");
+							
+						%>
+						<h3>Set Password</h3>
+						<form action="Control?action=otpVerification" method="post">
+							<div class="key">
+								<i class="fa fa-envelope" aria-hidden="true"></i>
+								<input  type="text" readonly name="email" value="<%=email%>" required="true" placeholder="Email">
+								<div class="clearfix"></div>
+							</div>
+							<div class="key">
+								<i class="fa fa-envelope" aria-hidden="true"></i>
+								<input  type="text" name="otp" required="true" placeholder="OTP">
+								<div class="clearfix"></div>
+							</div>
+							<div class="key">
+								<i class="fa fa-envelope" aria-hidden="true"></i>
+								<input  type="password" name="password" required="true" placeholder="New Password">
+								<div class="clearfix"></div>
+							</div>
+							<div class="key">
+								<i class="fa fa-envelope" aria-hidden="true"></i>
+								<input  type="password" name="confirmPassword" required="true" placeholder="Confrim Password">
+								<div class="clearfix"></div>
+							</div>
+							
+						
+						<input type="submit" value="Set Password">
+					  <%} %>
 					</form>
 				</div>
 				<div class="forg">
-					<a href="mentorForgotPassword.jsp" class="forg-left">Forgot Password</a>
-					 
+					<a href="#" class="forg-left">Forgot Password</a>
+					<a href="NgoRegister.jsp" class="forg-right">Register</a>
 				<div class="clearfix"></div>
 				</div>
 			</div>
 		</div>
+
+<br><br><br> 
+<div class="footer" style="background-color:#f8f8f8;   height:50px;">
+	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
+</div> 
+	  
+
 	 
- 
 </body>
 </html>

@@ -7,10 +7,7 @@
     <title>Sarva Hitkari Admin Dashboard - Home</title>
     <meta name="description" content="">
     <meta name="author" content="templatemo">
-    <!-- 
-    Visual Admin Template
-    http://www.templatemo.com/preview/templatemo_455_visual_admin
-    -->
+    
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,700' rel='stylesheet' type='text/css'>
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -50,8 +47,21 @@ input[type="submit"]:hover
 ResultSet teamRs =null,branchRs=null,professionalSkillRs=null,grievanceRs=null,vmsCategoryRs=null;
 ResultSet meetingRs =null,trainingRs=null,academicSkillRs=null,lifeSkillRs=null,softSkillRs=null;
 ResultSet stateRs =null;
+String adminId=null;
+int adminStatus=0;
 ResultSet contactDetails=null; 
 %> 
+<% 
+	adminId = (String)session.getAttribute("adminId"); 
+	if(adminId == null)
+	{	
+		adminId = (String)session.getAttribute("adminId"); 
+	} 
+	Control ct = new Control();
+/* 	adminStatus= ct.getAdminType(request, response,adminId); */
+ 
+if(adminId !=null){
+%>  
 
     <!-- Left column -->
     <div class="templatemo-flex-row">
@@ -60,7 +70,7 @@ ResultSet contactDetails=null;
         	<!-- <a href="index.html"> --><img src="../images/logo2.png" alt=" " >  <!--    </a>  -->    
 	   </header>
         <div class="profile-photo-container">
-          <img src="images/profile-photo.jpg" alt="Profile Photo" class="img-responsive">  
+          <img src="DisplayMentorPic?name=<%=2%>" alt="Profile Photo" class="img-responsive">  
           <div class="profile-photo-overlay"></div>
         </div>      
         <!-- Search box -->
@@ -117,7 +127,7 @@ ResultSet contactDetails=null;
               		<form action="${pageContext.request.contextPath}/Control?action=addSubCategory" method="post" >
               		 	  <select required class="form-control"   name="categoryId"> 
               				<option value="0">View Teams</option>
-              				<% 	Control ct= new Control(); 
+              				<%  
               					teamRs = ct.getTeams();
               				%>
               				<% while(teamRs.next() ){ %>
@@ -506,7 +516,7 @@ address: <span id="c"></span>
          </div>  
       </div>
     </div>
-     
+     <%} %>
     <!-- JS -->
     <script src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
     <script src="js/jquery-migrate-1.2.1.min.js"></script> <!--  jQuery Migrate Plugin -->

@@ -104,7 +104,7 @@
 				%>
 				<%  
 				 	pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
-					volunteerCount = ct.volunteerCount();
+					volunteerCount = ct.volunteerApplicationCount();
 					pageCount= volunteerCount/10 +1;		  
 					volunteerDetailsRs = ct.applicationDetails(pageNumber-1, nextRecordCount);
 			} catch (Exception e)	{
@@ -178,7 +178,7 @@
                 <% try{ %> 
 				<%  
 				 	pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
-					volunteerCount = ct.volunteerCount();
+					volunteerCount = ct.AdminVolunteerCount();
 					pageCount= volunteerCount/10 +1;		  
 					volunteerDetailsRs = ct.volunteerDetails(pageNumber-1, nextRecordCount);
 			} catch (Exception e)	{

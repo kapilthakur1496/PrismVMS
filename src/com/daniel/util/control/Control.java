@@ -1219,7 +1219,93 @@ catch (SQLException e) {
 	return name;
 
 }
- 
+
+public   int AdminVolunteerCount() throws ServletException, IOException { 
+	Statement volunteerCountSt =null;
+	ResultSet volunteerCountRs = null;
+	int totalCount = 0; 
+	
+	try {  				
+			volunteerCountSt = connection.createStatement();
+			 
+			volunteerCountRs = volunteerCountSt.executeQuery("select count(id) from volunteer_registration where approve_status ='Approved' ");
+		
+			if(volunteerCountRs.next())
+			{
+				totalCount = Integer.parseInt(volunteerCountRs.getString(1));
+			}
+		  
+		} 
+		catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	 catch (Exception e) {
+			// TODO: handle exception
+			 e.printStackTrace();
+		}
+		finally {
+			
+			 if(volunteerCountSt!=null)
+				try {
+					volunteerCountSt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			 if(volunteerCountRs!=null)
+					try {
+						volunteerCountRs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+		}
+return totalCount; 
+}
+public   int volunteerApplicationCount() throws ServletException, IOException { 
+	Statement volunteerCountSt =null;
+	ResultSet volunteerCountRs = null;
+	int totalCount = 0; 
+	
+	try {  				
+			volunteerCountSt = connection.createStatement();
+			 
+			volunteerCountRs = volunteerCountSt.executeQuery("select count(id) from volunteer_registration where approve_status !='Approved' ");
+		
+			if(volunteerCountRs.next())
+			{
+				totalCount = Integer.parseInt(volunteerCountRs.getString(1));
+			}
+		  
+		} 
+		catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	 catch (Exception e) {
+			// TODO: handle exception
+			 e.printStackTrace();
+		}
+		finally {
+			
+			 if(volunteerCountSt!=null)
+				try {
+					volunteerCountSt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			 if(volunteerCountRs!=null)
+					try {
+						volunteerCountRs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+		}
+return totalCount; 
+}
 public   int volunteerTeamCount(String id) throws ServletException, IOException { 
 	Statement volunteerCountSt =null;
 	ResultSet volunteerCountRs = null;
@@ -2112,6 +2198,64 @@ public   void otpVerification(HttpServletRequest request, HttpServletResponse re
 					} 
 		}  
 		
+}
+public   int getAdminType(HttpServletRequest request, HttpServletResponse response,String id) throws ServletException, IOException { 
+	Statement checkStatusSt =null;
+	ResultSet checkStatusRs = null; 
+	  PreparedStatement assingProjectPs =null;
+		HttpSession session = request.getSession();
+		String adminId = (String)session.getAttribute("adminId");
+		if(adminId !=null) {
+	if(id!=null) {	
+		try {  				
+				checkStatusSt = connection.createStatement();
+				String query = "select admin_type from admin where id ="+id;
+				checkStatusRs = checkStatusSt.executeQuery(query);
+				if(checkStatusRs.next())
+				{
+					
+				}
+				else
+				{
+					return 0;
+				}
+				 
+			} 
+		catch (SQLException e) {
+				// TODO: handle exception
+			e.printStackTrace();
+			}
+		 catch (Exception e) {
+				// TODO: handle exception
+				 e.printStackTrace();
+			}
+			finally {
+				
+				if(checkStatusSt!=null)
+					try {
+						checkStatusSt.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+				if(checkStatusRs!=null)
+					try {
+						checkStatusRs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+			}
+		}
+	else
+	{
+		response.sendRedirect("adminLogin.jsp"); 
+	}
+		}else
+		{
+			response.sendRedirect("adminLogin.jsp"); 
+		}
+	return 0; 
 }
 public   int checkMentorStatus(HttpServletRequest request, HttpServletResponse response,String id) throws ServletException, IOException { 
 	Statement checkStatusSt =null;

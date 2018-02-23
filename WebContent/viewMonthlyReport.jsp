@@ -192,7 +192,7 @@ if(mentorStatus == 1){
 					<a href="viewVolunteerMonthlyReport.jsp?vId=<%=volunteerDetailsRs.getString("id")%>" style="color:#333; text-decoration:none;">
 						<li style="list-style:none;" >
 							<div class="collapsible-header active" style="background:#66bdd7;"><p style="padding:5px; font-size:14px;">
-							  	<img style="display:inline-block; width:50px; height:50px; border-radius:50%; margin-lefT:10px; border-style:none; "  src="images/person.jpg" >&nbsp;&nbsp;
+							  	<img style="display:inline-block; width:50px; height:50px; border-radius:50%; margin-lefT:10px; border-style:none; "  src="DisplayVolunteerPic?name<%=volunteerDetailsRs.getString("id")%>" >&nbsp;&nbsp;
 								<%= volunteerDetailsRs.getString("volunteer_name") %>
 							 	<span style="float: right; margin-top:10px; margin-right:10px;" ><span class="fa fa-users" style="text-align: right; font-size:22px;  font-style: bold; "> </span> &nbsp;&nbsp; 
 							 		<%= volunteerDetailsRs.getString("team") %>

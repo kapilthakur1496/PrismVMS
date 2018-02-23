@@ -143,62 +143,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 					<div class="clearfix"> </div>
 				</div>
-			</div>
-<!-- //newsletter -->
-<div class="footer">
-	<div class="container">
-		<div class="col-md-3 footer-grids fgd1">
-		<a href="index.jsp"><img src="images/logo2.png" alt=" " /> </a>
-		<ul>
-			<li>Christ University</li>
-			<li>Bangalore-560029</li>
-			<li><a href="mailto:info@example.com">info@sarvahitkari.com</a></li>
-			<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-		</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd2">
-			<h4>Information</h4> 
-			<ul>
-				<li><a href="contact.jsp">Contact Us</a></li>
-				<li><a href="about.html">About</a></li>
-				<li><a href="faq.jsp">FAQ's</a></li>
-			</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd4">
-			<h4>My Account</h4> 
-			<ul>
-				<li><a href="NgoRegister.jsp">NGO Registration</a></li>
-				<li><a href="ngoLogin.jsp">NGO Login</a></li>
-				<li><a href="CustomerRegister.html">Customer Registration </a></li>
-				<li><a href="userLogin.jsp">Customer Login</a></li>
-			</ul>
-		</div>
-		<div class="clearfix"></div>
-		<p class="copy-right">© 2018 Sarvahitkari . All rights reserved | Design by <a href="#">Kapil Thakur & Rebecca John</a></p>
-	</div>
-</div>
+			</div> 
+<br><br><br> 
+<div class="footer" style="background-color:#f8f8f8;   height:50px;">
+	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
+</div> 
+	  
 
-
-	<!-- cart-js -->
-	<script src="js/minicart.js"></script>
-	<!-- <script>
-        w3ls1.render();
-
-        w3ls1.cart.on('w3sb1_checkout', function (evt) {
-        	var items, len, i;
-
-        	if (this.subtotal() > 0) {
-        		items = this.items();
-
-        		for (i = 0, len = items.length; i < len; i++) {
-        			items[i].set('shipping', 0);
-        			items[i].set('shipping2', 0);
-        		}
-        	}
-        });
-    </script> -->  
-	<!-- //cart-js -->  
 </body>
 </html>
