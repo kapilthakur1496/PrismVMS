@@ -138,14 +138,14 @@ body
 							</div> 
 							 <div class="key"  >   				
 								<i class="fa fa-paragraph" aria-hidden="true"></i> 
-								<textarea height="auto;" placeholder="Why do you wish to join as a volunteer" oninput="this.className = ''" style="height:135px;" name="whyVolunteer"></textarea>
+								<textarea height="auto;" placeholder="Why do you wish to join as a volunteer" oninput="this.className = ''" style="height:135px;" name="whyVolunteer" required></textarea>
 								<div class="clearfix"></div>
 							</div>  
 							 
 						</div> 
 					  <div style="overflow:auto;">
 					    <div style="float:left;">
-					      <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-primary">Previous</button>      
+					      <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-primary">Prev</button>      
 					    </div>
 					    <div style="float:right;">
 					      <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-primary">Next</button> 
