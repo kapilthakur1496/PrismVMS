@@ -68,13 +68,7 @@ body
 							<span class="icon-bar"></span>
 						</button>
 					</div> 
-					<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
-						<ul class="nav navbar-nav ">
-							<li><a href="index.jsp" class="hyper "><span>Home</span></a></li>	
-							<li><a href="about.html" class="hyper"><span>About</span></a></li>						
-							<li><a href="contact.jsp" class="hyper"><span>Contact Us</span></a></li>
-						</ul>
-					</div>
+
 				</nav>
 			</div>
 		  <script>
@@ -103,29 +97,29 @@ body
 					<h4 style="font-size:30px;">Volunteer Registration</h4><br>
 					<form id="regForm" action="Control?action=addVolunteerRegistration" method="post" style="">  
 						<div class="tab">
-					 		 <div class="key">
-								<i class="fa fa-user" aria-hidden="true"></i>
-								<input  type="text"  name="fullName"  required=""  placeholder="Full Name">
+					 		 <div class="key input-group">
+								<span class="input-group-addon"><i class="fa fa-user " aria-hidden="true"></i></span>
+								<input  type="text"  name="fullName"  required=""  placeholder="Full Name" class="form-control">
 								<div class="clearfix"></div>
 							</div> 
-							<div class="key">
-								<i class="fa fa-envelope" aria-hidden="true"></i>
-								<input  type="text"  name="email"  required=""  placeholder="Email">
+							<div class="key input-group">
+								<span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+								<input  type="text"  name="email"  required=""  placeholder="Email" class="form-control">
 								<div class="clearfix"></div>
 							</div>
-							<div class="key">
-								<i class="fa fa-phone" aria-hidden="true"></i>
-								<input  type="text"  name="phone"  required=""  placeholder="Mobile No.">
+							<div class="key input-group">
+								<span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+								<input  type="text"  name="phone"  required=""  placeholder="Mobile No." class="form-control">
 								<div class="clearfix"></div>
 							</div>
-							<div class="key">
-								<i class="fa fa-lock" aria-hidden="true"></i>
-								<input  type="password"  name="password"  required="" placeholder="Password">
+							<div class="key input-group">
+								<span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+								<input  type="password"  name="password"  required="" placeholder="Password" class="form-control">
 								<div class="clearfix"></div>
 							</div>
-							<div class="key">
-								<i class="fa fa-lock" aria-hidden="true"></i>
-								<input  type="password" name="Confirm Password" required="" placeholder="Confirm Password">
+							<div class="key input-group">
+								<span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+								<input  type="password" name="Confirm Password" required="" placeholder="Confirm Password" class="form-control">
 								<div class="clearfix"></div>
 							</div>
 						</div>
@@ -133,8 +127,8 @@ body
 					  		  
 							<div class="key">
 								<i class="fa fa-group" aria-hidden="true"></i>
-								<select name="gender"  >
-									<option>Select Your Gender</option>
+								<select name="gender" required  >
+									<option value="">Select Your Gender</option>
 									<option>Male</option>
 									<option>Female</option>
 									<option>Other</option> 
@@ -151,10 +145,10 @@ body
 						</div> 
 					  <div style="overflow:auto;">
 					    <div style="float:left;">
-					      <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>      
+					      <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-primary">Previous</button>      
 					    </div>
 					    <div style="float:right;">
-					      <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button> 
+					      <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-primary">Next</button> 
 					    </div> 
 					  </div>
 					  

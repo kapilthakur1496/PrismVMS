@@ -2124,18 +2124,18 @@ p.single-price-text {
     padding: 3em;
 }
 .key {
-    background: #fff;
-    border: 1px solid #999;
-    margin-bottom: 2em;
+  /*   background: #fff; */
+  margin-bottom:3em;
+    
 }
 .key i {
     float: left;
-    color: #999;
-    font-size: 1.1em;
-    padding: 13px;
+    color: #EC6F56;
+    
+    
 }
 .key input[type="text"], .key input[type="password"] {
-    width: 88%;
+   /*  width: 88%;
     padding: 10px 10px;
     font-size: 1em;
     border: none;
@@ -2143,7 +2143,7 @@ p.single-price-text {
     outline: none;
     color: #999;
     float: left;
-    background: none;
+    background: none; */
 }
 .form-w3agile input[type="submit"] {
     background: #66bdd7;
