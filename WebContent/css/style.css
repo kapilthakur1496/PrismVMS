@@ -1805,7 +1805,7 @@ button:hover {
         {
         border-radius:2px;
         margin:10px;
-        width:74%;
+        width:93%;
         height:31px;
         background-color:#fff;
         }
@@ -1914,7 +1914,14 @@ button:hover {
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
-
+ #exCollapsingNavbar3 li a.active {
+    	border-left: 5px solid #003366;
+    	color:#003366; 
+	}
+.nav > li > a:hover, .nav > li > a.active {
+    text-decoration: none;
+    background-color: #eee;
+    }
 @-webkit-keyframes fadein {
     from {bottom: 0; opacity: 0;} 
     to {bottom: 30px; opacity: 1;}
