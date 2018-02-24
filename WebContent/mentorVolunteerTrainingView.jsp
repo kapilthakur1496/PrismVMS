@@ -192,7 +192,7 @@ if(volunteerStatus == 1){
  	  		 String projectName=null;
 	 	  
 	 	  %> 
-	 	  <table>
+	 	  <table  class="table table-bordered">
 	 	  	<thead>
 	 	  	<tr>
 	 	  		<th>#</th>

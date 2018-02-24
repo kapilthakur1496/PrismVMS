@@ -181,10 +181,10 @@ if(mentorStatus == 1){
         <div class="col-md-10 col-lg-9" style="padding:22px 10px;">
  			<form action="Control?action=assignIndividualProject" method="post" >
  			<input type="hidden" name="vId" value="<%=vId %>" >
-			<br><br><br><input type="text" name="projectTitle" style="opacity:1;" required placeholder="Enter Project Title">
-			<br><br><br><input  name="projectStartDate" type="date" style="opacity:1;" required placeholder="Choose Project Start Date">
-			<br><br><br><input  name="projectEndDate" type="date" style="opacity:1;" required placeholder="Choose Project End Date">
-			<br><br><br><textarea  required name="projectDesc" placeholder="Enter Project Description"></textarea>
+			<br><br><br><input type="text" name="projectTitle" style="opacity:1;" required placeholder="Enter Project Title"  class="form-control">
+			<br><br><br><label>Start Date</label><input  name="projectStartDate" type="date" style="opacity:1;" required placeholder="Choose Project Start Date"  class="form-control">
+			<br><br><br><label>End Date</label><input  name="projectEndDate" type="date" style="opacity:1;" required placeholder="Choose Project End Date"  class="form-control">
+			<br><br><br><textarea  required name="projectDesc" placeholder="Enter Project Description" class="form-control"></textarea>
 			<br><br><br><input type="submit" style="opacity:1;"  value="Assign">
  			</form>
           
@@ -208,7 +208,7 @@ if(mentorStatus == 1){
 		</div>
 		<div class="col-md-6 w3agile_newsletter_right">
 			<form action="Control?action=subscription" method="post">
-				<input type="email" name="email" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
+				<input type="email" name="email" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required=""  class="form-control">
 				<input type="submit" value="Subscribe" />
 			</form>
 		</div>

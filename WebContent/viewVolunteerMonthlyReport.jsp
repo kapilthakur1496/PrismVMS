@@ -193,7 +193,7 @@ String id = request.getParameter("vId");
 	 	 monthlyReportRs = ct.getVolunteerMonthlyReport(request, response,id);
  	  		 
 	 	  %> 
-	 	  <table>
+	 	  <table  class="table table-bordered">
 	 	  	<thead>
 	 	  	<tr>
 	 	  		<th>#</th>
