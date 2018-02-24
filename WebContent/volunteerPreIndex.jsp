@@ -18,6 +18,7 @@
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/kj.js"></script>
+<link rel="shortcut icon" href="images/logo2_.ico" />
 <style type="text/css">
  body
  {
