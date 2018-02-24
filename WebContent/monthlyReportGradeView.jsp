@@ -193,7 +193,7 @@ String id = request.getParameter("id");
 			 <%monthlyReportRs = ct.getMonthlyReportGrades(request, response , id); %>
 				<div class="data">
 				<%while(monthlyReportRs.next()){ %>
-					<table id="table1">
+					<table id="table1" class="table table-bordered">
 					 
 						<tbody>
 							<tr>

@@ -126,8 +126,8 @@ if(mentorStatus == 1){
                  		</li>
                 		<li class="nav-item" style="margin-bottom:17px;">
                        		<form action="#" method="post">
-								<div   >
-								 	<input    id="myInput" onkeyup="search()" type="text" style="opacity:1; padding: 12px 20px 12px 40px; background-image: url('images/searchicon.png'); background-position: 10px 10px; background-repeat: no-repeat; cursor:text; height:40px;"  name="productPrice" required="" placeholder="Search Feature">
+								<div>
+								 	<input id="myInput" onkeyup="search()" type="text" style="opacity:1; padding: 12px 20px 12px 40px; background-image: url('images/searchicon.png'); background-position: 10px 10px; background-repeat: no-repeat; cursor:text; height:40px;"  name="productPrice" required="" placeholder="Search Feature" >
 									 <div class="clearfix"></div>
 								</div> 
 							</form>	
@@ -186,7 +186,7 @@ if(mentorStatus == 1){
 	 	  <% String id= request.getParameter("id");
 	 	  String name= request.getParameter("name");%> 
 	 	  <form action="Control?action=mentorVmsExperience" method="post">
-			  <br><br><select required name="category" >
+			  <br><br><select required name="category" class="form-control">
 			<option value="">Select Category</option>
 			<% vmsExperienceRs = ct.getVmsCategory();  
 				while(vmsExperienceRs.next()){
@@ -194,7 +194,7 @@ if(mentorStatus == 1){
 			 	<option value="<%=vmsExperienceRs.getString("category")%>"><%=vmsExperienceRs.getString("category")%></option>
 				<%} %>
 			</select>
-			<br><br><textarea required name="experienceDesc" placeholder="Enter Your Experience"></textarea>
+			<br><br><textarea required name="experienceDesc" placeholder="Enter Your Experience" class="form-control"></textarea>
 			<br><br><input type="submit" style="opacity:1;"  value="Submit Feedback">
 				</form>
     	</div>

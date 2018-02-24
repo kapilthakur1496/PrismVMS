@@ -181,10 +181,10 @@ if(mentorStatus == 1){
         <div class="col-md-10 col-lg-9" style="padding:22px 10px;">
  			<form action="Control?action=assignIndividualProject" method="post" >
  			<input type="hidden" name="vId" value="<%=vId %>" >
-			<br><br><br><input type="text" name="projectTitle" style="opacity:1;" required placeholder="Enter Project Title">
-			<br><br><br><input  name="projectStartDate" type="date" style="opacity:1;" required placeholder="Choose Project Start Date">
-			<br><br><br><input  name="projectEndDate" type="date" style="opacity:1;" required placeholder="Choose Project End Date">
-			<br><br><br><textarea  required name="projectDesc" placeholder="Enter Project Description"></textarea>
+			<br><br><br><input type="text" name="projectTitle" style="opacity:1;" required placeholder="Enter Project Title"  class="form-control">
+			<br><br><br><label>Start Date</label><input  name="projectStartDate" type="date" style="opacity:1;" required placeholder="Choose Project Start Date"  class="form-control">
+			<br><br><br><label>End Date</label><input  name="projectEndDate" type="date" style="opacity:1;" required placeholder="Choose Project End Date"  class="form-control">
+			<br><br><br><textarea  required name="projectDesc" placeholder="Enter Project Description" class="form-control"></textarea>
 			<br><br><br><input type="submit" style="opacity:1;"  value="Assign">
  			</form>
           
@@ -197,11 +197,6 @@ if(mentorStatus == 1){
 <div class="footer" style="background-color:#f8f8f8;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
-	  <br><br><br> 
-<div class="footer" style="background-color:#f8f8f8;   height:50px;">
-	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
-</div> 
-	  
-	 
+ 
 </body>
 </html>
