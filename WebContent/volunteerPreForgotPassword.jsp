@@ -147,8 +147,9 @@ overflow-x:hidden;
   
   if(action.equals("useNewPassword")){ 
  %>
+
 <script>
- 
+ 	
     var x = document.getElementById("snackbar")
     x.className = "show";
     x.innerHTML="Use New Password to Login";
