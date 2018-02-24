@@ -149,7 +149,7 @@ if(volunteerStatus == 1){
                          	<a class="nav-link" href="mentorVolunteerWorkDiary.jsp?pN=1">Work Diary</a>
                         </li>
                         <li   class="nav-item">
-                         	<a class="nav-link" href="mentorVolunteerMeeting.jsp?pN=1">Work Meeting</a>
+                         	<a class="nav-link active" href="mentorVolunteerMeeting.jsp?pN=1">Work Meeting</a>
                         </li>
                         <li   class="nav-item">
                          	<a class="nav-link" href="mentorVolunteerTraining.jsp?pN=1">Work Training</a>

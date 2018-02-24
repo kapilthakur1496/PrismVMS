@@ -149,8 +149,7 @@ if(volunteerStatus == 1){
                     	</li >
                    	</ul>
                     <ul class="nav flex-column" id="exCollapsingNavbar3">
-	                     
-                    		
+	                      
                        	<li   class="nav-item">
                          	<a class="nav-link" href="volunteerIndex.jsp">Home</a>
                         </li>
