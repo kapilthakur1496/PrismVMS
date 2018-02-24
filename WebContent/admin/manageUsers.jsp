@@ -25,6 +25,38 @@
 
   </head>
   <body>  
+  <%@ page import="java.sql.*" %>
+	<%@page import="java.lang.reflect.Array"%>
+	<%@ page import ="javax.sql.*" %>
+	<%@ page import="com.daniel.util.control.*"  %> 
+	 <%@ page import="java.sql.*" %>
+	<%@page import="java.lang.reflect.Array"%>
+	<%@ page import ="javax.sql.*" %>
+	<%@ page import="com.daniel.util.control.*"  %> 
+	<%!   
+		String adminId=null;
+		int adminStatus=0; 
+	%> 
+	<%! 
+		ResultSet volunteerDetailsRs=null,teamRs=null,branchRs=null;
+	 	int volunteerCount =0, pageCount = 0;
+		Control ct = new Control();
+		int pageNumber=0, nextRecordCount=10;	
+	%>
+				 
+	<% 
+	adminId = (String)session.getAttribute("adminId"); 
+	if(adminId == null)
+	{	
+		adminId = (String)session.getAttribute("adminId"); 
+		if(adminId==null){ 
+			response.sendRedirect("adminLogin.jsp?action=LoginAgain"); 
+		}
+	} 
+	Control ct = new Control();
+  	adminStatus= ct.getAdminType(request, response,adminId);  
+if(adminId !=null){
+%>
     <!-- Left column -->
     <div class="templatemo-flex-row">
       <div class="templatemo-sidebar">
@@ -49,36 +81,24 @@
           </div>
         <nav class="templatemo-left-nav">          
           <ul>
-            <li><a href="manageData.jsp"><i class="fa fa-home fa-fw"></i>Manage Data</a></li>
-           <!--  <li><a href="data-visualization.html"><i class="fa fa-bar-chart fa-fw"></i>Charts</a></li>
-            <li><a href="data-visualization.html"><i class="fa fa-database fa-fw"></i>Data Visualization</a></li>
-            <li><a href="maps.html"><i class="fa fa-map-marker fa-fw"></i>Maps</a></li>
-             --><li><a href="manage-users.jsp?pageNumber=1" class="active"><i class="fa fa-users fa-fw"></i>Manage Users</a></li>
-            <!-- <li><a href="preferences.html"><i class="fa fa-sliders fa-fw"></i>Preferences</a></li>
-            <li><a href="login.html"><i class="fa fa-eject fa-fw"></i>Sign Out</a></li>
-           --></ul>  
+            <li><a href="index.jsp"><i class="fa fa-home fa-fw"></i>Home</a></li>
+            <li><a href="manage-users.jsp?pageNumber=1" class="active"><i class="fa fa-users fa-fw"></i>Manage Users</a></li>
+             </ul>  
         </nav>
       </div>
       <!-- Main content --> 
       <div class="templatemo-content col-1 light-gray-bg">
         <div class="templatemo-top-nav-container">
-          <!-- <div class="row">
+          <div class="row">
             <nav class="templatemo-top-nav col-lg-12 col-md-12">
-              <ul class="text-uppercase">
-                <li><a href="" class="active">Admin panel</a></li>
-                <li><a href="">Dashboard</a></li>
-                <li><a href="">Overview</a></li>
-                <li><a href="login.html">Sign in form</a></li>
-              </ul>  
+              <a href="adminlogout.jsp" style="margin-right:20px; color:1B606c; font-weight:700;  float:right;" >Sign Out</a>
+             
             </nav> 
           </div>
- -->        </div>
-	<%@ page import="java.sql.*" %>
-	<%@page import="java.lang.reflect.Array"%>
-	<%@ page import ="javax.sql.*" %>
-	<%@ page import="com.daniel.util.control.*"  %> 
-        <div class="templatemo-content-container">
-          <div class="templatemo-content-widget no-padding">
+      </div>
+	
+        <div class="templatemo-content-container" style="padding:0px 0px;">
+          <div class="templatemo-content-widget no-padding"> 
             <div class="panel panel-default table-responsive">
             <form id="regForm" action="${pageContext.request.contextPath}/Control?action=volunteerApproval" method="post" style="margin-top:0px; padding-top:30px;">  
 			  <table class="table table-striped table-bordered templatemo-user-table">
@@ -96,12 +116,7 @@
                 <tbody>
                 <% try{ %>
 			  
-				<%! 
-					ResultSet volunteerDetailsRs=null,teamRs=null,branchRs=null;
-				 	int volunteerCount =0, pageCount = 0;
-					Control ct = new Control();
-					int pageNumber=0, nextRecordCount=10;	
-				%>
+				
 				<%  
 				 	pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 					volunteerCount = ct.volunteerApplicationCount();
@@ -128,7 +143,7 @@
 									<input type="text" readonly name="email_status"  class="form-control"   value="<%=volunteerDetailsRs.getString("approve_status") %>" >
 								</td> 
 								 <td>
-									<a href="#" >View </a>
+									<a href="applicationProfile.jsp?aId=<%=volunteerDetailsRs.getString("id")%>" target="_blank" >View </a>
 								</td> 
 								 
 							</tr>
@@ -144,6 +159,7 @@
 								<option>Under Process</option>
 								<option>Rejected </option> 
 								<option>Pending</option>
+								<option>On InterView</option>
 								<option>Archived</option>
 							</select>
 						</div>  
@@ -371,12 +387,12 @@
           </div>  -->         
           <footer class="text-right">
             <p>Copyright &copy; 2018 SarvaHitkari 
-            | Designed by <a href="/sarv_hitkari/about.html" target="_parent">Kapil Thakur and Rebecca John</a></p>
+            | Designed by <a href="/sarv_hitkari/about.html" target="_parent">Kapil Thakur and Anurag Goel</a></p>
           </footer>         
         </div>
       </div>
     </div>
-    
+    <%} %>
     <!-- JS -->
     <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
     <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->

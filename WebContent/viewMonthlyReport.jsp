@@ -176,7 +176,7 @@ if(mentorStatus == 1){
                             <a class="nav-link" href="branchProjectEnrollRequestView.jsp?pN=1"> Branch Project Enroll Request</a>
                         </li>   
                         <li   class="nav-item">
-                            <a class="nav-link" href="viewMonthlyReport.jsp?pN=1">View Monthly Report</a>
+                            <a class="nav-link active" href="viewMonthlyReport.jsp?pN=1">View Monthly Report</a>
                         </li>  
                         <li   class="nav-item">
                             <a class="nav-link" href="mentorVmsExperience.jsp">VMS Feedback</a>

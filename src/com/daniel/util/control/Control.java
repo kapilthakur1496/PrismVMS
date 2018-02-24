@@ -1,6 +1,4 @@
 package com.daniel.util.control;
-
-
 import java.sql.ResultSet;
 import java.sql.Array;
 import java.sql.Connection; 
@@ -630,6 +628,45 @@ private void addAcademicSkills( HttpServletRequest request, HttpServletResponse 
 		}
 		 out.close(); 
 		 
+	}
+public   ResultSet getApplications(HttpServletRequest request, HttpServletResponse response,String id) throws ServletException, IOException { 
+	Statement getTeamsSt =null;
+	ResultSet getTeamsRs = null;
+	 HttpSession session = request.getSession();
+		String adminId = (String)session.getAttribute("adminId");
+		if(adminId !=null) {
+		try {  				
+			getTeamsSt = connection.createStatement();
+				String query = "select *   from volunteer_registration where id ='"+id+"'";
+				getTeamsRs = getTeamsSt.executeQuery(query);
+				 
+		} 
+	catch (SQLException e) {
+			// TODO: handle exception
+		e.printStackTrace();
+		}
+	 catch (Exception e) {
+			// TODO: handle exception
+			 e.printStackTrace();
+		}
+		finally {
+			
+			/*if(NgoDetailSt!=null)
+				try {
+					NgoDetailSt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}*/
+	    	 
+		}
+		}
+		else
+		{
+			 response.sendRedirect("adminLogin.jsp?action=LoginAgain");
+		}
+	return getTeamsRs;
+
 	}
 public   ResultSet getAcademicSkill() throws ServletException, IOException { 
 	Statement getTeamsSt =null;

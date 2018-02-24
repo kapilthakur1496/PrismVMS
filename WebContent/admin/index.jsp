@@ -73,7 +73,7 @@ if(adminId !=null){
         	<!-- <a href="index.html"> --><img src="../images/logo2.png" alt=" " >  <!--    </a>  -->    
 	   </header>
         <div class="profile-photo-container">
-          <img src="DisplayMentorPic?name=<%=2%>" alt="Profile Photo" class="img-responsive">  
+          <img src="DisplayMentorPic?name=<%=adminId%>" alt="Profile Photo" class="img-responsive">  
           <div class="profile-photo-overlay"></div>
         </div>      
         <!-- Search box -->
@@ -90,16 +90,10 @@ if(adminId !=null){
           <ul>
           	<li><a href="index.jsp" class="active"><i class="fa fa-users fa-fw"></i>Home</a></li>
             
-            <li><a href="manageData.jsp"><i class="fa fa-home fa-fw"></i>Manage Data</a></li>
-           <!--  <li><a href="data-visualization.html"><i class="fa fa-bar-chart fa-fw"></i>Charts</a></li>
-            <li><a href="data-visualization.html"><i class="fa fa-database fa-fw"></i>Data Visualization</a></li>
-            <li><a href="maps.html"><i class="fa fa-map-marker fa-fw"></i>Maps</a></li>
-             -->
+             
 			
              <li><a href="manageUsers.jsp?pageNumber=1" ><i class="fa fa-users fa-fw"></i>Manage Users</a></li>
-            <!-- <li><a href="preferences.html"><i class="fa fa-sliders fa-fw"></i>Preferences</a></li>
-            <li><a href="login.html"><i class="fa fa-eject fa-fw"></i>Sign Out</a></li>
-           --></ul>  
+             </ul>  
         </nav>
       </div>
       <!-- Main content --> 
@@ -107,12 +101,7 @@ if(adminId !=null){
         <div class="templatemo-top-nav-container">
            <div class="row">
             <nav class="templatemo-top-nav col-lg-12 col-md-12">
-              <ul class="text-uppercase">
-                <li><a href="" class="active">Admin panel</a></li>
-                <li><a href="">Dashboard</a></li>
-                <li><a href="">Overview</a></li>
-                <li><a href="login.html">Sign in form</a></li>
-              </ul>  
+              <a href="adminlogout.jsp" style="margin-right:20px; color:1B606c; font-weight:700;  float:right;" >Sign Out</a>
             </nav> 
           </div> 
         </div>
@@ -138,8 +127,8 @@ if(adminId !=null){
               				<%} %> 
               			</select>  <br>
               	 
-             		<input type="submit"   class="form-control" value="View" >
-           
+             		<!-- <input type="submit"   class="form-control" value="View" >
+            -->
               		</form><hr> 
               		<form method="post" action="${pageContext.request.contextPath}/Control?action=addBranch" >
              	<input type="text" Placeholder=" Branch Name"  required class="form-control" name="branchName">
@@ -157,8 +146,8 @@ if(adminId !=null){
               				<%} %> 
               			</select>  <br>
               	 
-             		<input type="submit"   class="form-control" value="View" >
-           
+             	<!-- 	<input type="submit"   class="form-control" value="View" >
+            -->
               		</form>
                </div>
                 <div class="templatemo-content-widget white-bg col-2">
@@ -180,8 +169,8 @@ if(adminId !=null){
               					<option value="<%=meetingRs.getString("id") %>"><%=meetingRs.getString("meeting_type") %></option>
               				<%} %>   
               			</select><br> 
-             		<input type="submit" class="form-control" value="View" > 
-              		</form><hr> 
+             		<!-- <input type="submit" class="form-control" value="View" > 
+              		 --></form><hr> 
               		<form action="${pageContext.request.contextPath}/Control?action=addTraining" method="post" >
               		 	<select required class="form-control"   name="teamId"> 
               				<option value="0">Choose Team  </option>
@@ -260,8 +249,8 @@ address: <span id="c"></span>
               					<option value="<%=grievanceRs.getString("grievance") %>"><%=grievanceRs.getString("grievance") %></option>
               				<%} %>   
               			</select><br> 
-             		<input type="submit" class="form-control" value="View" > 
-              	</form><hr> 
+             	<!-- 	<input type="submit" class="form-control" value="View" > 
+               -->	</form><hr> 
               	<form method="post" action="${pageContext.request.contextPath}/Control?action=addVmsExperienceCategory" >
 	             	<input type="text" Placeholder="VMS Experience Category  "  required class="form-control" name="category">
 	             	 <br>
@@ -275,7 +264,7 @@ address: <span id="c"></span>
               					<option value="<%=vmsCategoryRs.getString("category") %>"><%=vmsCategoryRs.getString("category") %></option>
               				<%} %>   
               			</select><br> 
-             		<input type="submit" class="form-control" value="View" > 
+             	<!-- 	<input type="submit" class="form-control" value="View" >  -->
               	</form> 
               <%-- 	<form action="${pageContext.request.contextPath}/Control?action=addFaqDetails" method="post" >
               		<br>
@@ -319,7 +308,7 @@ address: <span id="c"></span>
                </div>                
              </div>            
            </div> -->
-           <div class="col-2">
+          <%--  <div class="col-2">
              <div class="panel panel-default templatemo-content-widget white-bg no-padding templatemo-overflow-hidden">
                <i class="fa fa-times"></i>
                <div class="panel-heading templatemo-position-relative"><h2 class="text-uppercase">User Table</h2></div>
@@ -336,7 +325,7 @@ address: <span id="c"></span>
                      </tr>
                    </thead>
                    <tbody>
-                <%--    <% contactDetails = ct.viewContact();  %>
+                   <% contactDetails = ct.viewContact();  %>
 			<%! int j=1; %>
 			
 				<% while(contactDetails.next()){
@@ -350,12 +339,12 @@ address: <span id="c"></span>
                        <td><%=contactDetails.getString("message")%></td>
                      </tr>
                      <%j++; 
-				} %>  --%>                   
+				} %>                    
                    </tbody>
                  </table>    
                </div>                          
              </div>
-           </div>           
+           </div>   --%>         
          </div> <!-- Second row ends -->
           <div class="templatemo-flex-row flex-content-row">
             <div class="templatemo-content-widget white-bg col-2">
@@ -375,8 +364,8 @@ address: <span id="c"></span>
               				<%} %> 
               			</select>  <br>
               	 
-             		<input type="submit"   class="form-control" value="View Academic Skill" >
-           
+             		<!-- <input type="submit"   class="form-control" value="View Academic Skill" >
+            -->
               		</form><hr> 
               		<form method="post" action="${pageContext.request.contextPath}/Control?action=addLifeSkills" >
              	<input type="text" Placeholder=" Life Skill"  required class="form-control" name="lifeSkill">
@@ -392,8 +381,8 @@ address: <span id="c"></span>
               				<%} %> 
               			</select>  <br>
               	 
-             		<input type="submit"   class="form-control" value="View Life Skill" >
-           
+             		<!-- <input type="submit"   class="form-control" value="View Life Skill" >
+            -->
               		</form>
                </div>
                 <div class="templatemo-content-widget white-bg col-2">
@@ -432,8 +421,8 @@ address: <span id="c"></span>
               				<%} %> 
               			</select><br>
 	              		 
-	             		<input type="submit" class="form-control" value="View  Professional Skill" >
-	       
+	             		<!-- <input type="submit" class="form-control" value="View  Professional Skill" >
+	        -->
              	 	</form>
                </div>
             <div class="templatemo-content-widget white-bg col-2 text-center">
@@ -523,7 +512,7 @@ address: <span id="c"></span>
     <!-- JS -->
     <script src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
     <script src="js/jquery-migrate-1.2.1.min.js"></script> <!--  jQuery Migrate Plugin -->
-    <script src="https://www.google.com/jsapi"></script> <!-- Google Chart -->
+    <!-- <script src="https://www.google.com/jsapi"></script> Google Chart
     <script>
       /* Google Chart 
       -------------------------------------------------------------------*/
@@ -580,7 +569,7 @@ address: <span id="c"></span>
         }   
       });
       
-    </script>
+    </script> -->
     <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
 
   </body>
