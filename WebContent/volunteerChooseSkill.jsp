@@ -65,14 +65,14 @@ h1 {
    
   
   
-   <div class="outercontainer" style="margin-top:0px;">
+<div class="outercontainer">
 	<div class="header-bottom-w3ls">  
 		<div class="row">
 			<div class="col-md-2 logo-w3">
 				<a href="index.jsp"><img src="images/logo2.png" alt=" " /> </a>
 				<div class="clearfix"></div>
 			</div> 
-			<div class="col-md-7 navigation-agileits" style=" text-align: center;">
+			<div class="col-md-8 navigation-agileits">
 				<nav class="navbar navbar-default">
 					<div class="navbar-header nav_2">
 						<button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
@@ -84,42 +84,20 @@ h1 {
 					</div> 
 					<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 						<ul class="nav navbar-nav ">
-							<li class=" active"><a href="index.jsp" class="hyper "><span>Home</span></a></li>	
-							<li><a href="contact.html" class="hyper"><span>Services</span></a></li>	
-							<li><a href="about.html" class="hyper"><span>About</span></a></li>						
-							<li><a href="contact.html" class="hyper"><span>Contact Us</span></a></li>
-						</ul>
+							<li><a href="index.jsp" class="hyper "><span>Home</span></a></li>	
+							<li><a href="about.html" class="hyper"><span>About</span></a></li>
+							<li><a href="contact.jsp" class="hyper"><span>Contact Us</span></a></li>
+							<li class=" "><a href="faq.jsp" class="hyper"><span>FAQ</span></a></li>
+						 </ul>
 					</div>
 				</nav>
-			</div>
-		  	<script>
-				$(document).ready(function(){
-					$(".dropdown").hover(            
-						function() {
-							$('.dropdown-menu', this).stop( true, true ).slideDown("fast");
-							$(this).toggleClass('open');        
-						},
-						function() {
-							$('.dropdown-menu', this).stop( true, true ).slideUp("fast");
-							$(this).toggleClass('open');       
-						}
-					);
-				});
-			</script>  
-			<div class="col-md-1 cart-wthree">  
-				 <a href="CustomerRegister.html"> <i class="fa fa-user" aria-hidden="true"></i><br>Register</a>	 
-				   	 
-			</div>
-			<div class="col-md-2 cart-wthree">  
-				<form action="ngoPreLogout.jsp" method="post"  style="float: right; margin-top:10px; display: inline-block; margin-right:40px;    "  > 
-				 
-					<button class="w3view-cart"  style="color:#66bdd7;" type="submit" name="submit"  > Sign Out </button>
-				</form>   	 
-			</div>
+			</div>  
+			  
+			  	    
 			<div class="clearfix"></div>
 		</div>
 	</div>
-</div>  
+</div>	 
 <%!  
 	ResultSet professionalSkillRs=null,academicSkillRs=null,lifeSkillRs=null,softSkillRs=null;
 	Control ct = new Control();
@@ -198,9 +176,44 @@ h1 {
 </form>
  
  
+<!--team-->
+ <hr style="color:#eee; height:15px;">
+<div class="footer">
+	<div class="container">
+		<div class="col-md-3 footer-grids fgd1">
+		<a href="index.jsp"><img src="images/logo2.png" alt=" " /> </a>
+		<ul>
+			<li>Christ University</li>
+			<li>Bangalore-560029</li>
+			<li><a href="mailto:info@example.com">prismhack@gmail.com</a></li>
+			<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+			<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+			<a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+		</ul>
+		</div>
+		<div class="col-md-3 footer-grids fgd2">
+			<h4>Information</h4> 
+			<ul>
+				<li><a href="contact.jsp">Contact Us</a></li>
+				<li><a href="about.html">About</a></li>
+				<li><a href="faq.jsp">FAQ's</a></li>
+			</ul>
+		</div>
+		<div class="col-md-3 footer-grids fgd4">
+			<h4>My Account</h4> 
+			<ul>
+				<li><a href="volunteerRegistration.jsp">Volunteer Registration</a></li>
+				<li><a href="volunteerLogin.jsp">Volunteer Login</a></li>
+				<li><a href="adminLogin.jsp">Menor Login</a></li>
+				<li><a href="volunteerPreLogin.jsp">Volunteer Application Status</a></li>
+		
+			</ul>
+		</div>
+		<div class="clearfix"></div>
+		 </div>
+</div>
 
-     <br><br><br> 
-<div class="footer" style="background-color:#f8f8f8;   height:50px;">
+	 <div class="footer" style="background-color:#f8f8f8;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
 	     <div id="snackbar"></div>

@@ -2,6 +2,7 @@
 body {
 	padding: 0;
 	margin: 0;
+	overflow-x:hidden;
 	background: #FFF;
 	font-family: 'open Sans', sans-serif;
 }
@@ -79,7 +80,7 @@ img {
 .logo-w3 img,.footer img {
        width: 54%;
     position: absolute;
-    top: -9px;
+    top: -30px;
     left: 45px;
 }
 .footer img {
@@ -1837,9 +1838,9 @@ button:hover {
 }
 
 /* Hide the browser's default checkbox */
-.container input {
+.container input[type="checkbox"] {
   position: absolute;
-  opacity: 0;
+  opacity: 1;
   cursor: pointer;
 }
 
