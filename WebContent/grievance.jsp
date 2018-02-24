@@ -192,7 +192,7 @@ if(volunteerStatus == 1){
 	 	  <% String id= request.getParameter("id");
 	 	  String name= request.getParameter("name");%> 
 	 	  <form action="Control?action=submitGrievance" method="post">
-			  <br><br><select required name="grievanceType" >
+			  <br><br><select required name="grievanceType"  class="form-control">
 			<option value="">Select Grievance Type</option>
 			<% meetingRs = ct.getGrievanceType();  
 				while(meetingRs.next()){
@@ -200,7 +200,7 @@ if(volunteerStatus == 1){
 			 	<option value="<%=meetingRs.getString("grievance")%>"><%=meetingRs.getString("grievance")%></option>
 				<%} %>
 			</select>
-			<br><br><textarea required name="grievanceDesc" placeholder="Enter Your Issue"></textarea>
+			<br><br><textarea required name="grievanceDesc" placeholder="Enter Your Issue"  class="form-control"></textarea>
 			<br><br><input type="submit" style="opacity:1;"  value="Submit Grievance">
 				</form>
     	</div>

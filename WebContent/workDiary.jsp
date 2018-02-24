@@ -199,9 +199,18 @@ if(volunteerStatus == 1){
 	 	  <% String id= request.getParameter("id");
 	 	  String name= request.getParameter("name");%> 
 	 	  <form action="Control?action=submitWorkDiaryForProjects" method="post">
-			<br><br>	<input type="date" required name="wdate" style="opacity:1;" placeholder="Choose the date">
-			<br><br><input type="time" required name="wtime" style="opacity:1;" placeholder="HH:MM">
-			<br><br><select required name="projectId" >
+	 	  <div class="form-group">
+	 	  <label>Date</label>
+				<input type="date" required name="wdate" style="opacity:1;" class="form-control"></div>
+			<br>
+			<br>
+			<div class="form-group">
+			<label >Work Hours</label>
+			<input type="time" required name="wtime" style="opacity:1;" value="00:00" class="form-control" ></div>
+			<br><br>
+			<div class="form-group">
+			<label>Select Project</label>
+			<select required name="projectId" class="form-control">
 			<option value="">Select Project</option>
 			<% projectRs = ct.getVoluntterProjects(volunteerId);  
 			while(projectRs.next()){
@@ -209,8 +218,12 @@ if(volunteerStatus == 1){
 			 	<option value="<%=projectRs.getString("id")%>"><%=projectRs.getString("project_title")%></option>
 				<%} %>
 			</select>
-		<br>	<br><textarea required name="taskDesc" placeholder="Enter the Task Description"></textarea>
+			</div>
+			<div class="form-group">
+				<label>Task Description</label>
+			<br><textarea required name="taskDesc" placeholder="Enter the Task Description" class="form-control"></textarea>
 			<br>	<br><input type="submit" style="opacity:1;"  value="Submit Work Diary">
+			</div>
 				</form>
     	</div>
  	</div>
@@ -223,4 +236,5 @@ if(volunteerStatus == 1){
 	  
 
 </body>
+
 </html>

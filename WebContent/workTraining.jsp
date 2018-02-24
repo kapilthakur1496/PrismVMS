@@ -199,9 +199,9 @@ if(volunteerStatus == 1){
 	 	  <% String id= request.getParameter("id");
 	 	  String name= request.getParameter("name");%> 
 	 	  <form action="Control?action=submitTraining" method="post">
-			<br><br>	<input type="date" required name="tdate" style="opacity:1;" placeholder="Choose the date of meeting">
-			<br><br><input type="time" required name="ttime" style="opacity:1;" placeholder="HH:MM">
-			<br><br><select required name="training" >
+			<br><br>	<label>Choose training date</label><input type="date" required name="tdate" style="opacity:1;" placeholder="Choose the date of meeting" class="form-control">
+			<br><br><br><label>Choose training time</label><input type="time" required name="ttime" style="opacity:1;" value="00:00" class="form-control">
+			<br><br><br><label>Choose training type</label><select required name="training"  class="form-control">
 			<option value="">Select Training Type</option>
 			<%	   
 		  		teamName = ct.getVolunteerTeam(volunteerId);
@@ -212,7 +212,7 @@ if(volunteerStatus == 1){
 			 	<option value="<%=trainingRs.getString("training_type")%>"><%=trainingRs.getString("training_type")%></option>
 				<%} %>
 			</select>
-			<br><br><textarea required name="trainingDesc" placeholder="Enter the agenda and Discussion of Meeting"></textarea>
+			<br><br><label>Agenda for training</label><textarea required name="trainingDesc" placeholder="Enter what you learned from trainning"  class="form-control"></textarea>
 			<br><br><input type="submit" style="opacity:1;"  value="Submit Meeting">
 				</form>
     	</div>

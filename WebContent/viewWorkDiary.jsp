@@ -233,7 +233,7 @@ if(volunteerStatus == 1){
 	 	  			</td>
 	 	  			<td><%=workDiaryRs.getString("work_status") %></td>
 	 	  			<td><%=workDiaryRs.getString("reward") %></td>
- 	  				<td><%=workDiaryRs.getString("work_desc") %></td>
+ 	  				<td><textarea readonly><%=workDiaryRs.getString("work_desc") %></textarea></td>
  	  			</tr>
  	  			
 	 	  	<%i++;} %>
