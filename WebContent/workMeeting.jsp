@@ -132,8 +132,8 @@ if(volunteerStatus == 1){
                  		</li>
                 		<li class="nav-item" style="margin-bottom:17px;">
                        		<form action="#" method="post">
-								<div   >
-								 	<input    id="myInput" onkeyup="search()" type="text" style="opacity:1; padding: 12px 20px 12px 40px; background-image: url('images/searchicon.png'); background-position: 10px 10px; background-repeat: no-repeat; cursor:text; height:40px;"  name="productPrice" required="" placeholder="Search Feature">
+								<div >
+								 	<input  id="myInput" onkeyup="search()" type="text" style="opacity:1; padding: 12px 20px 12px 40px; background-image: url('images/searchicon.png'); background-position: 10px 10px; background-repeat: no-repeat; cursor:text; height:40px;"  name="productPrice" required="" placeholder="Search Feature">
 									 <div class="clearfix"></div>
 								</div> 
 							</form>	
@@ -143,7 +143,7 @@ if(volunteerStatus == 1){
                     <ul class="nav flex-column" id="exCollapsingNavbar3">
 	                     	
                        	<li   class="nav-item">
-                         	<a class="nav-link active" href="volunteerIndex.jsp">Home</a>
+                         	<a class="nav-link" href="volunteerIndex.jsp">Home</a>
                         </li>
                         <li  class="nav-item">
                             <a class="nav-link" href="workDiary.jsp">Work Diary</a>
