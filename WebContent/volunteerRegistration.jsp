@@ -114,12 +114,12 @@ body
 							</div>
 							<div class="key input-group">
 								<span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-								<input  type="password"  name="password"  required="" placeholder="Password" class="form-control">
+								<input  type="password"  name="password" required placeholder="Password" class="form-control" value="" id="password">
 								<div class="clearfix"></div>
 							</div>
 							<div class="key input-group">
 								<span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-								<input  type="password" name="Confirm Password" required="" placeholder="Confirm Password" class="form-control">
+								<input  type="password" name="Confirm Password" required placeholder="Confirm Password" class="form-control" value="" id="confirmPassword">
 								<div class="clearfix"></div>
 							</div>
 						</div>
@@ -220,6 +220,8 @@ body
 </div>
 	 
 	
+<div id="snackbar"></div>
+	
 	
 		
 <script>
@@ -266,7 +268,10 @@ function nextPrev(n) {
 
 function validateForm() {
   // This function deals with validation of the form fields
-  var x, y, i, valid = true;
+  var valid=true; 
+var password = document.getElementById("password")
+, confirm_password = document.getElementById("confirmPassword");
+  var x, y, i;
   x = document.getElementsByClassName("tab");
   y = x[currentTab].getElementsByTagName("input");
   // A loop that checks every input field in the current tab:
@@ -279,12 +284,26 @@ function validateForm() {
       valid = false;
     }
   }
+  if(password.value != confirm_password.value) {
+		/* alert("Passwords dont match"); */
+		 var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Password does not match";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+	    
+	    valid=false;
+	  } 
+
+ 
+  
   // If the valid status is true, mark the step as finished and valid:
   if (valid) {
     document.getElementsByClassName("step")[currentTab].className += " finish";
   }
   return valid; // return the valid status
 }
+
 
 function fixStepIndicator(n) {
   // This function removes the "active" class of all steps...
