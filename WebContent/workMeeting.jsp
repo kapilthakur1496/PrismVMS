@@ -198,9 +198,13 @@ if(volunteerStatus == 1){
 	 	  <% String id= request.getParameter("id");
 	 	  String name= request.getParameter("name");%> 
 	 	  <form action="Control?action=submitMeeting" method="post">
-			<br><br>	<input type="date" required name="mdate" style="opacity:1;" placeholder="Choose the date of meeting">
-			<br><br><input type="time" required name="mtime" style="opacity:1;" placeholder="HH:MM">
-			<br><br><select required name="meeting" >
+	 	   <div class="form-group">
+	 	  <label>Date</label>
+			<br><br>	<input type="date" required name="mdate" style="opacity:1;" placeholder="Choose the date of meeting" class="form-control"></div>
+			
+			<div class="form-group"><br><br
+			<label >Meeting Time</label><br><br><input type="time" required name="mtime" style="opacity:1;" placeholder="HH:MM" class="form-control"></div>
+			><select required name="meeting" >
 			<option value="">Select Meeting Type</option>
 			<% meetingRs = ct.getVoluntterMeetings();  
 				while(meetingRs.next()){
