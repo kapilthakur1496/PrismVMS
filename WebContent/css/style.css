@@ -1714,7 +1714,8 @@ button:hover {
 }
 
 .step.active {
-  opacity: 1;   
+  opacity: 1;
+  background-color: #ec6f56; 
 }
 .step.finish {
   opacity: 1;

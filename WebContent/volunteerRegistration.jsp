@@ -104,12 +104,12 @@ body
 							</div> 
 							<div class="key input-group">
 								<span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-								<input  type="text"  name="email"  required=""  placeholder="Email" class="form-control">
+								<input  type="email"  name="email"  required=""  placeholder="Email" class="form-control" id="email">
 								<div class="clearfix"></div>
 							</div>
 							<div class="key input-group">
 								<span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
-								<input  type="text"  name="phone"  required=""  placeholder="Mobile No." class="form-control">
+								<input  type="text"  name="phone"  required=""  placeholder="Mobile No." class="form-control" id="phone">
 								<div class="clearfix"></div>
 							</div>
 							<div class="key input-group">
@@ -269,8 +269,7 @@ function nextPrev(n) {
 function validateForm() {
   // This function deals with validation of the form fields
   var valid=true; 
-var password = document.getElementById("password")
-, confirm_password = document.getElementById("confirmPassword");
+
   var x, y, i;
   x = document.getElementsByClassName("tab");
   y = x[currentTab].getElementsByTagName("input");
@@ -282,20 +281,44 @@ var password = document.getElementById("password")
       y[i].className += " invalid";
       // and set the current valid status to false
       valid = false;
-    }
+    } 
   }
+	var emailRe = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	var phoneRe= /^\d{10}$/;
+	var email=document.getElementById("email");
+	var phone=document.getElementById("phone");
+	if(!emailRe.test(email.value)){
+		var x = document.getElementById("snackbar"); 
+    x.className = "show";
+    x.innerHTML="Please enter a valid email address";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+	    valid=false;
+	}
+	if(!phoneRe.test(phone.value)){
+		var x = document.getElementById("snackbar"); 
+    x.className = "show";
+    x.innerHTML="Please enter a valid phone number";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+	    valid=false;
+	}
+	var password = document.getElementById("password")
+, confirm_password = document.getElementById("confirmPassword");
   if(password.value != confirm_password.value) {
-		/* alert("Passwords dont match"); */
-		 var x = document.getElementById("snackbar")
+		var x = document.getElementById("snackbar"); 
     x.className = "show";
     x.innerHTML="Password does not match";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
- 
-	    
 	    valid=false;
-	  } 
+	  }
+	if(password.value.length < 6) {
+		var x = document.getElementById("snackbar");
+		x.className = "show";
+    x.innerHTML="Password should be longer than 6 characters";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        
+        valid=false;
+      }
 
- 
   
   // If the valid status is true, mark the step as finished and valid:
   if (valid) {

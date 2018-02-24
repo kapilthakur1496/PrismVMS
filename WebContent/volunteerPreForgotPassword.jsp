@@ -86,9 +86,9 @@ overflow-x:hidden;
 					<h3>Verify Email</h3>
 					<form action="Control?action=preVolunteerForgotPassword" method="post">
 					
-						<div class="key">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
-							<input  type="text" name="email" required="true" placeholder="Email">
+						<div class="key input-group">
+							<span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+							<input  type="text" name="email" required="true" placeholder="Email" class="form-control">
 							<div class="clearfix"></div>
 						</div>
 						<input type="submit" value="Get OTP">
@@ -99,24 +99,24 @@ overflow-x:hidden;
 						%>
 						<h3>Set Password</h3>
 						<form action="Control?action=preVolunteerForgotOtpVerification" method="post">
-							<div class="key">
-								<i class="fa fa-envelope" aria-hidden="true"></i>
-								<input  type="text" readonly name="email" value="<%=email%>" required="true" placeholder="Email">
+							<div class="key input-group">
+								<span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+								<input  type="text" readonly name="email" value="<%=email%>" required="true" placeholder="Email" class="form-control">
 								<div class="clearfix"></div>
 							</div>
-							<div class="key">
-								<i class="fa fa-mobile-phone" aria-hidden="true"></i>
-								<input  type="text" name="otp" required="true" placeholder="OTP">
+							<div class="key input-group">
+								<span class="input-group-addon"><i class="fa fa-mobile-phone" aria-hidden="true"></i></span>
+								<input  type="text" name="otp" required="true" placeholder="OTP" class="form-control">
 								<div class="clearfix"></div>
 							</div>
-							<div class="key">
-								<i class="fa fa-lock" aria-hidden="true"></i>
-								<input  type="password" name="password" required="true" placeholder="New Password">
+							<div class="key input-group">
+								<span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+								<input  type="password" name="password" required="true" placeholder="New Password" class="form-control" id="password">
 								<div class="clearfix"></div>
 							</div>
-							<div class="key">
-								<i class="fa fa-lock" aria-hidden="true"></i>
-								<input  type="password" name="confirmPassword" required="true" placeholder="Confrim Password">
+							<div class="key input-group">
+								<span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+								<input  type="password" name="confirmPassword" required="true" placeholder="Confirm Password" class="form-control" id="confirmPassword">
 								<div class="clearfix"></div>
 							</div>
 							
@@ -135,7 +135,7 @@ overflow-x:hidden;
 
 <br><br><br> 
 <div class="footer" style="background-color:#f8f8f8;   height:50px;">
-	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
+	 <p class="copy-right">ï¿½ 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
 	  
 <div id="snackbar"></div>
