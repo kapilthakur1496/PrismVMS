@@ -256,7 +256,7 @@ if(mentorStatus == 1){
 				 <div class="col-lg-12 text-center" >
 					<ul class="pagination " >
 						<% for( int k=1; k<=pageCount; k++){ %>
-					    	<li><a href="teamProjectEnrollReqquestView.jsp?pN=<%=k%>"><%=k%></a></li>
+					    	<li><a href="teamProjectEnrollRequestView.jsp?pN=<%=k%>"><%=k%></a></li>
 					    <% } %> 
 				 	</ul>
 		 		</div>  

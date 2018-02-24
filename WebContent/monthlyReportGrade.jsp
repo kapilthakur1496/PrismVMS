@@ -68,20 +68,20 @@ h1 {
 	<div class="header-bottom-w3ls" style="padding:22px;">  
 		<div class="row">
 			<div class="col-md-2 logo-w3">
-				<a href="volunteerIndex.jsp"><img src="images/logo2.png" alt=" " /> </a>
+				<a href="mentorIndex.jsp"><img src="images/logo2.png" alt=" " /> </a>
 				<div class="clearfix"></div>
 			</div>  
 			<div class="col-md-8 cart-wthree">  
 			</div>
 			<div class="col-md-2 cart-wthree">  
 				 
-					<a href="volunteerLogout.jsp" class="w3view-cart"  style="color:#66bdd7;" ><br> Sign Out </a>
+					<a href="mentorLogout.jsp" class="w3view-cart"  style="color:#66bdd7;" ><br> Sign Out </a>
 				  	 
 			</div>
 			<div class="clearfix"></div>
 		</div>
 	</div>
-</div> 
+</div>
 <% try{ %>
   
 <%!  
@@ -125,24 +125,24 @@ String email = request.getParameter("email");
 
             <div class="bootstrap-vertical-nav" > 
                 <div   id="collapseExample"style="paddin:0px; margin-left:0px;" >
-                     <ul class="nav flex-column" id="exCollapsingNavbar3">
-	                   <li   class="nav-item" style="text-algin:center">
-	                    	<div class="center">
-	                     <img src="DisplayMentorPic?name=<%=adminId%>" align="middle" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 80px;height: 80px;border-radius: 50%;">
-	                 	</div>
-	                 	</li>
-                      	<li class="nav-item" style="margin-bottom:17px;">
-                         	<form action="#" method="post">
-								<div    >
-									<input  type="text" style="opacity:1; cursor:text; height:40px;"  name="productPrice" required="" placeholder="Search Feature">
-									<div class="clearfix"></div>
-								</div>
-								<button type="submit" style="height:40px; margin-top:6px;" class="btn btn-default search" aria-label="Left Align">
-									<i class="fa fa-search" aria-hidden="true"> </i>
-								</button> 
+                     <ul class="nav flex-column" id="exCollapsingNavbar">
+             			<li   class="nav-item" style="text-algin:center">
+		                    <div class="center">
+		                     <img src="DisplayMentorPic?name=<%=adminId %>" align="middle" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 80px;height: 80px;border-radius: 50%;">
+		                 	</div>
+                 		</li>
+                		<li class="nav-item" style="margin-bottom:17px;">
+                       		<form action="#" method="post">
+								<div   >
+								 	<input    id="myInput" onkeyup="search()" type="text" style="opacity:1; padding: 12px 20px 12px 40px; background-image: url('images/searchicon.png'); background-position: 10px 10px; background-repeat: no-repeat; cursor:text; height:40px;"  name="productPrice" required="" placeholder="Search Feature">
+									 <div class="clearfix"></div>
+								</div> 
 							</form>	
 							<br><br>
-                    	</li > 
+                    	</li >
+                   	</ul>
+                    <ul class="nav flex-column" id="exCollapsingNavbar3">
+	                     
                        	<li   class="nav-item">
                          	<a class="nav-link" href="mentorIndex.jsp">Home</a>
                         </li>
@@ -177,7 +177,7 @@ String email = request.getParameter("email");
                             <a class="nav-link" href="branchProjectEnrollRequestView.jsp?pN=1"> Branch Project Enroll Request</a>
                         </li>   
                         <li   class="nav-item">
-                            <a class="nav-link" href="viewMonthlyReport.jsp?pN=1">View Monthly Report</a>
+                            <a class="nav-link active" href="viewMonthlyReport.jsp?pN=1">View Monthly Report</a>
                         </li>  
                         <li   class="nav-item">
                             <a class="nav-link" href="mentorVmsExperience.jsp">VMS Feedback</a>
@@ -202,8 +202,8 @@ String email = request.getParameter("email");
 							<tr>
 							<td><p>Creativity </p></td>
 							<td>
-							<select   name=creativity id="creativity" onchange="total1()" >
-								<option value="0" > Marks</option>
+							<select required  name="creativity" id="creativity" onchange="total1()" >
+								<option value="" >Marks</option>
 								<option>1</option>
 								<option>2</option>
 								<option>3</option>
@@ -218,8 +218,8 @@ String email = request.getParameter("email");
 							</td>
 							<td><p>Punctuality </p></td>
 							<td>
-							<select  name=punctuality  id="punctuality" onchange="total1()" >
-								<option value="0" > Marks</option>
+							<select  name="punctuality"  required id="punctuality" onchange="total1()" >
+								<option value="" >Marks</option>
 								<option>1</option>
 								<option>2</option>
 								<option>3</option>
@@ -235,8 +235,8 @@ String email = request.getParameter("email");
 							
 							<td><p>Work Ethics</p></td>
 							<td>
-							<select name=work_ethic id="work_ethic" onchange="total1()" >
-								<option value="0" > Marks</option>
+							<select name="work_ethic" required id="work_ethic" onchange="total1()" >
+								<option value="" >Marks</option>
 								<option>1</option>
 								<option>2</option>
 								<option>3</option>
@@ -253,8 +253,8 @@ String email = request.getParameter("email");
 							<tr>
 							<td><p>Quality of Work</p></td>
 							<td>
-							<select name=qual_of_work   id="qual_of_work" onchange="total1()"  >
-								<option value="0" > Marks</option>
+							<select name="qual_of_work" required id="qual_of_work" onchange="total1()"  >
+								<option value="" >Marks</option>
 								<option>1</option>
 								<option>2</option>
 								<option>3</option>
@@ -270,8 +270,8 @@ String email = request.getParameter("email");
 							
 							<td><p>Reliability</p></td>
 							<td>
-							<select name=reliability   id="reliability" onchange="total1()" >
-								<option value="0" > Marks</option>
+							<select name="reliability" required  id="reliability" onchange="total1()" >
+								<option value="" >Marks</option>
 								<option>1</option>
 								<option>2</option>
 								<option>3</option>
@@ -287,8 +287,8 @@ String email = request.getParameter("email");
 							
 							<td><p>Decision Making</p></td>
 							<td>
-							<select name=decision_making  id="decision_making" onchange="total1()" >
-								<option value="0" > Marks</option>
+							<select name="decision_making" required  id="decision_making" onchange="total1()" >
+								<option value="" >Marks</option>
 								<option>1</option>
 								<option>2</option>
 								<option>3</option>
@@ -304,8 +304,8 @@ String email = request.getParameter("email");
 						</tr>
 						<tr>
 						<td><p>Promptness</p></td>
-						<td><select name=promtness id="promtness" onchange="total1()"  >
-							<option value="0" > Marks</option>
+						<td><select name="promtness" required id="promtness" onchange="total1()"  >
+							<option value="" >Marks</option>
 							<option>1</option>
 							<option>2</option>
 							<option>3</option>
@@ -320,8 +320,8 @@ String email = request.getParameter("email");
 						
 						<td><p>Involvement </p></td>
 						<td>
-						<select name=involvement id="involvement" onchange="total1()" >
-							<option value="0" > Marks</option>
+						<select name="involvement" required id="involvement" onchange="total1()" >
+							<option value="" >Marks</option>
 							<option>1</option>
 							<option>2</option>
 							<option>3</option>
@@ -337,8 +337,8 @@ String email = request.getParameter("email");
 						
 						<td><p>Upgradation of skills</p></td>
 						<td>
-						<select name=up_of_skill id="up_of_skill" onchange="total1()"  >
-							<option value="0" >Marks</option>
+						<select name="up_of_skill" required id="up_of_skill" onchange="total1()"  >
+							<option value="" >Marks</option>
 							<option>1</option>
 							<option>2</option>
 							<option>3</option>
@@ -355,8 +355,8 @@ String email = request.getParameter("email");
 						<tr>
 						<td><p>Overall Growth</p></td>
 						<td>
-						<select name=overall_growth id="overall_growth" onchange="total1()"  >
-							<option value="0" > Marks</option>
+						<select name="overall_growth" required id="overall_growth" onchange="total1()"  >
+							<option value="" >Marks</option>
 							<option>1</option>
 							<option>2</option>
 							<option>3</option>
@@ -373,7 +373,7 @@ String email = request.getParameter("email");
 							<td><p>Total</p></td>
 							<td><input  readonly id="total" style="opacity:1; margin-top:-10px; width:80px; height:30px;" value="0" type="text" name="total"></td>
 							<td><p>Comment</p>
-							<td><textarea   placeholder="Write your Views or Suggestions" name=comment  ></textarea></td>
+							<td><textarea  required placeholder="Write your Views or Suggestions" name=comment  ></textarea></td>
 						</tr>
 						
 						</tbody>
@@ -400,7 +400,6 @@ String email = request.getParameter("email");
 <div class="footer" style="background-color:#f8f8f8;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
-
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
 

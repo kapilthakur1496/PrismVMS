@@ -187,7 +187,7 @@ if(mentorStatus == 1){
 					<br><br><br><input  name="projectStartDate" type="date"  style="opacity:1" required placeholder="Choose Project Start Date">
 					<br><br><br><input  name="projectEndDate" type="date"  style="opacity:1" required placeholder="Choose Project End Date">
 				 	<br><br><br><textarea  required name="projectDesc"  style="opacity:1" placeholder="Enter Project Description"></textarea>
-					<br><br><br><input type="submit" style="opacity:1" value="Assign">
+					<br><br><br><input type="submit" style="opacity:1" value="Create Branch Project">
  			</form>
           
     	</div>

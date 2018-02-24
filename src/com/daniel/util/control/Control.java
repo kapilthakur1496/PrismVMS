@@ -142,7 +142,7 @@ public class Control extends HttpServlet {
 		}
 		else if(action.equals("createTeamProject"))
 		{   
-		createTeamProject(request, response); 
+			createTeamProject(request, response); 
 		}
 		else if(action.equals("assignTeamProject"))
 		{   
@@ -1272,11 +1272,11 @@ public   String getMentorName(String id) throws ServletException, IOException {
 	  String name =null;
 	try {  				
 		getStatusSt = connection.createStatement();
-			String query = "select volunteer_name   from admin where id = "+id;
+			String query = "select name   from admin where id = "+id;
 			getStatusRs = getStatusSt.executeQuery(query);
 			 if(getStatusRs.next())
 			 {
-				 name = getStatusRs.getString("volunteer_name");
+				 name = getStatusRs.getString("name");
 			 }
 			 
 	} 
@@ -2600,7 +2600,7 @@ public   String getMentorEmail(String id) throws ServletException, IOException {
 			getTeamsRs = getTeamsSt.executeQuery(query);
 			if(getTeamsRs.next())
 			{
-				email = getTeamsRs.getString("email_id");
+				email = getTeamsRs.getString("email");
 			}
 			 
 	} 
@@ -2800,11 +2800,7 @@ public void createTeamProject( HttpServletRequest request, HttpServletResponse r
 				assingProjectPs.setString(9, branchId);  
 				assingProjectPs.executeUpdate();	
 				emailRs = ct.getEmails(team);
-				if(!emailRs.next())
-				{
-					response.sendRedirect("assignTeamProjects.jsp?projectId="+maxId+"&noData=yes");
-			   		
-				}else {
+				 
 				while(emailRs.next()) {
 					
 				  	String from = "kapil.thakur1496@gmail.com";
@@ -2860,8 +2856,7 @@ public void createTeamProject( HttpServletRequest request, HttpServletResponse r
 					      mex.printStackTrace();
 					      //result = "Error: unable to send message....";
 					   } 
-				}
-				}
+				} 
 
 			}
 			
@@ -3718,7 +3713,7 @@ public   ResultSet getBranchProject(HttpServletRequest request, HttpServletRespo
 		if(adminId !=null) {
 		try {  				
 				getTeamProjectSt = connection.createStatement();
-				String query = "select *  from branch_project where admin_id = '"+adminId+"' limit "+(pageNumber*10)+","+nextRecordCount;
+				String query = "select *  from branch_project where admin_id = '"+adminId+"' order by id desc limit "+(pageNumber*10)+","+nextRecordCount;
 				getTeamProjectRs = getTeamProjectSt.executeQuery(query);
 				  
 		} 
@@ -6706,7 +6701,7 @@ public   ResultSet getMentorVmsExperience(HttpServletRequest request, HttpServle
 		if(adminId !=null) {
 		try {  				
 				getTeamProjectSt = connection.createStatement();
-				String query = "select *  from vms_experience where admin_id = '"+adminId+"' limit "+(pageNumber*10)+","+nextRecordCount;
+				String query = "select *  from vms_experience where admin_id = '"+adminId+"' order by id desc limit "+(pageNumber*10)+","+nextRecordCount;
 				getTeamProjectRs = getTeamProjectSt.executeQuery(query);
 				  
 		} 
@@ -6757,7 +6752,7 @@ public void addMentorVmsExperienceComment( HttpServletRequest request, HttpServl
 			String id = request.getParameter("id"); 
 			 
 			Control ct = new Control();
-			String to = ct.getEmail(adminId);
+			String to = ct.getMentorEmail(adminId);
 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
  			Date date = new Date();  
 	       // result = "Sent message successfully....";  

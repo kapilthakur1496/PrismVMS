@@ -8,7 +8,7 @@
 <%
 	session.removeAttribute("adminId"); 
 	session.invalidate();  
-	response.sendRedirect("./adminLogin.jsp");
+	response.sendRedirect("../adminLogin.jsp");
 %>  
 <script type="text/javascript">
      history.pushState(null, null, document.URL);

@@ -20,6 +20,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //font -->
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
+<link rel="shortcut icon" href="images/logo2_.ico" />
 <style type="text/css"> 
 body {
 	overflow-x:hidden;
