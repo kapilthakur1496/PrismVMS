@@ -126,24 +126,7 @@
 				<div class="clearfix"></div>
 				</div>
 			</div>
-		</div>
-		<!-- newsletter -->
-	<div class="newsletter">
-				<div class="container">
-					<div class="col-md-6 w3agile_newsletter_left">
-						<h2>Newsletter</h2>
-						<p>Subscribe to our newsletter to be updated about all our features</p>
-					</div>
-					 
-					<div class="col-md-6 w3agile_newsletter_right">
-						<form action="Control?action=subscription" method="post">
-							<input type="email" name="email" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-							<input type="submit" value="Subscribe" />
-						</form>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-			</div> 
+		</div> 
 <br><br><br> 
 <div class="footer" style="background-color:#f8f8f8;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>

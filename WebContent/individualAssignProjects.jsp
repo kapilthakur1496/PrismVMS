@@ -197,72 +197,11 @@ if(mentorStatus == 1){
 <div class="footer" style="background-color:#f8f8f8;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
+	  <br><br><br> 
+<div class="footer" style="background-color:#f8f8f8;   height:50px;">
+	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
+</div> 
 	  
-		  
-<!-- newsletter -->
-<div class="newsletter">
-	<div class="container">
-		<div class="col-md-6 w3agile_newsletter_left">
-			<h2>Newsletter</h2>
-			<p>Excepteur sint occaecat cupidatat non proident, sunt.</p>
-		</div>
-		<div class="col-md-6 w3agile_newsletter_right">
-			<form action="Control?action=subscription" method="post">
-				<input type="email" name="email" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-				<input type="submit" value="Subscribe" />
-			</form>
-		</div>
-		<div class="clearfix"> </div>
-	</div>
-</div>
-<!-- //newsletter -->
-<div class="footer">
-	<div class="container">
-		<div class="col-md-3 footer-grids fgd1">
-		<a href="index.jsp"><img src="images/logo2.png" alt=" " /> </a>
-		<ul>
-			<li>1234k Avenue, 4th block,</li>
-			<li>Bangalore.</li>
-			<li><a href="mailto:info@example.com">info@example.com</a></li>
-			<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-		</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd2">
-			<h4>Information</h4> 
-			<ul>
-				<li><a href="contact.html">Contact Us</a></li>
-				<li><a href="icons.html">Web Icons</a></li>
-				<li><a href="typography.html">Typography</a></li>
-				<li><a href="faq.html">FAQ's</a></li>
-			</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd3">
-			<h4>Shop</h4> 
-			<ul>
-				<li><a href="jewellery.html">Jewellery</a></li>
-				<li><a href="cosmetics.html">Cosmetics</a></li>
-				<li><a href="Shoes.html">Shoes</a></li>
-				<li><a href="deos.html">Deos</a></li>
-			</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd4">
-			<h4>My Account</h4> 
-			<ul>
-				
-				<li><a href="login.html">Login</a></li>
-				<li><a href="NgoRegister.jsp">Register</a></li>
-				<li><a href="recommended.html">Recommended </a></li>
-				<li><a href="payment.html">Payments</a></li>
-			</ul>
-		</div>
-		<div class="clearfix"></div>
-		<p class="copy-right">© 2016 Fashion Club . All rights reserved | Design by <a href="#">Kapil Thakur & Rebecca John</a></p>
-	</div>
-</div>
-
 	 
 </body>
 </html>
