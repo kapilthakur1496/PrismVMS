@@ -289,7 +289,7 @@ border: 1px solid #cccccc;" required name="comment" rows="3" cols="80"></textare
 					    </div>
   </div>
 				</li>
-				<%} %> 
+				<%j++; } %> 
 				 <div class="col-lg-12 text-center" style="margin-left:auto; margin-right:auto;">
 					<ul class="pagination " >
 						<% for( int k=1; k<=pageCount; k++){ %>
