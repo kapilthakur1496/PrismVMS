@@ -1504,7 +1504,7 @@ public   int volunteerBranchProjectCount(String id) throws ServletException, IOE
 			volunteerCountRs = volunteerCountSt.executeQuery("select count(id) from branch_project where admin_id= '"+id+"' ");
 		
 			if(volunteerCountRs.next())
-			{
+			{ 
 				totalCount = Integer.parseInt(volunteerCountRs.getString(1));
 			}
 		  
@@ -2800,6 +2800,11 @@ public void createTeamProject( HttpServletRequest request, HttpServletResponse r
 				assingProjectPs.setString(9, branchId);  
 				assingProjectPs.executeUpdate();	
 				emailRs = ct.getEmails(team);
+				if(!emailRs.next())
+				{
+					response.sendRedirect("assignTeamProjects.jsp?projectId="+maxId+"&noData=yes");
+			   		
+				}else {
 				while(emailRs.next()) {
 					
 				  	String from = "kapil.thakur1496@gmail.com";
@@ -2855,6 +2860,7 @@ public void createTeamProject( HttpServletRequest request, HttpServletResponse r
 					      mex.printStackTrace();
 					      //result = "Error: unable to send message....";
 					   } 
+				}
 				}
 
 			}
@@ -3179,7 +3185,7 @@ public   ResultSet getTeamProject(HttpServletRequest request, HttpServletRespons
 		if(adminId !=null) {
 		try {  				
 				getTeamProjectSt = connection.createStatement();
-				String query = "select *  from team_project where admin_id = '"+adminId+"' limit "+(pageNumber*10)+","+nextRecordCount;
+				String query = "select *  from team_project where admin_id = '"+adminId+"' order by id desc limit "+(pageNumber*10)+","+nextRecordCount;
 				getTeamProjectRs = getTeamProjectSt.executeQuery(query);
 				  
 		} 

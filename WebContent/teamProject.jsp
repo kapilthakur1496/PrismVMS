@@ -181,8 +181,8 @@ if(mentorStatus == 1){
         </div>
         <div class="col-md-10 col-lg-9" style="padding:22px 10px;">
  			<form action="Control?action=createTeamProject" method="post" >
-		 			<select name="team">
-		 				<option value="0">Select Team</option>
+		 			<select name="team" required>
+		 				<option value="">Select Team</option>
 		 				<%	String team = ct.getMentorTeams(adminId);
 		 	  		 		String s = "";
 			 	  		 	String[] charArray = team.split(" , ");
@@ -192,10 +192,10 @@ if(mentorStatus == 1){
 		 		  	  	<option value="<%=charArray[i]%>"><%=charArray[i]%></option>
 	  	    	  		<%}%> 
 		 			</select><br>
-					<br><br><input type="text" name="projectTitle" style="opacity:1" required placeholder="Enter Project Title">
-					<br><br><br><input  name="projectStartDate" type="date"  style="opacity:1" required placeholder="Choose Project Start Date">
-					<br><br><br><input  name="projectEndDate" type="date"  style="opacity:1" required placeholder="Choose Project End Date">
-				 	<br><br><br><textarea  required name="projectDesc"  style="opacity:1" placeholder="Enter Project Description"></textarea>
+					<br><br><input type="text" required name="projectTitle" style="opacity:1" required placeholder="Enter Project Title">
+					<br><br><br><input  required  name="projectStartDate" type="date"  style="opacity:1" required placeholder="Choose Project Start Date">
+					<br><br><br><input  required name="projectEndDate" type="date"  style="opacity:1" required placeholder="Choose Project End Date">
+				 	<br><br><br><textarea  required   name="projectDesc"  style="opacity:1" placeholder="Enter Project Description"></textarea>
 					<br><br><br><input type="submit" style="opacity:1" value="Assign">
  			</form>
           

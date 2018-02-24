@@ -152,15 +152,17 @@ String name = ct.getVolunteerName(volunteerId);
 
 	  %>
 	<div class="main-agileits" style="width: 45%; margin-top: 63px; margin-bottom: 12px; padding: 30px 28px;">
-	<h3>Welcome <%=name %>! </h3>
+	
+	 <%if(status.equals("Approved")){ %>
+	 <h3>Welcome <%=name %>! </h3>
 	<br>
-	   
-	  <h4>Your Application  has been  <%=status %></h4>
+	   <h4>Congratulations  your Application is  <%=status %></h4>
 	  <br>
-	<%if(status.equals("Approved")){ %>
-	<h4>Congratulations <%=name %>! Login As volunteer to View Your Profile by <a href="volunteerLogin.jsp">clicking here</a> for more update from your mentor</h4>
+	 
+	<h4> <a href="volunteerLogin.jsp">click here</a> to View Your Profile.</h4>
 	 <%} else {%>
-	  <h4>Keep Checking your application status <a href="volunteerPreLogin.jsp">here</a> for more updates.  </h4>
+	 <h3>Welcome <%=name %>! </h3>
+	  <h4>You can check you application status <a href="volunteerPreLogin.jsp">here.</a>   </h4>
 	 
 	 <%} %>
 	 </div>

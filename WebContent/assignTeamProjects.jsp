@@ -149,7 +149,7 @@ if(mentorStatus == 1){
                          	<a class="nav-link" href="mentorVolunteerMeeting.jsp?pN=1">Work Meeting</a>
                         </li>
                         <li   class="nav-item">
-                         	<a class="nav-link active" href="mentorVolunteerTraining.jsp?pN=1">Work Training</a>
+                         	<a class="nav-link" href="mentorVolunteerTraining.jsp?pN=1">Work Training</a>
                         </li>                       	 
                         <li  class="nav-item">
                             <a class="nav-link" href="individualProject.jsp?pN=1">Individual Projects</a>
@@ -186,13 +186,22 @@ if(mentorStatus == 1){
             </div> 
         </div>
         <div class="col-md-10 col-lg-9" style="padding:22px 10px;">
+        <% String projectId = request.getParameter("projectId"); 
+		 		String noData = request.getParameter("noData"); 
+		 		if(noData!=null)
+		 		{
+		 			%>
+		 			<p>No volunteers are there in this team</p>
+		 			<%
+		 		}else{%>
  			<form action="Control?action=assignTeamProject" method="post" >
  			<div style="height:400px; overflow-x:hidden;">
-		 		<% String projectId = request.getParameter("projectId"); 
-		 		
+		 		<% 
 		 		volunteerDetails = ct.getVolunteerForTeamProject(projectId);
-		 		
+		 		if(!volunteerDetails.next()){
 		 		%>
+		 		<p>All Volunteers have been Assigned</p>
+		 		 <%} %>
 		 		<%while(volunteerDetails.next()){ %>
 			   	<div class="col-md-3 col-lg-3" >
 					 <label class="container">  
@@ -205,7 +214,7 @@ if(mentorStatus == 1){
 		 			 </div>
 		 		<input type="submit" style="opacity:1;" value="Assign">
  			</form>
-          
+          <%} %>
     	</div>
  	</div>
 </div>
