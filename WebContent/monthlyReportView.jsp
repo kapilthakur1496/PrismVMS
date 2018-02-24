@@ -200,7 +200,7 @@ if(volunteerStatus == 1){
 	 	 monthlyReportRs = ct.getMonthlyReport(request, response);
  	  		 
 	 	  %> 
-	 	  <table>
+	 	  <table class="table table-bordered">
 	 	  	<thead>
 	 	  	<tr>
 	 	  		<th>#</th>

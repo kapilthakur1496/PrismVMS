@@ -198,14 +198,15 @@ if(volunteerStatus == 1){
 	 	  <% String id= request.getParameter("id");
 	 	  String name= request.getParameter("name");%> 
 	 	  <form action="Control?action=monthWorkDiray" method="post">
-		 <input required type="date" name="fromDate" style="opacity:1;" placeholder="Choose from date">
-			 <br><br><br>	<input required type="date" name="toDate" style="opacity:1;" placeholder="Choose to date">
+	 	  <label>Start Date</label>
+		 <input required type="date" name="fromDate" style="opacity:1;" class="form-control">
+			 <br><br><br><label>End Date</label>	<input required type="date" name="toDate" style="opacity:1;" placeholder="Choose to date" class="form-control">
 			 
-		<br><br>	<br><textarea  required name="skills" placeholder="Skills Acquired"></textarea>
-		<br> <textarea required name="progress" placeholder="Progress"></textarea>
-		<br><textarea  required  name="challenges" placeholder="Challenges"></textarea>
-		<br> <textarea  required name="futureProspects" placeholder="Future Prospects"></textarea>
-			<br>	<br><input type="submit" style="opacity:1;"  value="Submit Monthly Report">
+		<br><br>	<br><textarea  required name="skills" placeholder="Skills Acquired" class="form-control"></textarea>
+		<br> <textarea required name="progress" placeholder="Progress" class="form-control"></textarea>
+		<br><textarea  required  name="challenges" placeholder="Challenges" class="form-control"></textarea>
+		<br> <textarea  required name="futureProspects" placeholder="Future Prospects" class="form-control"></textarea>
+			<br>	<br><input type="submit" style="opacity:1;"  value="Submit Monthly Report" >
 				</form>
     	</div>
  	</div>

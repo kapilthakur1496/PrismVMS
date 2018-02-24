@@ -199,7 +199,7 @@ if(volunteerStatus == 1){
 	 	 workTrainingRs = ct.getWorkTraining(request, response);
  	  		 
 	 	  %> 
-	 	  <table>
+	 	  <table class="table table-bordered">
 	 	  	<thead>
 	 	  	<tr>
 	 	  		<th>#</th>
