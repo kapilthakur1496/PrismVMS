@@ -249,7 +249,8 @@ if(volunteerStatus == 1){
                                         <p style="text-align: right; padding:0px;" >
                                             <span>
                                               <%=vmsExperinceCommentRs.getString("comment_time")%>
-                                            </span>
+                                            </span><br>
+                                             <span>Sent</span>
                                         </p>
                                 </div>
                                 <%}else if(vmsExperinceCommentRs.getString("admin_id")!=null){ %>
@@ -263,7 +264,8 @@ if(volunteerStatus == 1){
                                               <%=vmsExperinceCommentRs.getString("comment_time")%>
                                               
                                                
-                                            </span>
+                                            </span><br>
+                                            <span>Sent</span>
                                         </p>
                                 </div>
                                 <%}} %>
@@ -271,6 +273,7 @@ if(volunteerStatus == 1){
                                  <div class="row" style=" float:left; text-align:center; bottom:0px;width:100%;">
                                     <form style="width:100%" method="post" action="Control?action=addVmsExperienceComment">
                                         <input type="hidden" name="id" value="<%=comment%>">
+                                        <input type="hidden" name="pN" value="<%=pageNumber%>">
                                         <textarea  placeholder='Comment Box'     style="  background: #ddd;  padding:5x; color:#333; width:89.5%; border-radius: 2px;
 border: 1px solid #cccccc;" required name="comment" rows="3" cols="80"></textarea>
                                         <input type="submit"  style="background:transparent;width: 38px;

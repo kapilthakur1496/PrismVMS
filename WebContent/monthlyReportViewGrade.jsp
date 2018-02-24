@@ -126,27 +126,27 @@ String id = request.getParameter("id");
 	 
  
                 <div   id="collapseExample"style="paddin:0px; margin-left:0px;" >
-                      <ul class="nav flex-column" id="exCollapsingNavbar3">
-	                    <li   class="nav-item" style="text-algin:center">
-	                    	<div class="center">
-	                     <img src="DisplayVolunteerPic?name=<%=volunteerId %>" align="middle" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 80px;height: 80px;border-radius: 50%;">
-	                 	</div>
-	                 	</li>
-                       <li class="nav-item" style="margin-bottom:17px;">
-                         <form action="#" method="post">
-								<div    >
-									<input  type="text" style="opacity:1; cursor:text; height:40px;"  name="productPrice" required="" placeholder="Search Feature">
-									<div class="clearfix"></div>
-								</div>
-								<button type="submit" style="height:40px; margin-top:6px;" class="btn btn-default search" aria-label="Left Align">
-									<i class="fa fa-search" aria-hidden="true"> </i>
-								</button> 
+                     <ul class="nav flex-column" id="exCollapsingNavbar">
+             			<li   class="nav-item" style="text-algin:center">
+		                    <div class="center">
+		                     <img src="DisplayVolunteerPic?name=<%=volunteerId %>" align="middle" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 80px;height: 80px;border-radius: 50%;">
+		                 	</div>
+                 		</li>
+                		<li class="nav-item" style="margin-bottom:17px;">
+                       		<form action="#" method="post">
+								<div   >
+								 	<input    id="myInput" onkeyup="search()" type="text" style="opacity:1; padding: 12px 20px 12px 40px; background-image: url('images/searchicon.png'); background-position: 10px 10px; background-repeat: no-repeat; cursor:text; height:40px;"  name="productPrice" required="" placeholder="Search Feature">
+									 <div class="clearfix"></div>
+								</div> 
 							</form>	
 							<br><br>
                     	</li >
+                   	</ul>
+                    <ul class="nav flex-column" id="exCollapsingNavbar3">
+	                     
                     		
                        	<li   class="nav-item">
-                         	<a class="nav-link active" href="volunteerIndex.jsp">Home</a>
+                         	<a class="nav-link " href="volunteerIndex.jsp">Home</a>
                         </li>
                         <li  class="nav-item">
                             <a class="nav-link" href="workDiary.jsp">Work Diary</a>
@@ -173,7 +173,7 @@ String id = request.getParameter("id");
                             <a class="nav-link" href="monthlyReport.jsp">Monthly Report</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="monthlyReportView.jsp">View Monthly Report </a>
+                            <a class="nav-link active" href="monthlyReportView.jsp">View Monthly Report </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link  " href="viewTeamProject.jsp">View Team Project</a>

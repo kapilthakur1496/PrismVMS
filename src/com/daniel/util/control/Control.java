@@ -2514,8 +2514,8 @@ public void assignIndividualProject( HttpServletRequest request, HttpServletResp
 			      Transport.send(message);
 			     // result = "Sent message successfully....";  
 			       
-			      response.sendRedirect("individualProjects.jsp?pN?=1");
-			   			  
+			      response.sendRedirect("individualProject.jsp?pN=1");
+			      
 			  } 
 		    catch (MessagingException mex) {
 		      mex.printStackTrace();
@@ -5346,7 +5346,7 @@ public void submitVmsExperience( HttpServletRequest request, HttpServletResponse
 			      Transport.send(message);
 			     // result = "Sent message successfully....";  
 			       
-			      response.sendRedirect("grievance.jsp");
+			      response.sendRedirect("vmsExperience.jsp");
 			   			  
 			  } 
 		    catch (MessagingException mex) {
@@ -5527,6 +5527,7 @@ public void addVmsExperienceComment( HttpServletRequest request, HttpServletResp
 		try {  
 			String comment = request.getParameter("comment"); 
 			String id = request.getParameter("id"); 
+			String pN = request.getParameter("pN"); 
 			 
 			Control ct = new Control();
 			String to = ct.getEmail(volunteerId);
@@ -5581,7 +5582,7 @@ public void addVmsExperienceComment( HttpServletRequest request, HttpServletResp
 			      Transport.send(message);
 			     // result = "Sent message successfully....";  
 			       
-			      response.sendRedirect("viewVmsExperience.jsp");
+			      response.sendRedirect("viewVmsExperience.jsp?pN="+pN);
 			   			  
 			  } 
 		    catch (MessagingException mex) {

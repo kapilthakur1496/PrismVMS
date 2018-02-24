@@ -194,16 +194,16 @@ if(volunteerStatus == 1){
 	 	  <% String id= request.getParameter("id");
 	 	  String name= request.getParameter("name");%> 
 	 	  <form action="Control?action=submitVmsExperience" method="post">
-			  <br><br><select name="category" >
-			<option value="0">Select Category</option>
+			  <br><br><select required name="category" >
+			<option value="">Select Category</option>
 			<% vmsExperienceRs = ct.getVmsCategory();  
 				while(vmsExperienceRs.next()){
 			%>
 			 	<option value="<%=vmsExperienceRs.getString("category")%>"><%=vmsExperienceRs.getString("category")%></option>
 				<%} %>
 			</select>
-			<br><br><textarea  name="experienceDesc" placeholder="Enter Your Experience"></textarea>
-			<br><br><input type="submit" style="opacity:1;"  value="Submit Grievance">
+			<br><br><textarea required name="experienceDesc" placeholder="Enter Your Experience"></textarea>
+			<br><br><input type="submit" style="opacity:1;"  value="Submit Feedback">
 				</form>
     	</div>
  	</div>
