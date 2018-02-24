@@ -124,26 +124,26 @@ String id = request.getParameter("id");
 	 
  
                 <div   id="collapseExample"style="paddin:0px; margin-left:0px;" >
-                     <ul class="nav flex-column" id="exCollapsingNavbar3">
-	                   <li   class="nav-item" style="text-algin:center">
-	                    	<div class="center">
-	                     <img src="DisplayMentorPic?name=<%=adminId%>" align="middle" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 80px;height: 80px;border-radius: 50%;">
-	                 	</div>
-	                 	</li>
-                      	<li class="nav-item" style="margin-bottom:17px;">
-                         	<form action="#" method="post">
-								<div    >
-									<input  type="text" style="opacity:1; cursor:text; height:40px;"  name="productPrice" required="" placeholder="Search Feature">
-									<div class="clearfix"></div>
-								</div>
-								<button type="submit" style="height:40px; margin-top:6px;" class="btn btn-default search" aria-label="Left Align">
-									<i class="fa fa-search" aria-hidden="true"> </i>
-								</button> 
+                     <ul class="nav flex-column" id="exCollapsingNavbar">
+             			<li   class="nav-item" style="text-algin:center">
+		                    <div class="center">
+		                     <img src="DisplayMentorPic?name=<%=adminId %>" align="middle" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 80px;height: 80px;border-radius: 50%;">
+		                 	</div>
+                 		</li>
+                		<li class="nav-item" style="margin-bottom:17px;">
+                       		<form action="#" method="post">
+								<div   >
+								 	<input    id="myInput" onkeyup="search()" type="text" style="opacity:1; padding: 12px 20px 12px 40px; background-image: url('images/searchicon.png'); background-position: 10px 10px; background-repeat: no-repeat; cursor:text; height:40px;"  name="productPrice" required="" placeholder="Search Feature">
+									 <div class="clearfix"></div>
+								</div> 
 							</form>	
 							<br><br>
-                    	</li > 
+                    	</li >
+                   	</ul>
+                    <ul class="nav flex-column" id="exCollapsingNavbar3">
+	                     
                        	<li   class="nav-item">
-                         	<a class="nav-link" href="mentorIndex.jsp">Home</a>
+                         	<a class="nav-link " href="mentorIndex.jsp">Home</a>
                         </li>
                         <li   class="nav-item">
                          	<a class="nav-link" href="mentorVolunteerWorkDiary.jsp?pN=1">Work Diary</a>
@@ -176,7 +176,7 @@ String id = request.getParameter("id");
                             <a class="nav-link" href="branchProjectEnrollRequestView.jsp?pN=1"> Branch Project Enroll Request</a>
                         </li>   
                         <li   class="nav-item">
-                            <a class="nav-link" href="viewMonthlyReport.jsp?pN=1">View Monthly Report</a>
+                            <a class="nav-link active" href="viewMonthlyReport.jsp?pN=1">View Monthly Report</a>
                         </li>  
                         <li   class="nav-item">
                             <a class="nav-link" href="mentorVmsExperience.jsp">VMS Feedback</a>
@@ -237,13 +237,7 @@ String id = request.getParameter("id");
 						
 						</tbody>
 					</table>
-					
-					<table id="table2">
-						<tbody>
-							<tr>
-							
-						</tbody>
-					</table>
+					 
 					<%} %>
 					 </div>
 			 
@@ -259,29 +253,7 @@ String id = request.getParameter("id");
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
 	  
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
-
-<script type="text/javascript">
-
-(function($) {
-	
-	$(window).scroll(function() {
-		
-		$(window).scroll(function() {
-			space = $(window).innerHeight() - $('.fab').offsetTop + $('.fab').offsetHeight;
-			if(space < 200){
-				$('.fab').css('margin-bottom', '150px');
-			}
-		})
-		
-	});
-	
-})(jQuery);
-
-</script>
-
+ 
  
 </body>
 </html>

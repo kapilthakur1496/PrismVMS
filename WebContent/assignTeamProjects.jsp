@@ -1,9 +1,3 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <%@page import="java.util.ArrayList"%>
 <html lang="en">
@@ -194,14 +188,13 @@ if(mentorStatus == 1){
 		 			<p>No volunteers are there in this team</p>
 		 			<%
 		 		}else{%>
- 			<form action="Control?action=assignTeamProject" method="post" >
+ 			<form action="Control?action=assignTeamProject" method="post"  onSubmit="return validateChecks()" >
  			<div style="height:400px; overflow-x:hidden;">
 		 		<% 
-		 		volunteerDetails = ct.getVolunteerForTeamProject(projectId);
-		 		if(!volunteerDetails.next()){
+		 			volunteerDetails = ct.getVolunteerForTeamProject(projectId);
 		 		%>
-		 		<p>All Volunteers have been Assigned</p>
-		 		 <%} %>
+		 		 
+		 		 
 		 		<%while(volunteerDetails.next()){ %>
 			   	<div class="col-md-3 col-lg-3" >
 					 <label class="container">  
@@ -224,6 +217,29 @@ if(mentorStatus == 1){
 <div class="footer" style="background-color:#f8f8f8;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
-	 
+<div id="snackbar"></div>
+	 <script type="text/javascript">
+	  
+	 function validateChecks() {
+     	
+  		var chks =  document.getElementsByName('vIds');
+  		var checkCount = 0;
+  		for (var i = 0; i < chks.length; i++) {
+  			if (chks[i].checked) {
+  				checkCount++;
+  			}
+  		}
+  		if (checkCount < 1) {
+  			
+  			var x = document.getElementById("snackbar")
+  		    x.className = "show";
+  		    x.innerHTML="Select at least one volunteer";
+  		    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  		 
+  			return false;
+  		}
+  		return true;
+  	}
+	 </script>
 </body>
 </html>

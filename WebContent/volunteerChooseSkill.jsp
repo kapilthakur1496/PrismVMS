@@ -126,7 +126,7 @@ h1 {
 %>
  
 	 
-<form action="Control?action=volunteerChooseSkills" method="post">
+<form action="Control?action=volunteerChooseSkills" method="post" onSubmit="return validateChecks()">
 	<div class="container" style="paddin:0px; margin-left:150px;  ">
 	    <div class="row" style="height:400px;"><br>
 	        <div class="col-md-3 col-lg-3" style="text-algin:center; ">
@@ -177,13 +177,13 @@ h1 {
 	        
 	 	</div>
 	 	<div class="key">
-			<i class="fa fa-lock" aria-hidden="true"></i>
+			<i class="fa fa-paragraph" aria-hidden="true"></i>
 			<textarea name="additionalSkills" style="width:94%;" placeholder="Write Addtional Skills"></textarea>
 			<div class="clearfix"></div>
 		</div> 
 		<div class="key">
-			<i class="fa fa-lock" aria-hidden="true"></i>
-			<textarea name="background" style="width:94%;" placeholder="Write Backgorund and Achievements"></textarea>
+			<i class="fa fa-paragraph" aria-hidden="true"></i>
+			<textarea required name="background" style="width:94%;" placeholder="Write Backgorund and Achievements"></textarea>
 			<div class="clearfix"></div>
 		</div> 
 		 <div class="row" style="margin-top:-10px;"> 
@@ -203,6 +203,29 @@ h1 {
 <div class="footer" style="background-color:#f8f8f8;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
+	     <div id="snackbar"></div>
+	 <script type="text/javascript">
 	  
+	 function validateChecks() {
+     	
+  		var chks =  document.getElementsByName('vIds');
+  		var checkCount = 0;
+  		for (var i = 0; i < chks.length; i++) {
+  			if (chks[i].checked) {
+  				checkCount++;
+  			}
+  		}
+  		if (checkCount < 1) {
+  			
+  			var x = document.getElementById("snackbar")
+  		    x.className = "show";
+  		    x.innerHTML="Select at least one skill";
+  		    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  		 
+  			return false;
+  		}
+  		return true;
+  	}
+	 </script>
 </body>
 </html>

@@ -35,7 +35,7 @@ public class AdminLogin extends HttpServlet {
 	  
 		 	java.sql.Statement adminLoginSt =  null; 
 	        java.sql.ResultSet adminLoginRs = null;
-	        
+	        PreparedStatement stmt = null;
 	        PrintWriter out;
 	        RequestDispatcher rd=null;
 	        
@@ -43,9 +43,16 @@ public class AdminLogin extends HttpServlet {
 				out = response.getWriter();
 			 
 				String username = request.getParameter("email");
-				String password = request.getParameter("password");  
-				adminLoginSt = connection.createStatement();			
-				adminLoginRs = adminLoginSt.executeQuery("select * from admin where email='"+username+"' and password='"+password+"'");
+				String password = request.getParameter("password"); 
+				String status="Approved";
+				adminLoginSt = connection.createStatement();	
+				stmt = connection.prepareStatement("select id,admin_type from admin where email=? and password=? and approve_status=?");
+				stmt.setString(1, username);
+				stmt.setString(2, password); 
+				stmt.setString(3, status);
+
+				adminLoginRs  = stmt.executeQuery(); 
+				
 				if (adminLoginRs.next())				
 				{	
 					
