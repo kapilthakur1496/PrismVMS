@@ -89,11 +89,9 @@ if(adminId !=null){
         <nav class="templatemo-left-nav">          
           <ul>
           	<li><a href="index.jsp" class="active"><i class="fa fa-users fa-fw"></i>Home</a></li>
-            
-             
-			
-             <li><a href="manageUsers.jsp?pageNumber=1" ><i class="fa fa-users fa-fw"></i>Manage Users</a></li>
-             </ul>  
+            <li><a href="manageUsers.jsp?pageNumber=1" ><i class="fa fa-users fa-fw"></i>Manage Users</a></li>
+          
+          </ul>  
         </nav>
       </div>
       <!-- Main content --> 
