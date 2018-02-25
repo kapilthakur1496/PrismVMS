@@ -24,9 +24,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 body{
 overflow-x:hidden;
 }
+ 
+
 </style>
 <body>
-<div class="outercontainer">
+<div class="outercontainer" style="position:fixed;">
 	<div class="header-bottom-w3ls">  
 		<div class="row">
 			<div class="col-md-2 logo-w3">
@@ -63,7 +65,9 @@ overflow-x:hidden;
 
 
 <div class="outercontainer">
-<div class="team" id="team">
+ 
+<div class="team" id="team" style="positon:fixed;" style="position: fixed; top: 0; width: 100%; height: 100%; z-index: -1;">
+ 
 	<div class="container">
 	 
 		<div class="team-grids"> 
@@ -138,7 +142,7 @@ overflow-x:hidden;
 	</div>
 </div>
 </div>
-<div class="about">
+<div class="about" style="z-index:50; ">
 	<div class="container"> 
 		<h3>About Us</h3>
 		<div class="about-info">
