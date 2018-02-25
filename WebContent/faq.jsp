@@ -4,7 +4,7 @@
 <title>PrismVMS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Teach For India , PrismVMS "nyEricsson, Motorola web design" />
+<meta name="keywords"  content="Teach For India , PrismVMS " />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- css -->
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
@@ -17,16 +17,18 @@
 <!-- //font -->
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
-<link rel="shortcut icon" href="images/logo2_.ico" />
-<style type="text/css">
-	body
-	{
-	overflow-x:hidden;
-	}
-</style>
 </head>
-
 <body>
+<%@ page import="java.sql.*" %>
+<%@page import="java.lang.reflect.Array"%>
+<%@ page import ="javax.sql.*" %>
+<%@ page import="com.daniel.util.control.*"  %>   
+<%@ page import="java.util.Date"  %> 
+ 
+<%! 
+	 ResultSet faqDetails=null;
+	Control ct = new Control(); 
+%>
 <div class="outercontainer">
 	<div class="header-bottom-w3ls">  
 		<div class="row">
@@ -47,9 +49,9 @@
 					<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 						<ul class="nav navbar-nav ">
 							<li><a href="index.jsp" class="hyper "><span>Home</span></a></li>	
-							<li class=" active"><a href="about.html" class="hyper"><span>About</span></a></li>
+							<li ><a href="about.html" class="hyper"><span>About</span></a></li>
 							<li ><a href="contact.jsp" class="hyper"><span>Contact Us</span></a></li>
-							<li class=" "><a href="faq.jsp" class="hyper"><span>FAQ</span></a></li>
+							<li class=" active"><a href="faq.jsp" class="hyper"><span>FAQ</span></a></li>
 						 </ul>
 					</div>
 				</nav>
@@ -59,32 +61,44 @@
 			<div class="clearfix"></div>
 		</div>
 	</div>
-</div>	 
-	<div class="login">
-		<div class="main-agileits">
-				<div class="form-w3agile">
-					<h3>Login</h3>
-					<form action="VolunteerLogin" method="post">
-						<div class="key input-group">
-							<span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-							<input  type="text" name="email" required="" placeholder="Email" class="form-control">
-							<div class="clearfix"></div>
-						</div>
-						<div class="key input-group">
-							<span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-							<input  type="password" name="password" required="" placeholder="Password" class="form-control">
-							<div class="clearfix"></div>
-						</div>
-						<input type="submit" value="Login">
-					</form>
+</div>	  											
+ 
+<div class="sub-banner">
+</div>
+<!-- faq-banner -->
+	<div class="faq">
+		<h3>FAQ</h3>
+		<% try{ 
+			faqDetails = ct.viewFaq();  %>
+				<%! int j=1; %>
+				
+					<% while(faqDetails.next()){
+						 %> 
+						
+		<div class="container"> 
+			<div class="panel-group w3l_panel_group_faq" id="accordion" role="tablist" aria-multiselectable="true">
+			  <div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="heading<%=j%>">
+				  <h4 class="panel-title asd">
+					<a class="pa_italic collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%=j%>" aria-expanded="false" aria-controls="collapseOne">
+					  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><i class="glyphicon glyphicon-minus" aria-hidden="true"></i><%=faqDetails.getString("question")%>
+					</a>
+				  </h4>
 				</div>
-				<div class="forg">
-					<a href="volunteerForgotPassword.jsp" class="forg-left">Forgot Password</a>
-					<a href="volunteerRegistration.jsp" class="forg-right">Register</a>
-				<div class="clearfix"></div>
+				<div id="collapse<%=j%>" class="panel-collapse collapse " role="tabpanel" aria-labelledby="heading<%=j%>">
+				  <div class="panel-body panel_text">
+					<%=faqDetails.getString("answer")%>
+					</div>
 				</div>
+			  </div>
 			</div>
-		</div> 
+		</div><%j++; 
+					}}catch (Exception e) {
+					}finally{
+						faqDetails.close();} %> 	
+		}
+			
+	</div>
 <!--team-->
  <hr style="color:#eee; height:15px;">
 <div class="footer">
@@ -124,71 +138,6 @@
 
 	 <div class="footer" style="background-color:#f8f8f8;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
-</div>  
-	  
-<div id="snackbar"></div>
-
- <% 
- String action =request.getParameter("action");
- if(action==null){
- 
- }else if(action!=null)
- {
-	 
-  
-  %><%if(action.equals("useNewPassword")){ 
- %>
-	 <script>
- 
-    var x = document.getElementById("snackbar")
-    x.className = "show";
-    x.innerHTML="Use New Password to Login";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
- 
-</script>
-<%}else if(action.equals("AccountDoesNotExist")){ 
- %>
-	 <script>
- 
-    var x = document.getElementById("snackbar")
-    x.className = "show";
-    x.innerHTML="Your Account Does not Exist";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
- 
-</script>
-<%}else if(action.equals("UserNotValid")){ 
- %>
-	 <script>
- 
-    var x = document.getElementById("snackbar")
-    x.className = "show";
-    x.innerHTML="Email or Password is Incorrect";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
- 
-</script>
-<%}else if(action.equals("NotVolunteer")){ 
- %>
-	 <script>
- 
-    var x = document.getElementById("snackbar")
-    x.className = "show";
-    x.innerHTML="Your Account has been Archived. Please Check with Adminstrator";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
- 
-</script>
-<%}else if(action.equals("LoginAgain")){ 
- %>
-	 <script>
- 
-    var x = document.getElementById("snackbar")
-    x.className = "show";
-    x.innerHTML="Your Session has been Expired Please Login Again!";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
- 
-</script>
-<%}%>
-  
- <%}%>
-
+</div> 
 </body>
 </html>

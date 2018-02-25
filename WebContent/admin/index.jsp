@@ -264,14 +264,14 @@ address: <span id="c"></span>
               			</select><br> 
              	<!-- 	<input type="submit" class="form-control" value="View" >  -->
               	</form> 
-              <%-- 	<form action="${pageContext.request.contextPath}/Control?action=addFaqDetails" method="post" >
+             	<form action="${pageContext.request.contextPath}/Control?action=addFaqDetails" method="post" >
               		<br>
               		<input type="text"  required class="form-control" Placeholder="FAQ Question" name="question">
               		<br>
               		<textarea  name="answer" placeholder="FAQ Answer" required class="form-control"></textarea>
               		<br>
              		<input type="submit" class="form-control" value="Add FAQ Details" >
-             	</form> --%>
+             	</form>  
              	 
            	</div> 
     	</div>
@@ -306,10 +306,10 @@ address: <span id="c"></span>
                </div>                
              </div>            
            </div> -->
-          <%--  <div class="col-2">
+             <div class="col-2">
              <div class="panel panel-default templatemo-content-widget white-bg no-padding templatemo-overflow-hidden">
                <i class="fa fa-times"></i>
-               <div class="panel-heading templatemo-position-relative"><h2 class="text-uppercase">User Table</h2></div>
+               <div class="panel-heading templatemo-position-relative"><h2 class="text-uppercase">Queries</h2></div>
                <div class="table-responsive">
                  <table class="table table-striped table-bordered">
                    <thead>
@@ -342,7 +342,7 @@ address: <span id="c"></span>
                  </table>    
                </div>                          
              </div>
-           </div>   --%>         
+           </div>             
          </div> <!-- Second row ends -->
           <div class="templatemo-flex-row flex-content-row">
             <div class="templatemo-content-widget white-bg col-2">

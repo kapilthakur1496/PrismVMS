@@ -252,6 +252,14 @@ public class Control extends HttpServlet {
 		{   
 			preVolunteerForgotOtpVerification(request,response);
 		}
+		else if(action.equals("addFaqDetails"))
+		{   
+			addFaqDetails(request,response); 
+		}
+		else if(action.equals("addContactDetails"))
+		{   
+			addContactDetails(request,response); 
+		}
 		  
 		  
 	}
@@ -350,6 +358,84 @@ private void addMeeting( HttpServletRequest request, HttpServletResponse respons
 		 out.close(); 
 		 
 	}
+public void addFaqDetails( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	response.setContentType("text/html");
+    PrintWriter out = response.getWriter();  
+	String faqQuestion = request.getParameter("question");
+	String faqAnswer = request.getParameter("answer");
+	Statement faqSt = null;
+	ResultSet faqRs = null;
+	 
+	try {
+		faqSt = connection.createStatement();
+		String checkFaqQ = "select question from faq_details where question = '"+faqQuestion+"'";
+		faqRs = faqSt.executeQuery(checkFaqQ);
+			
+		 		if (faqRs.next())	{
+		 			response.sendRedirect("admin/manageData.jsp?msg=faqExists");
+				 }
+				 else   { 
+					 PreparedStatement addfaqPs =null;
+					 try {
+						 String addfaqQ ="insert into faq_details (question,answer) values(?,?)";
+						
+						 addfaqPs  =  connection.prepareStatement(addfaqQ);
+						 addfaqPs.setString(1, faqQuestion); 
+						 addfaqPs.setString(2, faqAnswer); 
+						 addfaqPs.executeUpdate();	
+ 						  
+						response.sendRedirect("admin/index.jsp");
+						/*
+						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("adminIndex.jsp?pageNumber=1#tab2");
+						*/
+						/*RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("adminIndex.jsp?pageNumber=1#section02");
+				*/ }   
+				 catch (SQLException e) {
+						// TODO: handle exception
+					e.printStackTrace();
+					}
+				 catch (Exception e) {
+						// TODO: handle exception
+						 e.printStackTrace();
+					} finally {
+						if(addfaqPs!=null)  
+						  try {
+							  addfaqPs.close();
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}  
+					 }  
+				 }  
+	}
+			 
+		 catch (SQLException e) {
+				// TODO: handle exception
+			e.printStackTrace();
+			}
+		 catch (Exception e) {
+				// TODO: handle exception
+				 e.printStackTrace();
+			}
+		 finally {
+			  if(faqSt!=null)
+					try {
+						faqSt.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+	        	 if(faqSt!=null)
+					try {
+						faqSt.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+		 		}
+	 	out.close();  
+	}
 private void addBranch( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		response.setContentType("text/html");
@@ -397,6 +483,38 @@ private void addBranch( HttpServletRequest request, HttpServletResponse response
 		 out.close(); 
 		 
 	}
+public  ResultSet viewFaq()throws ServletException, IOException { 
+	Statement faqSt =null;
+	ResultSet faqRs = null;
+
+	try {  				
+		faqSt = connection.createStatement();
+		String faqQ ="select * from faq_details";
+		faqRs = faqSt.executeQuery(faqQ);
+	  
+		} 
+	catch (SQLException e) {
+	// TODO: handle exception
+		e.printStackTrace();
+		}
+	catch (Exception e) {
+	// TODO: handle exception
+		e.printStackTrace();
+		}
+finally {
+	
+	/*if(NgoDetailSt!=null)
+		try {
+			NgoDetailSt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+	 
+}
+return faqRs;
+
+}
 private void addTrainingType( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 	response.setContentType("text/html");
@@ -1610,7 +1728,96 @@ public   ResultSet applicationDetails(  int pageNumber, int nextRecordCount)thro
 return volunteerDetailsRs;
 
 }
+public void addContactDetails( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	response.setContentType("text/html");
+    PrintWriter out = response.getWriter();  
+	String contactName = request.getParameter("name");
+	String contactEmail = request.getParameter("email");
+	String contactPhone = request.getParameter("phone");
+	String contactSubject = request.getParameter("subject");
+	String contactMessage = request.getParameter("message");
+	
+ 
+	 
+	try { 
+		
+		 PreparedStatement addcontactPs =null;
+					 try {
+						 String addContactQ ="insert into contact_details (name,email,phone,subject,message) values(?,?,?,?,?)";
+						
+						 addcontactPs  =  connection.prepareStatement(addContactQ);
+						 addcontactPs.setString(1, contactName); 
+						 addcontactPs.setString(2, contactEmail); 
+						 addcontactPs.setString(3, contactPhone); 
+						 addcontactPs.setString(4, contactSubject); 
+						 addcontactPs.setString(5, contactMessage); 
+						 addcontactPs.executeUpdate();	
+ 						  
+						response.sendRedirect("contact.jsp");
+						/*
+						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("adminIndex.jsp?pageNumber=1#tab2");
+						*/
+						/*RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("adminIndex.jsp?pageNumber=1#section02");
+				*/ }   
+				 catch (SQLException e) {
+						// TODO: handle exception
+					e.printStackTrace();
+					}
+				 catch (Exception e) {
+						// TODO: handle exception
+						 e.printStackTrace();
+					} finally {
+						if(addcontactPs!=null)  
+						  try {
+							  addcontactPs.close();
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}  
+					 }  
+				  
+			}
+		  
+		 catch (Exception e) {
+				// TODO: handle exception
+				 e.printStackTrace();
+			}
+		 
+	 	out.close();  
+	}
+public  ResultSet viewContact()throws ServletException, IOException { 
+	Statement contactSt =null;
+	ResultSet contactRs = null;
 
+	try {  				
+		contactSt = connection.createStatement();
+		String faqQ ="select * from contact_details";
+		contactRs = contactSt.executeQuery(faqQ);
+	  
+		} 
+	catch (SQLException e) {
+	// TODO: handle exception
+		e.printStackTrace();
+		}
+	catch (Exception e) {
+	// TODO: handle exception
+		e.printStackTrace();
+		}
+finally {
+	
+	/*if(NgoDetailSt!=null)
+		try {
+			NgoDetailSt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+	 
+}
+return contactRs;
+
+}
 public void volunteerApproval( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 	response.setContentType("text/html");
