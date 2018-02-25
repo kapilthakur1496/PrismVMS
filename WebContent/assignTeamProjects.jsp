@@ -107,45 +107,44 @@ if(mentorStatus == 1){
  
  	
  
-<div class="container" style="padding-top:0px;  padding-right:10px; margin-left:10px; margin-top:10px; margin-right:15px;">
+ <div class="outercontainer" style="padding-top:0px;  padding-right:10px; margin-left:10px; margin-top:10px; margin-right:15px;">
     <div class="row">
-        <div class="col-md-2 col-lg-3" >
+        <div class="col-md-2 col-lg-3 col-sm-4 col-xs-12" >
 
             <div class="bootstrap-vertical-nav" >
-	 
  
-                <div   id="collapseExample"style="paddin:0px; margin-left:0px;" >
+                <div   id="collapseExample" style="margin-top:3px;" >
                     <ul class="nav flex-column" id="exCollapsingNavbar">
              			<li   class="nav-item" style="text-algin:center">
 		                    <div class="center">
 		                     <img src="DisplayMentorPic?name=<%=adminId %>" align="middle" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 80px;height: 80px;border-radius: 50%;">
 		                 	</div>
                  		</li>
-                		<li class="nav-item" style="margin-bottom:17px;">
+                		<li class="nav-item" >
                        		<form action="#" method="post">
 								<div   >
 								 	<input    id="myInput" onkeyup="search()" type="text" style="opacity:1; padding: 12px 20px 12px 40px; background-image: url('images/searchicon.png'); background-position: 10px 10px; background-repeat: no-repeat; cursor:text; height:40px;"  name="productPrice" required="" placeholder="Search Feature">
 									 <div class="clearfix"></div>
 								</div> 
-							</form>	
-							<br><br>
+							</form>
                     	</li >
                    	</ul>
                     <ul class="nav flex-column" id="exCollapsingNavbar3">
+	                     
                        	<li   class="nav-item">
-                         	<a class="nav-link" href="mentorIndex.jsp">Home</a>
+                         	<a class="nav-link " href="mentorIndex.jsp">Home</a>
                         </li>
                         <li   class="nav-item">
-                         	<a class="nav-link" href="mentorVolunteerWorkDiary.jsp?pN=1">Work Diary</a>
+                         	<a class="nav-link 	" href="mentorVolunteerWorkDiary.jsp?pN=1">Work Diary</a>
                         </li>
                         <li   class="nav-item">
                          	<a class="nav-link" href="mentorVolunteerMeeting.jsp?pN=1">Work Meeting</a>
                         </li>
                         <li   class="nav-item">
-                         	<a class="nav-link" href="mentorVolunteerTraining.jsp?pN=1">Work Training</a>
+                         	<a class="nav-link " href="mentorVolunteerTraining.jsp?pN=1">Work Training</a>
                         </li>                       	 
                         <li  class="nav-item">
-                            <a class="nav-link" href="individualProject.jsp?pN=1">Individual Projects</a>
+                            <a class="nav-link " href="individualProject.jsp?pN=1">Individual Projects</a>
                         </li> 
                         <li  class="nav-item">
                             <a class="nav-link" href="teamProject.jsp">Team Projects</a>
@@ -178,7 +177,8 @@ if(mentorStatus == 1){
                 </div> 
             </div> 
         </div>
-        <div class="col-md-10 col-lg-9" style="padding:22px 10px;">
+         
+        <div  class="col-md-10 col-lg-9 col-sm-9 col-xs-12" style="padding:3px 0px;">
         <% String projectId = request.getParameter("projectId"); 
 		 		String noData = request.getParameter("noData"); 
 		 		if(noData!=null)
