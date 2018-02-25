@@ -65,7 +65,7 @@ h1 {
   
   
 
-<div class="outercontainer" style="margin-top:0px; height:100px; background-color: #f8f8f8;">
+<div class="outercontainer" style="margin-top:0px; height:100px; background-color: #2A3F54;">
 	<div class="header-bottom-w3ls" style="padding:22px;">  
 		<div class="row">
 			<div class="col-md-2 logo-w3">
@@ -192,7 +192,7 @@ if(mentorStatus == 1){
 			 
 				 <%while(teamProjectsRs.next()){ %>
 					<li>
-						<div class="collapsible-header active"><p style="padding:10px; background-color:#66bdd7; font-size:14px;">
+						<div class="collapsible-header active"><p style="padding:10px; background-color:#EDE576; font-size:14px;">
 							<span class="glyphicon glyphicon-pushpin" style="font-size:20px; color:#fff; font-size:22px; font-style: bold;"></span>&nbsp;&nbsp;
 							<%=teamProjectsRs.getString("b.bproject_title") %>
 							 
@@ -275,7 +275,7 @@ if(mentorStatus == 1){
 <%} %>
 
 <br><br><br>  
-<div class="footer" style="background-color:#f8f8f8;   height:50px;">
+<div class="footer" style="background-color:#2A3F54;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
 	  

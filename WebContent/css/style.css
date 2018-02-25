@@ -1,6 +1,9 @@
 .collapsible-body{
 	overflow:hidden;
 	}
+thead{
+	background-color: #EDE576;
+}
 
 body {
 	padding: 0;
@@ -27,7 +30,7 @@ input[type="button"], input[type="submit"] {
 	outline: none;
     padding: 9.1px 0; 
     border: none;
-    background-color: #66bdd7;
+    background-color: #1B606C;
     color: #fff;
 	transition: 0.5s all;
 	-webkit-transition: 0.5s all;
@@ -117,7 +120,7 @@ img {
 	font-size:16px;
 }
 .header-bottom-w3ls {
-    background: #f8f8f8;
+    background: #2A3F54;
 	padding:20px 0;
 }
 .navbar-default {
@@ -1793,7 +1796,7 @@ button:hover {
         {
         margin-top:25px;
         height:800px;
-        background-color:#66bdd7;
+        background-color:#2A3F54;
         }
         #exCollapsingNavbar3 li a:hover
         {
