@@ -1491,7 +1491,7 @@ public   int getVolunteerProjectCount(HttpServletRequest request, HttpServletRes
 		try {  				
 				volunteerCountSt = connection.createStatement();
 				 
-				volunteerCountRs = volunteerCountSt.executeQuery("select count(id) from assign_projects where bproject_id=null and team_project_id=null and  volunteer_registration_id ='"+volunteerId+"' ");
+				volunteerCountRs = volunteerCountSt.executeQuery("select count(id) from assign_projects where bproject_id is null and team_project_id is null and  volunteer_registration_id ='"+volunteerId+"' ");
 			
 				if(volunteerCountRs.next())
 				{
@@ -1543,7 +1543,7 @@ public   int getVolunteerTeamProjectCount(HttpServletRequest request, HttpServle
 		try {  				
 				volunteerCountSt = connection.createStatement();
 				 
-				volunteerCountRs = volunteerCountSt.executeQuery("select count(id) from assign_projects where bproject_id=null and team_project_id!=null and  volunteer_registration_id ='"+volunteerId+"' ");
+				volunteerCountRs = volunteerCountSt.executeQuery("select count(id) from assign_projects where bproject_id is null and team_project_id is not null and  volunteer_registration_id ='"+volunteerId+"' ");
 			
 				if(volunteerCountRs.next())
 				{
@@ -1595,7 +1595,7 @@ public   int getVolunteerBranchProjectCount(HttpServletRequest request, HttpServ
 		try {  				
 				volunteerCountSt = connection.createStatement();
 				 
-				volunteerCountRs = volunteerCountSt.executeQuery("select count(id) from assign_projects where bproject_id!=null and team_project_id = null and  volunteer_registration_id ='"+volunteerId+"' ");
+				volunteerCountRs = volunteerCountSt.executeQuery("select count(id) from assign_projects where bproject_id is not null and team_project_id is null and  volunteer_registration_id ='"+volunteerId+"' ");
 			
 				if(volunteerCountRs.next())
 				{

@@ -109,7 +109,13 @@ h1 {
 }
 if(volunteerStatus == 1){
 	
-	
+	   workDiary = ct.getWorkDiaryCount(request,response);
+		workMeeting = ct.getWorkMeetingCount(request,response);
+		workTraining = ct.getWorkTrainingCount(request,response);
+		project = ct.getVolunteerProjectCount(request,response);
+		teamprojects = ct.getVolunteerTeamProjectCount(request,response);
+		branchProject = ct.getVolunteerBranchProjectCount(request,response); 
+		 
 %>  	
  
 <div class="container" style="paddin:0px; margin-left:0px;">
@@ -279,12 +285,7 @@ if(volunteerStatus == 1){
 <div class="footer" style="background-color:#2A3F54;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
-	 <% workDiary = ct.getWorkDiaryCount(request,response);
-	workMeeting = ct.getWorkMeetingCount(request,response);
-	workTraining = ct.getWorkTrainingCount(request,response);
-	project = ct.getVolunteerProjectCount(request,response);
-	teamprojects = ct.getVolunteerTeamProjectCount(request,response);
-	branchProject = ct.getVolunteerBranchProjectCount(request,response); %>
+	
 <script type="text/javascript">
     function validate()
     {
@@ -363,7 +364,7 @@ if(volunteerStatus == 1){
 
       // Set a callback to run when the Google Visualization API is loaded.
       google.setOnLoadCallback(drawChart); 
-      google.setOnLoadCallback(drawChart); 
+      google.setOnLoadCallback(drawChart1); 
       
       // Callback that creates and populates a data table,
       // instantiates the pie chart, passes in the data and
@@ -373,12 +374,12 @@ if(volunteerStatus == 1){
           // Create the data table.
           var data = new google.visualization.DataTable();
           data.addColumn('string', 'Topping');
-          data.addColumn('number', 'Work Diary'); 
-          
+          data.addColumn('number', 'Work Diary');  
           data.addRows([
             ['Work Diary', <%=workDiary%>],
             ['Work Meeting', <%=workMeeting%>],
-            ['Work Training', <%=workTraining%>] 
+            ['Work Training', <%=workTraining%>] ,
+             
              
           ]);
 
