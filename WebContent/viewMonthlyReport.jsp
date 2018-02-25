@@ -64,7 +64,7 @@ h1 {
    
   
   
-<div class="outercontainer" style="margin-top:0px; height:100px; background-color: #f8f8f8;">
+<div class="outercontainer" style="margin-top:0px; height:100px; background-color: #2A3F54;">
 	<div class="header-bottom-w3ls" style="padding:22px;">  
 		<div class="row">
 			<div class="col-md-2 logo-w3">
@@ -194,7 +194,7 @@ if(mentorStatus == 1){
 				<ul> 
 					<a href="viewVolunteerMonthlyReport.jsp?vId=<%=volunteerDetailsRs.getString("id")%>" style="color:#333; text-decoration:none;">
 						<li style="list-style:none;" >
-							<div class="collapsible-header active" style="background:#66bdd7;"><p style="padding:5px; font-size:14px;">
+							<div class="collapsible-header active" style="background:#EDE576;"><p style="padding:5px; font-size:14px;">
 							  	<img style="display:inline-block; width:50px; height:50px; border-radius:50%; margin-lefT:10px; border-style:none; "  src="DisplayVolunteerPic?name=<%=volunteerDetailsRs.getString("id")%>" >&nbsp;&nbsp;
 								<%= volunteerDetailsRs.getString("volunteer_name") %>
 							 	<span style="float: right; margin-top:10px; margin-right:10px;" ><span class="fa fa-users" style="text-align: right; font-size:22px;  font-style: bold; "> </span> &nbsp;&nbsp; 
@@ -215,7 +215,7 @@ if(mentorStatus == 1){
   
 <%} %>
 <br><br><br>  
-<div class="footer" style="background-color:#f8f8f8;   height:50px;">
+<div class="footer" style="background-color:#2A3F54;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
 	 

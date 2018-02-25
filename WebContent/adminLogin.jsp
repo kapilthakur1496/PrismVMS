@@ -66,7 +66,7 @@ body {
 		<div class="main-agileits">
 				<div class="form-w3agile">
 					<h3>Login</h3>
-					<form action="AdminLogin" method="post">
+					<form action="AdminLogin" method="post"> 
 					<div class="key input-group">
 							<span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
 							<input  type="text" name="email" required="" placeholder="Email" class="form-control">
@@ -125,7 +125,7 @@ body {
 		 </div>
 </div>
 
-	 <div class="footer" style="background-color:#f8f8f8;   height:50px;">
+	 <div class="footer" style="background-color:#2A3F54;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
 <div id="snackbar"></div>

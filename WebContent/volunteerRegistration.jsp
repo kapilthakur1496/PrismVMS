@@ -155,7 +155,7 @@ body
 				</div>
 				<div class="forg">
 					  
-					<a href="volunteerLogin.jsp" class="forg-right">Sign In</a>
+					<a href="volunteerLogin.jsp" class="forg-right"><span>Already a member? &nbsp;</span>Sign In</a>
 					 
 				<div class="clearfix"></div>
 				</div>
@@ -198,7 +198,7 @@ body
 		 </div>
 </div>
 
-	 <div class="footer" style="background-color:#f8f8f8;   height:50px;">
+	 <div class="footer" style="background-color:#2A3F54;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
 	
