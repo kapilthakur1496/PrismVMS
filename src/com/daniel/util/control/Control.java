@@ -1428,6 +1428,315 @@ catch (SQLException e) {
 
 }
 
+public   int getWorkDiaryCount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+	Statement volunteerCountSt =null;
+	ResultSet volunteerCountRs = null;
+	int totalCount = 0; 
+
+	HttpSession session = request.getSession();
+	String volunteerId = (String)session.getAttribute("volunteerId");
+	if(volunteerId!= null) {
+		try {  				
+				volunteerCountSt = connection.createStatement();
+				 
+				volunteerCountRs = volunteerCountSt.executeQuery("select count(id) from workdiary where volunteer_registration_id ='"+volunteerId+"' ");
+			
+				if(volunteerCountRs.next())
+				{
+					totalCount = Integer.parseInt(volunteerCountRs.getString(1));
+				}
+			  
+			} 
+			catch (SQLException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		 catch (Exception e) {
+				// TODO: handle exception
+				 e.printStackTrace();
+			}
+			finally {
+				
+				 if(volunteerCountSt!=null)
+					try {
+						volunteerCountSt.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+				 if(volunteerCountRs!=null)
+						try {
+							volunteerCountRs.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} 
+			}
+	}
+	else
+	{
+		response.sendRedirect("volunteerLogin.jsp?action=LoginAgain"); 
+	}
+return totalCount; 
+}
+
+public   int getVolunteerProjectCount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+	Statement volunteerCountSt =null;
+	ResultSet volunteerCountRs = null;
+	int totalCount = 0; 
+
+	HttpSession session = request.getSession();
+	String volunteerId = (String)session.getAttribute("volunteerId");
+	if(volunteerId!= null) {
+		try {  				
+				volunteerCountSt = connection.createStatement();
+				 
+				volunteerCountRs = volunteerCountSt.executeQuery("select count(id) from assign_projects where bproject_id=null and team_project_id=null and  volunteer_registration_id ='"+volunteerId+"' ");
+			
+				if(volunteerCountRs.next())
+				{
+					totalCount = Integer.parseInt(volunteerCountRs.getString(1));
+				}
+			  
+			} 
+			catch (SQLException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		 catch (Exception e) {
+				// TODO: handle exception
+				 e.printStackTrace();
+			}
+			finally {
+				
+				 if(volunteerCountSt!=null)
+					try {
+						volunteerCountSt.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+				 if(volunteerCountRs!=null)
+						try {
+							volunteerCountRs.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} 
+			}
+	}
+	else
+	{
+		response.sendRedirect("volunteerLogin.jsp?action=LoginAgain"); 
+	}
+return totalCount; 
+}
+
+public   int getVolunteerTeamProjectCount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+	Statement volunteerCountSt =null;
+	ResultSet volunteerCountRs = null;
+	int totalCount = 0; 
+
+	HttpSession session = request.getSession();
+	String volunteerId = (String)session.getAttribute("volunteerId");
+	if(volunteerId!= null) {
+		try {  				
+				volunteerCountSt = connection.createStatement();
+				 
+				volunteerCountRs = volunteerCountSt.executeQuery("select count(id) from assign_projects where bproject_id=null and team_project_id!=null and  volunteer_registration_id ='"+volunteerId+"' ");
+			
+				if(volunteerCountRs.next())
+				{
+					totalCount = Integer.parseInt(volunteerCountRs.getString(1));
+				}
+			  
+			} 
+			catch (SQLException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		 catch (Exception e) {
+				// TODO: handle exception
+				 e.printStackTrace();
+			}
+			finally {
+				
+				 if(volunteerCountSt!=null)
+					try {
+						volunteerCountSt.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+				 if(volunteerCountRs!=null)
+						try {
+							volunteerCountRs.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} 
+			}
+	}
+	else
+	{
+		response.sendRedirect("volunteerLogin.jsp?action=LoginAgain"); 
+	}
+return totalCount; 
+}
+
+public   int getVolunteerBranchProjectCount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+	Statement volunteerCountSt =null;
+	ResultSet volunteerCountRs = null;
+	int totalCount = 0; 
+
+	HttpSession session = request.getSession();
+	String volunteerId = (String)session.getAttribute("volunteerId");
+	if(volunteerId!= null) {
+		try {  				
+				volunteerCountSt = connection.createStatement();
+				 
+				volunteerCountRs = volunteerCountSt.executeQuery("select count(id) from assign_projects where bproject_id!=null and team_project_id = null and  volunteer_registration_id ='"+volunteerId+"' ");
+			
+				if(volunteerCountRs.next())
+				{
+					totalCount = Integer.parseInt(volunteerCountRs.getString(1));
+				}
+			  
+			} 
+			catch (SQLException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		 catch (Exception e) {
+				// TODO: handle exception
+				 e.printStackTrace();
+			}
+			finally {
+				
+				 if(volunteerCountSt!=null)
+					try {
+						volunteerCountSt.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+				 if(volunteerCountRs!=null)
+						try {
+							volunteerCountRs.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} 
+			}
+	}
+	else
+	{
+		response.sendRedirect("volunteerLogin.jsp?action=LoginAgain"); 
+	}
+return totalCount; 
+}
+public   int getWorkMeetingCount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+	Statement volunteerCountSt =null;
+	ResultSet volunteerCountRs = null;
+	int totalCount = 0; 
+
+	HttpSession session = request.getSession();
+	String volunteerId = (String)session.getAttribute("volunteerId");
+	if(volunteerId!= null) {
+		try {  				
+				volunteerCountSt = connection.createStatement();
+				 
+				volunteerCountRs = volunteerCountSt.executeQuery("select count(id) from work_meeting where volunteer_registration_id ='"+volunteerId+"' ");
+			
+				if(volunteerCountRs.next())
+				{
+					totalCount = Integer.parseInt(volunteerCountRs.getString(1));
+				}
+			  
+			} 
+			catch (SQLException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		 catch (Exception e) {
+				// TODO: handle exception
+				 e.printStackTrace();
+			}
+			finally {
+				
+				 if(volunteerCountSt!=null)
+					try {
+						volunteerCountSt.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+				 if(volunteerCountRs!=null)
+						try {
+							volunteerCountRs.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} 
+			}
+	}
+	else
+	{
+		response.sendRedirect("volunteerLogin.jsp?action=LoginAgain"); 
+	}
+return totalCount; 
+}
+public   int getWorkTrainingCount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+	Statement volunteerCountSt =null;
+	ResultSet volunteerCountRs = null;
+	int totalCount = 0; 
+
+	HttpSession session = request.getSession();
+	String volunteerId = (String)session.getAttribute("volunteerId");
+	if(volunteerId!= null) {
+		try {  				
+				volunteerCountSt = connection.createStatement();
+				 
+				volunteerCountRs = volunteerCountSt.executeQuery("select count(id) from work_training where volunteer_registration_id ='"+volunteerId+"' ");
+			
+				if(volunteerCountRs.next())
+				{
+					totalCount = Integer.parseInt(volunteerCountRs.getString(1));
+				}
+			  
+			} 
+			catch (SQLException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		 catch (Exception e) {
+				// TODO: handle exception
+				 e.printStackTrace();
+			}
+			finally {
+				
+				 if(volunteerCountSt!=null)
+					try {
+						volunteerCountSt.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+				 if(volunteerCountRs!=null)
+						try {
+							volunteerCountRs.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} 
+			}
+	}
+	else
+	{
+		response.sendRedirect("volunteerLogin.jsp?action=LoginAgain"); 
+	}
+return totalCount; 
+}
 public   int AdminVolunteerCount() throws ServletException, IOException { 
 	Statement volunteerCountSt =null;
 	ResultSet volunteerCountRs = null;

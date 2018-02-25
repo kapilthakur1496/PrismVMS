@@ -92,6 +92,7 @@ h1 {
 	String volunteerId=null,  PhoneNumber =null; ;
 	ResultSet SubCategoryRs=null; 
 	Control ct = new Control();
+	int workDiary=0, workMeeting=0,workTraining=0,project=0,teamprojects=0,branchProject=0;
 %>
 <% 
 	volunteerId = (String)session.getAttribute("volunteerId"); 
@@ -107,6 +108,8 @@ h1 {
 } catch (Exception e){ 	 	
 }
 if(volunteerStatus == 1){
+	
+	
 %>  	
  
 <div class="container" style="paddin:0px; margin-left:0px;">
@@ -240,7 +243,33 @@ if(volunteerStatus == 1){
         </div>
     </div>
     <a href="#"  data-toggle="modal" data-target="#myModal" class="btn btn-info"> Edit Profile</a>
-            
+             <div class="templatemo-flex-row flex-content-row templatemo-overflow-hidden"> <!-- overflow hidden for iPad mini landscape view-->
+            <div class="col-1 templatemo-overflow-hidden">
+              <div class="templatemo-content-widget white-bg templatemo-overflow-hidden">
+                 
+                <div class="templatemo-flex-row flex-content-row">
+                  <div class="col-1 col-lg-6 col-md-12">
+                    <h2 class="text-center">Modular<span class="badge">new</span></h2>
+                    <div id="pie_chart_div" class="templatemo-chart"></div> <!-- Pie chart div -->
+                  </div>
+                  <div class="col-1 col-lg-6 col-md-12">
+                    <h2 class="text-center">Interactive<span class="badge">new</span></h2>
+                    <div id="bar_chart_div" class="templatemo-chart"></div> <!-- Bar chart div -->
+                  </div>  
+                </div>    
+                <div class="templatemo-flex-row flex-content-row">
+                  <div class="col-1 col-lg-6 col-md-12">
+                    <h2 class="text-center">Modular<span class="badge">new</span></h2>
+                    <div id="pie_chart_div1" class="templatemo-chart"></div> <!-- Pie chart div -->
+                  </div>
+                  <div class="col-1 col-lg-6 col-md-12">
+                    <h2 class="text-center">Interactive<span class="badge">new</span></h2>
+                    <div id="bar_chart_div1" class="templatemo-chart"></div> <!-- Bar chart div -->
+                  </div>  
+                </div>              
+              </div>
+            </div>
+          </div>
     	</div>
  	</div>
 </div>
@@ -250,7 +279,12 @@ if(volunteerStatus == 1){
 <div class="footer" style="background-color:#f8f8f8;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
-	  
+	 <% workDiary = ct.getWorkDiaryCount(request,response);
+	workMeeting = ct.getWorkMeetingCount(request,response);
+	workTraining = ct.getWorkTrainingCount(request,response);
+	project = ct.getVolunteerProjectCount(request,response);
+	teamprojects = ct.getVolunteerTeamProjectCount(request,response);
+	branchProject = ct.getVolunteerBranchProjectCount(request,response); %>
 <script type="text/javascript">
     function validate()
     {
@@ -317,5 +351,91 @@ if(volunteerStatus == 1){
 
 </script>
 	  
+    <!-- JS -->
+    <script src="js/jquery-1.11.2.min.js"></script>      <!-- jQuery -->
+    <script src="js/jquery-migrate-1.2.1.min.js"></script> <!--  jQuery Migrate Plugin -->
+    <script src="https://www.google.com/jsapi"></script> <!-- Google Chart -->
+    <script>
+      /* Google Chart 
+      -------------------------------------------------------------------*/
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart); 
+      
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+          // Create the data table.
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Topping');
+          data.addColumn('number', 'Work Diary'); 
+          
+          data.addRows([
+            ['Work Diary', <%=workDiary%>],
+            ['Work Meeting', <%=workMeeting%>],
+            ['Work Training', <%=workTraining%>] 
+             
+          ]);
+
+          // Set chart options
+          var options = {'title':'How Many Work Diaries, Work Meeting and Work Trainings Submitted'};
+
+          // Instantiate and draw our chart, passing in some options.
+          var pieChart = new google.visualization.PieChart(document.getElementById('pie_chart_div'));
+          pieChart.draw(data, options);
+
+          var barChart = new google.visualization.BarChart(document.getElementById('bar_chart_div'));
+          barChart.draw(data, options);
+      }
+      function drawChart1() {
+
+          // Create the data table.
+          var data = new google.visualization.DataTable();
+          data.addColumn('string', 'Topping');
+          data.addColumn('number', 'Work Diary'); 
+          
+          data.addRows([
+            ['Work Diary', <%=project%>],
+            ['Work Meeting', <%=teamprojects%>],
+            ['Work Training', <%=branchProject%>] 
+             
+          ]);
+
+          // Set chart options
+          var options = {'title':'How Indvidual Projects, Team Projects and Branch Projects are Assigned'};
+
+          // Instantiate and draw our chart, passing in some options.
+          var pieChart = new google.visualization.PieChart(document.getElementById('pie_chart_div1'));
+          pieChart.draw(data, options);
+
+          var barChart = new google.visualization.BarChart(document.getElementById('bar_chart_div1'));
+          barChart.draw(data, options);
+      }
+
+      $(document).ready(function(){
+        if($.browser.mozilla) {
+          //refresh page on browser resize
+          // http://www.sitepoint.com/jquery-refresh-page-browser-resize/
+          $(window).bind('resize', function(e)
+          {
+            if (window.RT) clearTimeout(window.RT);
+            window.RT = setTimeout(function()
+            {
+              this.location.reload(false); /* false to get page from cache */
+            }, 200);
+          });      
+        } else {
+          $(window).resize(function(){
+            drawChart();
+            drawChart1();
+          });  
+        }   
+      });
+      
+    </script>
 </body>
 </html>
