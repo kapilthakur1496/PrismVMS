@@ -161,7 +161,7 @@ body
 				</div>
 				<div class="forg">
 					  
-					<a href="volunteerLogin.jsp" class="forg-right">Sign In</a>
+					<a href="volunteerLogin.jsp" class="forg-right"><span>Already a member? &nbsp;</span>Sign In</a>
 					 
 				<div class="clearfix"></div>
 				</div>

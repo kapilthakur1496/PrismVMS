@@ -204,7 +204,7 @@ if(volunteerStatus == 1){
 	 	  	<tr>
 	 	  		<th>#</th>
 	 	  		<th>Training Type</th>
-	 	  		<th>training Date</th>
+	 	  		<th>Training Date</th>
 	 	  		<th>Training Duration</th>
 	 	  		<th>Comment</th>  
 				<th>Training learnings</th>

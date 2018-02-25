@@ -210,7 +210,7 @@ if(volunteerStatus == 1){
 							<%= vmsExperinceRs.getString("request_status") %>
 							</span> 		
 				 	 	</div> 
-						<div class="collapsible-body" style="background-color: #fff;">
+						<div class="collapsible-body" style="background-color: #fff;" >
 							<div class="col-lg-12" style="margin-left:8px;">
 							<br><%= vmsExperinceRs.getString("category") %>
 								<br><br>
@@ -230,7 +230,7 @@ if(volunteerStatus == 1){
 					      <div class="modal-content">
 					        <div class="modal-header">
 					          <button type="button" class="close" data-dismiss="modal">&times;</button>
-					          <h4 class="modal-title">VMS Experience Chat Box</h4>
+					          <h4 class="modal-title">VMS Experience Comment Box</h4>
 					        </div>
 					        <div class="modal-body">
 					        	<%while(vmsExperinceCommentRs.next()){  
@@ -271,12 +271,12 @@ if(volunteerStatus == 1){
                                         <textarea  placeholder='Comment Box'     style="  background: #ddd;  padding:5x; color:#333; width:89.5%; border-radius: 2px;
 border: 1px solid #cccccc;" required name="comment" rows="3" cols="80"></textarea>
                                         <input type="submit"  style="background:transparent;width: 38px;
-    margin-top: 88px; opacity:1; color:#337ab7; display: inine-block; font-size: 36px; height:48px; border: none;"   class=" glyphicon"  value="&#xe171;"> </input>
+    position:relative; opacity:1; color:#337ab7; display: inine-block; font-size: 36px; height:48px; border: none;"   class=" glyphicon"  value="&#xe171;"> </input>
                                     </form>
                                 </div>
 					        </div>
 					        <div class="modal-footer">
-					          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					          
 					        </div>
 					      </div>
 					      

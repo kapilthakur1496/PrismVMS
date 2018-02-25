@@ -84,7 +84,7 @@ body {
 		<div class="main-agileits">
 				<div class="form-w3agile">
 					<h3>Login</h3>
-					<form action="AdminLogin" method="post">
+					<form action="AdminLogin" method="post"> 
 					<div class="key input-group">
 							<span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
 							<input  type="text" name="email" required="" placeholder="Email" class="form-control">
