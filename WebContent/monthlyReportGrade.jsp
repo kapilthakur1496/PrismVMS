@@ -127,8 +127,8 @@ String email = request.getParameter("email");
                 <div   id="collapseExample" style="margin-top:3px;" >
                     <ul class="nav flex-column" id="exCollapsingNavbar">
              			<li   class="nav-item" style="text-algin:center">
-		                    <div class="center">
-		                     <img src="DisplayMentorPic?name=<%=adminId %>" align="middle" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 80px;height: 80px;border-radius: 50%;">
+		                    <div class="text-center">
+		                     <img src="DisplayMentorPic?name=<%=adminId %>" align="middle" style="  width: 80px;text-aling: center;margin-top: 11px; height: 80px;border-radius: 50%;">
 		                 	</div>
                  		</li>
                 		<li class="nav-item" >
