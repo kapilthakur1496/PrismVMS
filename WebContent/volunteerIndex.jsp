@@ -363,6 +363,7 @@ if(volunteerStatus == 1){
 
       // Set a callback to run when the Google Visualization API is loaded.
       google.setOnLoadCallback(drawChart); 
+      google.setOnLoadCallback(drawChart); 
       
       // Callback that creates and populates a data table,
       // instantiates the pie chart, passes in the data and
@@ -396,12 +397,12 @@ if(volunteerStatus == 1){
           // Create the data table.
           var data = new google.visualization.DataTable();
           data.addColumn('string', 'Topping');
-          data.addColumn('number', 'Work Diary'); 
+          data.addColumn('number', 'Projects'); 
           
           data.addRows([
-            ['Work Diary', <%=project%>],
-            ['Work Meeting', <%=teamprojects%>],
-            ['Work Training', <%=branchProject%>] 
+            ['Individual ', <%=project%>],
+            ['Team', <%=teamprojects%>],
+            ['Branch', <%=branchProject%>] 
              
           ]);
 
