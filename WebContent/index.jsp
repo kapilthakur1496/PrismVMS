@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +27,7 @@ overflow-x:hidden;
 
 </style>
 <body>
-<div class="outercontainer" style="position:fixed;">
+<div class="outercontainer" >
 	<div class="header-bottom-w3ls">  
 		<div class="row">
 			<div class="col-md-2 logo-w3">
@@ -47,8 +46,8 @@ overflow-x:hidden;
 					</div> 
 					<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 						<ul class="nav navbar-nav ">
-							<li><a href="index.jsp" class="hyper "><span>Home</span></a></li>	
-							<li class=" active"><a href="about.html" class="hyper"><span>About</span></a></li>
+							<li class=" active"><a href="index.jsp" class="hyper "><span>Home</span></a></li>	
+							<li ><a href="about.html" class="hyper"><span>About</span></a></li>
 							<li><a href="contact.jsp" class="hyper"><span>Contact Us</span></a></li>
 							<li class=" "><a href="faq.jsp" class="hyper"><span>FAQ</span></a></li>
 						 </ul>
@@ -66,7 +65,7 @@ overflow-x:hidden;
 
 <div class="outercontainer">
  
-<div class="team" id="team" style="positon:fixed;" style="position: fixed; top: 0; width: 100%; height: 100%; z-index: -1;">
+<div class="team" id="team"  >
  
 	<div class="container">
 	 
@@ -320,8 +319,7 @@ overflow-x:hidden;
 				<li><a href="volunteerLogin.jsp">Volunteer Login</a></li>
 				<li><a href="adminLogin.jsp">Mentor Login</a></li>
 				<li><a href="volunteerPreLogin.jsp">Volunteer Application Status</a></li>
-		
-			</ul>
+			 </ul>
 		</div>
 		<div class="clearfix"></div>
 		 </div>

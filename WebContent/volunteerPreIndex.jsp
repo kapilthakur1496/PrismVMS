@@ -138,7 +138,7 @@ button:hover {
 			</div>  
 			<div class="col-md-2 cart-wthree">  
 				 
-					<a href="volunteerPreLogout.jsp" class="w3view-cart"  style="color:#66bdd7;" ><br> Sign Out </a>
+					<a href="volunteerPreLogout.jsp" class="w3view-cart"  style="color:#fff;" ><br> Sign Out </a>
 				  	 
 			</div>
 			  	    
