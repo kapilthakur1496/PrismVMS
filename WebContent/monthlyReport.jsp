@@ -116,7 +116,7 @@ if(volunteerStatus == 1){
  
  	
  
-<div class="container" style="paddin:0px; margin-left:0px;">
+<div class="outercontainer" style="padding-top:0px;  padding-right:10px; margin-left:10px; margin-top:10px; margin-right:15px;">
     <div class="row">
         <div class="col-md-2 col-lg-3 col-sm-3 col-xs-12" >
 
@@ -149,7 +149,7 @@ if(volunteerStatus == 1){
                             <a class="nav-link" href="workDiary.jsp">Work Diary</a>
                         </li> 
                          <li  class="nav-item">
-                            <a class="nav-link active" href="workDiaryView.jsp">View Work Diary</a>
+                            <a class="nav-link" href="workDiaryView.jsp">View Work Diary</a>
                         </li> 
                         <li  class="nav-item">
                             <a class="nav-link" href="workMeeting.jsp">Work Meeting</a>
@@ -167,11 +167,11 @@ if(volunteerStatus == 1){
                             <a class="nav-link" href="projectAssigned.jsp?pN=1">Project Assigned</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="monthlyReport.jsp">Monthly Report</a>
+                            <a class="nav-link active" href="monthlyReport.jsp">Monthly Report</a>
                         </li>
                         <li   class="nav-item">
                             <a class="nav-link" href="monthlyReportView.jsp">View Monthly Report </a>
-                        </li>
+                        </li> 
                         <li class="nav-item">
                             <a class="nav-link  " href="viewTeamProject.jsp">View Team Project</a>
                         </li>
@@ -198,14 +198,27 @@ if(volunteerStatus == 1){
 	 	  <% String id= request.getParameter("id");
 	 	  String name= request.getParameter("name");%> 
 	 	  <form action="Control?action=monthWorkDiray" method="post">
-	 	  <label>Start Date</label>
+	 	 <br>  <div class="form-group">
+	 	 <label>Start Date</label>
 		 <input required type="date" name="fromDate" style="opacity:1;" class="form-control">
-			 <br><br><br><label>End Date</label>	<input required type="date" name="toDate" style="opacity:1;" placeholder="Choose to date" class="form-control">
-			 
-		<br><br>	<br><textarea  required name="skills" placeholder="Skills Acquired" class="form-control"></textarea>
-		<br> <textarea required name="progress" placeholder="Progress" class="form-control"></textarea>
-		<br><textarea  required  name="challenges" placeholder="Challenges" class="form-control"></textarea>
-		<br> <textarea  required name="futureProspects" placeholder="Future Prospects" class="form-control"></textarea>
+		 </div>
+			 <br> <div class="form-group"> 
+			  <label>End Date</label>	
+			  <input required type="date" name="toDate" style="opacity:1;" placeholder="Choose to date" class="form-control">
+			 </div>
+		<br> 	 <div class="form-group">
+		  <label>Skills Acquired</label>	
+		<textarea  required name="skills" placeholder="Skills Acquired" class="form-control"></textarea>
+		</div>
+		<br> <div class="form-group">
+			 <label>Progress</label>	
+			 <textarea required name="progress" placeholder="Progress" class="form-control"></textarea>
+		</div>
+		<br><div class="form-group">
+			 <label>Challenges</label>	
+		<textarea  required  name="challenges" placeholder="Challenges" class="form-control"></textarea></div>
+		<br><div class="form-group">
+			 <label>Future Prospects</label>	  <textarea  required name="futureProspects" placeholder="Future Prospects" class="form-control"></textarea>
 			<br>	<br><input type="submit" style="opacity:1;"  value="Submit Monthly Report" >
 				</form>
     	</div>

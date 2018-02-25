@@ -116,7 +116,7 @@ if(volunteerStatus == 1){
  
  	
  
-<div class="container" style="paddin:0px; margin-left:0px;">
+<div class="outercontainer" style="padding-top:0px;  padding-right:10px; margin-left:10px; margin-top:10px; margin-right:15px;">
     <div class="row">
         <div class="col-md-2 col-lg-3 col-sm-3 col-xs-12" >
 
@@ -125,7 +125,7 @@ if(volunteerStatus == 1){
  
                 <div   id="collapseExample"style="margin-top:3px;" >
                      <ul class="nav flex-column" id="exCollapsingNavbar">
-             			<li   class="nav-item" style="text-algin:center">
+             			<li   class="nav-item" style="t	ext-algin:center">
 		                    <div class="center">
 		                     <img src="DisplayVolunteerPic?name=<%=volunteerId %>" align="middle" style="  width: 80px;text-aling: center;margin-top: 11px;margin-left: 80px;height: 80px;border-radius: 50%;">
 		                 	</div>
@@ -149,7 +149,7 @@ if(volunteerStatus == 1){
                             <a class="nav-link" href="workDiary.jsp">Work Diary</a>
                         </li> 
                          <li  class="nav-item">
-                            <a class="nav-link active" href="workDiaryView.jsp">View Work Diary</a>
+                            <a class="nav-link " href="workDiaryView.jsp">View Work Diary</a>
                         </li> 
                         <li  class="nav-item">
                             <a class="nav-link" href="workMeeting.jsp">Work Meeting</a>
@@ -170,7 +170,7 @@ if(volunteerStatus == 1){
                             <a class="nav-link" href="monthlyReport.jsp">Monthly Report</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="monthlyReportView.jsp">View Monthly Report </a>
+                            <a class="nav-link active" href="monthlyReportView.jsp">View Monthly Report </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link  " href="viewTeamProject.jsp">View Team Project</a>
@@ -222,11 +222,11 @@ if(volunteerStatus == 1){
 	 	  			<td><%=monthlyReportRs.getString("submit_date").substring(0,10) %></td>
 	 	  			<td><%=monthlyReportRs.getString("from_date") %></td>
 	 	  			<td><%=monthlyReportRs.getString("to_date") %></td>
-	 	  			<td><%=monthlyReportRs.getString("skillaacquired") %></td> 
- 	  				<td><%=monthlyReportRs.getString("progress")%></td> 
- 	  				<td><%=monthlyReportRs.getString("challenges") %></td>
- 	  				<td><%=monthlyReportRs.getString("future_prospects") %></td>
- 	  				<td><%=monthlyReportRs.getString("report_status") %></td> 
+	 	  			<td><textarea readonly><%=monthlyReportRs.getString("skillaacquired") %></textarea></td> 
+ 	  				<td><textarea readonly><%=monthlyReportRs.getString("progress")%></textarea></td> 
+ 	  				<td><textarea readonly><%=monthlyReportRs.getString("challenges") %></textarea></td>
+ 	  				<td><textarea readonly><%=monthlyReportRs.getString("future_prospects") %></textarea></td>
+ 	  				<td><textarea readonly><%=monthlyReportRs.getString("report_status") %></textarea></td> 
  	  				<td><a href="monthlyReportViewGrade.jsp?id=<%=monthlyReportRs.getString("month_work_id") %>">View</a> </td> 
  	  			</tr>
  	  			

@@ -111,7 +111,7 @@ finally
 }
 if(volunteerStatus == 1){ 
 %> 
-<div class="container" style="paddin:0px; margin-left:0px;">
+<div class="outercontainer" style="padding-top:0px;  padding-right:10px; margin-left:10px; margin-top:10px; margin-right:15px;">
     <div class="row">
         <div class="col-md-2 col-lg-3 col-sm-3 col-xs-12" >
 
@@ -144,7 +144,7 @@ if(volunteerStatus == 1){
                             <a class="nav-link" href="workDiary.jsp">Work Diary</a>
                         </li> 
                          <li  class="nav-item">
-                            <a class="nav-link active" href="workDiaryView.jsp">View Work Diary</a>
+                            <a class="nav-link " href="workDiaryView.jsp">View Work Diary</a>
                         </li> 
                         <li  class="nav-item">
                             <a class="nav-link" href="workMeeting.jsp">Work Meeting</a>
@@ -174,10 +174,10 @@ if(volunteerStatus == 1){
                             <a class="nav-link" href="viewBranchProject.jsp">Branch Project</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="grievance.jsp">Grievance</a>
+                            <a class="nav-link active" href="grievance.jsp">Grievance</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="grievanceView.jsp">View Grievance  </a>
+                            <a class="nav-link " href="grievanceView.jsp">View Grievance  </a>
                         </li>
                         <li   class="nav-item">
                             <a class="nav-link" href="vmsExperience.jsp">VMS Feedback</a>
@@ -193,7 +193,10 @@ if(volunteerStatus == 1){
 	 	  <% String id= request.getParameter("id");
 	 	  String name= request.getParameter("name");%> 
 	 	  <form action="Control?action=submitGrievance" method="post">
-			  <br><br><select required name="grievanceType"  class="form-control">
+	 	   <br>
+			 <div class="form-group">
+				 <label>Select Grievance Type</label>
+			   <select required name="grievanceType"  class="form-control">
 			<option value="">Select Grievance Type</option>
 			<% meetingRs = ct.getGrievanceType();  
 				while(meetingRs.next()){
@@ -201,8 +204,13 @@ if(volunteerStatus == 1){
 			 	<option value="<%=meetingRs.getString("grievance")%>"><%=meetingRs.getString("grievance")%></option>
 				<%} %>
 			</select>
-			<br><br><textarea required name="grievanceDesc" placeholder="Enter Your Issue"  class="form-control"></textarea>
-			<br><br><input type="submit" style="opacity:1;"  value="Submit Grievance">
+			</div>
+			 <br>
+			 <div class="form-group">
+				 <label>Grievance</label>
+			 <textarea required name="grievanceDesc" placeholder="Enter Your Grievance"  class="form-control"></textarea>
+			</div>
+			<br><input type="submit" style="opacity:1;"  value="Submit Grievance">
 				</form>
     	</div>
  	</div>

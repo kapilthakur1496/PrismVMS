@@ -117,7 +117,7 @@ if(volunteerStatus == 1){
  
  	
  
-<div class="container" style="paddin:0px; margin-left:0px;">
+<div class="outercontainer" style="padding-top:0px;  padding-right:10px; margin-left:10px; margin-top:10px; margin-right:15px;">
     <div class="row">
         <div class="col-md-2 col-lg-3 col-sm-3 col-xs-12" >
 
@@ -147,10 +147,10 @@ if(volunteerStatus == 1){
                          	<a class="nav-link  " href="volunteerIndex.jsp">Home</a>
                         </li>
                         <li  class="nav-item">
-                            <a class="nav-link" href="workDiary.jsp">Work Diary</a>
+                            <a class="nav-link active" href="workDiary.jsp">Work Diary</a>
                         </li> 
                          <li  class="nav-item">
-                            <a class="nav-link active" href="workDiaryView.jsp">View Work Diary</a>
+                            <a class="nav-link " href="workDiaryView.jsp">View Work Diary</a>
                         </li> 
                         <li  class="nav-item">
                             <a class="nav-link" href="workMeeting.jsp">Work Meeting</a>

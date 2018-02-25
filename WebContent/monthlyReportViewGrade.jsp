@@ -118,7 +118,7 @@ String id = request.getParameter("id");
  
  	
  
-<div class="container" style="paddin:0px; margin-left:0px;">
+<div class="outercontainer" style="padding-top:0px;  padding-right:10px; margin-left:10px; margin-top:10px; margin-right:15px;">
     <div class="row">
         <div class="col-md-2 col-lg-3 col-sm-3 col-xs-12" >
 
@@ -151,7 +151,7 @@ String id = request.getParameter("id");
                             <a class="nav-link" href="workDiary.jsp">Work Diary</a>
                         </li> 
                          <li  class="nav-item">
-                            <a class="nav-link active" href="workDiaryView.jsp">View Work Diary</a>
+                            <a class="nav-link " href="workDiaryView.jsp">View Work Diary</a>
                         </li> 
                         <li  class="nav-item">
                             <a class="nav-link" href="workMeeting.jsp">Work Meeting</a>
@@ -172,7 +172,7 @@ String id = request.getParameter("id");
                             <a class="nav-link" href="monthlyReport.jsp">Monthly Report</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="monthlyReportView.jsp">View Monthly Report </a>
+                            <a class="nav-link active" href="monthlyReportView.jsp">View Monthly Report </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link  " href="viewTeamProject.jsp">View Team Project</a>

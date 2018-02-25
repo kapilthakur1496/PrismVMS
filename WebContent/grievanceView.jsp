@@ -116,7 +116,7 @@ if(volunteerStatus == 1){
  
  	
  
-<div class="container" style="paddin:0px; margin-left:0px;">
+<div class="outercontainer" style="padding-top:0px;  padding-right:10px; margin-left:10px; margin-top:10px; margin-right:15px;">
     <div class="row">
         <div class="col-md-2 col-lg-3 col-sm-3 col-xs-12" >
 
@@ -149,7 +149,7 @@ if(volunteerStatus == 1){
                             <a class="nav-link" href="workDiary.jsp">Work Diary</a>
                         </li> 
                          <li  class="nav-item">
-                            <a class="nav-link active" href="workDiaryView.jsp">View Work Diary</a>
+                            <a class="nav-link " href="workDiaryView.jsp">View Work Diary</a>
                         </li> 
                         <li  class="nav-item">
                             <a class="nav-link" href="workMeeting.jsp">Work Meeting</a>
@@ -182,7 +182,7 @@ if(volunteerStatus == 1){
                             <a class="nav-link" href="grievance.jsp">Grievance</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="grievanceView.jsp">View Grievance  </a>
+                            <a class="nav-link active" href="grievanceView.jsp">View Grievance  </a>
                         </li>
                         <li   class="nav-item">
                             <a class="nav-link" href="vmsExperience.jsp">VMS Feedback</a>
@@ -217,12 +217,12 @@ if(volunteerStatus == 1){
 	 	  			<td><%=i %></td>
 	 	  			<td><%=workMeetingRs.getString("grievance_type") %>
 	 	  			 </td>
-	 	  			<td><%=workMeetingRs.getString("grievance") %></td>
+	 	  			<td><textarea readonly><%=workMeetingRs.getString("grievance") %></textarea></td>
 	 	  			 
 	 	  			<td><%if(workMeetingRs.getString("comment")==null) {%>
 	 	  			
 	 	  			<%}else {%>
-	 	  				<%=workMeetingRs.getString("comment")%>
+	 	  				<textarea readonly><%=workMeetingRs.getString("comment")%></textarea>
 	 	  				
 	 	  				<% }%>
 	 	  			</td> 

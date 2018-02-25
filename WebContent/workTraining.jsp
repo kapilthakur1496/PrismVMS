@@ -116,7 +116,7 @@ if(volunteerStatus == 1){
  
  	
  
-<div class="container" style="paddin:0px; margin-left:0px;">
+<div class="outercontainer" style="padding-top:0px;  padding-right:10px; margin-left:10px; margin-top:10px; margin-right:15px;">
     <div class="row">
         <div class="col-md-2 col-lg-3 col-sm-3 col-xs-12" >
 
@@ -149,7 +149,7 @@ if(volunteerStatus == 1){
                             <a class="nav-link" href="workDiary.jsp">Work Diary</a>
                         </li> 
                          <li  class="nav-item">
-                            <a class="nav-link active" href="workDiaryView.jsp">View Work Diary</a>
+                            <a class="nav-link" href="workDiaryView.jsp">View Work Diary</a>
                         </li> 
                         <li  class="nav-item">
                             <a class="nav-link" href="workMeeting.jsp">Work Meeting</a>
@@ -158,7 +158,7 @@ if(volunteerStatus == 1){
                             <a class="nav-link" href="meetingView.jsp">View Work Meeting</a>
                         </li>
                         <li   class="nav-item">
-                            <a class="nav-link" href="workTraining.jsp">Work Training</a>
+                            <a class="nav-link active" href="workTraining.jsp">Work Training</a>
                         </li>
                         <li   class="nav-item">
                             <a class="nav-link" href="trainingView.jsp">View Work Training</a>
@@ -198,10 +198,19 @@ if(volunteerStatus == 1){
 	 	  <% String id= request.getParameter("id");
 	 	  String name= request.getParameter("name");%> 
 	 	  <form action="Control?action=submitTraining" method="post">
-			<br><br>	<label>Choose training date</label><input type="date" required name="tdate" style="opacity:1;" placeholder="Choose the date of meeting" class="form-control">
-			<br><br><br><label>Choose training time</label><input type="time" required name="ttime" style="opacity:1;" value="00:00" class="form-control">
-			<br><br><br><label>Choose training type</label><select required name="training"  class="form-control">
-			<option value="">Select Training Type</option>
+			<br> 
+			<div class="form-group">
+				<label>Choose training date</label><input type="date" required name="tdate" style="opacity:1;" placeholder="Choose the date of meeting" class="form-control">
+			 </div>
+			 <br>
+			 <div class="form-group">
+				 <label>Choose training time</label>
+				 <input type="time" required name="ttime" style="opacity:1;" value="00:00" class="form-control">
+			</div>
+			<br><div class="form-group">
+				<label>Choose training type</label>
+				<select required name="training"  class="form-control">
+				<option value="">Select Training Type</option>
 			<%	   
 		  		teamName = ct.getVolunteerTeam(volunteerId);
 				String teamId = ct.getTeamId(teamName);
@@ -211,8 +220,13 @@ if(volunteerStatus == 1){
 			 	<option value="<%=trainingRs.getString("training_type")%>"><%=trainingRs.getString("training_type")%></option>
 				<%} %>
 			</select>
-			<br><br><label>Agenda for training</label><textarea required name="trainingDesc" placeholder="Enter what you learned from trainning"  class="form-control"></textarea>
-			<br><br><input type="submit" style="opacity:1;"  value="Submit Meeting">
+			</div>
+			<br><div class="form-group">
+					<label>Agenda for training</label>
+					<textarea required name="trainingDesc" placeholder="Enter what you learned from trainning"  class="form-control"></textarea>
+				</div>
+			<br>
+			<input type="submit" style="opacity:1;"  value="Submit Training">
 				</form>
     	</div>
  	</div>

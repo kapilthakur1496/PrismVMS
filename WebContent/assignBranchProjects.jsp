@@ -115,7 +115,7 @@ if(mentorStatus == 1){
             <div class="bootstrap-vertical-nav" >
 	 
  
-                <div   id="collapseExample"style="paddin:0px; margin-left:0px;" >
+                <div   id="collapseExample"  style="padding-top:0px;  padding-right:10px; margin-left:10px; margin-top:10px; margin-right:15px;" >
                     <ul class="nav flex-column" id="exCollapsingNavbar">
              			<li   class="nav-item" style="text-algin:center">
 		                    <div class="center">

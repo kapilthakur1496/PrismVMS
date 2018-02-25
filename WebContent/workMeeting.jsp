@@ -116,7 +116,7 @@ if(volunteerStatus == 1){
  
  	
  
-<div class="container" style="paddin:0px; margin-left:0px;">
+<div class="outercontainer" style="padding-top:0px;  padding-right:10px; margin-left:10px; margin-top:10px; margin-right:15px;">
     <div class="row">
         <div class="col-md-2 col-lg-3 col-sm-3 col-xs-12" >
 
@@ -143,16 +143,16 @@ if(volunteerStatus == 1){
 	                     
                     		
                        	<li   class="nav-item">
-                         	<a class="nav-link  " href="volunteerIndex.jsp">Home</a>
+                         	<a class="nav-link" href="volunteerIndex.jsp">Home</a>
                         </li>
                         <li  class="nav-item">
                             <a class="nav-link" href="workDiary.jsp">Work Diary</a>
                         </li> 
                          <li  class="nav-item">
-                            <a class="nav-link active" href="workDiaryView.jsp">View Work Diary</a>
+                            <a class="nav-link" href="workDiaryView.jsp">View Work Diary</a>
                         </li> 
                         <li  class="nav-item">
-                            <a class="nav-link" href="workMeeting.jsp">Work Meeting</a>
+                            <a class="nav-link active" href="workMeeting.jsp">Work Meeting</a>
                         </li>
                          <li  class="nav-item">
                             <a class="nav-link" href="meetingView.jsp">View Work Meeting</a>
@@ -198,13 +198,13 @@ if(volunteerStatus == 1){
 	 	  <% String id= request.getParameter("id");
 	 	  String name= request.getParameter("name");%> 
 	 	  <form action="Control?action=submitMeeting" method="post">
-	 	   <div class="form-group">
+	 	  <br> <div class="form-group">
 	 	  <label>Date</label>
-			<br><br>	<input type="date" required name="mdate" style="opacity:1;" placeholder="Choose the date of meeting" class="form-control"></div>
-			
-			<div class="form-group"><br><br>
-			<label >Meeting Time</label><br><br><input type="time" required name="mtime" style="opacity:1;" placeholder="HH:MM" class="form-control"></div>
-			<div class="form-group"><br><br>
+			 <input type="date" required name="mdate" style="opacity:1;" placeholder="Choose the date of meeting" class="form-control"></div>
+			<br>
+			<div class="form-group">  
+			<label >Meeting Time</label><input type="time" required name="mtime" style="opacity:1;" placeholder="HH:MM" class="form-control"></div>
+			<br><div class="form-group"> 
 			<label>Meeting Type</label>
 			<select required name="meeting" class="form-control">
 			<option value="">Select Meeting Type</option>
@@ -214,7 +214,7 @@ if(volunteerStatus == 1){
 			 	<option value="<%=meetingRs.getString("meeting_type")%>"><%=meetingRs.getString("meeting_type")%></option>
 				<%} %>
 			</select></div>
-			<br><br>			<label>Meeting Description</label><textarea required name="meetingDesc" placeholder="Enter the agenda and Discussion of Meeting" class="form-control"></textarea>
+			<br>		<label>Meeting Description</label><textarea required name="meetingDesc" placeholder="Enter the agenda and Discussion of Meeting" class="form-control"></textarea>
 			<br><br><input type="submit" style="opacity:1;"  value="Submit Meeting">
 				</form>
     	</div>
