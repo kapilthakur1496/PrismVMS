@@ -37,21 +37,9 @@ body {
 			<div class="col-md-8 navigation-agileits">
 				<nav class="navbar navbar-default">
 					<div class="navbar-header nav_2">
-						<button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
+						 
 					</div> 
-					<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
-						<ul class="nav navbar-nav ">
-							<li><a href="index.jsp" class="hyper "><span>Home</span></a></li>	
-							<li><a href="about.html" class="hyper"><span>About</span></a></li>
-							<li ><a href="contact.jsp" class="hyper"><span>Contact Us</span></a></li>
-							<li><a href="faq.jsp" class="hyper"><span>FAQ</span></a></li>
-						 </ul>
-					</div>
+					 
 				</nav>
 			</div>  
 			  
@@ -65,7 +53,7 @@ body {
 		<div class="main-agileits">
 				<div class="form-w3agile">
 					<h3>Admin Login</h3>
-					<form action="${pageContext.request.contextPath}/MentorLogin" method="post"> 
+					<form action="${pageContext.request.contextPath}/AdminLogin" method="post"> 
 					<div class="key input-group">
 							<span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
 							<input  type="text" name="email" required="" placeholder="Email" class="form-control">
@@ -87,40 +75,7 @@ body {
 				</div>
 			</div>
 		</div>
- <!--team-->
- <hr style="color:#eee; height:15px;">
-<div class="footer">
-	<div class="container">
-		<div class="col-md-3 footer-grids fgd1">
-		<a href="index.jsp"><img src="../images/logo2.png" alt=" " /> </a>
-		<ul>
-			<li>Christ University</li>
-			<li>Bangalore-560029</li>
-			<li><a href="mailto:info@example.com">prismhack@gmail.com</a></li>
-			<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-			<a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-		</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd2">
-			<h4>Information</h4> 
-			<ul>
-				<li><a href="contact.jsp">Contact Us</a></li>
-				<li><a href="about.html">About</a></li>
-				<li><a href="faq.jsp">FAQ's</a></li>
-			</ul>
-		</div>
-		<div class="col-md-3 footer-grids fgd4">
-			<h4>My Account</h4> 
-			<ul>
-				<li><a href="adminLogin.jsp">Admin Login</a></li>
-				 
-			</ul>
-		</div>
-		<div class="clearfix"></div>
-		 </div>
-</div>
-
+  
 <div class="footer" style="background-color:#2A3F54;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 

@@ -228,9 +228,17 @@ public class Control extends HttpServlet {
 		{   
 			gradeMonthlyReport(request, response);
 		}
+		else if(action.equals("adminForgotPassword"))
+		{   
+			adminForgotPassword(request,response);
+		}
 		else if(action.equals("mentorForgotPassword"))
 		{   
 			mentorForgotPassword(request,response);
+		}
+		else if(action.equals("adminforgotOtpVerification"))
+		{   
+			adminforgotOtpVerification(request,response);
 		}
 		else if(action.equals("forgotOtpVerification"))
 		{   
@@ -7603,7 +7611,133 @@ finally {
 }
 out.close();
 }
+public void adminForgotPassword( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	response.setContentType("text/html");
+    PrintWriter out = response.getWriter();   
+    String email=request.getParameter("email");  
+	Statement checkMentorSt = null;
+	ResultSet checkMentorRs = null; 
+	PreparedStatement updatePassDatePs =null;
+try {  
+	checkMentorSt = connection.createStatement();
+	String mentorId=null;
+ 	String checkQ = "select id as mentorId from admin  where email ='"+email+"' and approve_status= 'Approved'  ";
+ 	checkMentorRs = checkMentorSt.executeQuery(checkQ);
+	
+ 	if (checkMentorRs.next()) { 
+ 	 mentorId = checkMentorRs.getString("mentorId");
+ 	 Random rnd = new Random();
+	 int rand = 100000 + rnd.nextInt(90000); 
+	 
+	 String otp = Integer.toString(rand);
+	 
+	 
+			  
+			     // result = "Sent message successfully....";  
+			String to = email;
+			  	String from = "prismhack@gmail.com";
+   			Properties props = System.getProperties();
+   			props.setProperty("mail.smtp.host", "smtp.gmail.com");
+   			props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+   			props.setProperty("mail.smtp.socketFactory.fallback", "false");
+   			props.setProperty("mail.smtp.port", "465");
+   			props.setProperty("mail.smtp.socketFactory.port", "465");
+   			props.put("mail.smtp.auth", "true");
+   			props.put("mail.debug", "true");
+   			props.put("mail.store.protocol", "pop3");
+   			props.put("mail.transport.protocol", "smtp");
+   			final String username = "prismhack@gmail.com";
+   			final String password = "code2win";
+		       
+			   try{
+			   		Session mySession = Session.getInstance(props, new Authenticator(){
+			   			 
+			   			protected PasswordAuthentication getPasswordAuthentication() {
+			   				return new PasswordAuthentication(username, password);
+						} 
+			   			
+					});
 
+			      MimeMessage message = new MimeMessage(mySession); 
+			      message.setFrom(new InternetAddress(from)); 
+			      message.addRecipient(Message.RecipientType.TO,
+			                               new InternetAddress(to)); 
+			      message.setSubject("PrismVMS Update Password"); 
+			      message.setText("Dear Sir/Ma'am\n "
+			    		  +"\n\n Your otp is "+otp
+			    		    +"\n\nThank You" 
+			    		  +"\nWarm Regards"
+			    		  +"\n\nPrismVMS"
+			    		   );
+			      
+			      Transport.send(message);
+			     // result = "Sent message successfully....";  
+			      
+			   DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+ 			Date date = new Date(); 
+ 			 HttpSession session = request.getSession(); 
+			 session.setAttribute("otp", otp); 
+			String query = "update admin set password_set=? where id = "+mentorId;
+			updatePassDatePs  =  connection.prepareStatement(query);
+			updatePassDatePs.setString(1,  dateFormat.format(date));  
+			updatePassDatePs.executeUpdate(); 
+			      
+			   response.sendRedirect("admin/mentorForgotPassword.jsp?action=otpVarification&email="+email);
+			  
+	   						  
+			  } 
+		    catch (MessagingException mex) {
+		      mex.printStackTrace();
+		      //result = "Error: unable to send message....";
+		   }
+   		 
+			
+ 	}
+ else{     
+	 response.sendRedirect("admin/adminLogin.jsp?action=AccountDoesNotExist");
+ }
+	 
+}  
+catch (SQLException e) {
+	// TODO: handle exception
+e.printStackTrace();
+}
+catch (Exception e) {
+	// TODO: handle exception
+	 e.printStackTrace();
+}
+finally {
+ if(checkMentorSt!=null) {
+		try {
+			checkMentorSt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		}
+ if(checkMentorRs!=null) {
+		try {
+			checkMentorRs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+	 
+	 
+	if(updatePassDatePs!=null) {
+		try {
+			updatePassDatePs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+	
+}
+out.close();
+}
 public   void forgotOtpVerification(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
 	Statement volunteerCountSt =null;
 	ResultSet volunteerCountRs = null;
@@ -7645,6 +7779,77 @@ public   void forgotOtpVerification(HttpServletRequest request, HttpServletRespo
 	        }else
 	        {
 				 response.sendRedirect("mentorForgotPassword.jsp?action=otpIsNotCorrect");
+	        }
+	         
+		} 
+		catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	 catch (Exception e) {
+			// TODO: handle exception
+			 e.printStackTrace();
+		}
+		finally {
+			
+			 if(volunteerCountSt!=null)
+				try {
+					volunteerCountSt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			 if(volunteerCountRs!=null)
+					try {
+						volunteerCountRs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+		}  
+		
+}
+public   void adminforgotOtpVerification(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+	Statement volunteerCountSt =null;
+	ResultSet volunteerCountRs = null;
+	 try {  				
+			String otp = request.getParameter("otp");
+			String email = request.getParameter("email");
+			
+			HttpSession session = request.getSession();   
+	        String checkOtp = (String)session.getAttribute("otp");
+	        if(checkOtp==null) {
+	        	response.sendRedirect("admin/mentorForgotPassword?action=OtpExpired");
+	        }
+	        if(checkOtp.equals(otp)) {
+	        
+				volunteerCountSt = connection.createStatement();
+				volunteerCountRs = volunteerCountSt.executeQuery("select id  from admin where email ='"+email+"' ");
+				PreparedStatement updatePassDatePs =null;
+				String password = request.getParameter("password");
+				String confirmPassword = request.getParameter("confirmPassword");
+				DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	 			Date date = new Date(); 
+		 			
+				if(password.equals(confirmPassword) ) { 
+					if(volunteerCountRs.next()) {
+					
+						String query = "update admin  set password=?,password_set=? where id = "+volunteerCountRs.getString("id");
+						updatePassDatePs  =  connection.prepareStatement(query);
+						updatePassDatePs.setString(1, password);  
+						updatePassDatePs.setString(2, dateFormat.format(date));  
+						
+						updatePassDatePs.executeUpdate();	
+						response.sendRedirect("admin/adminLogin.jsp?action=useNewPassword");
+					
+					}
+		        }else
+		        {
+		        	response.sendRedirect("admin/mentorForgotPassword.jsp?action=PasswordAndConfirmPasswordNotMactched");
+		        } 
+	        }else
+	        {
+				 response.sendRedirect("admin/mentorForgotPassword.jsp?action=otpIsNotCorrect");
 	        }
 	         
 		} 
