@@ -213,7 +213,7 @@ if(mentorStatus == 1){
 								</div>
 								<br>
 								<p style="   font-size:16px;"><%=teamProjectsRs.getString("tproject_desc") %>  </p> 
-								<br><a href="assignTeamProjects.jsp?projectId=<%=teamProjectsRs.getString("id")%>"><i class="fa fa-tags" style="color:#fff; font-size:22px;  "></i> Assign Students </a>
+								<br><a href="assignTeamProjects.jsp?projectId=<%=teamProjectsRs.getString("id")%>" class="btn btn-primary"><i class="fa fa-tags" style="color:#fff; font-size:22px;"></i> Assign Students </a>
 							</div> 
 					</div>
 				</li>
