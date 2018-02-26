@@ -219,7 +219,7 @@ if(volunteerStatus == 1){
 		 	  			<td><textarea style="width:300px;" readonly placeholder="Enter Your Comment"><%=workDiaryRs.getString("work_desc") %></textarea></td>
 	 	  				<%if(workDiaryRs.getString("comment")==null) {%>
 	 	  				<td><textarea style="width:300px;" required name="comment" placeholder="Enter Your Comment"></textarea></td>
-		 	  			<td><input type="submit" style="opacity:1; margin-left:10px; width:100px;" value="Submit"></td>
+		 	  			<td><input type="submit" style="opacity:1; margin-left:10px; width:100px;" value="Submit" class="btn btn-primary"></td>
 	 	  				<%} else if(workDiaryRs.getString("comment")!=null){ %>
 	 	  				
 	 	  				<td><textarea style="width:300px;" required name="comment"><%=workDiaryRs.getString("comment") %></textarea></td>

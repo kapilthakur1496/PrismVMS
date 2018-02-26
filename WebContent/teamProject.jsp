@@ -198,7 +198,7 @@ if(mentorStatus == 1){
 					<br><br><label>Start Date</label><input  required  name="projectStartDate" type="date"  style="opacity:1" required placeholder="Choose Project Start Date" class="form-control">
 					<br><br><label>End Date</label><input  required name="projectEndDate" type="date"  style="opacity:1" required placeholder="Choose Project End Date" class="form-control">
 				 	<br><br><label>Project Description</label><textarea  required   name="projectDesc"  style="opacity:1" placeholder="Enter Project Description" class="form-control"></textarea>
-					<br><br><input type="submit" style="opacity:1" value="Create Team Project">
+					<br><br><input type="submit" style="opacity:1" value="Create Team Project" class="btn btn-success btn-lg btn-block">
  			</form>
           
     	</div>

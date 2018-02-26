@@ -251,7 +251,7 @@ if(volunteerStatus == 1){
                                  <div class="row" style=" float:left; text-align:center; bottom:0px;width:100%;">
                                     <form style="width:100%" method="post" action="Control?action=addMentorVmsExperienceComment">
                                         <input type="hidden" name="id" value="<%=comment%>">
-                                        <textarea  placeholder='Comment Box'     style="  background: #ddd;  padding:5x; color:#333; width:89.5%; border-radius: 2px;
+                                        <textarea  placeholder='Comment Box'     style="  background: #ddd;  padding:5x; color:#333; border-radius: 2px;
 border: 1px solid #cccccc;" required name="comment" rows="3" cols="80"></textarea>
                                         <input type="submit"  style="background:transparent;width: 38px;
     margin-top: 88px; opacity:1; color:#337ab7; display: inine-block; font-size: 36px; height:48px; border: none;"   class=" glyphicon"  value="&#xe171;"> </input>
@@ -259,7 +259,7 @@ border: 1px solid #cccccc;" required name="comment" rows="3" cols="80"></textare
                                 </div>
 					        </div>
 					        <div class="modal-footer">
-					          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					          
 					        </div>
 					      </div>
 					      
