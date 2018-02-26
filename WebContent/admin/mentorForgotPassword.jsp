@@ -25,9 +25,8 @@ body {
 	overflow-x:hidden;
 }
 </style>
-</head>
 <body>
-  <div class="outercontainer">
+   <div class="outercontainer">
 	<div class="header-bottom-w3ls">  
 		<div class="row">
 			<div class="col-md-2 logo-w3">
@@ -48,8 +47,8 @@ body {
 						<ul class="nav navbar-nav ">
 							<li><a href="index.jsp" class="hyper "><span>Home</span></a></li>	
 							<li><a href="about.html" class="hyper"><span>About</span></a></li>
-							<li ><a href="contact.jsp" class="hyper"><span>Contact Us</span></a></li>
-							<li><a href="faq.jsp" class="hyper"><span>FAQ</span></a></li>
+							<li><a href="contact.jsp" class="hyper"><span>Contact Us</span></a></li>
+							<li class=" "><a href="faq.jsp" class="hyper"><span>FAQ</span></a></li>
 						 </ul>
 					</div>
 				</nav>
@@ -59,35 +58,63 @@ body {
 			<div class="clearfix"></div>
 		</div>
 	</div>
-</div>	  											
- 
-	<div class="login">
+</div>
+	<div class="login"> 
 		<div class="main-agileits">
 				<div class="form-w3agile">
-					<h3>Admin Login</h3>
-					<form action="${pageContext.request.contextPath}/MentorLogin" method="post"> 
-					<div class="key input-group">
+				<% String action = request.getParameter("action");%>
+						<%if(action == null){ %>
+					<h3>Verify Email</h3>
+					<form action="Control?action=mentorForgotPassword" method="post">
+					
+						<div class="key input-group">
 							<span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-							<input  type="text" name="email" required="" placeholder="Email" class="form-control">
+							<input  type="text" name="email" required="true" placeholder="Email" class="form-control">
 							<div class="clearfix"></div>
 						</div>
-						 
-						<div class="key input-group">
-							<span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-							<input  type="password" name="password" required="" placeholder="Password" class="form-control">
-							<div class="clearfix"></div>
-						</div> 
-						<input type="submit" value="Sign In" class="btn btn-primary">
+						<input type="submit" value="Get OTP" class="btn btn-primary">
+						 </form>
+						<%}else if(action.equals("otpVarification") || action.equals("otpIsNotCorrect")){
+							String email = request.getParameter("email");
+							
+						%>
+						<h3>Set Password</h3>
+						<form action="Control?action=forgotOtpVerification" method="post">
+							<div class="key input-group">
+								<span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+								<input  type="text" readonly name="email" value="<%=email%>" required placeholder="Email" class="form-control">
+								<div class="clearfix"></div>
+							</div>
+							<div class="key input-group">
+								<span class="input-group-addon"><i class="fa fa-mobile-phone" aria-hidden="true"></i></span>
+								<input  type="text" name="otp" required placeholder="OTP" class="form-control">
+								<div class="clearfix"></div>
+							</div>
+							<div class="key input-group">
+								<span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+								<input  type="password" name="password" required placeholder="New Password" class="form-control">
+								<div class="clearfix"></div>
+							</div>
+							<div class="key input-group">
+								<span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+								<input  type="password" name="confirmPassword" required placeholder="Confirm Password" class="form-control">
+								<div class="clearfix"></div>
+							</div>
+							
+						
+						<input type="submit" value="Set Password" class="btn btn-primary">
+					  <%} %>
 					</form>
 				</div>
 				<div class="forg">
-					<a href="mentorForgotPassword.jsp" class="forg-left">Forgot Password</a>
+					<a href="adminLogin.jsp" class="forg-left">Login</a>
 					 
 				<div class="clearfix"></div>
 				</div>
 			</div>
 		</div>
- <!--team-->
+
+<!--team-->
  <hr style="color:#eee; height:15px;">
 <div class="footer">
 	<div class="container">
@@ -113,7 +140,7 @@ body {
 		<div class="col-md-3 footer-grids fgd4">
 			<h4>My Account</h4> 
 			<ul>
-				<li><a href="adminLogin.jsp">Admin Login</a></li>
+				 <li><a href="adminLogin.jsp">Admin Login</a></li>
 				 
 			</ul>
 		</div>
@@ -121,91 +148,62 @@ body {
 		 </div>
 </div>
 
-<div class="footer" style="background-color:#2A3F54;   height:50px;">
+	 <div class="footer" style="background-color:#2A3F54;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
+	
+	  
 <div id="snackbar"></div>
-
- <% 
- String action =request.getParameter("action");
+ <%  
  if(action==null){
  
  }else if(action!=null)
- {
-	 
+ { 
   
-  %><%if(action.equals("useNewPassword")){ 
+  if(action.equals("PasswordAndConfirmPasswordNotMactched")){ 
  %>
-	 <script>
+<script>
  
     var x = document.getElementById("snackbar")
     x.className = "show";
-    x.innerHTML="Use New Password to Login";
+    x.innerHTML="Password and Confrim Password Does Not Match";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
  
 </script>
-<%}else if(action.equals("AccountDoesNotExist")){ 
- %>
+<%}else if(action.equals("otpVarification")){ 
+	 %>
 	 <script>
+	  
+	     var x = document.getElementById("snackbar")
+	     x.className = "show";
+	     x.innerHTML="Please check OTP on Your Registered Email Id";
+	     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+	  
+	 </script>
+	 <%}else if(action.equals("otpIsNotCorrect")){ 
+ %>
+<script>
  
     var x = document.getElementById("snackbar")
     x.className = "show";
-    x.innerHTML="Your Account Does not Exist";
+    x.innerHTML="OTP is Wrong";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
  
 </script>
-<%}else if(action.equals("PasswordAlreadySetUseForgotOption")){ 
+<%} else if(action.equals("OtpExpired")){ 
  %>
-	 <script>
+<script>
  
     var x = document.getElementById("snackbar")
     x.className = "show";
-    x.innerHTML="You Have Already Set Your Password Please Use Forgot Password Option";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
- 
-</script> 
-<%}else if(action.equals("notAdmin")){ 
- %>
-	 <script>
- 
-    var x = document.getElementById("snackbar")
-    x.className = "show";
-    x.innerHTML="You are not an Admin";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
- 
-</script> 
-<%}else if(action.equals("LoginAgain")){ 
- %>
-	 <script>
- 
-    var x = document.getElementById("snackbar")
-    x.className = "show";
-    x.innerHTML="Sorry, Session Expired Please Login Again";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
- 
-</script>  
-<%}else if(action.equals("NotMentor")){ 
- %>
-	 <script>
- 
-    var x = document.getElementById("snackbar")
-    x.className = "show";
-    x.innerHTML="Your Account has been Archived. Please Check with Adminstrator";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
- 
-</script>  
-<%}else if(action.equals("UserNotValid")){ 
- %>
-	 <script>
- 
-    var x = document.getElementById("snackbar")
-    x.className = "show";
-    x.innerHTML="Email or Password is Incorrect";
+    x.innerHTML="Your OTP is Expired";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
  
 </script>
 <%}%>
   
 <% } %>
+   
+	 
 </body>
 </html>

@@ -16,14 +16,14 @@ import javax.servlet.http.HttpSession;
 
 import com.daniel.util.DbUtil;
 
-public class AdminLogin extends HttpServlet {
+public class MentorLogin extends HttpServlet {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private static Connection connection;
 
-	public   AdminLogin()
+	public   MentorLogin()
 	{
 		connection = DbUtil.getConnection();
 	}
@@ -64,10 +64,9 @@ public class AdminLogin extends HttpServlet {
 					session.setAttribute("adminId", adminId); 
 					session.setAttribute("adminType", adminType); 
 					session.setMaxInactiveInterval(1800); 
-					if(adminType.equals("Admin")) {
-						response.sendRedirect("admin/index.jsp"); 
-					}
-					  
+					if(adminType.equals("Mentor")) {
+						response.sendRedirect("mentorIndex.jsp"); 
+					} 
 				}  
 				else
 				{
