@@ -227,7 +227,7 @@ if(mentorStatus == 1){
 		            </div>
 		        </div>
     		</div>
-    		<a href="#"  data-toggle="modal" data-target="#myModal" class="btn btn-info"> Edit Profile</a>
+    		<a href="#"  data-toggle="modal" data-target="#myModal"  class="btn btn-info btn-block"> Edit Profile</a>
          </div>
  	</div>
 </div>
