@@ -388,8 +388,8 @@ if(adminId !=null){
             </ul>
           </div>  -->         
           <footer class="text-right">
-            <p>Copyright &copy; 2018 SarvaHitkari 
-            | Designed by <a href="/sarv_hitkari/about.html" target="_parent">Kapil Thakur and Anurag Goel</a></p>
+            <p>Copyright &copy; 2018 PrismVMS 
+            | Designed by <a href="#" target="_parent">Kapil Thakur and Anurag Goel</a></p>
           </footer>         
         </div>
       </div>

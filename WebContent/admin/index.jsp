@@ -520,13 +520,18 @@ address: <span id="c"></span>
                        <td><%=contactDetails.getString("message")%></td>
                      </tr>
                      <%j++; 
-				} %>                    
+				}j=1; %>                    
                    </tbody>
                  </table>    
                </div>                          
              </div>
            </div>             
          </div> 
+          <footer class="text-right">
+            <p>Copyright &copy; 2018 PrismVMS 
+            | Designed by <a href="#" target="_parent">Kapil Thakur and Anurag Goel</a></p>
+          </footer>         
+        </div>
       </div>
     </div>
      <%} %>

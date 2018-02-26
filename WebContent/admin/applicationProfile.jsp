@@ -58,28 +58,29 @@ if(adminId !=null){
       <div class="templatemo-sidebar">
         <header class="templatemo-site-header">
           <header class="templatemo-site-header"  >
-        	<!-- <a href="index.html"> --><img src="../images/logo2.png" alt=" " >   <!--   </a>   -->   
+        	<a href="index.jsp">  <img src="../images/logo2.png" alt=" " >      </a>     
 	   </header>
         </header>
         <div class="profile-photo-container">
-          <img src="DisplayMentorPic?name=<%=adminId%>" alt="Profile Photo" class="img-responsive">  
+          <img src="${pageContext.request.contextPath}/DisplayMentorPic?name=<%=adminId%>" alt="Profile Photo" class="img-responsive">  
           <div class="profile-photo-overlay"></div>
         </div>      
         <!-- Search box -->
         <form class="templatemo-search-form" role="search">
           <div class="input-group">
               <button type="submit" class="fa fa-search"></button>
-              <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">           
+              <input type="text" class="form-control" placeholder="Search Feature"   onkeyup="search()" id="myInput"  name="srch-term" id="srch-term">           
           </div>
         </form>
         <div class="mobile-menu-icon">
             <i class="fa fa-bars"></i>
           </div>
         <nav class="templatemo-left-nav">          
-          <ul>
-            <li><a href="index.jsp"><i class="fa fa-home fa-fw"></i>Home</a></li>
-            <li><a href="manageUsers.jsp?pageNumber=1" class="active"><i class="fa fa-users fa-fw"></i>Manage Users</a></li>
-         </ul>  
+         <ul id="exCollapsingNavbar3">
+          	<li><a href="index.jsp" class="active"><i style="color:#fff; font-size:22px;" class="fa fa-home fa-fw"></i>Home</a></li>
+            <li><a href="manageUsers.jsp?pageNumber=1" ><i  style="color:#fff; font-size:22px;" class="fa fa-users fa-fw"></i>Manage Users</a></li>
+          
+          </ul>  
         </nav>
       </div>
       <!-- Main content --> 
@@ -164,8 +165,8 @@ if(adminId !=null){
                    
                
           <footer class="text-right">
-            <p>Copyright &copy; 2018 SarvaHitkari 
-            | Designed by <a href="/sarv_hitkari/about.html" target="_parent">Kapil Thakur and Anurag Goel</a></p>
+            <p>Copyright &copy; 2018 PrismVMS 
+            | Designed by <a href="#" target="_parent">Kapil Thakur and Anurag Goel</a></p>
           </footer>         
         </div>
       </div>
