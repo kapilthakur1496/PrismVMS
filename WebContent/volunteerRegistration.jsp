@@ -338,7 +338,20 @@ function fixStepIndicator(n) {
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
  
 </script>
-<%}}%>
+<%} else if(action.equals("SessionExpires")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Your Session Expired Please Registered With Other Email";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}%>
+
+
+<%}%>
 	
 </body>
 </html>

@@ -404,5 +404,40 @@ if(adminId !=null){
         $('img.content-bg-img').hide();        
       });
     </script>
+    
+<div id="snackbar"></div>
+ <% 
+ String action =request.getParameter("action");
+ if(action==null){
+ 
+ }else if(action!=null)
+ {
+	 
+  
+  %><%if(action.equals("StatusUpdated")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Status Is Updated";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("TeamBranchAssigned")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Volunteer Is Assigned In Team And Branch";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}%>
+
+
+<%}%>
+    
   </body>
 </html>

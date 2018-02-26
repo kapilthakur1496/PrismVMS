@@ -203,8 +203,7 @@ overflow-x:hidden;
 </script>
 <%}  else if(action.equals("OtpExpired")){ 
  %>
-<script>
- 
+<script> 
     var x = document.getElementById("snackbar")
     x.className = "show";
     x.innerHTML="Your OTP is Expired";

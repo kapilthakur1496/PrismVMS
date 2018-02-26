@@ -291,6 +291,30 @@ border: 1px solid #cccccc;" required name="comment" rows="3" cols="80"></textare
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
 	  
+  <div id="snackbar"></div>
+ <% 
+ String action =request.getParameter("action");
+ if(action==null){
+ 
+ }else if(action!=null)
+ {
+	 
+  
+  %>
+  <%if(action.equals("SubmitExperienceComment")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="You Have Send Your Comment Successfully";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}%>
+
+
+<%}%> 	  
  
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
