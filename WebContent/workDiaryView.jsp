@@ -234,7 +234,7 @@ if(volunteerStatus == 1){
  	  				<td><textarea readonly><%=workDiaryRs.getString("work_desc") %></textarea></td>
  	  			</tr>
  	  			
-	 	  	<%i++;} %>
+	 	  	<%i++;}i=1; %>
 	 	  	
 	 	  	</tbody>
 	 	  

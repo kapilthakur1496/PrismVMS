@@ -61,6 +61,14 @@
     <servlet-name>MentorEditDetails</servlet-name>
     <url-pattern>/MentorEditDetails</url-pattern>
   </servlet-mapping> 
+  <servlet>
+    <servlet-name>AdminEditDetails</servlet-name>
+    <servlet-class>AdminEditDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminEditDetails</servlet-name>
+    <url-pattern>/AdminEditDetails</url-pattern>
+  </servlet-mapping> 
   
   <servlet>
     <servlet-name>DisplayMentorPic</servlet-name>
