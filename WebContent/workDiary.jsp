@@ -220,7 +220,7 @@ if(volunteerStatus == 1){
 			<div class="form-group">
 				<label>Task Description</label>
 			<br><textarea required name="taskDesc" placeholder="Enter the Task Description" class="form-control"></textarea>
-			<br>	<br><input type="submit" style="opacity:1;"  value="Submit Work Diary">
+			<br>	<br><input type="submit" style="opacity:1;"  value="Submit Work Diary" class="btn btn-success btn-lg btn-block">
 			</div>
 				</form>
     	</div>

@@ -226,7 +226,7 @@ if(volunteerStatus == 1){
 					<textarea required name="trainingDesc" placeholder="Enter what you learned from trainning"  class="form-control"></textarea>
 				</div>
 			<br>
-			<input type="submit" style="opacity:1;"  value="Submit Training">
+			<input type="submit" style="opacity:1;"  value="Submit Training" class="btn btn-success btn-lg btn-block">
 				</form>
     	</div>
  	</div>

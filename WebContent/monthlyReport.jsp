@@ -219,7 +219,7 @@ if(volunteerStatus == 1){
 		<textarea  required  name="challenges" placeholder="Challenges" class="form-control"></textarea></div>
 		<br><div class="form-group">
 			 <label>Future Prospects</label>	  <textarea  required name="futureProspects" placeholder="Future Prospects" class="form-control"></textarea>
-			<br>	<br><input type="submit" style="opacity:1;"  value="Submit Monthly Report" >
+			<br>	<br><input type="submit" style="opacity:1;"  value="Submit Monthly Report" class="btn btn-success btn-lg btn-block" >
 				</form>
     	</div>
  	</div>

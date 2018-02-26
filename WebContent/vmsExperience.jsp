@@ -208,7 +208,7 @@ if(volunteerStatus == 1){
 				 <label>Select Grievance Type</label>
 			 <textarea required name="experienceDesc" placeholder="Enter Your Experience" class="form-control"></textarea>
 				</div>
-			 <br><input type="submit" style="opacity:1;"  value="Submit Feedback" ">
+			 <br><input type="submit" style="opacity:1;"  value="Submit Feedback" " class="btn btn-success btn-lg btn-block">
 				</form>
     	</div>
  	</div>

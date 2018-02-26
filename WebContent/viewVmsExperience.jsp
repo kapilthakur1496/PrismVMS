@@ -201,7 +201,7 @@ if(volunteerStatus == 1){
 			 <%!int j=1; %>
 			  <% while(vmsExperinceRs.next()){%>
 					<li>
-						<div class="collapsible-header active"><p style="padding:10px; background-color:#66bdd7; font-size:14px;">
+						<div class="collapsible-header active"><p style="padding:10px; background-color:#EDE576; font-size:14px;">
 							<span class="glyphicon glyphicon-pushpin" style="font-size:20px; color:#fff; font-size:22px; font-style: bold;"></span>&nbsp;&nbsp;
 							 <%=ct.getVolunteerName(vmsExperinceRs.getString("volunteer_registration_id"))%>
 							 
@@ -217,7 +217,7 @@ if(volunteerStatus == 1){
 								<p style="font-size:16px;"><%=vmsExperinceRs.getString("description") %>  </p> 
 								<br>
 								<div style="text-align:center;">
-									<a href="#" data-toggle="modal" data-target="#myModal<%=j%>" style="margin-left:auto; margin-right:auto;"><i class="	fa fa-comments-o" style="color:#66bdd7; font-size:22px;  "></i> Comments</a>
+									<a href="#" data-toggle="modal" data-target="#myModal<%=j%>" style="margin-left:auto; margin-right:auto;"><i class="	fa fa-comments-o" style="color:#EDE576; font-size:22px;  "></i> Comments</a>
 								</div>
 							</div> 
 					</div>
@@ -268,7 +268,7 @@ if(volunteerStatus == 1){
                                     <form style="width:100%" method="post" action="Control?action=addVmsExperienceComment">
                                         <input type="hidden" name="id" value="<%=comment%>">
                                         <input type="hidden" name="pN" value="<%=pageNumber%>">
-                                        <textarea  placeholder='Comment Box'     style="  background: #ddd;  padding:5x; color:#333; width:89.5%; border-radius: 2px;
+                                        <textarea  placeholder='Comment Box'     style="  background: #ddd;  padding:5x; color:#333; border-radius: 2px;
 border: 1px solid #cccccc;" required name="comment" rows="3" cols="80"></textarea>
                                         <input type="submit"  style="background:transparent;width: 38px;
     position:relative; opacity:1; color:#337ab7; display: inine-block; font-size: 36px; height:48px; border: none;"   class=" glyphicon"  value="&#xe171;"> </input>

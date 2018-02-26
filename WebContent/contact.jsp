@@ -84,7 +84,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<input type="text" name="subject" placeholder="Your subject" required>
 				<input type="text" name="phone" placeholder="Phone number" required>
 				<textarea  name="message" placeholder="Your message" required=" "></textarea>
-				<input type="submit" value="Send message">
+				<input type="submit" value="Send message" class="btn btn-success btn-lg btn-block">
 			</form>
 		</div>
 	</div>
@@ -98,9 +98,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="col-md-3 footer-grids fgd1">
 		<a href="index.jsp"><img src="images/logo2.png" alt=" " /> </a>
 		<ul>
-			<li>Tavarekere Main Road</li>
+			<li>Christ University</li>
 			<li>Bangalore-560029</li>
-			<li><a href="mailto:prismhack@gmail.com">prismhack@gmail.com</a></li>
+			<li><a href="mailto:info@example.com">prismhack@gmail.com</a></li>
 			<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
 			<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
 			<a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
@@ -117,15 +117,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="col-md-3 footer-grids fgd4">
 			<h4>My Account</h4> 
 			<ul>
-				<li><a href="NgoRegister.jsp">NGO Registration</a></li>
-				<li><a href="ngoLogin.jsp">NGO Login</a></li>
-				<li><a href="CustomerRegister.html">Customer Registration </a></li>
-				<li><a href="userLogin.jsp">Customer Login</a></li>
+				<li><a href="volunteerRegistration.jsp">Volunteer Registration</a></li>
+				<li><a href="volunteerLogin.jsp">Volunteer Login</a></li>
+				<li><a href="adminLogin.jsp">Mentor Login</a></li>
+				<li><a href="volunteerPreLogin.jsp">Volunteer Application Status</a></li>
+		
 			</ul>
 		</div>
 		<div class="clearfix"></div>
-		<p class="copy-right">© 2018 Sarvahitkari . All rights reserved | Design by <a href="#">Kapil Thakur & Rebecca John</a></p>
-	</div>
+		 </div>
 </div>
 	<!-- cart-js -->
 	<script src="js/minicart.js"></script>

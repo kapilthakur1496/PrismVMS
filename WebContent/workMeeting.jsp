@@ -203,7 +203,7 @@ if(volunteerStatus == 1){
 			 <input type="date" required name="mdate" style="opacity:1;" placeholder="Choose the date of meeting" class="form-control"></div>
 			<br>
 			<div class="form-group">  
-			<label >Meeting Time</label><input type="time" required name="mtime" style="opacity:1;" placeholder="HH:MM" class="form-control"></div>
+			<label >Meeting Time</label><input type="time" required name="mtime" style="opacity:1;" value="00:00" class="form-control"></div>
 			<br><div class="form-group"> 
 			<label>Meeting Type</label>
 			<select required name="meeting" class="form-control">
@@ -215,7 +215,7 @@ if(volunteerStatus == 1){
 				<%} %>
 			</select></div>
 			<br>		<label>Meeting Description</label><textarea required name="meetingDesc" placeholder="Enter the agenda and Discussion of Meeting" class="form-control"></textarea>
-			<br><br><input type="submit" style="opacity:1;"  value="Submit Meeting">
+			<br><br><input type="submit" style="opacity:1;"  value="Submit Meeting" class="btn btn-success btn-lg btn-block">
 				</form>
     	</div>
  	</div>
