@@ -65,7 +65,7 @@ body {
 				<% String action = request.getParameter("action");%>
 						<%if(action == null){ %>
 					<h3>Verify Email</h3>
-					<form action="Control?action=mentorForgotPassword" method="post">
+					<form action="${pageContext.request.contextPath}/Control?action=mentorForgotPassword" method="post">
 					
 						<div class="key input-group">
 							<span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
@@ -79,7 +79,7 @@ body {
 							
 						%>
 						<h3>Set Password</h3>
-						<form action="Control?action=forgotOtpVerification" method="post">
+						<form action="${pageContext.request.contextPath}/Control?action=forgotOtpVerification" method="post">
 							<div class="key input-group">
 								<span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
 								<input  type="text" readonly name="email" value="<%=email%>" required placeholder="Email" class="form-control">
