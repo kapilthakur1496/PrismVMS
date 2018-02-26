@@ -16,6 +16,8 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/templatemo-style.css" rel="stylesheet">
     
+<link rel="shortcut icon" href="../images/logo2_.ico" />
+    
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -62,7 +64,7 @@ if(adminId !=null){
       <div class="templatemo-sidebar">
         <header class="templatemo-site-header">
           <header class="templatemo-site-header"  >
-        	<!-- <a href="index.html"> --><img src="../images/logo2.png" alt=" " >   <!--   </a>   -->   
+        	<a href="index.jsp">  <img src="../images/logo2.png" alt=" " >      </a>   
 	   </header>
         </header>
         <div class="profile-photo-container">
@@ -73,16 +75,16 @@ if(adminId !=null){
         <form class="templatemo-search-form" role="search">
           <div class="input-group">
               <button type="submit" class="fa fa-search"></button>
-              <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">           
+              <input type="text" class="form-control"  placeholder="Search Feature"   onkeyup="search()" id="myInput" name="srch-term" id="srch-term">           
           </div>
         </form>
         <div class="mobile-menu-icon">
             <i class="fa fa-bars"></i>
           </div>
         <nav class="templatemo-left-nav">          
-          <ul>
-            <li><a href="index.jsp"><i class="fa fa-home fa-fw"></i>Home</a></li>
-            <li><a href="manage-users.jsp?pageNumber=1" class="active"><i class="fa fa-users fa-fw"></i>Manage Users</a></li>
+          <ul id="exCollapsingNavbar3">
+            <li><a href="index.jsp"><i style="color:#fff; font-size:22px;" class="fa fa-home fa-fw"></i>Home</a></li>
+            <li><a href="manageUsers.jsp?pageNumber=1" class="active"><i  style="color:#fff; font-size:22px;" class="fa fa-users fa-fw"></i>Manage Users</a></li>
              </ul>  
         </nav>
       </div>
@@ -171,7 +173,7 @@ if(adminId !=null){
 			 <div class="col-lg-12 text-center" style="margin-left:auto; margin-right:auto;">
 				<ul class="pagination " >
 					<% for( int k=1; k<=pageCount; k++){ %>
-				    	<li><a href="manage-users.jsp?pageNumber=<%=k%>"><%=k%></a></li>
+				    	<li><a href="manageUsers.jsp?pageNumber=<%=k%>"><%=k%></a></li>
 				    <% } %> 
 			 	</ul>
 		 	</div>  
@@ -256,7 +258,7 @@ if(adminId !=null){
 			 <div class="col-lg-12 text-center" style="margin-left:auto; margin-right:auto;">
 				<ul class="pagination " >
 					<% for( int k=1; k<=pageCount; k++){ %>
-				    	<li><a href="manage-users.jsp?pageNumber=<%=k%>"><%=k%></a></li>
+				    	<li><a href="manageUsers.jsp?pageNumber=<%=k%>"><%=k%></a></li>
 				    <% } %> 
 			 	</ul>
 		 	</div>  

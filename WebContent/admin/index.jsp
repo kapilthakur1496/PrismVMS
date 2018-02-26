@@ -13,6 +13,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/templatemo-style.css" rel="stylesheet">
     
+<link rel="shortcut icon" href="../images/logo2_.ico" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -71,7 +72,7 @@ if(adminId !=null){
     <div class="templatemo-flex-row">
       <div class="templatemo-sidebar">
         <header class="templatemo-site-header"  >
-        	<!-- <a href="index.html"> --><img src="../images/logo2.png" alt=" " >  <!--    </a>  -->    
+        	 <a href="index.jsp">  <img src="../images/logo2.png" alt=" " >      </a>   
 	   </header>
         <div class="profile-photo-container">
           <img src="${pageContext.request.contextPath}/DisplayMentorPic?name=<%=adminId%>" alt="Profile Photo" class="img-responsive">  
@@ -81,16 +82,16 @@ if(adminId !=null){
         <form class="templatemo-search-form" role="search">
           <div class="input-group">
               <button type="submit" class="fa fa-search"></button>
-              <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">           
+              <input type="text" class="form-control" placeholder="Search Feature"   onkeyup="search()" id="myInput" name="srch-term" id="srch-term">           
           </div>
         </form>
         <div class="mobile-menu-icon">
             <i class="fa fa-bars"></i>
         </div>
         <nav class="templatemo-left-nav">          
-          <ul>
-          	<li><a href="index.jsp" class="active"><i class="fa fa-users fa-fw"></i>Home</a></li>
-            <li><a href="manageUsers.jsp?pageNumber=1" ><i class="fa fa-users fa-fw"></i>Manage Users</a></li>
+          <ul id="exCollapsingNavbar3">
+          	<li><a href="index.jsp" class="active"><i style="color:#fff; font-size:22px;" class="fa fa-home fa-fw"></i>Home</a></li>
+            <li><a href="manageUsers.jsp?pageNumber=1" ><i  style="color:#fff; font-size:22px;" class="fa fa-users fa-fw"></i>Manage Users</a></li>
           
           </ul>  
         </nav>
@@ -149,21 +150,17 @@ if(adminId !=null){
             -->
               		</form>
               		<hr>
-              		 <form  name="f1" enctype="multipart/form-data"  action="${pageContext.request.contextPath}/AdminEditDetails" method="post" onSubmit="return validate()">
-		
-		                    
-		                      
-		                                <input type="file" id="profile_pic"   class="form-control" name="playerphoto"  accept="image/*"  onchange="loadFile(event)">
-		                                
-		                          <br>
-		                         <br>   
-		                              <input name=current_conact type="text"  class="form-control"   class="" readonly="true" value="<%=PhoneNumber%>" ondblclick="this.readOnly='';"></td>
-		                            
-		                                 
-		                            
-		
-		                    
-		                          <br> <input   type="submit" class="form-control" value="Update">
+              		 <form  name="f1" enctype="multipart/form-data"  action="${pageContext.request.contextPath}/AdminEditDetails" method="post" onSubmit="return updateDetail()">
+			 			<input type="file" id="profile_pic"   class="form-control" name="playerphoto"  accept="image/*"  onchange="loadFile(event)">
+			            	<br>
+	                        <br>   
+	                        <%if(PhoneNumber!=null){ %>
+		                   <br>  <input name=current_conact type="text"  class="form-control"   placeholder="Admin Phone Number"  value="<%=PhoneNumber%>" ondblclick="this.readOnly='';"></td>
+		                   
+		                   <%} else {%> 
+		                  	<br><input name=current_conact type="text"  class="form-control"  placeholder="Admin Phone Number" ondblclick="this.readOnly='';"></td>
+		                   
+		                   <%} %>	<br> <input   type="submit" class="form-control" value="Update Profile">
 		                    
 		                          <%--<div class=" form-row col-lg-12 text-center" style="" >--%>
 		                            <%--<br><br>--%>
@@ -310,7 +307,7 @@ address: <span id="c"></span>
              	</form><hr>  
               		<form action="${pageContext.request.contextPath}/Control?action=addSubCategory" method="post" >
               		 	  <select required class="form-control"   name="skillId"> 
-              				<option value="">View Academic Skill</option> 
+              				<option value="">View Academic Skills</option> 
               				<% academicSkillRs = ct.getAcademicSkill(); %>
               				<% while(academicSkillRs.next() ){ %>
               					<option value="<%=academicSkillRs.getString("skill_id") %>"> <%=academicSkillRs.getString("skill_name") %></option>
@@ -327,7 +324,7 @@ address: <span id="c"></span>
              	</form> <hr> 
              	<form action="${pageContext.request.contextPath}/Control?action=addSubCategory" method="post" >
               		 	  <select required class="form-control"   name="categoryId"> 
-              				<option value="">ViewLife Skill</option>
+              				<option value="">View Life Skills</option>
               				 <% lifeSkillRs = ct.getLifeSkill(); %>
               				<% while(lifeSkillRs.next() ){ %>
               					<option value="<%=lifeSkillRs.getString("skill_id") %>"> <%=lifeSkillRs.getString("skill_name") %></option>
@@ -367,7 +364,7 @@ address: <span id="c"></span>
               		 
               		<form  action="${pageContext.request.contextPath}/Control?action=addTraining" method="post" >
               		 	<select required class="form-control"    > 
-              				<option value="">Choose Professional Skill </option>
+              				<option value="">View Professional Skills </option>
            				  	<% professionalSkillRs = ct.getProfessionalSkill(); %>
               				<% while(professionalSkillRs.next() ){ %>
               					<option value="<%=professionalSkillRs.getString("skill_id") %>"> <%=professionalSkillRs.getString("skill_name") %></option>
@@ -934,28 +931,32 @@ function validate()
 }
 }
 
-function validate()
+function updateDetail()
 {
 
     var fld = document.f1.current_conact.value;
 
     if (isNaN(fld)) {
-         
-        document.getElementById('msg').innerHTML = "Contact number is not valid";
-
-
+    	 var x = document.getElementById("snackbar")
+    	    x.className = "show";
+    	    x.innerHTML="Contact number is not valid";
+    	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    	  
         return false;
     }
     else if (!(fld.length == 10)) {
-         
-        document.getElementById('msg').innerHTML = "Contact number is not valid";
-        return false;
+        
+    	 var x = document.getElementById("snackbar")
+ 	    x.className = "show";
+ 	    x.innerHTML="Contact number is not valid";
+ 	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 	  
+      return false;
     }
 
     var fuData = document.getElementById('profile_pic');
     var FileUploadPath = fuData.value;
-
-    var Extension = FileUploadPath.substring(FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+  	var Extension = FileUploadPath.substring(FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
 
 
     if(FileUploadPath == '')
@@ -974,8 +975,11 @@ function validate()
 
                 if(size >500000 ){
                     
-                    document.getElementById('msg').innerHTML = "File too large (Max Picture Size 500KB)";
-
+                	 var x = document.getElementById("snackbar")
+              	    x.className = "show";
+              	    x.innerHTML="File too large (Max Picture Size 500KB)";
+              	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+              	    
                     return false;
                 }else{
                     var reader = new FileReader();
@@ -990,7 +994,14 @@ function validate()
 
         }
         else {
-            document.getElementById('msg').innerHTML = "Photo only allows file types of GIF, PNG, JPG, JPEG and BMP.";
+	        	 var x = document.getElementById("snackbar")
+	       	    x.className = "show";
+	       	    x.innerHTML="File too large (Max Picture Size 500KB)";
+	       	    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+       	    
+         
+        	    
+        	    
             return false;
         }}
 

@@ -89,7 +89,7 @@ body
 		<div class="main-agileits">
 				<div class="form-w3agile">
 					<h4 style="font-size:30px;">Volunteer Registration</h4><br>
-					<form id="regForm" action="Control?action=addVolunteerRegistration" method="post" style="">  
+					<form id="regForm" action="Control?action=addVolunteerRegistration" method="post" style="" onSubmit=" return validateForm()">  
 						<div class="tab">
 					 		 <div class="key input-group">
 								<span class="input-group-addon"><i class="fa fa-user " aria-hidden="true"></i></span>
@@ -121,7 +121,7 @@ body
 					  		  
 							<div class="key">
 								<i class="fa fa-group" aria-hidden="true"></i>
-								<select name="gender" required  >
+								<select name="gender" required="true"  >
 									<option value="">Select Your Gender</option>
 									<option>Male</option>
 									<option>Female</option>
@@ -132,7 +132,7 @@ body
 							</div> 
 							 <div class="key"  >   				
 								<i class="fa fa-paragraph" aria-hidden="true"></i> 
-								<textarea height="auto;" placeholder="Why do you wish to join as a volunteer" oninput="this.className = ''" style="height:135px;" name="whyVolunteer" required></textarea>
+								<textarea  placeholder="Why do you wish to join as a volunteer" oninput="this.className = ''" style="height:135px;" name="whyVolunteer" required></textarea>
 								<div class="clearfix"></div>
 							</div>  
 							 
