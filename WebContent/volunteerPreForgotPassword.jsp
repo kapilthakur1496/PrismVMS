@@ -72,7 +72,7 @@ overflow-x:hidden;
 							<input  type="text" name="email" required="true" placeholder="Email" class="form-control">
 							<div class="clearfix"></div>
 						</div>
-						<input type="submit" value="Get OTP">
+						<input type="submit" value="Get OTP" class="btn btn-primary">
 						 </form>
 						<%}else if(action.equals("otpVarification") || action.equals("otpIsNotCorrect")  ){
 							String email = request.getParameter("email");

@@ -64,7 +64,7 @@ body {
 	<div class="login">
 		<div class="main-agileits">
 				<div class="form-w3agile">
-					<h3>Login</h3>
+					<h3>Mentor Login</h3>
 					<form action="AdminLogin" method="post"> 
 					<div class="key input-group">
 							<span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
@@ -77,7 +77,7 @@ body {
 							<input  type="password" name="password" required="" placeholder="Password" class="form-control">
 							<div class="clearfix"></div>
 						</div> 
-						<input type="submit" value="Sign In">
+						<input type="submit" value="Sign In" class="btn btn-primary">
 					</form>
 				</div>
 				<div class="forg">

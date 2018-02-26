@@ -199,12 +199,12 @@ if(volunteerStatus == 1){
 	 	  <% String id= request.getParameter("id");
 	 	  String name= request.getParameter("name");%> 
 	 	  <form action="Control?action=submitWorkDiary" method="post">
-			<br><br>	<input required type="date" name="wdate" style="opacity:1;" placeholder="Choose the date">
-			<br><br><input type="time" required name="wtime" style="opacity:1;" placeholder="HH:MM">
-			<br><br><select name="projectId" >
+			<br><br>	<label>Date</label><input required type="date" name="wdate" style="opacity:1;" placeholder="Choose the date" class="form-control">
+			<br><br><label>Work Hours</label><input type="time" required name="wtime" style="opacity:1;" placeholder="HH:MM" class="form-control">
+			<br><br><label>Project Type</label><select name="projectId" class="form-control">
 				<option value="<%=id%>"><%=name%></option>
 			</select>
-		<br>	<br><textarea  name="taskDesc" required placeholder="Enter the Task Description"></textarea>
+		<br>	<br><label>Task Description</label><textarea  name="taskDesc" required placeholder="Enter the Task Description" class="form-control"></textarea>
 			<br>	<br><input type="submit" style="opacity:1;"  value="Submit Work Diary">
 				</form>
     	</div>

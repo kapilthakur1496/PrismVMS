@@ -67,12 +67,12 @@ overflow-x:hidden;
 					<h3>Verify Email</h3>
 					<form action="Control?action=mentorForgotPassword" method="post">
 					
-						<div class="key">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
-							<input  type="text" name="email" required="true" placeholder="Email">
+						<div class="key input-group">
+							<span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+							<input  type="text" name="email" required="true" placeholder="Email" class="form-control">
 							<div class="clearfix"></div>
 						</div>
-						<input type="submit" value="Get OTP">
+						<input type="submit" value="Get OTP" class="btn btn-primary">
 						 </form>
 						<%}else if(action.equals("otpVarification") || action.equals("otpIsNotCorrect")){
 							String email = request.getParameter("email");
@@ -80,29 +80,29 @@ overflow-x:hidden;
 						%>
 						<h3>Set Password</h3>
 						<form action="Control?action=forgotOtpVerification" method="post">
-							<div class="key">
-								<i class="fa fa-envelope" aria-hidden="true"></i>
-								<input  type="text" readonly name="email" value="<%=email%>" required="true" placeholder="Email">
+							<div class="key input-group">
+								<span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+								<input  type="text" readonly name="email" value="<%=email%>" required placeholder="Email" class="form-control">
 								<div class="clearfix"></div>
 							</div>
-							<div class="key">
-								<i class="fa fa-mobile-phone" aria-hidden="true"></i>
-								<input  type="text" name="otp" required="true" placeholder="OTP">
+							<div class="key input-group">
+								<span class="input-group-addon"><i class="fa fa-mobile-phone" aria-hidden="true"></i></span>
+								<input  type="text" name="otp" required placeholder="OTP" class="form-control">
 								<div class="clearfix"></div>
 							</div>
-							<div class="key">
-								<i class="fa fa-lock" aria-hidden="true"></i>
-								<input  type="password" name="password" required="true" placeholder="New Password">
+							<div class="key input-group">
+								<span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+								<input  type="password" name="password" required placeholder="New Password" class="form-control">
 								<div class="clearfix"></div>
 							</div>
-							<div class="key">
-								<i class="fa fa-lock" aria-hidden="true"></i>
-								<input  type="password" name="confirmPassword" required="true" placeholder="Confrim Password">
+							<div class="key input-group">
+								<span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+								<input  type="password" name="confirmPassword" required placeholder="Confirm Password" class="form-control">
 								<div class="clearfix"></div>
 							</div>
 							
 						
-						<input type="submit" value="Set Password">
+						<input type="submit" value="Set Password" class="btn btn-primary">
 					  <%} %>
 					</form>
 				</div>

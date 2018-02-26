@@ -210,7 +210,7 @@ if(volunteerStatus == 1){
 				 <label>Grievance</label>
 			 <textarea required name="grievanceDesc" placeholder="Enter Your Grievance"  class="form-control"></textarea>
 			</div>
-			<br><input type="submit" style="opacity:1;"  value="Submit Grievance">
+			<br><input type="submit" style="opacity:1;"  value="Submit Grievance" class="btn btn-success btn-lg btn-block">
 				</form>
     	</div>
  	</div>

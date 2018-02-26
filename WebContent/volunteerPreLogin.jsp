@@ -68,7 +68,7 @@
 							<input  type="password" name="password" required="" placeholder="Password" class="form-control" >
 							<div class="clearfix"></div>
 						</div>
-						<input type="submit" value="Login">
+						<input type="submit" value="Login" class="btn btn-primary">
 					</form>
 				</div>
 				<div class="forg">

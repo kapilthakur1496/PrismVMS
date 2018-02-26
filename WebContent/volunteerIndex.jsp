@@ -214,9 +214,9 @@ if(volunteerStatus == 1){
                         <div class="container">
 
                         <div>
-                             <div  class="btn btn-default" style="margin-left:0; margin-right: 0;margin-top: 0;">
+                             <div class="btn">
                                  <label>Profile Picture: </label>
-                                <input type="file" id="profile_pic" style="opacity:1; margin-top:-15px; margin-left:2px;"  name="playerphoto"  accept="image/*"  onchange="loadFile(event)">
+                                <input type="file" id="profile_pic"  name="playerphoto"  accept="image/*"  onchange="loadFile(event)"  class="form-control">
                                 </div>
                                 <img id="output"/>
                         </div>
@@ -226,8 +226,8 @@ if(volunteerStatus == 1){
                             
                             <div>
                                 <td><label>Contact Number : </label></td>
-                                <td><input name=current_conact type="text" style="opacity:1; width:250px; margin-top:-22px;"  class="" readonly="true" value="<%=PhoneNumber%>" ondblclick="this.readOnly='';"></td>
-                            </div>
+                                <td><input name=current_conact type="text"  class="" readonly="true" value="<%=PhoneNumber%>" ondblclick="this.readOnly='';"></td>
+                            </div>	
                                  
                            
                                 
@@ -239,7 +239,7 @@ if(volunteerStatus == 1){
                         <span><p id="msg" style="color: red; font-size:17px; display: inline-block;" > </p></span>
                         <br> <input  type="submit"  class="btn btn-info" style="margin-top: -1px; margin-left:-105px; width:100px; opacity:1; margin-right: 0 "  value="Update" >
                     
-                        <button type="button" class="btn btn-default" style="margin-top: 0; margin-right: 0" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" style="margin-top: 0; margin-right: 0" data-dismiss="modal">Close</button>
                         <%--<div class=" form-row col-lg-12 text-center" style="" >--%>
                             <%--<br><br>--%>
                                <%--</div>--%>
@@ -250,7 +250,7 @@ if(volunteerStatus == 1){
             </div>
         </div>
     </div>
-    <a href="#"  data-toggle="modal" data-target="#myModal" class="btn btn-info"> Edit Profile</a>
+    <a href="#"  data-toggle="modal" data-target="#myModal" class="btn btn-info btn-block"> Edit Profile</a>
              <div class="templatemo-flex-row flex-content-row templatemo-overflow-hidden"> <!-- overflow hidden for iPad mini landscape view-->
             <div class="col-1 templatemo-overflow-hidden">
               <div class="templatemo-content-widget white-bg templatemo-overflow-hidden">

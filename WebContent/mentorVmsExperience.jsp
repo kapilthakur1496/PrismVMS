@@ -126,7 +126,7 @@ if(mentorStatus == 1){
                 		<li class="nav-item" >
                        		<form action="#" method="post">
 								<div   >
-								 	<input    id="myInput" onkeyup="search()" type="text" style="opacity:1; padding: 12px 20px 12px 40px; background-image: url('images/searchicon.png'); background-position: 10px 10px; background-repeat: no-repeat; cursor:text; height:40px;"  name="productPrice" required="" placeholder="Search Feature">
+								 	<input    id="myInput" onkeyup="search()" type="text" style="opacity:1; padding: 12px 20px 12px 40px; background-image: url('images/searchicon.png'); background-position: 10px 10px; background-repeat: no-repeat; cursor:text; height:40px;"  name="productPrice" required placeholder="Search Feature">
 									 <div class="clearfix"></div>
 								</div> 
 							</form>
@@ -194,7 +194,7 @@ if(mentorStatus == 1){
 				<%} %>
 			</select>
 			<br><br><textarea required name="experienceDesc" placeholder="Enter Your Experience" class="form-control"></textarea>
-			<br><br><input type="submit" style="opacity:1;"  value="Submit Feedback">
+			<br><br><input type="submit"  value="Submit Feedback" class="btn btn-success btn-lg btn-block">
 				</form>
     	</div>
  	</div>
