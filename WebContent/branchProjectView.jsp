@@ -263,5 +263,31 @@ if(mentorStatus == 1){
 })(jQuery);
 
 </script>
+
+<div id="snackbar"></div>
+ <% 
+ String action =request.getParameter("action");
+ if(action==null){
+ 
+ }else if(action!=null)
+ {
+	 
+  
+  %>
+  <%if(action.equals("BranchProjectAssigned")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Branch Project Is Assigned";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}%>
+
+
+<%}%>
+ 
 </body>
 </html>

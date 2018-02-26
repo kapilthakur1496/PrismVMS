@@ -47,7 +47,7 @@ input[type="submit"]:hover
 ResultSet teamRs =null,branchRs=null,professionalSkillRs=null,grievanceRs=null,vmsCategoryRs=null;
 ResultSet meetingRs =null,trainingRs=null,academicSkillRs=null,lifeSkillRs=null,softSkillRs=null;
 ResultSet stateRs =null;
-String adminId=null;
+String adminId=null,PhoneNumber=null;
 int adminStatus=0;
 ResultSet contactDetails=null; 
 %> 
@@ -64,6 +64,7 @@ ResultSet contactDetails=null;
 /* 	adminStatus= ct.getAdminType(request, response,adminId); */
  
 if(adminId !=null){
+	   PhoneNumber = ct.getMentorPhone(adminId);   
 %>  
 
     <!-- Left column -->
@@ -73,7 +74,7 @@ if(adminId !=null){
         	<!-- <a href="index.html"> --><img src="../images/logo2.png" alt=" " >  <!--    </a>  -->    
 	   </header>
         <div class="profile-photo-container">
-          <img src="DisplayMentorPic?name=<%=adminId%>" alt="Profile Photo" class="img-responsive">  
+          <img src="${pageContext.request.contextPath}/DisplayMentorPic?name=<%=adminId%>" alt="Profile Photo" class="img-responsive">  
           <div class="profile-photo-overlay"></div>
         </div>      
         <!-- Search box -->
@@ -116,7 +117,7 @@ if(adminId !=null){
              	</form> <hr>  
               		<form action="${pageContext.request.contextPath}/Control?action=addSubCategory" method="post" >
               		 	  <select required class="form-control"   name="categoryId"> 
-              				<option value="0">View Teams</option>
+              				<option value="">View Teams</option>
               				<%  
               					teamRs = ct.getTeams();
               				%>
@@ -135,7 +136,7 @@ if(adminId !=null){
              	</form> <hr> 
              	<form action="${pageContext.request.contextPath}/Control?action=addSubCategory" method="post" >
               		 	  <select required class="form-control"   name="categoryId"> 
-              				<option value="0">View Branch</option>
+              				<option value="">View Branch</option>
               				<% 	 
               				branchRs = ct.getBranch();
               				%>
@@ -147,6 +148,28 @@ if(adminId !=null){
              	<!-- 	<input type="submit"   class="form-control" value="View" >
             -->
               		</form>
+              		<hr>
+              		 <form  name="f1" enctype="multipart/form-data"  action="${pageContext.request.contextPath}/AdminEditDetails" method="post" onSubmit="return validate()">
+		
+		                    
+		                      
+		                                <input type="file" id="profile_pic"   class="form-control" name="playerphoto"  accept="image/*"  onchange="loadFile(event)">
+		                                
+		                          <br>
+		                         <br>   
+		                              <input name=current_conact type="text"  class="form-control"   class="" readonly="true" value="<%=PhoneNumber%>" ondblclick="this.readOnly='';"></td>
+		                            
+		                                 
+		                            
+		
+		                    
+		                          <br> <input   type="submit" class="form-control" value="Update">
+		                    
+		                          <%--<div class=" form-row col-lg-12 text-center" style="" >--%>
+		                            <%--<br><br>--%>
+		                               <%--</div>--%>
+		                  
+		                    </form>
                </div>
                 <div class="templatemo-content-widget white-bg col-2">
               <i class="fa fa-times"></i>
@@ -159,7 +182,7 @@ if(adminId !=null){
              	</form> <hr>  
               		<form action="" method="post" >
               		 	<select required class="form-control"   name="meetingType"> 
-              				<option value="0">View Meeting</option>
+              				<option value="">View Meeting</option>
               			  	<% 	 
               			   		meetingRs = ct.getMeetingType();
               				%>
@@ -171,7 +194,7 @@ if(adminId !=null){
               		 --></form><hr> 
               		<form action="${pageContext.request.contextPath}/Control?action=addTraining" method="post" >
               		 	<select required class="form-control"   name="teamId"> 
-              				<option value="0">Choose Team  </option>
+              				<option value="">Choose Team  </option>
               				<% teamRs = ct.getTeams(); %>
               				<% while(teamRs.next() ){ %>
               					<option value="<%=teamRs.getString("id") %>"> <%=teamRs.getString("team_name") %></option>
@@ -185,7 +208,7 @@ if(adminId !=null){
               		 
               		<form name="getTrainingForm" action="${pageContext.request.contextPath}/Control?action=addTraining" method="post" >
               		 	<select required class="form-control"  onchange="loadXMLDoc()"  name="teamId"> 
-              				<option value="0">Choose Team  </option>
+              				<option value="">Choose Team  </option>
               				<% teamRs = ct.getTeams();
               				%>
               				<% while(teamRs.next() ){ %>
@@ -239,7 +262,7 @@ address: <span id="c"></span>
              	</form> <hr> 
              	<form action="" method="post" >
               		 	<select required class="form-control"   name="meetingType"> 
-              				<option value="0">View Grievance Type</option>
+              				<option value="">View Grievance Type</option>
               			  	<% 	 
               			  grievanceRs = ct.getGrievanceType();
               				%>
@@ -256,7 +279,7 @@ address: <span id="c"></span>
              	</form> <hr> 
              	<form action="" method="post" >
               		 	<select required class="form-control"   name="meetingType"> 
-              				<option value="0">View VMS Experience Category</option>
+              				<option value="">View VMS Experience Category</option>
               			  	<%  vmsCategoryRs = ct.getVmsCategory(); %>
               				<% while(vmsCategoryRs.next() ){ %>
               					<option value="<%=vmsCategoryRs.getString("category") %>"><%=vmsCategoryRs.getString("category") %></option>
@@ -275,6 +298,169 @@ address: <span id="c"></span>
              	 
            	</div> 
     	</div>
+         <!-- First row ends -->
+          <div class="templatemo-flex-row flex-content-row">
+            <div class="templatemo-content-widget white-bg col-2">
+              <i class="fa fa-times"></i>
+            <br>
+              	<form method="post" action="${pageContext.request.contextPath}/Control?action=addAcademicSkills" >
+             	<input type="text" Placeholder="Academic Skill"  required class="form-control" name="academicSkill">
+             	 <br>
+             	<input type="submit" class="form-control" value="Add Academic Skill" >
+             	</form><hr>  
+              		<form action="${pageContext.request.contextPath}/Control?action=addSubCategory" method="post" >
+              		 	  <select required class="form-control"   name="skillId"> 
+              				<option value="">View Academic Skill</option> 
+              				<% academicSkillRs = ct.getAcademicSkill(); %>
+              				<% while(academicSkillRs.next() ){ %>
+              					<option value="<%=academicSkillRs.getString("skill_id") %>"> <%=academicSkillRs.getString("skill_name") %></option>
+              				<%} %> 
+              			</select>  <br>
+              	 
+             		<!-- <input type="submit"   class="form-control" value="View Academic Skill" >
+            -->
+              		</form><hr> 
+              		<form method="post" action="${pageContext.request.contextPath}/Control?action=addLifeSkills" >
+             	<input type="text" Placeholder=" Life Skill"  required class="form-control" name="lifeSkill">
+             	 <br>
+             	<input type="submit" class="form-control" value="Add Life Skill" >
+             	</form> <hr> 
+             	<form action="${pageContext.request.contextPath}/Control?action=addSubCategory" method="post" >
+              		 	  <select required class="form-control"   name="categoryId"> 
+              				<option value="">ViewLife Skill</option>
+              				 <% lifeSkillRs = ct.getLifeSkill(); %>
+              				<% while(lifeSkillRs.next() ){ %>
+              					<option value="<%=lifeSkillRs.getString("skill_id") %>"> <%=lifeSkillRs.getString("skill_name") %></option>
+              				<%} %> 
+              			</select>  <br>
+              	 
+             		<!-- <input type="submit"   class="form-control" value="View Life Skill" >
+            -->
+              		</form>
+               </div>
+                <div class="templatemo-content-widget white-bg col-2">
+              <i class="fa fa-times"></i>
+            	<br>
+               
+             	<form method="post" action="${pageContext.request.contextPath}/Control?action=addSoftSkills" >
+             	<input type="text" Placeholder="Soft Skill"  required class="form-control" name="softSkill">
+             	 <br>
+             	<input type="submit" class="form-control" value="Add Soft Skill" >
+             	</form> <hr>  
+              		<form action="" method="post" >
+              		 	<select required class="form-control"   name="softSkill"> 
+              				<option value="">View Soft Skills</option>
+              			     <% softSkillRs = ct.getSoftSkill(); %>
+              				<% while(softSkillRs.next() ){ %>
+              					<option value="<%=softSkillRs.getString("skill_id") %>"> <%=softSkillRs.getString("skill_name") %></option>
+              				<%} %> 
+              			</select><br> 
+             		<input type="submit" class="form-control" value="View Soft Skill" > 
+              		</form><hr> 
+              		<form action="${pageContext.request.contextPath}/Control?action=addProfessionalSkills" method="post" >
+              		 	 
+              		<input type="text"  required class="form-control" Placeholder="Professional Skill" name="professionalSkill">
+             	 	<br>
+             		<input type="submit" class="form-control" value="Add  Professional Skill" >
+             	 
+              		</form><hr>
+              		 
+              		<form  action="${pageContext.request.contextPath}/Control?action=addTraining" method="post" >
+              		 	<select required class="form-control"    > 
+              				<option value="">Choose Professional Skill </option>
+           				  	<% professionalSkillRs = ct.getProfessionalSkill(); %>
+              				<% while(professionalSkillRs.next() ){ %>
+              					<option value="<%=professionalSkillRs.getString("skill_id") %>"> <%=professionalSkillRs.getString("skill_name") %></option>
+              				<%} %> 
+              			</select><br>
+	              		 
+	             		<!-- <input type="submit" class="form-control" value="View  Professional Skill" >
+	        -->
+             	 	</form>
+               </div>
+            <div class="templatemo-content-widget white-bg col-2 text-center">
+              	<i class="fa fa-times"></i>
+              	<form action="${pageContext.request.contextPath}/Control?action=addInterViewSlot" method="post" >
+              		<br>
+              		 
+              		<input type="date"  required class="form-control" Placeholder="Interview Date" name="interViewDate">
+              		<br>
+              		<input type="number" min="1"    required class="form-control" Placeholder="Available Seats" name="availableSeats">
+              		<br>
+              		<select required class="form-control" name="slotTime"  >
+              		 		<option value="">Select InterView Time</option>
+	           				<option value="09:00 AM">09:00 AM</option>
+	           				<option value="10:00 AM">10:00 AM</option>
+	           				<option value="11:00 AM">11:00 AM</option>
+	           				<option value="12:00 PM">12:00 PM</option>
+	           				<option value="01:00 PM">01:00 PM</option>
+	           				<option value="02:00 PM">02:00 PM</option>
+	           				<option value="03:00 PM">03:00 PM</option>
+	           				<option value="04:00 PM">04:00 PM</option>
+	           				<option value="05:00 PM">05:00 PM</option> 
+	             		 
+             		</select> <br> 
+             		<textarea  name="venue" required class="form-control" placeholder="Interview Venue" ></textarea>
+              		 <br> 
+              		 <input type="submit" class="form-control" value="Add Interview Slot" >
+	       
+             	</form>
+           	</div> 
+    	</div>
+    	 <div class="templatemo-flex-row flex-content-row">
+          	<div class="col-2">
+              <div class="panel panel-default templatemo-content-widget white-bg  templatemo-overflow-hidden">
+               <i class="fa fa-times"></i>  
+                     <h2 class="margin-bottom-10">Create Mentors </h2>
+		            <p></p>
+	           		<form action="${pageContext.request.contextPath}/Control?action=createMentor" class="templatemo-login-form" method="post" enctype="multipart/form-data">
+		              	<div class="row form-group">
+			                <div class="col-lg-4 col-md-4 form-group">                  
+			                    <label for="inputFullName">Full Name</label>
+			                    <input type="text" name="fullName"  required class="form-control" id="inputFullName" placeholder="Kapil Thakur">                  
+			                </div>
+			                 <div class="col-lg-4 col-md-4 form-group">                  
+			                    <label for="inputEmail">Email</label>
+			                    <input type="email"  name="email" required class="form-control" id="inputEmail" placeholder="prism.mentor@gmail.com">                  
+			                </div> 
+			                 <div class="col-lg-4 col-md-4 form-group"> 
+			                  	<label class="control-label templatemo-block">Select Teams</label>                 
+			                  	<select required multiple name="team" class="templatemo-multi-select form-control" style="overflow-y: scroll;">
+	                				<% 	teamRs = ct.getTeams();  %>
+	              					<% while(teamRs.next() ){ %>
+	              					<option value="<%=teamRs.getString("team_name") %>"><%=teamRs.getString("team_name") %></option>
+	              					<% } %>  
+           						</select> 
+		              		</div>
+		              	</div>
+		              	<div class="row form-group"> 
+		              		<div class="col-lg-4 col-md-4 form-group"> 
+			                  	<label class="control-label templatemo-block">Select Branch</label>                 
+			                  	<select required  name="branch" class="  form-control" style="overflow-y: scroll;">
+	                				<option value="">Select Branch</option>
+	                				<% 	branchRs = ct.getBranch();  %>
+	              					<% while(branchRs.next() ){ %>
+	              					<option value="<%=branchRs.getString("id") %>"><%=branchRs.getString("name")%></option>
+	              					<% } %>  
+           						</select> 
+		              		</div>
+		              		<div class="col-lg-4 col-md-4 form-group"> 
+	                  			<label class="control-label templatemo-block">Select User Type</label>                 
+			                  	<select required name="userType" class="form-control">
+			                  		<option value="">Select User Type</option>
+				                    <option value="Mentor">Mentor</option>                     
+			                  	</select>
+			                </div>
+		              		<div class=" col-lg-4 col-md-4 form-group "><br>
+		              		<label class="control-label templatemo-block"> </label>       
+			                	<button type="submit" class="templatemo-blue-button" style="padding:8px 10px;">Create Mentor</button>
+				                <button type="reset" class="templatemo-blue-button" style="padding:8px 35px;">Reset</button>
+              				</div>
+	              		</div>               
+		            </form>                    
+             	</div>
+           	</div>           
+         </div>  
          <div class="templatemo-flex-row flex-content-row">
           <!--  <div class="col-1">              
              <div class="templatemo-content-widget orange-bg">
@@ -343,167 +529,7 @@ address: <span id="c"></span>
                </div>                          
              </div>
            </div>             
-         </div> <!-- Second row ends -->
-          <div class="templatemo-flex-row flex-content-row">
-            <div class="templatemo-content-widget white-bg col-2">
-              <i class="fa fa-times"></i>
-            <br>
-              	<form method="post" action="${pageContext.request.contextPath}/Control?action=addAcademicSkills" >
-             	<input type="text" Placeholder="Academic Skill"  required class="form-control" name="academicSkill">
-             	 <br>
-             	<input type="submit" class="form-control" value="Add Academic Skill" >
-             	</form><hr>  
-              		<form action="${pageContext.request.contextPath}/Control?action=addSubCategory" method="post" >
-              		 	  <select required class="form-control"   name="skillId"> 
-              				<option value="0">View Academic Skill</option> 
-              				<% academicSkillRs = ct.getAcademicSkill(); %>
-              				<% while(academicSkillRs.next() ){ %>
-              					<option value="<%=academicSkillRs.getString("skill_id") %>"> <%=academicSkillRs.getString("skill_name") %></option>
-              				<%} %> 
-              			</select>  <br>
-              	 
-             		<!-- <input type="submit"   class="form-control" value="View Academic Skill" >
-            -->
-              		</form><hr> 
-              		<form method="post" action="${pageContext.request.contextPath}/Control?action=addLifeSkills" >
-             	<input type="text" Placeholder=" Life Skill"  required class="form-control" name="lifeSkill">
-             	 <br>
-             	<input type="submit" class="form-control" value="Add Life Skill" >
-             	</form> <hr> 
-             	<form action="${pageContext.request.contextPath}/Control?action=addSubCategory" method="post" >
-              		 	  <select required class="form-control"   name="categoryId"> 
-              				<option value="0">ViewLife Skill</option>
-              				 <% lifeSkillRs = ct.getLifeSkill(); %>
-              				<% while(lifeSkillRs.next() ){ %>
-              					<option value="<%=lifeSkillRs.getString("skill_id") %>"> <%=lifeSkillRs.getString("skill_name") %></option>
-              				<%} %> 
-              			</select>  <br>
-              	 
-             		<!-- <input type="submit"   class="form-control" value="View Life Skill" >
-            -->
-              		</form>
-               </div>
-                <div class="templatemo-content-widget white-bg col-2">
-              <i class="fa fa-times"></i>
-            	<br>
-               
-             	<form method="post" action="${pageContext.request.contextPath}/Control?action=addSoftSkills" >
-             	<input type="text" Placeholder="Soft Skill"  required class="form-control" name="softSkill">
-             	 <br>
-             	<input type="submit" class="form-control" value="Add Soft Skill" >
-             	</form> <hr>  
-              		<form action="" method="post" >
-              		 	<select required class="form-control"   name="softSkill"> 
-              				<option value="0">View Soft Skills</option>
-              			     <% softSkillRs = ct.getSoftSkill(); %>
-              				<% while(softSkillRs.next() ){ %>
-              					<option value="<%=softSkillRs.getString("skill_id") %>"> <%=softSkillRs.getString("skill_name") %></option>
-              				<%} %> 
-              			</select><br> 
-             		<input type="submit" class="form-control" value="View Soft Skill" > 
-              		</form><hr> 
-              		<form action="${pageContext.request.contextPath}/Control?action=addProfessionalSkills" method="post" >
-              		 	 
-              		<input type="text"  required class="form-control" Placeholder="Professional Skill" name="professionalSkill">
-             	 	<br>
-             		<input type="submit" class="form-control" value="Add  Professional Skill" >
-             	 
-              		</form><hr>
-              		 
-              		<form  action="${pageContext.request.contextPath}/Control?action=addTraining" method="post" >
-              		 	<select required class="form-control"    > 
-              				<option value="0">Choose Professional Skill </option>
-           				  	<% professionalSkillRs = ct.getProfessionalSkill(); %>
-              				<% while(professionalSkillRs.next() ){ %>
-              					<option value="<%=professionalSkillRs.getString("skill_id") %>"> <%=professionalSkillRs.getString("skill_name") %></option>
-              				<%} %> 
-              			</select><br>
-	              		 
-	             		<!-- <input type="submit" class="form-control" value="View  Professional Skill" >
-	        -->
-             	 	</form>
-               </div>
-            <div class="templatemo-content-widget white-bg col-2 text-center">
-              	<i class="fa fa-times"></i>
-              	<form action="${pageContext.request.contextPath}/Control?action=addInterViewSlot" method="post" >
-              		<br>
-              		 
-              		<input type="date"  required class="form-control" Placeholder="Interview Date" name="interViewDate">
-              		<br>
-              		<input type="number" min="1"    required class="form-control" Placeholder="Available Seats" name="availableSeats">
-              		<br>
-              		<select required class="form-control" name="slotTime"  >
-              		 		<option>Select InterView Time</option>
-	           				<option value="09:00 AM">09:00 AM</option>
-	           				<option value="10:00 AM">10:00 AM</option>
-	           				<option value="11:00 AM">11:00 AM</option>
-	           				<option value="12:00 PM">12:00 PM</option>
-	           				<option value="01:00 PM">01:00 PM</option>
-	           				<option value="02:00 PM">02:00 PM</option>
-	           				<option value="03:00 PM">03:00 PM</option>
-	           				<option value="04:00 PM">04:00 PM</option>
-	           				<option value="05:00 PM">05:00 PM</option> 
-	             		 
-             		</select> <br> 
-             		<textarea  name="venue" required class="form-control" placeholder="Interview Venue" ></textarea>
-              		 <br> 
-              		 <input type="submit" class="form-control" value="Add Interview Slot" >
-	       
-             	</form>
-           	</div> 
-    	</div>
-    	 <div class="templatemo-flex-row flex-content-row">
-          	<div class="col-2">
-              <div class="panel panel-default templatemo-content-widget white-bg  templatemo-overflow-hidden">
-               <i class="fa fa-times"></i>  
-                     <h2 class="margin-bottom-10">Create Mentors </h2>
-		            <p></p>
-	           		<form action="${pageContext.request.contextPath}/Control?action=createMentor" class="templatemo-login-form" method="post" enctype="multipart/form-data">
-		              	<div class="row form-group">
-			                <div class="col-lg-4 col-md-4 form-group">                  
-			                    <label for="inputFullName">Full Name</label>
-			                    <input type="text" name="fullName"  required class="form-control" id="inputFullName" placeholder="Kapil Thakur">                  
-			                </div>
-			                 <div class="col-lg-4 col-md-4 form-group">                  
-			                    <label for="inputEmail">Email</label>
-			                    <input type="email" name="email" required class="form-control" id="inputEmail" placeholder="prism.mentor@gmail.com">                  
-			                </div> 
-			                 <div class="col-lg-4 col-md-4 form-group"> 
-			                  	<label class="control-label templatemo-block">Select Teams</label>                 
-			                  	<select required multiple name="team" class="templatemo-multi-select form-control" style="overflow-y: scroll;">
-	                				<% 	teamRs = ct.getTeams();  %>
-	              					<% while(teamRs.next() ){ %>
-	              					<option value="<%=teamRs.getString("team_name") %>"><%=teamRs.getString("team_name") %></option>
-	              					<% } %>  
-           						</select> 
-		              		</div>
-		              	</div>
-		              	<div class="row form-group"> 
-		              		<div class="col-lg-4 col-md-4 form-group"> 
-			                  	<label class="control-label templatemo-block">Select Branch</label>                 
-			                  	<select required  name="branch" class="  form-control" style="overflow-y: scroll;">
-	                				<% 	branchRs = ct.getBranch();  %>
-	              					<% while(branchRs.next() ){ %>
-	              					<option value="<%=branchRs.getString("id") %>"><%=branchRs.getString("name")%></option>
-	              					<% } %>  
-           						</select> 
-		              		</div>
-		              		<div class="col-lg-4 col-md-4 form-group"> 
-	                  			<label class="control-label templatemo-block">Select User Type</label>                 
-			                  	<select name="userType" class="form-control">
-				                    <option value="Mentor">Mentor</option>                     
-			                  	</select>
-			                </div>
-		              		<div class=" col-lg-4 col-md-4 form-group "><br>
-		              		<label class="control-label templatemo-block"> </label>       
-			                	<button type="submit" class="templatemo-blue-button" style="padding:8px 10px;">Create Mentor</button>
-				                <button type="reset" class="templatemo-blue-button" style="padding:8px 35px;">Reset</button>
-              				</div>
-	              		</div>               
-		            </form>                    
-             	</div>
-           	</div>           
-         </div>  
+         </div> 
       </div>
     </div>
      <%} %>
@@ -569,6 +595,407 @@ address: <span id="c"></span>
       
     </script> -->
     <script type="text/javascript" src="js/templatemo-script.js"></script>      <!-- Templatemo Script -->
+<div id="snackbar"></div>
 
+ <% 
+ String action =request.getParameter("action");
+ if(action==null){
+ 
+ }else if(action!=null)
+ {
+	 
+  
+  %><%if(action.equals("TeamExist")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Team Name Alreay Exist";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("TeamAdded")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="New Team Has Been Added";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("MeetingTypeExist")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Meeting Type Laready Exist";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("MeetingTypeAdded")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Meeting Type Has Been Added";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("faqExists")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Faq Is Already Exist";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("FaqAdded")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="New FAQ Has Been Added";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("BranchExist")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Branch Name Already Exist";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("BranchAdded")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="New Branch Has Been Added";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("TrainingTypeAlradyExist")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Training Type Is Already Exist For Selected Team";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("TrainingAdded")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="New Training Type Has Been Added For Selected Team";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("AcademicSkillExist")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Skill Already Exist in Academic Skills";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("NewAcademicSkillAdded")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="New Skill Has Been Added In Academic Skills";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("LifeSkillsExist")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Skill Already Exist In the Life Skills List";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("NewLifeSkillsAdded")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="New Skill Has Been Added To The Life Skill List";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("SoftSkillExist")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Skill Already Exist In The Life Skill List";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("NewSoftSkillAdded")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Skill Is Added To The Soft Skill List";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("professionalSkillExist")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Skill Already Exist In The Professional Skill List";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("newProfessionalSkillAdded")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Skill Already Exist In The Life Skill List";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("InterViewSlotsExist")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Interview Slot Already Exist";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("NewInterViewSlotAdded")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="New Interview Skill Is Added";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("MentorRegistered")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Mentor Account Already Exist";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("MentorCreated")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Skill Already Exist In The Life Skill List";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("GrievanceTypeExist")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Grievnace Type Already Exist";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("NewGrievanceTypeAdded")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="New Grievnace Type Added";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("VmsExperienceCategoryExist")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="VMS Experience Category Already Exist";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("NewVMSCategorAdded")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="New VMS Experience Category Added";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Skill Already Exist In The Life Skill List";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Skill Already Exist In The Life Skill List";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Skill Already Exist In The Life Skill List";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Skill Already Exist In The Life Skill List";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}else if(action.equals("")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="Skill Already Exist In The Life Skill List";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}%>
+
+
+<%}%>
+<script type="text/javascript">
+function validate()
+{
+	var emailRe = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	var phoneRe= /^\d{10}$/;
+	var email=document.getElementById("inputEmail"); 
+	if(!emailRe.test(email.value)){
+		var x = document.getElementById("snackbar"); 
+    x.className = "show";
+    x.innerHTML="Email Is Incorrect";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+	    valid=false;	
+}
+}
+
+function validate()
+{
+
+    var fld = document.f1.current_conact.value;
+
+    if (isNaN(fld)) {
+         
+        document.getElementById('msg').innerHTML = "Contact number is not valid";
+
+
+        return false;
+    }
+    else if (!(fld.length == 10)) {
+         
+        document.getElementById('msg').innerHTML = "Contact number is not valid";
+        return false;
+    }
+
+    var fuData = document.getElementById('profile_pic');
+    var FileUploadPath = fuData.value;
+
+    var Extension = FileUploadPath.substring(FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+
+
+    if(FileUploadPath == '')
+    {
+        return true
+    }
+    else {
+
+        if (Extension == "gif" || Extension == "png" || Extension == "bmp"
+            || Extension == "jpeg" || Extension == "jpg") {
+
+
+            if (fuData.files && fuData.files[0]) {
+
+                var size = fuData.files[0].size;
+
+                if(size >500000 ){
+                    
+                    document.getElementById('msg').innerHTML = "File too large (Max Picture Size 500KB)";
+
+                    return false;
+                }else{
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $('#blah').attr('src', e.target.result);
+                    };
+
+                    reader.readAsDataURL(fuData.files[0]);
+                }
+            }
+
+        }
+        else {
+            document.getElementById('msg').innerHTML = "Photo only allows file types of GIF, PNG, JPG, JPEG and BMP.";
+            return false;
+        }}
+
+
+}
+</script>
   </body>
 </html>

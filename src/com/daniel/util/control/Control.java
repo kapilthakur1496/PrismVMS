@@ -280,7 +280,7 @@ public class Control extends HttpServlet {
 			 	checkTeamRs = checkTeamSt.executeQuery(checkQ);
 				
 				 if (checkTeamRs.next())	{
-					 response.sendRedirect("admin/index.jsp?msg=TeamExist");
+					 response.sendRedirect("admin/index.jsp?action=TeamExist");
 				 }
 				 else   {  
 					PreparedStatement addCategoryPs =null;
@@ -288,7 +288,7 @@ public class Control extends HttpServlet {
 					addCategoryPs  =  connection.prepareStatement(query);
 					addCategoryPs.setString(1, team); 
 					addCategoryPs.executeUpdate();	
-					response.sendRedirect("admin/index.jsp");
+					response.sendRedirect("admin/index.jsp?action=TeamAdded");
 	  
 	 				  } 
 			}  
@@ -305,7 +305,7 @@ public class Control extends HttpServlet {
 		 }
 		}
 		else{
-			response.sendRedirect("index.jsp?action=LoginAgain");
+			response.sendRedirect("../adminLogin?action=LoginAgain");
 		}
 		 out.close(); 
 		 
@@ -328,7 +328,7 @@ private void addMeeting( HttpServletRequest request, HttpServletResponse respons
 				meetingTypeRs = meetingTypeSt.executeQuery(checkQ);
 				
 				 if (meetingTypeRs.next())	{
-					 response.sendRedirect("admin/index.jsp?msg=MeetingTypeExist");
+					 response.sendRedirect("admin/index.jsp?action=MeetingTypeExist");
 				 }
 				 else   {  
 					PreparedStatement addCategoryPs =null;
@@ -336,7 +336,7 @@ private void addMeeting( HttpServletRequest request, HttpServletResponse respons
 					addCategoryPs  =  connection.prepareStatement(query);
 					addCategoryPs.setString(1, meetingType); 
 					addCategoryPs.executeUpdate();	
-					response.sendRedirect("admin/index.jsp");
+					response.sendRedirect("admin/index.jsp?action=MeetingTypeAdded");
 	  
 	 				  } 
 			}  
@@ -353,7 +353,7 @@ private void addMeeting( HttpServletRequest request, HttpServletResponse respons
 		 }
 		}
 		else{
-			response.sendRedirect("index.jsp?action=LoginAgain");
+			response.sendRedirect("../adminLogin.jsp?action=LoginAgain");
 		}
 		 out.close(); 
 		 
@@ -366,6 +366,9 @@ public void addFaqDetails( HttpServletRequest request, HttpServletResponse respo
 	String faqAnswer = request.getParameter("answer");
 	Statement faqSt = null;
 	ResultSet faqRs = null;
+	 HttpSession session = request.getSession();
+		String adminId = (String)session.getAttribute("adminId");
+		if(adminId !=null) {
 	 
 	try {
 		faqSt = connection.createStatement();
@@ -373,7 +376,7 @@ public void addFaqDetails( HttpServletRequest request, HttpServletResponse respo
 		faqRs = faqSt.executeQuery(checkFaqQ);
 			
 		 		if (faqRs.next())	{
-		 			response.sendRedirect("admin/manageData.jsp?msg=faqExists");
+		 			response.sendRedirect("admin/index.jsp?action=faqExists");
 				 }
 				 else   { 
 					 PreparedStatement addfaqPs =null;
@@ -385,7 +388,7 @@ public void addFaqDetails( HttpServletRequest request, HttpServletResponse respo
 						 addfaqPs.setString(2, faqAnswer); 
 						 addfaqPs.executeUpdate();	
  						  
-						response.sendRedirect("admin/index.jsp");
+						response.sendRedirect("admin/index.jsp?action=FaqAdded");
 						/*
 						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("adminIndex.jsp?pageNumber=1#tab2");
 						*/
@@ -434,6 +437,11 @@ public void addFaqDetails( HttpServletRequest request, HttpServletResponse respo
 						e.printStackTrace();
 					} 
 		 		}
+		}
+		else
+		{
+			response.sendRedirect("../adminLogin.jsp?action=LoginAgain");
+		}
 	 	out.close();  
 	}
 private void addBranch( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -453,7 +461,7 @@ private void addBranch( HttpServletRequest request, HttpServletResponse response
 				branchNameRs = branchNameSt.executeQuery(checkQ);
 				
 				 if (branchNameRs.next())	{
-					 response.sendRedirect("admin/index.jsp?msg=BranchExist");
+					 response.sendRedirect("admin/index.jsp?action=BranchExist");
 				 }
 				 else   {  
 					PreparedStatement addCategoryPs =null;
@@ -461,7 +469,7 @@ private void addBranch( HttpServletRequest request, HttpServletResponse response
 					addCategoryPs  =  connection.prepareStatement(query);
 					addCategoryPs.setString(1, branchName); 
 					addCategoryPs.executeUpdate();	
-					response.sendRedirect("admin/index.jsp");
+					response.sendRedirect("admin/index.jsp?action=BranchAdded");
 	  
 	 				  } 
 			}  
@@ -478,7 +486,7 @@ private void addBranch( HttpServletRequest request, HttpServletResponse response
 		 }
 		}
 		else{
-			response.sendRedirect("index.jsp?action=LoginAgain");
+			response.sendRedirect("../adminLogin.jsp?action=LoginAgain");
 		}
 		 out.close(); 
 		 
@@ -533,7 +541,7 @@ private void addTrainingType( HttpServletRequest request, HttpServletResponse re
 			trainingTypeRs = trainingTypeSt.executeQuery(checkQ);
 			
 			 if (trainingTypeRs.next())	{
-				 response.sendRedirect("admin/index.jsp?msg=BranchExist");
+				 response.sendRedirect("admin/index.jsp?action=TrainingTypeAlradyExist");
 			 }
 			 else   {  
 				PreparedStatement addCategoryPs =null;
@@ -542,7 +550,7 @@ private void addTrainingType( HttpServletRequest request, HttpServletResponse re
 				addCategoryPs.setString(1, training_type); 
 				addCategoryPs.setString(2, teamId); 
 				addCategoryPs.executeUpdate();	
-				response.sendRedirect("admin/index.jsp");
+				response.sendRedirect("admin/index.jsp?action=TrainingAdded");
   
  				  } 
 		}  
@@ -559,7 +567,7 @@ private void addTrainingType( HttpServletRequest request, HttpServletResponse re
 	 }
 	}
 	else{
-		response.sendRedirect("index.jsp?action=LoginAgain");
+		response.sendRedirect("adminLogin.jsp?action=LoginAgain");
 	}
 	 out.close(); 
 	 
@@ -718,7 +726,7 @@ private void addAcademicSkills( HttpServletRequest request, HttpServletResponse 
 			 	checkAcademicSkillRs = checkAcademicSkillSt.executeQuery(checkQ);
 				
 			 	if (checkAcademicSkillRs.next()) {
-					 response.sendRedirect("admin/index.jsp?msg=TeamExist");
+					 response.sendRedirect("admin/index.jsp?action=AcademicSkillExist");
 				 }
 				 else   {  
 							PreparedStatement addCategoryPs =null;
@@ -726,7 +734,7 @@ private void addAcademicSkills( HttpServletRequest request, HttpServletResponse 
 							addCategoryPs  =  connection.prepareStatement(query);
 							addCategoryPs.setString(1, academicSkill); 
 							addCategoryPs.executeUpdate();	
-							response.sendRedirect("admin/index.jsp"); 
+							response.sendRedirect("admin/index.jsp?action=NewAcademicSkillAdded"); 
 	 				  }  
 			}  
 		 catch (SQLException e) {
@@ -742,7 +750,7 @@ private void addAcademicSkills( HttpServletRequest request, HttpServletResponse 
 		 }
 		}
 		else{
-			response.sendRedirect("index.jsp?action=LoginAgain");
+			response.sendRedirect("adminLogin.jsp?action=LoginAgain");
 		}
 		 out.close(); 
 		 
@@ -835,7 +843,7 @@ private void addLifeSkills( HttpServletRequest request, HttpServletResponse resp
 		 	checkLifeSkillRs = checkLifeSkillSt.executeQuery(checkQ);
 			
 		 	if (checkLifeSkillRs.next()) {
-				 response.sendRedirect("admin/index.jsp?msg=TeamExist");
+				 response.sendRedirect("admin/index.jsp?action=LifeSkillsExist");
 			 }
 			 else   {  
 						PreparedStatement addCategoryPs =null;
@@ -843,7 +851,7 @@ private void addLifeSkills( HttpServletRequest request, HttpServletResponse resp
 						addCategoryPs  =  connection.prepareStatement(query);
 						addCategoryPs.setString(1, lifeSkill); 
 						addCategoryPs.executeUpdate();	
-						response.sendRedirect("admin/index.jsp"); 
+						response.sendRedirect("admin/index.jsp?action=NewLifeSkillsAdded"); 
  				  }  
 		}  
 	 catch (SQLException e) {
@@ -859,7 +867,7 @@ private void addLifeSkills( HttpServletRequest request, HttpServletResponse resp
 	 }
 	}
 	else{
-		response.sendRedirect("index.jsp?action=LoginAgain");
+		response.sendRedirect("adminLogin.jsp?action=LoginAgain");
 	}
 	 out.close(); 
 	 
@@ -913,7 +921,7 @@ private void addSoftSkills( HttpServletRequest request, HttpServletResponse resp
 		 	checkSoftSkillRs = checkSoftSkillSt.executeQuery(checkQ);
 			
 		 	if (checkSoftSkillRs.next()) {
-				 response.sendRedirect("admin/index.jsp?msg=TeamExist");
+				 response.sendRedirect("admin/index.jsp?action=SoftSkillExist");
 			 }
 			 else   {  
 						PreparedStatement addCategoryPs =null;
@@ -921,7 +929,7 @@ private void addSoftSkills( HttpServletRequest request, HttpServletResponse resp
 						addCategoryPs  =  connection.prepareStatement(query);
 						addCategoryPs.setString(1, softSkill); 
 						addCategoryPs.executeUpdate();	
-						response.sendRedirect("admin/index.jsp"); 
+						response.sendRedirect("admin/index.jsp?action=NewSoftSkillAdded"); 
  				  }  
 		}  
 	 catch (SQLException e) {
@@ -937,7 +945,7 @@ private void addSoftSkills( HttpServletRequest request, HttpServletResponse resp
 	 }
 	}
 	else{
-		response.sendRedirect("index.jsp?action=LoginAgain");
+		response.sendRedirect("adminLogin.jsp?action=LoginAgain");
 	}
 	 out.close(); 
 	 
@@ -991,7 +999,7 @@ private void addProfessionalSkills( HttpServletRequest request, HttpServletRespo
 		 	checkprofessionalSkillRs = checkprofessionalSkillSt.executeQuery(checkQ);
 			
 		 	if (checkprofessionalSkillRs.next()) {
-				 response.sendRedirect("admin/index.jsp?msg=TeamExist");
+				 response.sendRedirect("admin/index.jsp?action=professionalSkillExist");
 			 }
 			 else   {  
 						PreparedStatement addCategoryPs =null;
@@ -999,7 +1007,7 @@ private void addProfessionalSkills( HttpServletRequest request, HttpServletRespo
 						addCategoryPs  =  connection.prepareStatement(query);
 						addCategoryPs.setString(1, professionalSkill); 
 						addCategoryPs.executeUpdate();	
-						response.sendRedirect("admin/index.jsp"); 
+						response.sendRedirect("admin/index.jsp?action=newProfessionalSkillAdded"); 
  				  }  
 		}  
 	 catch (SQLException e) {
@@ -1015,7 +1023,7 @@ private void addProfessionalSkills( HttpServletRequest request, HttpServletRespo
 	 }
 	}
 	else{
-		response.sendRedirect("index.jsp?action=LoginAgain");
+		response.sendRedirect("adminLogin.jsp?action=LoginAgain");
 	}
 	 out.close(); 
 	 
@@ -1074,7 +1082,7 @@ private void addInterViewSlot( HttpServletRequest request, HttpServletResponse r
 		 	checkinterViewRs = checkinterViewSt.executeQuery(checkQ);
 			
 		 	if (checkinterViewRs.next()) {
-				 response.sendRedirect("admin/index.jsp?msg=InterViewSlotsExist");
+				 response.sendRedirect("admin/index.jsp?action=InterViewSlotsExist");
 			 }
 			 else   {   
 						PreparedStatement addInterViewSlotPs =null;
@@ -1085,7 +1093,7 @@ private void addInterViewSlot( HttpServletRequest request, HttpServletResponse r
 			            addInterViewSlotPs.setString(4, venue ); 
 			            addInterViewSlotPs.executeUpdate(); 
 			             
-						response.sendRedirect("admin/index.jsp"); 
+						response.sendRedirect("admin/index.jsp?action=NewInterViewSlotAdded"); 
  				  }  
 		}  
 	 catch (SQLException e) {
@@ -1101,7 +1109,7 @@ private void addInterViewSlot( HttpServletRequest request, HttpServletResponse r
 	 }
 	}
 	else{
-		response.sendRedirect("index.jsp?action=LoginAgain");
+		response.sendRedirect("adminLogin.jsp?action=LoginAgain");
 	}
 	 out.close(); 
 	 
@@ -1283,7 +1291,7 @@ private void volunteerChooseSkills( HttpServletRequest request, HttpServletRespo
 				addCategoryPs.setString(2, addi_skill); 
 				addCategoryPs.setString(3, background); 
 				addCategoryPs.executeUpdate();	
-				response.sendRedirect("volunteerPreIndex.jsp"); 
+				response.sendRedirect("volunteerPreIndex.jsp?action=SuccessfullyRegistered"); 
 	 				    
 			}  
 		 catch (SQLException e) {
@@ -1299,7 +1307,7 @@ private void volunteerChooseSkills( HttpServletRequest request, HttpServletRespo
 		 }
 	}
 	else{
-		response.sendRedirect("index.jsp?action=LoginAgain");//send redirect to Volunteer Registration
+		response.sendRedirect("volunteerRegistration.jsp.jsp?action=SessionExpires");//send redirect to Volunteer Registration
 	}
 	 out.close(); 
 	 
@@ -2063,7 +2071,7 @@ public void addContactDetails( HttpServletRequest request, HttpServletResponse r
 						 addcontactPs.setString(5, contactMessage); 
 						 addcontactPs.executeUpdate();	
  						  
-						response.sendRedirect("contact.jsp");
+						response.sendRedirect("contact.jsp?action=SuccessfullySubmitted");
 						/*
 						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("adminIndex.jsp?pageNumber=1#tab2");
 						*/
@@ -2225,7 +2233,7 @@ public void volunteerApproval( HttpServletRequest request, HttpServletResponse r
 	   	
    	} 
 	   	if(emailSentCount ==   updateCount) {
-	   		response.sendRedirect("admin/manageUsers.jsp?pageNumber="+pageNumber);
+	   		response.sendRedirect("admin/manageUsers.jsp?action=StatusUpdated&pageNumber="+pageNumber);
 	   		/*dispatcher.forward(request, response); */
 	   	}
 }  
@@ -2256,7 +2264,7 @@ public void volunteerApproval( HttpServletRequest request, HttpServletResponse r
 	}
 	else
 	{
-		response.sendRedirect("admin/index.jsp?action=LoginAgain");
+		response.sendRedirect("adminLogin.jsp?action=LoginAgain");
 	}
 	  out.close(); 
 	 
@@ -2267,7 +2275,7 @@ public   int checkVolunteerStatus(HttpServletRequest request, HttpServletRespons
 	if(id!=null) {	
 		try {  				
 				checkStatusSt = connection.createStatement();
-				String query = "select id from volunteer_registration where approve_status = 'Approved' ";
+				String query = "select id from volunteer_registration where approve_status = 'Approved' and id="+id;
 				checkStatusRs = checkStatusSt.executeQuery(query);
 				if(checkStatusRs.next())
 				{
@@ -2414,7 +2422,7 @@ public void assignTeam( HttpServletRequest request, HttpServletResponse response
 		   			updateTeamPs.executeUpdate(); 
 				 }  
 		   	}  
-	   		response.sendRedirect("admin/manageUsers.jsp?pageNumber="+pageNumber);
+	   		response.sendRedirect("admin/manageUsers.jsp?action=TeamBranchAssigned&pageNumber="+pageNumber);
 	   	 
 		}  
 	 catch (SQLException e) {
@@ -2436,7 +2444,7 @@ public void assignTeam( HttpServletRequest request, HttpServletResponse response
 	 		}
 		}
 	else {
-	response.sendRedirect("admin/index.jsp?action=LoginAgain"); 
+	response.sendRedirect("adminLogin.jsp?action=LoginAgain"); 
 	}
 	out.close(); 
 	 
@@ -2458,7 +2466,7 @@ public void createMentor( HttpServletRequest request, HttpServletResponse respon
 		 	checkMentorRs = checkMentorSt.executeQuery(checkQ);
 			
 		 	if (checkMentorRs.next()) {
-				 response.sendRedirect("admin/index.jsp?msg=AlreadyRegistered");
+				 response.sendRedirect("admin/index.jsp?action=MentorRegistered");
 			 }
 			 else{     
 		 			
@@ -2539,7 +2547,7 @@ public void createMentor( HttpServletRequest request, HttpServletResponse respon
 				   			      
 				   			      Transport.send(message);
 				   			     // result = "Sent message successfully...."; 
-				   			   response.sendRedirect("admin/index.jsp"); 
+				   			   response.sendRedirect("admin/index.jsp?action=MentorCreated"); 
 								 
 						   						  
 			   				  } 
@@ -2871,7 +2879,7 @@ public   int checkMentorStatus(HttpServletRequest request, HttpServletResponse r
 	if(id!=null) {	
 		try {  				
 				checkStatusSt = connection.createStatement();
-				String query = "select id from admin where approve_status = 'Approved' ";
+				String query = "select id from admin where approve_status = 'Approved' and id= "+id;
 				checkStatusRs = checkStatusSt.executeQuery(query);
 				if(checkStatusRs.next())
 				{
@@ -3019,7 +3027,7 @@ public void assignIndividualProject( HttpServletRequest request, HttpServletResp
 			      message.setFrom(new InternetAddress(from)); 
 			      message.addRecipient(Message.RecipientType.TO,
 			                               new InternetAddress(to)); 
-			      message.setSubject("PrismVMS Account Details"); 
+			      message.setSubject("New Project"); 
 			      message.setText("Dear Volunteer\n "
 			    		  +"\n\n One New Project is assigned to you "+projectTitle 
 			    		   +"\n\nThank You" 
@@ -3030,7 +3038,7 @@ public void assignIndividualProject( HttpServletRequest request, HttpServletResp
 			      Transport.send(message);
 			     // result = "Sent message successfully....";  
 			       
-			      response.sendRedirect("individualProject.jsp?pN=1");
+			      response.sendRedirect("individualProject.jsp?action=ProjectAssigned&pN=1");
 			      
 			  } 
 		    catch (MessagingException mex) {
@@ -3058,7 +3066,7 @@ public void assignIndividualProject( HttpServletRequest request, HttpServletResp
 		} 	 
 	}	 
  else{     
-	 response.sendRedirect("adminLogin?action=LoginAgain");
+	 response.sendRedirect("adminLogin.jsp?action=LoginAgain");
  	}  
 	out.close();
 }
@@ -3620,7 +3628,7 @@ public void assignTeamProject( HttpServletRequest request, HttpServletResponse r
 		      //result = "Error: unable to send message....";
 		   } 
 			}
-			response.sendRedirect("teamProjectView.jsp?pN=1");
+			response.sendRedirect("teamProjectView.jsp?action=TeamProjectAssigned&pN=1");
 		}
 		catch (SQLException e) {
 			// TODO: handle exception
@@ -3810,7 +3818,7 @@ public void createBranchProject( HttpServletRequest request, HttpServletResponse
 					 	 
 					      /*message.addRecipient(Message.RecipientType.TO,
 					                               new InternetAddress(to)); */
-					      message.setSubject("New Team Project"); 
+					      message.setSubject("New Branch Project"); 
 					      message.setText("Dear Volunteer\n "
 					    		  +"\n\n One New Branch Project is Created fot your Team "+projectTitle 
 					    		  +"\n\n You can enroll yourself by sending enroll request" 
@@ -4114,7 +4122,7 @@ public void assignBranchProject( HttpServletRequest request, HttpServletResponse
 		      //result = "Error: unable to send message....";
 		   } 
 			}
-			response.sendRedirect("branchProjectView.jsp?pN=1");
+			response.sendRedirect("branchProjectView.jsp?action=BranchProjectAssigned&pN=1");
 		}
 		catch (SQLException e) {
 			// TODO: handle exception
@@ -4261,7 +4269,7 @@ public   ResultSet getBranchProject(HttpServletRequest request, HttpServletRespo
 		}
 		else
 		{
-			response.sendRedirect("MentorIndex.jsp?action=LoginAgain");
+			response.sendRedirect("adminLogin.jsp?action=LoginAgain");
 		}
 	return getTeamProjectRs;
 
@@ -4307,7 +4315,7 @@ public   ResultSet getVolunteerProject(HttpServletRequest request, HttpServletRe
 		}
 		else
 		{
-			response.sendRedirect("MentorIndex.jsp?action=LoginAgain");
+			response.sendRedirect("adminLogin.jsp?action=LoginAgain");
 		}
 	return getTeamProjectRs;
 
@@ -4345,7 +4353,7 @@ public void submitWorkDiary( HttpServletRequest request, HttpServletResponse res
 			assingProjectPs.executeUpdate();	
 	 
 		 
-			response.sendRedirect("projectAssigned.jsp?pN=1");
+			response.sendRedirect("projectAssigned.jsp?action=WorkDiarySubmitted&pN=1");
 		}
 		catch (SQLException e) {
 			// TODO: handle exception
@@ -4553,7 +4561,7 @@ public void submitWorkDiaryForProject( HttpServletRequest request, HttpServletRe
 			assingProjectPs.executeUpdate();	
 	 
 		 
-			response.sendRedirect("workDiary.jsp?msg=workDiarySubmitted");
+			response.sendRedirect("workDiary.jsp?action=workDiarySubmitted");
 		}
 		catch (SQLException e) {
 			// TODO: handle exception
@@ -4641,7 +4649,7 @@ public void submitMeeting( HttpServletRequest request, HttpServletResponse respo
 			assingProjectPs.setString(5, volunteerId); 
 			assingProjectPs.setString(6, dateFormat.format(date));   
 			assingProjectPs.executeUpdate();	 
-			response.sendRedirect("workMeeting.jsp?msg=meetingSubmitted");
+			response.sendRedirect("workMeeting.jsp?action=meetingSubmitted");
 		}
 		catch (SQLException e) {
 			// TODO: handle exception
@@ -4666,9 +4674,7 @@ public void submitMeeting( HttpServletRequest request, HttpServletResponse respo
 	 response.sendRedirect("volunteerLogin.jsp?action=LoginAgain");
  	}  
 	out.close();
-}
-
-
+} 
 public   ResultSet getWorkMeeting( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
 	Statement getTeamsSt =null;
 	ResultSet getTeamsRs = null;
@@ -4740,7 +4746,7 @@ public   ResultSet getVolunteerWorkMeeting( HttpServletRequest request, HttpServ
 		}
 		else
 		{
-			 response.sendRedirect("mentorIndex.jsp?action=LoginAgain");
+			 response.sendRedirect("adminLogin.jsp?action=LoginAgain");
 		}
 	return getTeamsRs;
 
@@ -4780,7 +4786,7 @@ public   ResultSet getVolunteerWorkTraining( HttpServletRequest request, HttpSer
 		}
 		else
 		{
-			 response.sendRedirect("mentorIndex.jsp?action=LoginAgain");
+			 response.sendRedirect("adminLogin.jsp?action=LoginAgain");
 		}
 	return getTeamsRs; 
 }
@@ -4931,7 +4937,7 @@ public void submitTraining( HttpServletRequest request, HttpServletResponse resp
 			assingProjectPs.setString(5, volunteerId); 
 			assingProjectPs.setString(6, dateFormat.format(date));   
 			assingProjectPs.executeUpdate();	 
-			response.sendRedirect("workTraining.jsp?msg=trainingSubmitted");
+			response.sendRedirect("workTraining.jsp?action=trainingSubmitted");
 		}
 		catch (SQLException e) {
 			// TODO: handle exception
@@ -4991,7 +4997,7 @@ public void monthWorkDiray( HttpServletRequest request, HttpServletResponse resp
 			assingProjectPs.setString(8, volunteerId);			
 			assingProjectPs.setString(9, status);
 			assingProjectPs.executeUpdate();	 
-			response.sendRedirect("monthlyReport.jsp?msg=monthlyReportSubmitted");
+			response.sendRedirect("monthlyReport.jsp?action=monthlyReportSubmitted");
 		}
 		catch (SQLException e) {
 			// TODO: handle exception
@@ -5058,9 +5064,9 @@ public   ResultSet getWorkDiary(HttpServletRequest request, HttpServletResponse 
 						e.printStackTrace();
 					} */
 		}
-		}
+	} 
 	else{
-		response.sendRedirect("volunteerIndex.jsp?action=LoginAgain");
+		response.sendRedirect("volunteerLogin.jsp?action=LoginAgain");
 	}
 	return getTraningRs;
 
@@ -5106,7 +5112,7 @@ public   ResultSet getMonthlyReport(HttpServletRequest request, HttpServletRespo
 			}
 		}
 	else{
-		response.sendRedirect("volunteerIndex.jsp?action=LoginAgain");
+		response.sendRedirect("volunteerLogin.jsp?action=LoginAgain");
 	}
 	return getMonthReportRs;
 
@@ -5151,7 +5157,7 @@ public   ResultSet getMonthlyReportGrades(HttpServletRequest request, HttpServle
 			}
 		}
 	else{
-		response.sendRedirect("mentorIndex.jsp?action=LoginAgain");
+		response.sendRedirect("adminLogin.jsp?action=LoginAgain");
 	}
 	return getMonthReportRs;
 
@@ -5196,7 +5202,7 @@ public   ResultSet getVolunteerMonthlyReportGrades(HttpServletRequest request, H
 			}
 		}
 	else{
-		response.sendRedirect("volunteerIndex.jsp?action=LoginAgain");
+		response.sendRedirect("volunteerLogin.jsp?action=LoginAgain");
 	}
 	return getMonthReportRs;
 
@@ -5241,7 +5247,7 @@ public   ResultSet getVolunteerMonthlyReport(HttpServletRequest request, HttpSer
 			}
 		}
 	else{
-		response.sendRedirect("volunteerIndex.jsp?action=LoginAgain");
+		response.sendRedirect("volunteerLogin.jsp?action=LoginAgain");
 	}
 	return getMonthReportRs;
 
@@ -5290,7 +5296,7 @@ public   ResultSet getVolunteerBranchProject(HttpServletRequest request, HttpSer
 		}
 		else
 		{
-			response.sendRedirect("volunteerIndex.jsp?action=LoginAgain");
+			response.sendRedirect("volunteerLogin.jsp?action=LoginAgain");
 		}
 	return getTeamProjectRs;
 
@@ -5419,7 +5425,7 @@ public   ResultSet getVolunteerTeamProject(HttpServletRequest request, HttpServl
 		}
 		else
 		{
-			response.sendRedirect("MentorIndex.jsp?action=LoginAgain");
+			response.sendRedirect("volunteerLogin.jsp?action=LoginAgain");
 		}
 	return getTeamProjectRs;
 
@@ -5521,7 +5527,7 @@ private void addGrievance( HttpServletRequest request, HttpServletResponse respo
 			meetingTypeRs = meetingTypeSt.executeQuery(checkQ);
 			
 			 if (meetingTypeRs.next())	{
-				 response.sendRedirect("admin/index.jsp?msg=MeetingTypeExist");
+				 response.sendRedirect("admin/index.jsp?action=GrievanceTypeExist");
 			 }
 			 else   {  
 				PreparedStatement addCategoryPs =null;
@@ -5529,7 +5535,7 @@ private void addGrievance( HttpServletRequest request, HttpServletResponse respo
 				addCategoryPs  =  connection.prepareStatement(query);
 				addCategoryPs.setString(1, grievance); 
 				addCategoryPs.executeUpdate();	
-				response.sendRedirect("admin/index.jsp");
+				response.sendRedirect("admin/index.jsp?action=NewGrievanceTypeAdded");
   
  				  } 
 		}  
@@ -5546,7 +5552,7 @@ private void addGrievance( HttpServletRequest request, HttpServletResponse respo
 	 }
 	}
 	else{
-		response.sendRedirect("index.jsp?action=LoginAgain");
+		response.sendRedirect("adminLogin.jsp?action=LoginAgain");
 	}
 	 out.close(); 
 	 
@@ -5681,7 +5687,7 @@ public void submitGrievance( HttpServletRequest request, HttpServletResponse res
 			      Transport.send(message);
 			     // result = "Sent message successfully....";  
 			       
-			      response.sendRedirect("grievance.jsp");
+			      response.sendRedirect("grievance.jsp?action=SubmittedGrievance");
 			   			  
 			  } 
 		    catch (MessagingException mex) {
@@ -5766,7 +5772,7 @@ private void addVmsExperienceCategory( HttpServletRequest request, HttpServletRe
 			meetingTypeRs = meetingTypeSt.executeQuery(checkQ);
 			
 			 if (meetingTypeRs.next())	{
-				 response.sendRedirect("admin/index.jsp?msg=VmsExperienceCategory");
+				 response.sendRedirect("admin/index.jsp?action=VmsExperienceCategoryExist");
 			 }
 			 else   {  
 				PreparedStatement addCategoryPs =null;
@@ -5774,12 +5780,12 @@ private void addVmsExperienceCategory( HttpServletRequest request, HttpServletRe
 				addCategoryPs  =  connection.prepareStatement(query);
 				addCategoryPs.setString(1, category); 
 				addCategoryPs.executeUpdate();	
-				response.sendRedirect("admin/index.jsp");
+				response.sendRedirect("admin/index.jsp?action=NewVMSCategorAdded");
   
  				  } 
 		}  
 	 catch (SQLException e) {
-			// TODO: handle exception
+			// TODO: handle exceptions
 		e.printStackTrace(); 
 		}
 	 catch (Exception e) {
@@ -5791,7 +5797,7 @@ private void addVmsExperienceCategory( HttpServletRequest request, HttpServletRe
 	 }
 	}
 	else{
-		response.sendRedirect("volunteerIndex.jsp?action=LoginAgain");
+		response.sendRedirect("volunteerLogin.jsp?action=LoginAgain");
 	}
 	 out.close(); 
 	 
@@ -5863,7 +5869,7 @@ public void submitVmsExperience( HttpServletRequest request, HttpServletResponse
 			      Transport.send(message);
 			     // result = "Sent message successfully....";  
 			       
-			      response.sendRedirect("vmsExperience.jsp");
+			      response.sendRedirect("vmsExperience.jsp?action=SubmittedVMSExperience");
 			   			  
 			  } 
 		    catch (MessagingException mex) {
@@ -5936,7 +5942,7 @@ public   ResultSet getVmsExperience(HttpServletRequest request, HttpServletRespo
 		}
 		else
 		{
-			response.sendRedirect("volunteerIndex.jsp?action=LoginAgain");
+			response.sendRedirect("volunteerLogin.jsp?action=LoginAgain");
 		}
 	return getTeamProjectRs;
 
@@ -5982,7 +5988,7 @@ public   ResultSet getVmsExperienceComment(HttpServletRequest request, HttpServl
 		}
 		else
 		{
-			response.sendRedirect("volunteerIndex.jsp?action=LoginAgain");
+			response.sendRedirect("volunteerLogin.jsp?action=LoginAgain");
 		}
 	return getTeamProjectRs;
 
@@ -6028,7 +6034,7 @@ public   ResultSet getVolunteerVmsExperienceComment(HttpServletRequest request, 
 		}
 		else
 		{
-			response.sendRedirect("mentorIndex.jsp?action=LoginAgain");
+			response.sendRedirect("adminLogin.jsp?action=LoginAgain");
 		}
 	return getTeamProjectRs;
 
@@ -6047,7 +6053,8 @@ public void addVmsExperienceComment( HttpServletRequest request, HttpServletResp
 			String pN = request.getParameter("pN"); 
 			 
 			Control ct = new Control();
-			String to = ct.getEmail(volunteerId);
+			String to = "prismhack@gmail.com";
+			String name = ct.getVolunteerName(volunteerId);
 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
  			Date date = new Date();  
 	       // result = "Sent message successfully....";  
@@ -6087,10 +6094,10 @@ public void addVmsExperienceComment( HttpServletRequest request, HttpServletResp
 			      message.setFrom(new InternetAddress(from)); 
 			      message.addRecipient(Message.RecipientType.TO,
 			                               new InternetAddress(to)); 
-			      message.setSubject("Regarding VMS Experience  "); 
-			      message.setText("Dear Volunteer\n "
-			    		  +"\n\n Admin has Send you new Comment on your VMS Experience feedback  "
-			    		  +"\n We will keep you inform about your VMS Experience" 
+			      message.setSubject("Regarding VMS Experience Comment by "+name); 
+			      message.setText("Dear Admin\n "
+			    		  +"\n\n Volunteer has Send you new Comment on your VMS Experience feedback  "
+			    		  +"\n  Kindly look into it!" 
 			    		   +"\n\nThank You" 
 			    		  +"\nWarm Regards"
 			    		  +"\n\nPrismVMS"
@@ -6099,7 +6106,7 @@ public void addVmsExperienceComment( HttpServletRequest request, HttpServletResp
 			      Transport.send(message);
 			     // result = "Sent message successfully....";  
 			       
-			      response.sendRedirect("viewVmsExperience.jsp?pN="+pN);
+			      response.sendRedirect("viewVmsExperience.jsp?action=CommentAdded&pN="+pN);
 			   			  
 			  } 
 		    catch (MessagingException mex) {
@@ -6229,7 +6236,7 @@ public void addWorkDiaryComment( HttpServletRequest request, HttpServletResponse
 			      message.setSubject("Regarding Your Work Diary  "); 
 			      message.setText("Dear Volunteer\n "
 			    		  +"\n\n Your Mentor  has Commented on your Work Diary for the  project "+project 
-			    		  +"\n    " 
+			    		  +"\n" 
 			    		   +"\n\nThank You" 
 			    		  +"\nWarm Regards"
 			    		  +"\n\nPrismVMS"
@@ -6238,7 +6245,7 @@ public void addWorkDiaryComment( HttpServletRequest request, HttpServletResponse
 			      Transport.send(message);
 			     // result = "Sent message successfully....";  
 			       
-			      response.sendRedirect("mentorVolunteerWorkDiaryView.jsp?vId="+volunteerId);
+			      response.sendRedirect("mentorVolunteerWorkDiaryView.jsp?action=CommentedOnWorkDiat&vId="+volunteerId);
 			   			  
 			  } 
 		    catch (MessagingException mex) {
@@ -6381,7 +6388,7 @@ public void addWorkMeetingComment( HttpServletRequest request, HttpServletRespon
 			      Transport.send(message);
 			     // result = "Sent message successfully....";  
 			       
-			      response.sendRedirect("mentorVolunteerMeetingView.jsp?vId="+volunteerId);
+			      response.sendRedirect("mentorVolunteerMeetingView.jsp?action=CommentedOnMeeting&vId="+volunteerId);
 			   			  
 			  } 
 		    catch (MessagingException mex) {
@@ -6523,7 +6530,7 @@ public void addWorkTrainingComment( HttpServletRequest request, HttpServletRespo
 			      Transport.send(message);
 			     // result = "Sent message successfully....";  
 			       
-			      response.sendRedirect("mentorVolunteerTrainingView.jsp?vId="+volunteerId);
+			      response.sendRedirect("mentorVolunteerTrainingView.jsp?action=CommentedOnTraining&vId="+volunteerId);
 			   			  
 			  } 
 		    catch (MessagingException mex) {
@@ -6679,7 +6686,7 @@ public   ResultSet getTeamProjectEnrollment(HttpServletRequest request, HttpServ
 		}
 		else
 		{
-			response.sendRedirect("MentorIndex.jsp?action=LoginAgain");
+			response.sendRedirect("adminLogin.jsp?action=LoginAgain");
 		}
 	return getTeamProjectRs;
 
@@ -6724,7 +6731,7 @@ public   ResultSet getBranchProjectEnrollment(HttpServletRequest request, HttpSe
 		}
 		else
 		{
-			response.sendRedirect("MentorIndex.jsp?action=LoginAgain");
+			response.sendRedirect("adminLogin.jsp?action=LoginAgain");
 		}
 	return getTeamProjectRs;
 
@@ -6869,7 +6876,7 @@ public void branchProjectApproval ( HttpServletRequest request, HttpServletRespo
 		      //result = "Error: unable to send message....";
 		   } 
 			}
-			response.sendRedirect("branchProjectEnrollRequestView.jsp?pN=1");
+			response.sendRedirect("branchProjectEnrollRequestView.jsp?action=RequestApproved&pN=1");
 		}
 		catch (SQLException e) {
 			// TODO: handle exception
@@ -6992,7 +6999,7 @@ public void teamProjectApproval( HttpServletRequest request, HttpServletResponse
 		      //result = "Error: unable to send message....";
 		   } 
 			}
-			response.sendRedirect("teamProjectEnrollRequestView.jsp?pN=1");
+			response.sendRedirect("teamProjectEnrollRequestView.jsp?action=TeamProjectApproved&pN=1");
 		}
 		catch (SQLException e) {
 			// TODO: handle exception
@@ -7085,7 +7092,7 @@ public void mentorVmsExperience( HttpServletRequest request, HttpServletResponse
 			      Transport.send(message);
 			     // result = "Sent message successfully....";  
 			       
-			      response.sendRedirect("mentorVmsExperience.jsp");
+			      response.sendRedirect("mentorVmsExperience.jsp?action=SubmitExperienced");
 			   			  
 			  } 
 		    catch (MessagingException mex) {
@@ -7249,7 +7256,7 @@ public   ResultSet getMentorVmsExperience(HttpServletRequest request, HttpServle
 		}
 		else
 		{
-			response.sendRedirect("mentorIndex.jsp?action=LoginAgain");
+			response.sendRedirect("adminLogin.jsp?action=LoginAgain");
 		}
 	return getTeamProjectRs;
 
@@ -7267,12 +7274,13 @@ public void addMentorVmsExperienceComment( HttpServletRequest request, HttpServl
 			String comment = request.getParameter("comment"); 
 			String id = request.getParameter("id"); 
 			 
-			Control ct = new Control();
-			String to = ct.getMentorEmail(adminId);
+			  
+			String to = "prismhack@gmail.com";
 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
  			Date date = new Date();  
 	       // result = "Sent message successfully....";  
-			
+			Control ct = new Control();
+			String name = ct.getMentorName(adminId);
 			String query = " insert into vms_experience_comment (comment,admin_id,vms_experince_id,comment_time)  values(?,?,?,?)" ;
 			assingProjectPs = connection.prepareStatement(query);
 			assingProjectPs.setString(1, comment); 
@@ -7308,9 +7316,9 @@ public void addMentorVmsExperienceComment( HttpServletRequest request, HttpServl
 			      message.setFrom(new InternetAddress(from)); 
 			      message.addRecipient(Message.RecipientType.TO,
 			                               new InternetAddress(to)); 
-			      message.setSubject("Regarding VMS Experience  "); 
-			      message.setText("Dear Volunteer\n "
-			    		  +"\n\n Admin has Send you new Comment on your VMS Experience feedback  "
+			      message.setSubject("Regarding VMS Experience Comment by "+name); 
+			      message.setText("Dear Sir/Ma'am\n "
+			    		  +"\n\n Mentor has Send you new Comment on your VMS Experience feedback  "
 			    		  +"\n We will keep you inform about your VMS Experience" 
 			    		   +"\n\nThank You" 
 			    		  +"\nWarm Regards"
@@ -7320,7 +7328,7 @@ public void addMentorVmsExperienceComment( HttpServletRequest request, HttpServl
 			      Transport.send(message);
 			     // result = "Sent message successfully....";  
 			       
-			      response.sendRedirect("mentorVmsExperienceView.jsp?pN=1");
+			      response.sendRedirect("mentorVmsExperienceView.jsp?action=SubmitExperienceComment&pN=1");
 			   			  
 			  } 
 		    catch (MessagingException mex) {
@@ -7440,9 +7448,10 @@ public void gradeMonthlyReport( HttpServletRequest request, HttpServletResponse 
 		      mex.printStackTrace();
 		      //result = "Error: unable to send message....";
 		   } 
+			 
+			response.sendRedirect("viewVolunteerMonyhlyReport.jsp?vId="+vId[i]);
 			}
-			response.sendRedirect("viewVolunteerMonyhlyReport.jsp?vId=1");
-		}
+			}
 		catch (SQLException e) {
 			// TODO: handle exception
 		e.printStackTrace();

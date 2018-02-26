@@ -102,8 +102,10 @@ h1 {
 	ResultSet professionalSkillRs=null,academicSkillRs=null,lifeSkillRs=null,softSkillRs=null;
 	Control ct = new Control();
 %>
- 
-	 
+ <div class="text-center">
+	<h3>CHoose Your skills</h3>
+ </div>
+	  
 <form action="Control?action=volunteerChooseSkills" method="post" onSubmit="return validateChecks()">
 	<div class="container" style="paddin:0px; margin-left:150px;  ">
 	    <div class="row" style="height:400px;"><br>

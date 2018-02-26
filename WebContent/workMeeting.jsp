@@ -227,6 +227,30 @@ if(volunteerStatus == 1){
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
 	  
+	  <div id="snackbar"></div>
+ <% 
+ String action =request.getParameter("action");
+ if(action==null){
+ 
+ }else if(action!=null)
+ {
+	 
+  
+  %>
+  <%if(action.equals("meetingSubmitted")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="You Have Submitted Meeting Report";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}%>
+
+
+<%}%>
 
 </body>
 </html>

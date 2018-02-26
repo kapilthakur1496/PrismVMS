@@ -47,9 +47,9 @@ body {
 					<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 						<ul class="nav navbar-nav ">
 							<li><a href="index.jsp" class="hyper "><span>Home</span></a></li>	
-							<li class=" active"><a href="about.html" class="hyper"><span>About</span></a></li>
+							<li><a href="about.html" class="hyper"><span>About</span></a></li>
 							<li ><a href="contact.jsp" class="hyper"><span>Contact Us</span></a></li>
-							<li class=" "><a href="faq.jsp" class="hyper"><span>FAQ</span></a></li>
+							<li><a href="faq.jsp" class="hyper"><span>FAQ</span></a></li>
 						 </ul>
 					</div>
 				</nav>
