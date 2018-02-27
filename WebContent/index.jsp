@@ -18,13 +18,259 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //font -->
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/responsive.css">
 </head>
+<script type="text/javascript">
+	$(document).ready(function()
+	{
+		var i=0,j=0,k=0,count=0;
+		j=i;
+		$(".pince:last-child").attr("id","top-news");
+			
+		do
+		{
+			count++;
+			k++;
+			}while($(".pince:eq("+k+")").attr("id")!="top-news")
+		$("#login-btn").click(function(){
+			$("#login-box").animate({marginLeft:"-60%",opacity:"0.1"},"slow","swing");
+			$(".loader").show();
+			$(".loader").delay("800").fadeOut(300,"linear");
+			setTimeout(function(){
+			$("#login-type").animate({marginLeft:"50%",opacity:"1"},"slow","swing");
+			},800);
+		});
+		$("#close").click(function(){
+			$("#login-type").animate({marginLeft:"120%",opacity:"0"},"slow","swing");
+			$(".loader").show();
+			$(".loader").delay("800").fadeOut(300,"linear");
+			setTimeout(function(){
+			$("#login-box").animate({marginLeft:"50%",opacity:"1"},"slow","swing");
+			},800);
+		});
+		$(".scroll-up").click(function(){
+			if(count-3!=i)
+			{
+			$("h5:eq("+i+")").css("text-decoration","line-through");
+			$(".pince:eq("+i+")").fadeOut("slow","linear");
+			i++;
+			}
+		});
+		$(".scroll-down").click(function(){
+			if(j<i)
+			{
+			i--;
+			$("h5:eq("+i+")").css("text-decoration","none");
+			$(".pince:eq("+i+")").fadeIn("slow","linear");
+			}
+		});
+	});
+</script>
 <style>
-body{
-overflow-x:hidden;
-}
- 
-
+	.team
+	{
+		height:650px;
+		width:auto;
+		overflow:hidden;
+		background:#b3c1c7;
+	}
+	.container-login
+	{
+	height: 100%;
+    width: 50%;
+    background-size: contain;
+    transform: translate(50%,0%);
+    margin-top: 6%;
+    display: inline-flex;
+    border-radius: 4px;
+    overflow: hidden;
+	}
+	#myVideo
+	{
+		max-width:100%;
+		max-height:100%;
+		box-shadow: 1px 10px 30px -10px rgba(0,0,0,0.5);
+		position: fixed;
+		z-index: -1;
+	}
+	#login
+	{
+    	height: 69%;
+    	min-width: 52.4%;
+		margin-left:-1px;
+		cursor: pointer;
+		transition: 0.5s all;
+	}
+	#login:hover
+	{
+	background-color: rgba(243, 241, 234,0.22);
+	}
+	#signup
+	{
+    	height: 69%;
+    	min-width: 52.4%;
+    	cursor: pointer;
+    	transition: 0.5s all;
+    	position: fixed;
+    	margin-left:48%;
+	}
+	#signup:hover
+	{
+	background-color:rgba(255, 255, 255,0.39);
+	}
+	#login-box
+	{
+    height: 50%;
+    width: 70%;
+    background-color: rgba(169, 181, 183,0.7);
+    border-radius: 4px;
+    margin-top: 50%;
+    margin-left: 50%;
+    transform: translate(-50%,-46%);
+    text-align: center;
+    box-shadow: 1px 10px 30px -10px rgba(0,0,0,0.5);
+    overflow: hidden;
+	}
+	#signup-box
+	{
+    height: 50%;
+    width: 70%;
+    background-color: rgba(169, 181, 183,0.7);
+    border-radius: 4px;
+    margin-top: 50%;
+    margin-left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    padding-top:3px;
+   	box-shadow: 1px 10px 30px -10px rgba(0,0,0,0.5);
+	}
+	#login-box>h2,#signup-box>h2
+	{
+		font-family:'Open Sans', sans-serif;
+		text-transform: uppercase;
+		color: linen;
+		font-size: 29px;
+    	margin-top: 11px;
+    	margin-bottom:10px;
+	}
+	#login-box>h3,#signup-box>h3
+	{
+		font-family:'Open Sans', sans-serif;
+		color: linen;
+		font-size:18px;
+		line-height:25px;
+	}
+	#login-btn
+	{
+		height:20%;
+		width:70%;
+		outline: none;
+		font-family:'Open Sans', sans-serif;
+		background-color: #26C6DA;
+		box-shadow: 1px 5px 20px -5px rgba(0,0,0,0.4);
+    	color: #fff;
+    	margin-top: -12px;
+    	cursor: pointer;
+    	border:none;
+    	border-radius: 4px;
+	}
+	#signup-btn
+	{
+		height:20%;
+		width:70%;
+		outline: none;
+		font-family:'Open Sans', sans-serif;
+		background-color: #ef5350;
+		box-shadow: 1px 5px 20px -5px rgba(0,0,0,0.4);
+    	color: #fff;
+    	margin-top: -12px;
+    	cursor: pointer;
+    	border:none;
+    	border-radius: 4px;
+	}
+	#login-type
+	{
+    height: 50%;
+    width: 93%;
+    background-color: rgba(169, 181, 183,0.7);
+    border-radius: 4px;
+    margin-top: -62%;
+    margin-left: 160%;
+    transform: translate(-50%,-35%);
+    text-align: center;
+    padding-top:10%;
+    box-shadow: 1px 10px 30px -10px rgba(0,0,0,0.5);
+    opacity: 0;
+	}
+	#login-type>a>#login-btn
+	{
+		height:28%;
+		width:70%;
+		outline: none;
+		font-family:'Open Sans', sans-serif;
+		background-color: linen;
+		box-shadow: 1px 5px 20px -5px rgba(0,0,0,0.4);
+    	color: black;
+    	margin-top: 10px;
+    	cursor: pointer;
+    	font-weight: bolder;
+    	border:none;
+    	border-radius: 4px;
+	}
+	#close
+	{
+	height: 25px;
+    width: 25px;
+    font-family: showcard gothic;
+    border-radius: 50%;
+    background-color: linen;
+    text-align: center;
+    position: fixed;
+    font-size: 20px;
+	margin-left: 81%;
+    margin-top: -8%;
+    transition:0.5s all;
+	}
+	#close:hover,#close:focus
+	{
+	color:linen;
+	background:black;
+	}
+	.loader
+	{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 999999999;
+    border: 5px solid black;
+    border-top: 5px solid beige;
+    animation: spin 2s linear infinite;
+ 	top: 33%;
+    left: 22%;
+    transform:translate(0%,0%);
+    display:none;
+	}
+	@keyframes spin {
+ 	0% { transform: rotate(0deg); }
+ 	100% { transform: rotate(360deg); }
+	}
+	.scroll-up
+	{
+	font-size:40px;
+	text-align:center;
+	}
+	.scroll-down
+	{
+	font-size:40px;
+	text-align:center;
+	}
+	.news
+	{
+	overflow-y:hidden !important;
+	height:400px;
+	}
 </style>
 <body>
 <div class="outercontainer" >
@@ -61,83 +307,31 @@ overflow-x:hidden;
 	</div>
 </div>	  											
  
-
-
-<div class="outercontainer">
- 
-<div class="team" id="team"  >
- 
-	<div class="container">
-	 
-		<div class="team-grids"> 
-		
-			<div class="col-md-3 team-grid" >
-				<a target=""  href=""><div class="team-img">
-					<img src="images/kapil.jpg" style=" border-radius:50%;" alt=" "   />
-					<figcaption class="overlay" style=" border-radius:50%;">
-						<div class="social-icon"  >
-							
-							 
-						</div>
-					</figcaption>
-				</div> </a>
-				 
-				 </div><div class="col-md-3 team-grid">
+ <div class="outercontainer team" id="team">
+	<div class="container-login" >
+	<video autoplay muted loop id="myVideo">
+ 	<source src="images/back.mp4" type="video/mp4">
+	</video>
+	<div id="login">
+		<div id="login-box">
+			<h2>Login</h2>
+			<h3>Already A Member? Log In Below.</h3>
+		<input type="button" id="login-btn" value="LOG IN">
 		</div>
-			
-			<div class="col-md-3 team-grid">
+		<div class="loader"></div>
+		<div id="login-type" class="col-md-6 col-sm-6 col-xs-6">
+			<div id="close">X</div>
+			<a href="volunteerLogin.jsp" target="_blank"><input type="button" id="login-btn" value="VOLUNTEER LOG IN"></a> 
+			<a href="adminLogin.jsp" target="_blank"><input type="button" id="login-btn" value="MENTOR LOG IN"></a>
 		</div>
-		<div class="col-md-3 team-grid"  style="border-radius:50%;">
-				<a target=""  href=""><div class="team-img">
-					<img src="images/kapil.jpg" style=" border-radius:50%;" alt=" "   />
-					<figcaption class="overlay" style=" border-radius:50%;">
-						<div class="social-icon"  >
-							
-							 
-						</div>
-					</figcaption>
-				</div> </a> 
-				 
-			</div>
-			 
-			
-			<div class="clearfix"></div>
+	</div>
+	<div id="signup">
+		<div id="signup-box">
+			<h2>Sign Up</h2>
+			<h3>Not A Member? Sign Up Below.</h3>
+			<a href="volunteerRegistration.jsp"><input type="button" id="signup-btn" value="SIGN UP"></a>
 		</div>
-		
-		<div class="team-grids"> 
-		 </div><div class="col-md-3 team-grid">
-		</div>
-			
-			<div class="col-md-3 team-grid" >
-				<a target=""  href=""><div class="team-img">
-					<img src="images/kapil.jpg" style=" border-radius:50%;" alt=" "   />
-					<figcaption class="overlay" style=" border-radius:50%;">
-						<div class="social-icon"  >
-							
-							 
-						</div>
-					</figcaption>
-				</div> </a>
-				 
-				</div>
-			
-		<div class="col-md-3 team-grid"  style="border-radius:50%;">
-				<a target=""  href=""><div class="team-img">
-					<img src="images/kapil.jpg" style=" border-radius:50%;" alt=" "   />
-					<figcaption class="overlay" style=" border-radius:50%;">
-						<div class="social-icon"  >
-							
-							 
-						</div>
-					</figcaption>
-				</div> </a> 
-				 
-			</div>
-			 <div class="col-md-3 team-grid">
-		</div>
-			
-			<div class="clearfix"></div>
-		</div>
+	</div>
 	</div>
 </div>
 </div>
@@ -196,6 +390,10 @@ overflow-x:hidden;
 			</div>
 			<div class="col-md-4 about-grids">
 					<h4>Our Advantages</h4>
+					<div class="scroll-up">
+					<i class="fa fa fa-chevron-circle-up"></i>
+					</div>
+					<div class="news">
 					<div class="pince">
 						<div class="pince-left">
 							<h5>01</h5>
@@ -231,6 +429,55 @@ overflow-x:hidden;
 							<p>We have aimed to model simplicity at its best.</p>
 						</div>
 						<div class="clearfix"> </div>
+					</div>
+					<div class="pince">
+						<div class="pince-left">
+							<h5>04</h5>
+						</div>
+						<div class="pince-right">
+							<p>We have aimed to model simplicity at its best.</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class="pince">
+						<div class="pince-left">
+							<h5>01</h5>
+						</div>
+						<div class="pince-right">
+							<p>NGO's can use our free services to run their organisation.</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class="pince">
+						<div class="pince-left">
+							<h5>02</h5>
+						</div>
+						<div class="pince-right">
+							<p>Customers have an easy to use system to support the community.</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class="pince">
+						<div class="pince-left">
+							<h5>03</h5>
+						</div>
+						<div class="pince-right">
+							<p>A free system benefiting the society as a whole.</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+										<div class="pince">
+						<div class="pince-left">
+							<h5>09</h5>
+						</div>
+						<div class="pince-right">
+							<p>A free system benefiting the society as a whole.</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					</div>
+					<div class="scroll-down">
+					<i class="fa fa fa-chevron-circle-down"></i>
 					</div>
 			</div>
 			<div class="clearfix"> </div>
