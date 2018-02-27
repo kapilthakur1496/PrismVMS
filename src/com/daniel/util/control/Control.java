@@ -1670,7 +1670,7 @@ public   ResultSet getNotification(HttpServletRequest request, HttpServletRespon
 		try {  				
 				volunteerCountSt = connection.createStatement();
 				 
-				volunteerCountRs = volunteerCountSt.executeQuery("select * from common_notification ");
+				volunteerCountRs = volunteerCountSt.executeQuery("select * from common_notification  order by id desc ");
 			
 				 
 			  
@@ -1707,6 +1707,55 @@ public   ResultSet getNotification(HttpServletRequest request, HttpServletRespon
 	}
 return volunteerCountRs; 
 }
+public   ResultSet getUsersNotication(HttpServletRequest request, HttpServletResponse response, String team) throws ServletException, IOException { 
+	Statement volunteerCountSt =null;
+	ResultSet volunteerCountRs = null;
+ 
+
+	HttpSession session = request.getSession();
+	String volunteerId = (String)session.getAttribute("volunteerId");
+	if(volunteerId!= null) {
+		try {  				
+				volunteerCountSt = connection.createStatement();
+				 
+				volunteerCountRs = volunteerCountSt.executeQuery("select * from users_notification where receiver='"+team+"' order by id desc");
+			
+				 
+			  
+			} 
+			catch (SQLException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		 catch (Exception e) {
+				// TODO: handle exception
+				 e.printStackTrace();
+			}
+			finally {
+				
+				 /*if(volunteerCountSt!=null)
+					try {
+						volunteerCountSt.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+				 if(volunteerCountRs!=null)
+						try {
+							volunteerCountRs.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} */
+			}
+	}
+	else
+	{
+		response.sendRedirect("volunteerLogin.jsp?action=LoginAgain"); 
+	}
+return volunteerCountRs; 
+}
+
 public   int getWorkMeetingCount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
 	Statement volunteerCountSt =null;
 	ResultSet volunteerCountRs = null;
@@ -3559,7 +3608,7 @@ public void createTeamProject( HttpServletRequest request, HttpServletResponse r
 					      Transport.send(message);
 					     // result = "Sent message successfully....";  
 					       
-					      response.sendRedirect("assignTeamProjects.jsp?projectId="+maxId);
+					      response.sendRedirect("assignTeamProjects.jsp?action=projectCreated&projectId="+maxId);
 					   			  
 					   } 
 					    catch (MessagingException mex) {
