@@ -86,7 +86,7 @@ h1 {
 	ResultSet ngoDetail=null;
 	int mentorStatus=0; 
 	String adminId =null,PhoneNumber=null;
-	ResultSet SubCategoryRs=null; 
+	ResultSet SubCategoryRs=null,notificationRs=null,userNotificationRs; 
 	Control ct = new Control();
 %>
 <% 
@@ -104,6 +104,11 @@ h1 {
 if(mentorStatus == 1){
 	int branchProjectcount = ct.volunteerBranchProjectCount(adminId);
 	int teamProjectcount = ct.volunteerTeamProjectCount(adminId);
+	
+	notificationRs = ct.getNotification(request, response); 
+	 
+	userNotificationRs = ct.getUsersNotication(request, response,"Mentor");
+	 
 	
 %>  	
  
@@ -179,7 +184,11 @@ if(mentorStatus == 1){
         </div>
          
         <div  class="col-md-10 col-lg-9 col-sm-9 col-xs-12" style="padding:3px 0px;">
-        <%   PhoneNumber = ct.getMentorPhone(adminId);   %>
+        <%   PhoneNumber = ct.getMentorPhone(adminId);
+        
+       String  mentorName = ct.getMentorName(adminId);
+   	 String	mentorTeams  = ct.getMentorTeams(adminId);
+		%>
              <div class="container">
 		        <div class="modal fade" id="myModal" role="dialog">
 		            <div class="modal-dialog">
@@ -230,7 +239,31 @@ if(mentorStatus == 1){
 		            </div>
 		        </div>
     		</div>
-    		<a href="#"  data-toggle="modal" data-target="#myModal"  class="btn btn-info btn-block"> Edit Profile</a>
+    		<h1 style="color: #2a3f54; text-align:left;  font-weight: 800"><%=mentorName%></h1>
+            <h3 style="color: #2a3f54; text-align:left; font-style: italic"><%=mentorTeams%></h3><br>
+             
+    		<a href="#"  data-toggle="modal" data-target="#myModal"  class="btn btn-info  " style=" float:left;"> Edit Profile</a>
+        	 <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                   
+                   <%while(userNotificationRs.next()) {%>
+                     <div>
+                     	<h3 style="text-align:left;"><%=userNotificationRs.getString("title") %></h3>
+                     	<h4 style="text-align:left;"><%=userNotificationRs.getString("news_date") %></h4>
+                     	<p style="text-align:left;"><%=userNotificationRs.getString("content") %></p>
+                     </div>
+                     <%} %>
+                     <%while(notificationRs.next()) {%>
+                     <div>
+                     	<h3 style="text-align:left;"><%=notificationRs.getString("title") %></h3>
+                     	<h4 style="text-align:left;"><%=notificationRs.getString("news_date") %></h4>
+                     	<p style="text-align:left;"><%=notificationRs.getString("content") %></p>
+                     </div>
+                     <%} %>
+                     
+                  
+                   
+                </div>   
+        
          </div>
  	</div>
 </div>

@@ -241,11 +241,11 @@ if(volunteerStatus == 1){
 							
 							System.out.println("Status "+status);
 							%>
-								<br><a href="temProjectEnrollRequest.jsp?projectId=<%=teamProjectsRs.getString("id")%>"><i class="fa fa-plus" style="color:#fff; font-size:22px;  "></i> Enroll  Request </a>
+								<br><a  class="btn btn-primary" href="temProjectEnrollRequest.jsp?projectId=<%=teamProjectsRs.getString("id")%>"><i class="fa fa-plus" style="color:#fff; font-size:22px;  "></i> Enroll  Request </a>
 							<%}
 							else if(status.equals("Project Assigned")){ %>
 							<%}else if(status.equals("Not Approved")){ %>
-								<br><a href="teamProjectEnrollCancelRequest.jsp?projectId=<%=teamProjectsRs.getString("id")%>"><i class="fa fa-cross" style="color:#fff; font-size:22px;  "></i> Cancel  Request </a>
+								<br><a  class="btn btn-primary" href="teamProjectEnrollCancelRequest.jsp?projectId=<%=teamProjectsRs.getString("id")%>"><i class="fa fa-cross" style="color:#fff; font-size:22px;  "></i> Cancel  Request </a>
 							<%}else if(status.equals("Approved")){ %>
 							<i class="fa fa-cricle-right" style="color:green;"></i>
 							 <%} %>

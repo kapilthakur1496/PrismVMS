@@ -87,7 +87,7 @@ h1 {
 <% try{ %>
   
 <%!  
-	ResultSet ngoDetail=null,notificationRs=null;
+	ResultSet ngoDetail=null,notificationRs=null,userNotificationRs=null;
 	int volunteerStatus=0; 
 	String volunteerId=null,  PhoneNumber =null,name=null, teamName=null,volunteerName=null,volunteerTeam=null; 
 	ResultSet SubCategoryRs=null; 
@@ -116,6 +116,9 @@ if(volunteerStatus == 1){
 		teamprojects = ct.getVolunteerTeamProjectCount(request,response);
 		branchProject = ct.getVolunteerBranchProjectCount(request,response); 
 		notificationRs = ct.getNotification(request, response); 
+		volunteerName = ct.getVolunteerName(volunteerId);
+   	 volunteerTeam = ct.getVolunteerTeam(volunteerId);
+		userNotificationRs = ct.getUsersNotication(request, response,volunteerTeam);
 		 
 %>  	
  
@@ -200,8 +203,7 @@ if(volunteerStatus == 1){
         <div class="col-md-10 col-lg-9 col-sm-9 col-xs-12" style="padding:3px 0px;">
         
         <%   PhoneNumber = ct.getPhone(volunteerId);
-        	 volunteerName = ct.getVolunteerName(volunteerId);
-        	 volunteerTeam = ct.getVolunteerTeam(volunteerId);
+        	 
         %>
    	<div class="container">
         <div class="modal fade" id="myModal" role="dialog">
@@ -226,8 +228,7 @@ if(volunteerStatus == 1){
                         </div>
                             <br>
                             <table>
-
-                            
+ 
                             <div>
                                 <td><label>Contact Number : </label></td>
                                 <td><input name=current_conact type="text"  class="" readonly="true" value="<%=PhoneNumber%>" ondblclick="this.readOnly='';"></td>
@@ -275,9 +276,9 @@ if(volunteerStatus == 1){
                     <h3 class="text-center">Projects Chart &nbsp;<span class="badge">new</span></h3>
                     <div id="pie_chart_div1" class="templatemo-chart"></div> <!-- Pie chart div -->
                   </div>
-                  <div style="background:transparent;">
-                  
-                  </div>  <hr> 
+                  <div style="background:transparent; height:200px;">
+                   
+                  </div>  <hr>
                   <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <h3 class="text-center">Work Reports Graphs &nbsp;<span class="badge">new</span></h3>
                     <div id="bar_chart_div" class="templatemo-chart"></div> <!-- Bar chart div -->
@@ -294,6 +295,14 @@ if(volunteerStatus == 1){
                    
                 </div>   
                   <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                   
+                   <%while(userNotificationRs.next()) {%>
+                     <div>
+                     	<h3 style="text-align:left;"><%=userNotificationRs.getString("title") %></h3>
+                     	<h4 style="text-align:left;"><%=userNotificationRs.getString("news_date") %></h4>
+                     	<p style="text-align:left;"><%=userNotificationRs.getString("content") %></p>
+                     </div>
+                     <%} %>
                      <%while(notificationRs.next()) {%>
                      <div>
                      	<h3 style="text-align:left;"><%=notificationRs.getString("title") %></h3>
@@ -301,6 +310,7 @@ if(volunteerStatus == 1){
                      	<p style="text-align:left;"><%=notificationRs.getString("content") %></p>
                      </div>
                      <%} %>
+                     
                   
                    
                 </div>      

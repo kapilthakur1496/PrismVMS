@@ -181,12 +181,19 @@ if(mentorStatus == 1){
         <div  class="col-md-10 col-lg-9 col-sm-9 col-xs-12" style="padding:3px 0px;">
         <% String projectId = request.getParameter("projectId"); 
 		 		String noData = request.getParameter("noData"); 
+		 		String action = request.getParameter("action"); 
+		 		if(action.equals("projectCreated"))
+		 		{%>
+		 			<a  class="btn btn-primary" href="teamProject.jsp">Skip</a>
+		 		<%}
+		 		
 		 		if(noData!=null)
 		 		{
 		 			%>
 		 			<p>No volunteers are there in this team</p>
 		 			<%
 		 		}else{%>
+		 		
  			<form action="Control?action=assignTeamProject" method="post"  onSubmit="return validateChecks()" >
  			<div style="height:400px; overflow-x:hidden;">
 		 		<% 
