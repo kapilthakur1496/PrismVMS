@@ -1707,6 +1707,54 @@ public   ResultSet getNotification(HttpServletRequest request, HttpServletRespon
 	}
 return volunteerCountRs; 
 }
+public   ResultSet getMentorNotification(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+	Statement volunteerCountSt =null;
+	ResultSet volunteerCountRs = null;
+ 
+
+	HttpSession session = request.getSession();
+	String volunteerId = (String)session.getAttribute("adminId");
+	if(volunteerId!= null) {
+		try {  				
+				volunteerCountSt = connection.createStatement();
+				 
+				volunteerCountRs = volunteerCountSt.executeQuery("select * from common_notification  order by id desc ");
+			
+				 
+			  
+			} 
+			catch (SQLException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		 catch (Exception e) {
+				// TODO: handle exception
+				 e.printStackTrace();
+			}
+			finally {
+				
+				 /*if(volunteerCountSt!=null)
+					try {
+						volunteerCountSt.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+				 if(volunteerCountRs!=null)
+						try {
+							volunteerCountRs.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} */
+			}
+	}
+	else
+	{
+		response.sendRedirect("adminLogin.jsp?action=LoginAgain"); 
+	}
+return volunteerCountRs; 
+}
 public   ResultSet getUsersNotication(HttpServletRequest request, HttpServletResponse response, String team) throws ServletException, IOException { 
 	Statement volunteerCountSt =null;
 	ResultSet volunteerCountRs = null;
@@ -1752,6 +1800,54 @@ public   ResultSet getUsersNotication(HttpServletRequest request, HttpServletRes
 	else
 	{
 		response.sendRedirect("volunteerLogin.jsp?action=LoginAgain"); 
+	}
+return volunteerCountRs; 
+}
+public   ResultSet getMentorUsersNotication(HttpServletRequest request, HttpServletResponse response, String team) throws ServletException, IOException { 
+	Statement volunteerCountSt =null;
+	ResultSet volunteerCountRs = null;
+ 
+
+	HttpSession session = request.getSession();
+	String volunteerId = (String)session.getAttribute("adminId");
+	if(volunteerId!= null) {
+		try {  				
+				volunteerCountSt = connection.createStatement();
+				 
+				volunteerCountRs = volunteerCountSt.executeQuery("select * from users_notification where receiver='"+team+"' order by id desc");
+			
+				 
+			  
+			} 
+			catch (SQLException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		 catch (Exception e) {
+				// TODO: handle exception
+				 e.printStackTrace();
+			}
+			finally {
+				
+				 /*if(volunteerCountSt!=null)
+					try {
+						volunteerCountSt.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+				 if(volunteerCountRs!=null)
+						try {
+							volunteerCountRs.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} */
+			}
+	}
+	else
+	{
+		response.sendRedirect("adminLogin.jsp?action=LoginAgain"); 
 	}
 return volunteerCountRs; 
 }
@@ -3108,6 +3204,63 @@ public   int getAdminType(HttpServletRequest request, HttpServletResponse respon
 		}
 	return 0; 
 }
+public   String getMentorType(HttpServletRequest request, HttpServletResponse response,String id) throws ServletException, IOException { 
+	Statement checkStatusSt =null;
+	ResultSet checkStatusRs = null; 
+	  PreparedStatement assingProjectPs =null;
+	  String type=null;
+		HttpSession session = request.getSession();
+		String adminId = (String)session.getAttribute("adminId");
+		if(adminId !=null) {
+	if(id!=null) {	
+		try {  				
+				checkStatusSt = connection.createStatement();
+				String query = "select admin_type from admin where id ="+id;
+				checkStatusRs = checkStatusSt.executeQuery(query);
+				if(checkStatusRs.next())
+				{
+					type = checkStatusRs.getString("admin_type");
+				}
+				 
+				 
+			} 
+		catch (SQLException e) {
+				// TODO: handle exception
+			e.printStackTrace();
+			}
+		 catch (Exception e) {
+				// TODO: handle exception
+				 e.printStackTrace();
+			}
+			finally {
+				
+				if(checkStatusSt!=null)
+					try {
+						checkStatusSt.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+				if(checkStatusRs!=null)
+					try {
+						checkStatusRs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+			}
+		}
+	else
+	{
+		response.sendRedirect("adminLogin.jsp?action=notAdmin"); 
+	}
+		}else
+		{
+			response.sendRedirect("adminLogin.jsp?action=LoginAgain"); 
+		}
+	return type; 
+}
+
 public   int checkMentorStatus(HttpServletRequest request, HttpServletResponse response,String id) throws ServletException, IOException { 
 	Statement checkStatusSt =null;
 	ResultSet checkStatusRs = null; 
@@ -5615,7 +5768,7 @@ public  String getTeamProjectStatus(HttpServletRequest request, HttpServletRespo
 	return status;
 
 	}
-public   ResultSet getVolunteerTeamProject(HttpServletRequest request, HttpServletResponse response,int pageNumber, int nextRecordCount) throws ServletException, IOException { 
+public   ResultSet getVolunteerTeamProject(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
 	Statement getTeamProjectSt = null; 
 	ResultSet getTeamProjectRs = null;
  
@@ -5629,7 +5782,7 @@ public   ResultSet getVolunteerTeamProject(HttpServletRequest request, HttpServl
 				System.out.println("Team Name "+team);
 				String branchId  = ct.getVolunteerBranch(volunteerId); 
  				System.out.println("branch Project id "+branchId);
-				String query = "select *  from team_project where team='"+team+"' and branch_id ='"+branchId+"'   limit "+(pageNumber*10)+","+nextRecordCount;
+				String query = "select *  from team_project where team='"+team+"' and branch_id ='"+branchId+"'   ";
 				getTeamProjectRs = getTeamProjectSt.executeQuery(query);
 				  
 		} 
@@ -6891,7 +7044,7 @@ public   ResultSet getTeamProjectEnrollment(HttpServletRequest request, HttpServ
 		if(adminId !=null) {
 		try {  				
 				getTeamProjectSt = connection.createStatement();
-				String query = "select * from team_project_enrollment te,  team_project t, volunteer_registration v  where t.id= te.team_project_id and te.enroll_status ='Not Approved'  and t.admin_id ='"+adminId+"' limit "+(pageNumber*10)+","+nextRecordCount;
+				String query = "select * from team_project_enrollment te,  team_project t, volunteer_registration v  where te.volunteer_registrationg_id=v.id and t.id= te.team_project_id and te.enroll_status ='Not Approved'  and t.admin_id ='"+adminId+"' limit "+(pageNumber*10)+","+nextRecordCount;
 				getTeamProjectRs = getTeamProjectSt.executeQuery(query);
 		 } 
 	catch (SQLException e) {

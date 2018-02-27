@@ -110,7 +110,7 @@ finally
 }
 if(volunteerStatus == 1){
 
-	teamProjectsRs = ct.getVolunteerTeamProject(request, response, pageNumber, nextRecordCount);
+	teamProjectsRs = ct.getVolunteerTeamProject(request, response);
 %>
  
  	
@@ -202,15 +202,18 @@ if(volunteerStatus == 1){
 					<li>
 						<div class="collapsible-header active"><p style="padding:10px; background-color:#EDE576; font-size:14px;">
 							
-							 <%if(status ==null){%>
+							 <%
+							 
+							 System.out.println("Status "+status);
+							 if(status ==null){%>
 								<span class="glyphicon glyphicon-pushpin" style="font-size:20px; color:#fff; font-size:22px; font-style: bold;"></span>&nbsp;&nbsp;
 							<%} else if(status.equals("Project Assigned")){ %>
 								<span class="glyphicon glyphicon-pushpin" style="font-size:20px; color:#fff; font-size:22px; font-style: bold;"></span>&nbsp;&nbsp;
 							 <%}else if(status.equals("Rejected")){ %>
-							 	<i class="fa fa-cross" style="color:red;"></i>
-							<%}else if(status.equals("Approved")){ %> 
-								<i class="fa fa-cricle-right" style="color:green;"></i>
-							 <%} %>  
+							 	<span class="glyphicon glyphicon-home" style="font-size:20px; color:#fff; font-size:22px; font-style: bold;"></span>&nbsp;&nbsp;
+							 		<%}else if(status.equals("Approved")){ %> 
+								<span class="glyphicon glyphicon-ok-sign " style="font-size:20px; color:#fff; font-size:22px; font-style: bold;"></span>&nbsp;&nbsp;
+							 	<%} %>  
 							<!-- <span class="glyphicon glyphicon-pushpin" style="font-size:20px; color:#fff; font-size:22px; font-style: bold;"></span>&nbsp;&nbsp;
 							 --><%=teamProjectsRs.getString("tproject_title") %>
 							 
@@ -247,7 +250,7 @@ if(volunteerStatus == 1){
 							<%}else if(status.equals("Not Approved")){ %>
 								<br><a  class="btn btn-primary" href="teamProjectEnrollCancelRequest.jsp?projectId=<%=teamProjectsRs.getString("id")%>"><i class="fa fa-cross" style="color:#fff; font-size:22px;  "></i> Cancel  Request </a>
 							<%}else if(status.equals("Approved")){ %>
-							<i class="fa fa-cricle-right" style="color:green;"></i>
+							<i class="fa fa-circle-right" style="color:green;"></i>
 							 <%} %>
 							</div> 
 					</div>
