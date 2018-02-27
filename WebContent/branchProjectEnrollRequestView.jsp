@@ -234,19 +234,20 @@ if(mentorStatus == 1){
 								<br>
 								<p style="font-size:16px;"><%=teamProjectsRs.getString("b.bproject_desc") %>  </p> 
 								<br>
-								<div style="text-align:center;  margin-left:-120px;"   >
+								<div style="text-align:center;  margin-left: 400px; display: inline-flex; margin-bottom:20px;"   >
 								 	
 								 	<form action="Control?action=branchProjectApproval" method="post">
 								 		<input type="hidden" name="projectId" value="<%=teamProjectsRs.getString("b.id")%>">
 								 		<input type="hidden" name="vIds" value="<%=teamProjectsRs.getString("v.id")%>">
 								  		<input type="hidden" name="enrollId" value="<%=teamProjectsRs.getString("be.id")%>">
 								  		
-									  	<input type="submit"   ><i class="fa fa-check" style="color:#fff; font-size:22px;  "></i>Approve  
-										&nbsp;&nbsp;&nbsp;&nbsp; 
+									  <button type="submit" class="btn btn-warning" style="  display: inline-block; ">
+  <i class="fa fa-check" style="color:#fff; font-size:20px;"></i>Approve
+</button>&nbsp;&nbsp;&nbsp;&nbsp; 
 								 	</form>
 								 	
 								 	<br>
-									<a href="branchProjectEnrollRequestStatus.jsp?projectId=<%=teamProjectsRs.getString("be.id")%>&project=<%=teamProjectsRs.getString("b.bproject_title") %>&email=<%=teamProjectsRs.getString("v.email_id")%>"  ><i class="fa fa-close"   style="color:#fff; font-size:22px;  "></i>Reject </a>
+									<a   class="btn btn-danger" href="branchProjectEnrollRequestStatus.jsp?projectId=<%=teamProjectsRs.getString("be.id")%>&project=<%=teamProjectsRs.getString("b.bproject_title") %>&email=<%=teamProjectsRs.getString("v.email_id")%>"  ><i class="fa fa-close"   style="color:#fff; font-size:22px;  "></i>Reject </a>
 								  
 								</div>
 							</div> 

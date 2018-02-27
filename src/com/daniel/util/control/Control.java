@@ -7089,7 +7089,7 @@ public   ResultSet getBranchProjectEnrollment(HttpServletRequest request, HttpSe
 		if(adminId !=null) {
 		try {  				
 				getTeamProjectSt = connection.createStatement();
-				String query = "select * from branch_project_enrollment be,  branch_project b, volunteer_registration v  where b.id= be.branch_project_id and be.enroll_status ='Not Approved'  and b.admin_id ='"+adminId+"' limit "+(pageNumber*10)+","+nextRecordCount;
+				String query = "select * from branch_project_enrollment be,  branch_project b, volunteer_registration v  where v.id=be.volunteer_registrationg_id and b.id= be.branch_project_id and be.enroll_status ='Not Approved'  and b.admin_id ='"+adminId+"' limit "+(pageNumber*10)+","+nextRecordCount;
 				getTeamProjectRs = getTeamProjectSt.executeQuery(query);
 		 } 
 	catch (SQLException e) {
