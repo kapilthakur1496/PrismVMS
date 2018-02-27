@@ -328,7 +328,7 @@
 		<div id="signup-box">
 			<h2>Sign Up</h2>
 			<h3>Not A Member? Sign Up Below.</h3>
-			<a href="volunteerRegistration.jsp"><input type="button" id="signup-btn" value="SIGN UP"></a>
+			<a href="volunteerRegistration.jsp" target="_blank" ><input type="button" id="signup-btn" value="SIGN UP"></a>
 		</div>
 	</div>
 	</div>

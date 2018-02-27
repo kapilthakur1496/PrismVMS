@@ -18,15 +18,15 @@ Connection connection = DbUtil.getConnection();
 
    	String pname = request.getParameter("pname");
      
-   	
-   	PreparedStatement ps=null;
-   	String q = "delete from team_project_enrollment where id ="+projectId;
+   	String status = request.getParameter("status");
+   	Statement st=null;
+   	 
  
+    st= connection.createStatement(); 
+    int n =st.executeUpdate("update team_project_enrollment set enroll_status = '"+status+"' where id ="+projectId); 
+	  
     
-    ps = connection.prepareStatement(q);
-    
-       
-  ps.executeUpdate();
+        
     
    	
     String from = "kapil.thakur1496@gmail.com";

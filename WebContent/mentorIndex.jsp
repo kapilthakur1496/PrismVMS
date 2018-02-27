@@ -105,9 +105,9 @@ if(mentorStatus == 1){
 	int branchProjectcount = ct.volunteerBranchProjectCount(adminId);
 	int teamProjectcount = ct.volunteerTeamProjectCount(adminId);
 	
-	notificationRs = ct.getNotification(request, response); 
-	 
-	userNotificationRs = ct.getUsersNotication(request, response,"Mentor");
+	notificationRs = ct.getMentorNotification(request, response); 
+	String adminType= ct.getMentorType(request, response, adminId);
+	userNotificationRs = ct.getMentorUsersNotication(request, response,adminType);
 	 
 	
 %>  	

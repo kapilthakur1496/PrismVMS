@@ -233,20 +233,24 @@ if(mentorStatus == 1){
 								<br>
 								<p style="font-size:16px;"><%=teamProjectsRs.getString("t.tproject_desc") %>  </p> 
 								<br>
-								<div style="text-align:center;  margin-left:-120px;"   >
+								<div style="text-align:center;  margin-left: 400px; display: inline-flex; margin-bottom:20px;"   >
 								 	
 								 	<form action="Control?action=teamProjectApproval" method="post">
 								 		<input type="hidden" name="projectId" value="<%=teamProjectsRs.getString("t.id")%>">
 								 		<input type="hidden" name="enrollId" value="<%=teamProjectsRs.getString("te.id")%>">
 								  		<input type="hidden" name="vIds" value="<%=teamProjectsRs.getString("v.id")%>">
 								  		
-									  	<input type="submit"   ><i class="fa fa-check" style="color:#fff; font-size:22px;  "></i>Approve  
+									  	<!-- <input type="submit"   class="btn btn-primary" class="fa fa-check" style="width:80px;     display: inline-block; " value="Approve" ><i class="fa fa-check" style="color:#fff; font-size:22px;  "></i>  
+										 --><button type="submit" class="btn btn-warning" style="  display: inline-block; ">
+  <i class="fa fa-check" style="color:#fff; font-size:20px;"></i>Approve
+</button>
+										
 										&nbsp;&nbsp;&nbsp;&nbsp; 
 								 	</form>
 								 	
 								 	<br>
-									<a href="branchProjectEnrollRequestStatus.jsp?projectId=<%=teamProjectsRs.getString("te.id")%>&project=<%=teamProjectsRs.getString("t.tproject_title") %>&email=<%=teamProjectsRs.getString("v.email_id")%>"  ><i class="fa fa-close"   style="color:#fff; font-size:22px;  "></i>Reject </a>
-								  
+									<a  class="btn btn-danger" href="teamProjectEnrollRequestStatus.jsp?projectId=<%=teamProjectsRs.getString("te.id")%>&project=<%=teamProjectsRs.getString("t.tproject_title") %>&email=<%=teamProjectsRs.getString("v.email_id")%>&status=Rejected"  ><i class="fa fa-close"   style="color:#fff; font-size:22px;  "></i> Reject </a>
+								   
 								</div>
 							</div> 
 					</div>
