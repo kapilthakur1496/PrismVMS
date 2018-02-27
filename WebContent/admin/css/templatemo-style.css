@@ -577,7 +577,7 @@ input[type="radio"]:checked + label span {
     border-radius: 2px;
     padding: 16px;
     position: fixed;
-    z-index: 10;
+    z-index: 100;
     left: 50%;
     bottom: 30px;
     font-size: 17px;

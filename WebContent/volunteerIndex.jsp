@@ -265,21 +265,22 @@ if(volunteerStatus == 1){
               <div class="templatemo-content-widget white-bg templatemo-overflow-hidden">
                  
                 <div class="templatemo-flex-row flex-content-row">
-                  <div class="col-1 col-lg-4 col-md-4">
+                  <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <h3 class="text-center">Work Reports Chart &nbsp;<span class="badge">new</span></h3>
                     <div id="pie_chart_div" class="templatemo-chart"></div> <!-- Pie chart div -->
                   </div> 
                   <div class="templatemo-flex-row flex-content-row">
-                  <div class="col-1 col-lg-4 col-md-4">
+                  <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <h3 class="text-center">Projects Chart &nbsp;<span class="badge">new</span></h3>
                     <div id="pie_chart_div1" class="templatemo-chart"></div> <!-- Pie chart div -->
                   </div>
-                  <div class="col-1 col-lg-4 col-md-4">
+                  <br><br> <br> <br> <br> <br> <br>  <br> <br> <br> <br> <br> <hr> 
+                  <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <h3 class="text-center">Work Reports Graphs &nbsp;<span class="badge">new</span></h3>
                     <div id="bar_chart_div" class="templatemo-chart"></div> <!-- Bar chart div -->
-                  </div>   <br><br> <br> <br> <br> <br> <br>  <br> <br> <br> <br> <br> <hr> 
-                  <div class="col-1 col-lg-4 col-md-4">
-                    <h3 class="text-center">Projects Graph<span class="badge">new</span></h3>
+                  </div>   
+                  <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <h3 class="text-center">Projects Graph &nbsp;<span class="badge">new</span></h3>
                     <div id="bar_chart_div1" class="templatemo-chart"></div> <!-- Bar chart div -->
                   </div>
                 </div>      
@@ -389,6 +390,7 @@ if(volunteerStatus == 1){
           var data = new google.visualization.DataTable();
           data.addColumn('string', 'Topping');
           data.addColumn('number', 'Work Diary');  
+         
           data.addRows([
             ['Work Diary', <%=workDiary%>],
             ['Work Meeting', <%=workMeeting%>],

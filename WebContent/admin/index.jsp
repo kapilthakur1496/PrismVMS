@@ -377,7 +377,7 @@ address: <span id="c"></span>
                </div>
             <div class="templatemo-content-widget white-bg col-2 text-center">
               	<i class="fa fa-times"></i>
-              	<form action="${pageContext.request.contextPath}/Control?action=addInterViewSlot" method="post" >
+             <%--  	<form action="${pageContext.request.contextPath}/Control?action=addInterViewSlot" method="post" >
               		<br>
               		 
               		<input type="date"  required class="form-control" Placeholder="Interview Date" name="interViewDate">
@@ -385,7 +385,7 @@ address: <span id="c"></span>
               		<input type="number" min="1"    required class="form-control" Placeholder="Available Seats" name="availableSeats">
               		<br>
               		<select required class="form-control" name="slotTime"  >
-              		 		<option value="">Select InterView Time</option>
+              		 		<option value="">Select  Time</option>
 	           				<option value="09:00 AM">09:00 AM</option>
 	           				<option value="10:00 AM">10:00 AM</option>
 	           				<option value="11:00 AM">11:00 AM</option>
@@ -400,6 +400,45 @@ address: <span id="c"></span>
              		<textarea  name="venue" required class="form-control" placeholder="Interview Venue" ></textarea>
               		 <br> 
               		 <input type="submit" class="form-control" value="Add Interview Slot" >
+	       
+             	</form> --%>
+             	
+             	<form action="${pageContext.request.contextPath}/Control?action=commonNotification" method="post" >
+              		<br>
+              		 
+              		<input type="text"  required class="form-control" Placeholder="News Title" name="newsTitle">
+              		<br>
+              		<input type="text"     required class="form-control" Placeholder="Dates" name="newsDate">
+              		<br>
+              		<br> 
+             		<textarea  name="desc" required class="form-control" placeholder="News Description" ></textarea>
+              		 <br> 
+              		 <input type="submit" class="form-control" value="Add Common News" >
+	       
+             	</form>
+             	<hr>
+             	<form action="${pageContext.request.contextPath}/Control?action=TeamNewsNotification" method="post" >
+              		<br>
+              		 
+              		<input type="text"  required class="form-control" Placeholder="News Title" name="newsTitle">
+              		<br>
+              		<input type="text"     required class="form-control" Placeholder="Dates" name="newsDate">
+              		<br>
+              		<br> 
+             		<textarea  name="desc" required class="form-control" placeholder="News Description" ></textarea>
+              		 <br> 
+              		 <select   multiple name="team" class="templatemo-multi-select form-control" style="overflow-y: scroll;">
+	                				<% 	teamRs = ct.getTeams();  %>
+	              					<% while(teamRs.next() ){ %>
+	              					<option value="<%=teamRs.getString("team_name") %>"><%=teamRs.getString("team_name") %></option>
+	              					<% } %>  
+           			</select> 
+           			<br>
+           			<select class="form-control"  name="team" >
+	                				<option value="0">Select Mentor Optional</option> 
+	                				<option value="Mentor">Mentor</option>
+           			</select>	<br>		
+              		 <input type="submit" class="form-control" value="Add Branch News" >
 	       
              	</form>
            	</div> 
@@ -867,57 +906,37 @@ address: <span id="c"></span>
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
  
 </script>
-<%}else if(action.equals("")){ 
+<%}else if(action.equals("CommonNewsUpdated")){ 
  %>
 	 <script>
  
     var x = document.getElementById("snackbar")
     x.className = "show";
-    x.innerHTML="Skill Already Exist In The Life Skill List";
+    x.innerHTML="News Has Been Send  For All The Profiles ";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
  
 </script>
-<%}else if(action.equals("")){ 
+<%} else if(action.equals("usersNewsUpdated")){ 
  %>
 	 <script>
  
     var x = document.getElementById("snackbar")
     x.className = "show";
-    x.innerHTML="Skill Already Exist In The Life Skill List";
+    x.innerHTML="News Has Been Send  For Selected Profiles/Teams";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
  
 </script>
-<%}else if(action.equals("")){ 
+<%} else if(action.equals("SelectTypeoFUser")){ 
  %>
 	 <script>
  
     var x = document.getElementById("snackbar")
     x.className = "show";
-    x.innerHTML="Skill Already Exist In The Life Skill List";
+    x.innerHTML="Select Teams or Mentor Profile To Send Notifications";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
  
 </script>
-<%}else if(action.equals("")){ 
- %>
-	 <script>
- 
-    var x = document.getElementById("snackbar")
-    x.className = "show";
-    x.innerHTML="Skill Already Exist In The Life Skill List";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
- 
-</script>
-<%}else if(action.equals("")){ 
- %>
-	 <script>
- 
-    var x = document.getElementById("snackbar")
-    x.className = "show";
-    x.innerHTML="Skill Already Exist In The Life Skill List";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
- 
-</script>
-<%}%>
+<%} %>
 
 
 <%}%>

@@ -268,7 +268,15 @@ public class Control extends HttpServlet {
 		{   
 			addContactDetails(request,response); 
 		}
-		  
+		else if(action.equals("commonNotification"))
+		{   
+			commonNotification(request,response); 
+		}
+		else if(action.equals("TeamNewsNotification"))
+		{   
+			teamNewsNotification(request,response); 
+		}
+		   
 		  
 	}
 	private void addTeam( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -2109,6 +2117,128 @@ public void addContactDetails( HttpServletRequest request, HttpServletResponse r
 				 e.printStackTrace();
 			}
 		 
+	 	out.close();  
+	}
+
+public void commonNotification( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	response.setContentType("text/html");
+    PrintWriter out = response.getWriter();  
+	String newsTitle = request.getParameter("newsTitle");
+	String newsDate = request.getParameter("newsDate");
+	String desc = request.getParameter("desc"); 
+	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	Date date = new Date(); 
+ 
+	
+	try { 
+		
+		 PreparedStatement addcontactPs =null;
+					 try {
+						 String addContactQ ="insert into common_notification (title,content,news_date,post_date) values(?,?,?,?)";
+						
+						 addcontactPs  =  connection.prepareStatement(addContactQ);
+						 addcontactPs.setString(1, newsTitle); 
+						 addcontactPs.setString(2, desc); 
+						 addcontactPs.setString(3, newsDate); 
+						 addcontactPs.setString(4, dateFormat.format(date)); 
+						 
+						 addcontactPs.executeUpdate();	
+ 						  
+						response.sendRedirect("admin/index.jsp?action=CommonNewsUpdated");
+						/*
+						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("adminIndex.jsp?pageNumber=1#tab2");
+						*/
+						/*RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("adminIndex.jsp?pageNumber=1#section02");
+				*/ }   
+				 catch (SQLException e) {
+						// TODO: handle exception
+					e.printStackTrace();
+					}
+				 catch (Exception e) {
+						// TODO: handle exception
+						 e.printStackTrace();
+					} finally {
+						if(addcontactPs!=null)  
+						  try {
+							  addcontactPs.close();
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}  
+					 }  
+				  
+			}
+		  
+		 catch (Exception e) {
+				// TODO: handle exception
+				 e.printStackTrace();
+			}
+		 
+	 	out.close();  
+	}
+public void teamNewsNotification( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	response.setContentType("text/html");
+    PrintWriter out = response.getWriter();  
+	String newsTitle = request.getParameter("newsTitle");
+	String newsDate = request.getParameter("newsDate");
+	String desc = request.getParameter("desc"); 
+	String team[] = request.getParameterValues("team"); 
+	System.out.println("team.length "+team.length);	
+	if(team[0].equals("0"))
+	{
+		response.sendRedirect("admin/index.jsp?action=SelectTypeoFUser");
+	}else {
+	
+	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	Date date = new Date(); 
+ 
+	
+	try { 
+		
+		 PreparedStatement addcontactPs =null;
+		 for(int i=0; i<team.length;i++)
+		 {
+			 
+		 
+					 try {
+						 String addContactQ ="insert into users_notification (title,content,news_date,post_date,receiver) values(?,?,?,?,?)";
+						
+						 addcontactPs  =  connection.prepareStatement(addContactQ);
+						 addcontactPs.setString(1, newsTitle); 
+						 addcontactPs.setString(2, desc); 
+						 addcontactPs.setString(3, newsDate); 
+						 addcontactPs.setString(4, dateFormat.format(date)); 
+						 addcontactPs.setString(5, team[i] );  
+						 addcontactPs.executeUpdate();	
+ 						   
+						 }   
+				 catch (SQLException e) {
+						// TODO: handle exception
+					e.printStackTrace();
+					}
+				 catch (Exception e) {
+						// TODO: handle exception
+						 e.printStackTrace();
+					} finally {
+						if(addcontactPs!=null)  
+						  try {
+							  addcontactPs.close();
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}  
+					 } 
+		 		}
+			response.sendRedirect("admin/index.jsp?action=usersNewsUpdated");		  
+			}
+		  
+		 catch (Exception e) {
+				// TODO: handle exception
+				 e.printStackTrace();
+			}
+	}
 	 	out.close();  
 	}
 public  ResultSet viewContact()throws ServletException, IOException { 
