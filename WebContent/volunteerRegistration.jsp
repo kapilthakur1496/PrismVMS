@@ -98,7 +98,7 @@ body
 							</div> 
 							<div class="key input-group">
 								<span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-								<input  type="email"  name="email"  required=""  placeholder="Email" class="form-control" id="email">
+								<input  type="text"  name="email"  required=""  placeholder="Email" class="form-control" id="email">
 								<div class="clearfix"></div>
 							</div>
 							<div class="key input-group">
