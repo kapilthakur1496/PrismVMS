@@ -340,7 +340,7 @@
 		<div class="about-info">
 			<div class="col-md-8 about-grids">
 				<h4>Our Beneficiaries:</h4>
-				<p>We aim to uplift the various sections of the society by technologically assisting the NGO's that aid them </p>		
+				<p>We aim to connect volunteers and mentors for India's education</p>		
 					<div class="about-w3ls-row">
 						<script type="text/javascript">
 								 $(window).load(function() {
@@ -388,7 +388,7 @@
 					</div>
 			</div>
 			<div class="col-md-4 about-grids">
-					<h4>Our Advantages</h4>
+					<h4>News and Events</h4>
 					<div class="scroll-up">
 					<i class="fa fa fa-chevron-circle-up"></i>
 					</div>
@@ -488,8 +488,8 @@
 	<div class="about-bottom">
 		<div class="container">
 			<h3>Do your part <span>for</span> the Nation</h3>
-			<h4>Purchase products made by the underprivileged</h4>
-			<a href="index.jsp">Shop Now</a>
+			<h4>Register as a volunteer</h4>
+			<a href="volunteerRegistraton.jsp"> Register</a>
 		</div>
 	</div>
 <!-- //about-bottom -->
