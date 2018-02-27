@@ -111,7 +111,7 @@ finally
 }
 if(volunteerStatus == 1){
 
-	branchProjectsRs = ct.getVolunteerBranchProject(request, response, pageNumber, nextRecordCount);
+	branchProjectsRs = ct.getVolunteerBranchProject(request, response);
 %>
  
  	
@@ -220,7 +220,7 @@ if(volunteerStatus == 1){
 							 	<%=branchProjectsRs.getString("branch_id") %>  
 							</span> 		
 				 	 	</div> 
-						<div class="collapsible-body" style="background-color: #fff;">
+						<div class="collapsible-body" style="background-color: #fff; margin-bottom:20px;">
 							<div class="col-lg-12" style="margin-left:90px;">
 								<div class="row"  >
 									<div class="col-lg-6" style="padding:5px;  "> 
@@ -241,11 +241,11 @@ if(volunteerStatus == 1){
 							<%if(status ==null){
 							 
 							%>
-								<br><a href="branchProjectEnrollRequest.jsp?projectId=<%=branchProjectsRs.getString("id")%>"><i class="fa fa-plus" style="color:#fff; font-size:22px;  "></i> Enroll  Request </a>
+								<br><a   class="btn btn-primary"  href="branchProjectEnrollRequest.jsp?projectId=<%=branchProjectsRs.getString("id")%>"><i class="fa fa-plus" style="color:#fff; font-size:22px;  "></i> Enroll  Request </a>
 							<%}
 							else if(status.equals("Project Assigned")){ %>
 							<%}else if(status.equals("Not Approved")){ %>
-								<br><a href="branchProjectEnrollCancelRequest.jsp?projectId=<%=branchProjectsRs.getString("id")%>"><i class="fa fa-cross" style="color:#fff; font-size:22px;  "></i> Cancel  Request </a>
+								<br><a   class="btn btn-primary"  href="branchProjectEnrollCancelRequest.jsp?projectId=<%=branchProjectsRs.getString("id")%>"><i class="fa fa-cross" style="color:#fff; font-size:22px;  "></i> Cancel  Request </a>
 							<%}else if(status.equals("Approved")){ %>
 							<i class="fa fa-cricle-right" style="color:green;"></i>
 							 <%} %>

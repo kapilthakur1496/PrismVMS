@@ -5487,7 +5487,7 @@ public   ResultSet getVolunteerMonthlyReport(HttpServletRequest request, HttpSer
 	return getMonthReportRs;
 
 }
-public   ResultSet getVolunteerBranchProject(HttpServletRequest request, HttpServletResponse response,int pageNumber, int nextRecordCount) throws ServletException, IOException { 
+public   ResultSet getVolunteerBranchProject(HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException { 
 	Statement getTeamProjectSt = null; 
 	ResultSet getTeamProjectRs = null;
  
@@ -5499,7 +5499,7 @@ public   ResultSet getVolunteerBranchProject(HttpServletRequest request, HttpSer
 				Control ct = new Control(); 
 				String branchId  = ct.getVolunteerBranch(volunteerId); 
 				
-				String query = "select *  from branch_project where    branch_id ='"+branchId+"'   limit "+(pageNumber*10)+","+nextRecordCount;
+				String query = "select *  from branch_project where    branch_id ='"+branchId+"' order by id desc   ";
 				getTeamProjectRs = getTeamProjectSt.executeQuery(query);
 				  
 		} 
