@@ -102,7 +102,7 @@ if(adminId !=null){
         <div class="templatemo-content-container" style="padding:0px 0px;">
           <div class="templatemo-content-widget no-padding"> 
             <div class="panel panel-default table-responsive">
-            <form id="regForm" action="${pageContext.request.contextPath}/Control?action=volunteerApproval" method="post" style="margin-top:0px; padding-top:30px;">  
+            <form id="regForm" action="${pageContext.request.contextPath}/Control?action=volunteerApproval" name="f1"  onSubmit="return validateChecks1()" method="post" style="margin-top:0px; padding-top:30px;">  
 			  <table class="table table-striped table-bordered templatemo-user-table">
                 <thead>
                   <tr>
@@ -155,13 +155,12 @@ if(adminId !=null){
               </table>  
               <div style="margin:10px;">
 						<div class="col-lg-5">
-							<select   class="form-control" name="status">
-							<option>Select the Status</option>
+							<select required  class="form-control" name="status">
+							<option value="">Select the Status</option>
 								<option>Approved</option>
 								<option>Under Process</option>
 								<option>Rejected </option> 
-								<option>Pending</option>
-								<option>On InterView</option>
+								<option>Pending</option> 
 								<option>Archived</option>
 							</select>
 						</div>  
@@ -179,7 +178,7 @@ if(adminId !=null){
 		 	</div>  
             </div>
             <div class="panel panel-default table-responsive">
-            <form id="regForm" action="${pageContext.request.contextPath}/Control?action=assignTeam" method="post" style="margin-top:0px; padding-top:30px;">  
+            <form id="regForm" action="${pageContext.request.contextPath}/Control?action=assignTeam" name="f2" onSubmit="return validateChecks2()" method="post" style="margin-top:0px; padding-top:30px;">  
 			  <table class="table table-striped table-bordered templatemo-user-table">
                 <thead>
                   <tr>
@@ -207,7 +206,7 @@ if(adminId !=null){
 			
 							<tr>
 								<td>
-								  	<input type="checkbox" name="volunteerId" id="t<%=j%>" value="<%=volunteerDetailsRs.getString("id") %>">
+								  	<input type="checkbox" name="volunteerIds" id="t<%=j%>" value="<%=volunteerDetailsRs.getString("id") %>">
                       				<label for="t<%=j%>" class="font-weight-400"><span></span> </label> 
 								 				
 								</td>
@@ -231,8 +230,8 @@ if(adminId !=null){
               </table>  
               <div style="margin:10px;">
 						<div class="col-lg-4">
-							<select   class="form-control" name="team">
-							<option value="0">Select the Team</option>
+							<select required   class="form-control" name="team">
+							<option value="">Select the Team</option>
 								<%	teamRs = ct.getTeams();
               					%>
               				<% while(teamRs.next() ){ %>
@@ -241,8 +240,8 @@ if(adminId !=null){
 							</select>
 						</div>  
 						<div class="col-lg-4">
-							<select   class="form-control" name="branch">
-							<option value="0">Select the Branch</option>
+							<select required  class="form-control" name="branch">
+							<option value="">Select the Branch</option>
 								<%	branchRs = ct.getBranch();
               					%>
               				<% while(branchRs.next() ){ %>
@@ -439,7 +438,50 @@ if(adminId !=null){
 <%}%>
 
 
-<%}%>
+<%}%> 
+	 <script type="text/javascript">
+	  
+	 function validateChecks2() {
+     	
+		 var chks =  document.getElementsByName('volunteerIds');
+  		var checkCount = 0;
+  		for (var i = 0; i < chks.length; i++) {
+  			if (chks[i].checked) {
+  				checkCount++;
+  			}
+  		}
+  		if (checkCount < 1) {
+  			
+  			var x = document.getElementById("snackbar")
+  		    x.className = "show";
+  		    x.innerHTML="Select at least one Volunteer";
+  		    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  		 
+  			return false;
+  		}
+  		return true;
+  	}
+	 function validateChecks1() {
+	     	
+		 var chks =  document.getElementsByName('volunteerId');
+  		var checkCount = 0;
+  		for (var i = 0; i < chks.length; i++) {
+  			if (chks[i].checked) {
+  				checkCount++;
+  			}
+  		}
+  		if (checkCount < 1) {
+  			
+  			var x = document.getElementById("snackbar")
+  		    x.className = "show";
+  		    x.innerHTML="Select at least one Volunteer";
+  		    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  		 
+  			return false;
+  		}
+  		return true;
+  	}
+	 </script>
     
   </body>
 </html>

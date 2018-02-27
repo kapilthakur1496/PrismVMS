@@ -2414,7 +2414,7 @@ public void assignTeam( HttpServletRequest request, HttpServletResponse response
 	if(adminId !=null) {
 	 
 	try { 
-	   		String volunteerIds[] = request.getParameterValues("volunteerId"); 
+	   		String volunteerIds[] = request.getParameterValues("volunteerIds"); 
 		   	String team = request.getParameter("team");  
 			String branch = request.getParameter("branch");  
 		   	
@@ -5399,8 +5399,9 @@ public   ResultSet getVolunteerTeamProject(HttpServletRequest request, HttpServl
 				getTeamProjectSt = connection.createStatement();
 				Control ct = new Control();
 				String team = ct.getVolunteerTeam(volunteerId);
+				System.out.println("Team Name "+team);
 				String branchId  = ct.getVolunteerBranch(volunteerId); 
-				
+ 				System.out.println("branch Project id "+branchId);
 				String query = "select *  from team_project where team='"+team+"' and branch_id ='"+branchId+"'   limit "+(pageNumber*10)+","+nextRecordCount;
 				getTeamProjectRs = getTeamProjectSt.executeQuery(query);
 				  

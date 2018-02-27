@@ -102,6 +102,9 @@ h1 {
 } catch (Exception e){ 	 	
 }
 if(mentorStatus == 1){
+	int branchProjectcount = ct.volunteerBranchProjectCount(adminId);
+	int teamProjectcount = ct.volunteerTeamProjectCount(adminId);
+	
 %>  	
  
 <div class="outercontainer" style="padding-top:0px;  padding-right:10px; margin-left:10px; margin-top:10px; margin-right:15px;">
@@ -231,6 +234,8 @@ if(mentorStatus == 1){
          </div>
  	</div>
 </div>
+  
+  
   
 <%} %>
 <br><br><br>  
