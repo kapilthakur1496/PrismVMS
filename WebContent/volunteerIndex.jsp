@@ -87,7 +87,7 @@ h1 {
 <% try{ %>
   
 <%!  
-	ResultSet ngoDetail=null;
+	ResultSet ngoDetail=null,notificationRs=null;
 	int volunteerStatus=0; 
 	String volunteerId=null,  PhoneNumber =null,name=null, teamName=null,volunteerName=null,volunteerTeam=null; 
 	ResultSet SubCategoryRs=null; 
@@ -115,6 +115,7 @@ if(volunteerStatus == 1){
 		project = ct.getVolunteerProjectCount(request,response);
 		teamprojects = ct.getVolunteerTeamProjectCount(request,response);
 		branchProject = ct.getVolunteerBranchProjectCount(request,response); 
+		notificationRs = ct.getNotification(request, response); 
 		 
 %>  	
  
@@ -274,7 +275,9 @@ if(volunteerStatus == 1){
                     <h3 class="text-center">Projects Chart &nbsp;<span class="badge">new</span></h3>
                     <div id="pie_chart_div1" class="templatemo-chart"></div> <!-- Pie chart div -->
                   </div>
-                  <br><br> <br> <br> <br> <br> <br>  <br> <br> <br> <br> <br> <hr> 
+                  <div style="background:transparent;">
+                  
+                  </div>  <hr> 
                   <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <h3 class="text-center">Work Reports Graphs &nbsp;<span class="badge">new</span></h3>
                     <div id="bar_chart_div" class="templatemo-chart"></div> <!-- Bar chart div -->
@@ -283,13 +286,28 @@ if(volunteerStatus == 1){
                     <h3 class="text-center">Projects Graph &nbsp;<span class="badge">new</span></h3>
                     <div id="bar_chart_div1" class="templatemo-chart"></div> <!-- Bar chart div -->
                   </div>
+                  
+                <div class="templatemo-flex-row flex-content-row">
+                <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                     
+                  
+                   
+                </div>   
+                  <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                     <%while(notificationRs.next()) {%>
+                     <div>
+                     	<h3 style="text-align:left;"><%=notificationRs.getString("title") %></h3>
+                     	<h4 style="text-align:left;"><%=notificationRs.getString("news_date") %></h4>
+                     	<p style="text-align:left;"><%=notificationRs.getString("content") %></p>
+                     </div>
+                     <%} %>
+                  
+                   
                 </div>      
               </div>
             </div>
           </div>
-           <br><br> <br> <br> <br> <br> <br>  <br> <br> <br> <br> <br> <hr> 
-         
-          <br> <br> <br>
+            
           
     	</div>
  	</div>
