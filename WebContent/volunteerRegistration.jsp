@@ -98,7 +98,7 @@ body
 							</div> 
 							<div class="key input-group">
 								<span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
-								<input  type="email"  name="email"  required=""  placeholder="Email" class="form-control" id="email">
+								<input  type="text"  name="email"  required=""  placeholder="Email" class="form-control" id="email">
 								<div class="clearfix"></div>
 							</div>
 							<div class="key input-group">
@@ -132,7 +132,7 @@ body
 							</div> 
 							 <div class="key"  >   				
 								<i class="fa fa-paragraph" aria-hidden="true"></i> 
-								<textarea height="auto;" placeholder="Why do you wish to join as a volunteer" oninput="this.className = ''" style="height:135px;" name="whyVolunteer" required></textarea>
+								<textarea  placeholder="Why do you wish to join as a volunteer" oninput="this.className = ''" style="height:135px;" name="whyVolunteer" required></textarea>
 								<div class="clearfix"></div>
 							</div>  
 							 
