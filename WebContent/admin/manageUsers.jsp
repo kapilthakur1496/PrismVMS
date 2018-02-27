@@ -16,6 +16,8 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/templatemo-style.css" rel="stylesheet">
     
+<link rel="shortcut icon" href="../images/logo2_.ico" />
+    
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -62,7 +64,7 @@ if(adminId !=null){
       <div class="templatemo-sidebar">
         <header class="templatemo-site-header">
           <header class="templatemo-site-header"  >
-        	<!-- <a href="index.html"> --><img src="../images/logo2.png" alt=" " >   <!--   </a>   -->   
+        	<a href="index.jsp">  <img src="../images/logo2.png" alt=" " >      </a>   
 	   </header>
         </header>
         <div class="profile-photo-container">
@@ -73,16 +75,16 @@ if(adminId !=null){
         <form class="templatemo-search-form" role="search">
           <div class="input-group">
               <button type="submit" class="fa fa-search"></button>
-              <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">           
+              <input type="text" class="form-control"  placeholder="Search Feature"   onkeyup="search()" id="myInput" name="srch-term" id="srch-term">           
           </div>
         </form>
         <div class="mobile-menu-icon">
             <i class="fa fa-bars"></i>
           </div>
         <nav class="templatemo-left-nav">          
-          <ul>
-            <li><a href="index.jsp"><i class="fa fa-home fa-fw"></i>Home</a></li>
-            <li><a href="manage-users.jsp?pageNumber=1" class="active"><i class="fa fa-users fa-fw"></i>Manage Users</a></li>
+          <ul id="exCollapsingNavbar3">
+            <li><a href="index.jsp"><i style="color:#fff; font-size:22px;" class="fa fa-home fa-fw"></i>Home</a></li>
+            <li><a href="manageUsers.jsp?pageNumber=1" class="active"><i  style="color:#fff; font-size:22px;" class="fa fa-users fa-fw"></i>Manage Users</a></li>
              </ul>  
         </nav>
       </div>
@@ -100,7 +102,7 @@ if(adminId !=null){
         <div class="templatemo-content-container" style="padding:0px 0px;">
           <div class="templatemo-content-widget no-padding"> 
             <div class="panel panel-default table-responsive">
-            <form id="regForm" action="${pageContext.request.contextPath}/Control?action=volunteerApproval" method="post" style="margin-top:0px; padding-top:30px;">  
+            <form id="regForm" action="${pageContext.request.contextPath}/Control?action=volunteerApproval" name="f1"  onSubmit="return validateChecks1()" method="post" style="margin-top:0px; padding-top:30px;">  
 			  <table class="table table-striped table-bordered templatemo-user-table">
                 <thead>
                   <tr>
@@ -153,13 +155,12 @@ if(adminId !=null){
               </table>  
               <div style="margin:10px;">
 						<div class="col-lg-5">
-							<select   class="form-control" name="status">
-							<option>Select the Status</option>
+							<select required  class="form-control" name="status">
+							<option value="">Select the Status</option>
 								<option>Approved</option>
 								<option>Under Process</option>
 								<option>Rejected </option> 
-								<option>Pending</option>
-								<option>On InterView</option>
+								<option>Pending</option> 
 								<option>Archived</option>
 							</select>
 						</div>  
@@ -171,13 +172,13 @@ if(adminId !=null){
 			 <div class="col-lg-12 text-center" style="margin-left:auto; margin-right:auto;">
 				<ul class="pagination " >
 					<% for( int k=1; k<=pageCount; k++){ %>
-				    	<li><a href="manage-users.jsp?pageNumber=<%=k%>"><%=k%></a></li>
+				    	<li><a href="manageUsers.jsp?pageNumber=<%=k%>"><%=k%></a></li>
 				    <% } %> 
 			 	</ul>
 		 	</div>  
             </div>
             <div class="panel panel-default table-responsive">
-            <form id="regForm" action="${pageContext.request.contextPath}/Control?action=assignTeam" method="post" style="margin-top:0px; padding-top:30px;">  
+            <form id="regForm" action="${pageContext.request.contextPath}/Control?action=assignTeam" name="f2" onSubmit="return validateChecks2()" method="post" style="margin-top:0px; padding-top:30px;">  
 			  <table class="table table-striped table-bordered templatemo-user-table">
                 <thead>
                   <tr>
@@ -205,7 +206,7 @@ if(adminId !=null){
 			
 							<tr>
 								<td>
-								  	<input type="checkbox" name="volunteerId" id="t<%=j%>" value="<%=volunteerDetailsRs.getString("id") %>">
+								  	<input type="checkbox" name="volunteerIds" id="t<%=j%>" value="<%=volunteerDetailsRs.getString("id") %>">
                       				<label for="t<%=j%>" class="font-weight-400"><span></span> </label> 
 								 				
 								</td>
@@ -229,8 +230,8 @@ if(adminId !=null){
               </table>  
               <div style="margin:10px;">
 						<div class="col-lg-4">
-							<select   class="form-control" name="team">
-							<option value="0">Select the Team</option>
+							<select required   class="form-control" name="team">
+							<option value="">Select the Team</option>
 								<%	teamRs = ct.getTeams();
               					%>
               				<% while(teamRs.next() ){ %>
@@ -239,8 +240,8 @@ if(adminId !=null){
 							</select>
 						</div>  
 						<div class="col-lg-4">
-							<select   class="form-control" name="branch">
-							<option value="0">Select the Branch</option>
+							<select required  class="form-control" name="branch">
+							<option value="">Select the Branch</option>
 								<%	branchRs = ct.getBranch();
               					%>
               				<% while(branchRs.next() ){ %>
@@ -256,7 +257,7 @@ if(adminId !=null){
 			 <div class="col-lg-12 text-center" style="margin-left:auto; margin-right:auto;">
 				<ul class="pagination " >
 					<% for( int k=1; k<=pageCount; k++){ %>
-				    	<li><a href="manage-users.jsp?pageNumber=<%=k%>"><%=k%></a></li>
+				    	<li><a href="manageUsers.jsp?pageNumber=<%=k%>"><%=k%></a></li>
 				    <% } %> 
 			 	</ul>
 		 	</div>  
@@ -386,8 +387,8 @@ if(adminId !=null){
             </ul>
           </div>  -->         
           <footer class="text-right">
-            <p>Copyright &copy; 2018 SarvaHitkari 
-            | Designed by <a href="/sarv_hitkari/about.html" target="_parent">Kapil Thakur and Anurag Goel</a></p>
+            <p>Copyright &copy; 2018 PrismVMS 
+            | Designed by <a href="#" target="_parent">Kapil Thakur and Anurag Goel</a></p>
           </footer>         
         </div>
       </div>
@@ -437,7 +438,50 @@ if(adminId !=null){
 <%}%>
 
 
-<%}%>
+<%}%> 
+	 <script type="text/javascript">
+	  
+	 function validateChecks2() {
+     	
+		 var chks =  document.getElementsByName('volunteerIds');
+  		var checkCount = 0;
+  		for (var i = 0; i < chks.length; i++) {
+  			if (chks[i].checked) {
+  				checkCount++;
+  			}
+  		}
+  		if (checkCount < 1) {
+  			
+  			var x = document.getElementById("snackbar")
+  		    x.className = "show";
+  		    x.innerHTML="Select at least one Volunteer";
+  		    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  		 
+  			return false;
+  		}
+  		return true;
+  	}
+	 function validateChecks1() {
+	     	
+		 var chks =  document.getElementsByName('volunteerId');
+  		var checkCount = 0;
+  		for (var i = 0; i < chks.length; i++) {
+  			if (chks[i].checked) {
+  				checkCount++;
+  			}
+  		}
+  		if (checkCount < 1) {
+  			
+  			var x = document.getElementById("snackbar")
+  		    x.className = "show";
+  		    x.innerHTML="Select at least one Volunteer";
+  		    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  		 
+  			return false;
+  		}
+  		return true;
+  	}
+	 </script>
     
   </body>
 </html>

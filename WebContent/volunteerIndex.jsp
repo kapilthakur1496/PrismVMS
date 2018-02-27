@@ -89,7 +89,7 @@ h1 {
 <%!  
 	ResultSet ngoDetail=null;
 	int volunteerStatus=0; 
-	String volunteerId=null,  PhoneNumber =null; ;
+	String volunteerId=null,  PhoneNumber =null,name=null, teamName=null,volunteerName=null,volunteerTeam=null; 
 	ResultSet SubCategoryRs=null; 
 	Control ct = new Control();
 	int workDiary=0, workMeeting=0,workTraining=0,project=0,teamprojects=0,branchProject=0;
@@ -198,7 +198,10 @@ if(volunteerStatus == 1){
         </div>
         <div class="col-md-10 col-lg-9 col-sm-9 col-xs-12" style="padding:3px 0px;">
         
-        <%   PhoneNumber = ct.getPhone(volunteerId);  %>
+        <%   PhoneNumber = ct.getPhone(volunteerId);
+        	 volunteerName = ct.getVolunteerName(volunteerId);
+        	 volunteerTeam = ct.getVolunteerTeam(volunteerId);
+        %>
    	<div class="container">
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
@@ -250,38 +253,48 @@ if(volunteerStatus == 1){
             </div>
         </div>
     </div>
-    <a href="#"  data-toggle="modal" data-target="#myModal" class="btn btn-info btn-block"> Edit Profile</a>
-             <div class="templatemo-flex-row flex-content-row templatemo-overflow-hidden"> <!-- overflow hidden for iPad mini landscape view-->
+            
+            
+             
+            <h1 style="color: #2a3f54; text-align:left;  font-weight: 800"><%=volunteerName%></h1>
+            <h3 style="color: #2a3f54; text-align:left; font-style: italic"><%=volunteerTeam%></h3><br>
+            <a href="#"  data-toggle="modal" data-target="#myModal" class="btn btn-info  "> Edit Profile</a>
+            <hr>    
+          <div class="templatemo-flex-row flex-content-row templatemo-overflow-hidden"> <!-- overflow hidden for iPad mini landscape view-->
             <div class="col-1 templatemo-overflow-hidden">
               <div class="templatemo-content-widget white-bg templatemo-overflow-hidden">
                  
                 <div class="templatemo-flex-row flex-content-row">
-                  <div class="col-1 col-lg-6 col-md-12">
-                    <h2 class="text-center">Modular<span class="badge">new</span></h2>
+                  <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <h3 class="text-center">Work Reports Chart &nbsp;<span class="badge">new</span></h3>
                     <div id="pie_chart_div" class="templatemo-chart"></div> <!-- Pie chart div -->
-                  </div>
-                  <div class="col-1 col-lg-6 col-md-12">
-                    <h2 class="text-center">Interactive<span class="badge">new</span></h2>
-                    <div id="bar_chart_div" class="templatemo-chart"></div> <!-- Bar chart div -->
-                  </div>  
-                </div>    
-                <div class="templatemo-flex-row flex-content-row">
-                  <div class="col-1 col-lg-6 col-md-12">
-                    <h2 class="text-center">Modular<span class="badge">new</span></h2>
+                  </div> 
+                  <div class="templatemo-flex-row flex-content-row">
+                  <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <h3 class="text-center">Projects Chart &nbsp;<span class="badge">new</span></h3>
                     <div id="pie_chart_div1" class="templatemo-chart"></div> <!-- Pie chart div -->
                   </div>
-                  <div class="col-1 col-lg-6 col-md-12">
-                    <h2 class="text-center">Interactive<span class="badge">new</span></h2>
+                  <br><br> <br> <br> <br> <br> <br>  <br> <br> <br> <br> <br> <hr> 
+                  <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <h3 class="text-center">Work Reports Graphs &nbsp;<span class="badge">new</span></h3>
+                    <div id="bar_chart_div" class="templatemo-chart"></div> <!-- Bar chart div -->
+                  </div>   
+                  <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <h3 class="text-center">Projects Graph &nbsp;<span class="badge">new</span></h3>
                     <div id="bar_chart_div1" class="templatemo-chart"></div> <!-- Bar chart div -->
-                  </div>  
-                </div>              
+                  </div>
+                </div>      
               </div>
             </div>
           </div>
+           <br><br> <br> <br> <br> <br> <br>  <br> <br> <br> <br> <br> <hr> 
+         
+          <br> <br> <br>
+          
     	</div>
  	</div>
 </div>
-  
+   
 <%}%>
 <br><br><br> 
 <div class="footer" style="background-color:#2A3F54;   height:50px;">
@@ -377,6 +390,7 @@ if(volunteerStatus == 1){
           var data = new google.visualization.DataTable();
           data.addColumn('string', 'Topping');
           data.addColumn('number', 'Work Diary');  
+         
           data.addRows([
             ['Work Diary', <%=workDiary%>],
             ['Work Meeting', <%=workMeeting%>],
@@ -386,7 +400,7 @@ if(volunteerStatus == 1){
           ]);
 
           // Set chart options
-          var options = {'title':'How Many Work Diaries, Work Meeting and Work Trainings Submitted'};
+          var options = {'title':'Work Diaries, Work Meeting and Work Trainings Submitted ?'};
 
           // Instantiate and draw our chart, passing in some options.
           var pieChart = new google.visualization.PieChart(document.getElementById('pie_chart_div'));
@@ -410,7 +424,7 @@ if(volunteerStatus == 1){
           ]);
 
           // Set chart options
-          var options = {'title':'How Indvidual Projects, Team Projects and Branch Projects are Assigned'};
+          var options = {'title':'Indvidual Projects, Team Projects and Branch Projects are Assigned ?'};
 
           // Instantiate and draw our chart, passing in some options.
           var pieChart = new google.visualization.PieChart(document.getElementById('pie_chart_div1'));

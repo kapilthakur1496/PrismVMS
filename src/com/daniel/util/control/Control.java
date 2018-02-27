@@ -228,9 +228,17 @@ public class Control extends HttpServlet {
 		{   
 			gradeMonthlyReport(request, response);
 		}
+		else if(action.equals("adminForgotPassword"))
+		{   
+			adminForgotPassword(request,response);
+		}
 		else if(action.equals("mentorForgotPassword"))
 		{   
 			mentorForgotPassword(request,response);
+		}
+		else if(action.equals("adminforgotOtpVerification"))
+		{   
+			adminforgotOtpVerification(request,response);
 		}
 		else if(action.equals("forgotOtpVerification"))
 		{   
@@ -260,7 +268,15 @@ public class Control extends HttpServlet {
 		{   
 			addContactDetails(request,response); 
 		}
-		  
+		else if(action.equals("commonNotification"))
+		{   
+			commonNotification(request,response); 
+		}
+		else if(action.equals("TeamNewsNotification"))
+		{   
+			teamNewsNotification(request,response); 
+		}
+		   
 		  
 	}
 	private void addTeam( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -2103,6 +2119,128 @@ public void addContactDetails( HttpServletRequest request, HttpServletResponse r
 		 
 	 	out.close();  
 	}
+
+public void commonNotification( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	response.setContentType("text/html");
+    PrintWriter out = response.getWriter();  
+	String newsTitle = request.getParameter("newsTitle");
+	String newsDate = request.getParameter("newsDate");
+	String desc = request.getParameter("desc"); 
+	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	Date date = new Date(); 
+ 
+	
+	try { 
+		
+		 PreparedStatement addcontactPs =null;
+					 try {
+						 String addContactQ ="insert into common_notification (title,content,news_date,post_date) values(?,?,?,?)";
+						
+						 addcontactPs  =  connection.prepareStatement(addContactQ);
+						 addcontactPs.setString(1, newsTitle); 
+						 addcontactPs.setString(2, desc); 
+						 addcontactPs.setString(3, newsDate); 
+						 addcontactPs.setString(4, dateFormat.format(date)); 
+						 
+						 addcontactPs.executeUpdate();	
+ 						  
+						response.sendRedirect("admin/index.jsp?action=CommonNewsUpdated");
+						/*
+						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("adminIndex.jsp?pageNumber=1#tab2");
+						*/
+						/*RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("adminIndex.jsp?pageNumber=1#section02");
+				*/ }   
+				 catch (SQLException e) {
+						// TODO: handle exception
+					e.printStackTrace();
+					}
+				 catch (Exception e) {
+						// TODO: handle exception
+						 e.printStackTrace();
+					} finally {
+						if(addcontactPs!=null)  
+						  try {
+							  addcontactPs.close();
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}  
+					 }  
+				  
+			}
+		  
+		 catch (Exception e) {
+				// TODO: handle exception
+				 e.printStackTrace();
+			}
+		 
+	 	out.close();  
+	}
+public void teamNewsNotification( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	response.setContentType("text/html");
+    PrintWriter out = response.getWriter();  
+	String newsTitle = request.getParameter("newsTitle");
+	String newsDate = request.getParameter("newsDate");
+	String desc = request.getParameter("desc"); 
+	String team[] = request.getParameterValues("team"); 
+	System.out.println("team.length "+team.length);	
+	if(team[0].equals("0"))
+	{
+		response.sendRedirect("admin/index.jsp?action=SelectTypeoFUser");
+	}else {
+	
+	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	Date date = new Date(); 
+ 
+	
+	try { 
+		
+		 PreparedStatement addcontactPs =null;
+		 for(int i=0; i<team.length;i++)
+		 {
+			 
+		 
+					 try {
+						 String addContactQ ="insert into users_notification (title,content,news_date,post_date,receiver) values(?,?,?,?,?)";
+						
+						 addcontactPs  =  connection.prepareStatement(addContactQ);
+						 addcontactPs.setString(1, newsTitle); 
+						 addcontactPs.setString(2, desc); 
+						 addcontactPs.setString(3, newsDate); 
+						 addcontactPs.setString(4, dateFormat.format(date)); 
+						 addcontactPs.setString(5, team[i] );  
+						 addcontactPs.executeUpdate();	
+ 						   
+						 }   
+				 catch (SQLException e) {
+						// TODO: handle exception
+					e.printStackTrace();
+					}
+				 catch (Exception e) {
+						// TODO: handle exception
+						 e.printStackTrace();
+					} finally {
+						if(addcontactPs!=null)  
+						  try {
+							  addcontactPs.close();
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}  
+					 } 
+		 		}
+			response.sendRedirect("admin/index.jsp?action=usersNewsUpdated");		  
+			}
+		  
+		 catch (Exception e) {
+				// TODO: handle exception
+				 e.printStackTrace();
+			}
+	}
+	 	out.close();  
+	}
 public  ResultSet viewContact()throws ServletException, IOException { 
 	Statement contactSt =null;
 	ResultSet contactRs = null;
@@ -2406,7 +2544,7 @@ public void assignTeam( HttpServletRequest request, HttpServletResponse response
 	if(adminId !=null) {
 	 
 	try { 
-	   		String volunteerIds[] = request.getParameterValues("volunteerId"); 
+	   		String volunteerIds[] = request.getParameterValues("volunteerIds"); 
 		   	String team = request.getParameter("team");  
 			String branch = request.getParameter("branch");  
 		   	
@@ -5391,8 +5529,9 @@ public   ResultSet getVolunteerTeamProject(HttpServletRequest request, HttpServl
 				getTeamProjectSt = connection.createStatement();
 				Control ct = new Control();
 				String team = ct.getVolunteerTeam(volunteerId);
+				System.out.println("Team Name "+team);
 				String branchId  = ct.getVolunteerBranch(volunteerId); 
-				
+ 				System.out.println("branch Project id "+branchId);
 				String query = "select *  from team_project where team='"+team+"' and branch_id ='"+branchId+"'   limit "+(pageNumber*10)+","+nextRecordCount;
 				getTeamProjectRs = getTeamProjectSt.executeQuery(query);
 				  
@@ -7603,7 +7742,133 @@ finally {
 }
 out.close();
 }
+public void adminForgotPassword( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	response.setContentType("text/html");
+    PrintWriter out = response.getWriter();   
+    String email=request.getParameter("email");  
+	Statement checkMentorSt = null;
+	ResultSet checkMentorRs = null; 
+	PreparedStatement updatePassDatePs =null;
+try {  
+	checkMentorSt = connection.createStatement();
+	String mentorId=null;
+ 	String checkQ = "select id as mentorId from admin  where email ='"+email+"' and approve_status= 'Approved'  ";
+ 	checkMentorRs = checkMentorSt.executeQuery(checkQ);
+	
+ 	if (checkMentorRs.next()) { 
+ 	 mentorId = checkMentorRs.getString("mentorId");
+ 	 Random rnd = new Random();
+	 int rand = 100000 + rnd.nextInt(90000); 
+	 
+	 String otp = Integer.toString(rand);
+	 
+	 
+			  
+			     // result = "Sent message successfully....";  
+			String to = email;
+			  	String from = "prismhack@gmail.com";
+   			Properties props = System.getProperties();
+   			props.setProperty("mail.smtp.host", "smtp.gmail.com");
+   			props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+   			props.setProperty("mail.smtp.socketFactory.fallback", "false");
+   			props.setProperty("mail.smtp.port", "465");
+   			props.setProperty("mail.smtp.socketFactory.port", "465");
+   			props.put("mail.smtp.auth", "true");
+   			props.put("mail.debug", "true");
+   			props.put("mail.store.protocol", "pop3");
+   			props.put("mail.transport.protocol", "smtp");
+   			final String username = "prismhack@gmail.com";
+   			final String password = "code2win";
+		       
+			   try{
+			   		Session mySession = Session.getInstance(props, new Authenticator(){
+			   			 
+			   			protected PasswordAuthentication getPasswordAuthentication() {
+			   				return new PasswordAuthentication(username, password);
+						} 
+			   			
+					});
 
+			      MimeMessage message = new MimeMessage(mySession); 
+			      message.setFrom(new InternetAddress(from)); 
+			      message.addRecipient(Message.RecipientType.TO,
+			                               new InternetAddress(to)); 
+			      message.setSubject("PrismVMS Update Password"); 
+			      message.setText("Dear Sir/Ma'am\n "
+			    		  +"\n\n Your otp is "+otp
+			    		    +"\n\nThank You" 
+			    		  +"\nWarm Regards"
+			    		  +"\n\nPrismVMS"
+			    		   );
+			      
+			      Transport.send(message);
+			     // result = "Sent message successfully....";  
+			      
+			   DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+ 			Date date = new Date(); 
+ 			 HttpSession session = request.getSession(); 
+			 session.setAttribute("otp", otp); 
+			String query = "update admin set password_set=? where id = "+mentorId;
+			updatePassDatePs  =  connection.prepareStatement(query);
+			updatePassDatePs.setString(1,  dateFormat.format(date));  
+			updatePassDatePs.executeUpdate(); 
+			      
+			   response.sendRedirect("admin/mentorForgotPassword.jsp?action=otpVarification&email="+email);
+			  
+	   						  
+			  } 
+		    catch (MessagingException mex) {
+		      mex.printStackTrace();
+		      //result = "Error: unable to send message....";
+		   }
+   		 
+			
+ 	}
+ else{     
+	 response.sendRedirect("admin/adminLogin.jsp?action=AccountDoesNotExist");
+ }
+	 
+}  
+catch (SQLException e) {
+	// TODO: handle exception
+e.printStackTrace();
+}
+catch (Exception e) {
+	// TODO: handle exception
+	 e.printStackTrace();
+}
+finally {
+ if(checkMentorSt!=null) {
+		try {
+			checkMentorSt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		}
+ if(checkMentorRs!=null) {
+		try {
+			checkMentorRs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+	 
+	 
+	if(updatePassDatePs!=null) {
+		try {
+			updatePassDatePs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+	}
+	
+}
+out.close();
+}
 public   void forgotOtpVerification(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
 	Statement volunteerCountSt =null;
 	ResultSet volunteerCountRs = null;
@@ -7645,6 +7910,77 @@ public   void forgotOtpVerification(HttpServletRequest request, HttpServletRespo
 	        }else
 	        {
 				 response.sendRedirect("mentorForgotPassword.jsp?action=otpIsNotCorrect");
+	        }
+	         
+		} 
+		catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	 catch (Exception e) {
+			// TODO: handle exception
+			 e.printStackTrace();
+		}
+		finally {
+			
+			 if(volunteerCountSt!=null)
+				try {
+					volunteerCountSt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			 if(volunteerCountRs!=null)
+					try {
+						volunteerCountRs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+		}  
+		
+}
+public   void adminforgotOtpVerification(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { 
+	Statement volunteerCountSt =null;
+	ResultSet volunteerCountRs = null;
+	 try {  				
+			String otp = request.getParameter("otp");
+			String email = request.getParameter("email");
+			
+			HttpSession session = request.getSession();   
+	        String checkOtp = (String)session.getAttribute("otp");
+	        if(checkOtp==null) {
+	        	response.sendRedirect("admin/mentorForgotPassword?action=OtpExpired");
+	        }
+	        if(checkOtp.equals(otp)) {
+	        
+				volunteerCountSt = connection.createStatement();
+				volunteerCountRs = volunteerCountSt.executeQuery("select id  from admin where email ='"+email+"' ");
+				PreparedStatement updatePassDatePs =null;
+				String password = request.getParameter("password");
+				String confirmPassword = request.getParameter("confirmPassword");
+				DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	 			Date date = new Date(); 
+		 			
+				if(password.equals(confirmPassword) ) { 
+					if(volunteerCountRs.next()) {
+					
+						String query = "update admin  set password=?,password_set=? where id = "+volunteerCountRs.getString("id");
+						updatePassDatePs  =  connection.prepareStatement(query);
+						updatePassDatePs.setString(1, password);  
+						updatePassDatePs.setString(2, dateFormat.format(date));  
+						
+						updatePassDatePs.executeUpdate();	
+						response.sendRedirect("admin/adminLogin.jsp?action=useNewPassword");
+					
+					}
+		        }else
+		        {
+		        	response.sendRedirect("admin/mentorForgotPassword.jsp?action=PasswordAndConfirmPasswordNotMactched");
+		        } 
+	        }else
+	        {
+				 response.sendRedirect("admin/mentorForgotPassword.jsp?action=otpIsNotCorrect");
 	        }
 	         
 		} 

@@ -188,5 +188,11 @@
   
  <%}%>
 
+<script type="text/javascript">
+     history.pushState(null, null, document.URL);
+     window.addEventListener('popstate', function () {
+         history.pushState(null, null, document.URL);
+     });
+</script>
 </body>
 </html>

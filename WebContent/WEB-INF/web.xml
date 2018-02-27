@@ -77,6 +77,14 @@
   <servlet-mapping>
     <servlet-name>DisplayMentorPic</servlet-name>
     <url-pattern>/DisplayMentorPic</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MentorLogin</servlet-name>
+    <servlet-class>MentorLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MentorLogin</servlet-name>
+    <url-pattern>/MentorLogin</url-pattern>
   </servlet-mapping> 
   
 <context-param>
@@ -92,5 +100,7 @@
   <param-value>10</param-value>
 </context-param>
 
-
+<session-config>
+    <session-timeout>60</session-timeout>
+  </session-config>
 </web-app>

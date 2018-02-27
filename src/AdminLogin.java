@@ -58,22 +58,19 @@ public class AdminLogin extends HttpServlet {
 					
 					String adminId = adminLoginRs.getString("id"); 
 					String adminType = adminLoginRs.getString("admin_type");
-					System.out.println("id="+adminId);
-					System.out.println("id="+adminId);
 					HttpSession session = request.getSession();
 					session.setAttribute("adminId", adminId); 
 					session.setAttribute("adminType", adminType); 
 					session.setMaxInactiveInterval(1800); 
 					if(adminType.equals("Admin")) {
 						response.sendRedirect("admin/index.jsp"); 
+					}else {
+					response.sendRedirect("admin/adminLogin.jsp?action=UserNotValid");
 					}
-					else if(adminType.equals("Mentor")) {
-						response.sendRedirect("mentorIndex.jsp"); 
-					} 
 				}  
 				else
 				{
-					response.sendRedirect("adminLogin.jsp?action=UserNotValid");
+					response.sendRedirect("admin/adminLogin.jsp?action=UserNotValid");
 				}
 		}
 		 catch(SQLException se){
