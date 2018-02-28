@@ -187,11 +187,20 @@ if(mentorStatus == 1){
 		 		}
 		 		else if(action.equals("projectCreated"))
 		 		{%>
-		 			<a  class="btn btn-primary" href="teamProject.jsp">Skip</a>
+		 			<a style="margin:30px;" class="btn btn-primary" href="teamProject.jsp">Skip &nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right" style="color:#fff;"></i></a>
+		 			<div id="snackbar"></div>
+		 			<script>
+ 
+				    var x = document.getElementById("snackbar")
+				    x.className = "show";
+				    x.innerHTML="Project Has Been Created, Team Volunteers Has Been Notified To Send Enroll Request";
+				    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+				 
+				</script>
 		 		<%}
 		 		
 		 	%>
-		 		
+	
  			<form action="Control?action=assignTeamProject" method="post"  onSubmit="return validateChecks()" >
  			<div style="height:400px; overflow-x:hidden;">
 		 		<% 

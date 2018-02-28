@@ -269,9 +269,20 @@
 	{
 	overflow-y:hidden !important;
 	height:400px;
+	padding:0px;
 	}
 </style>
 <body>
+<%@ page import="java.sql.*" %>
+<%@page import="java.lang.reflect.Array"%>
+<%@ page import ="javax.sql.*" %>
+<%@ page import="com.daniel.util.control.*"  %>   
+<%@ page import="java.util.Date"  %> 
+ 
+<%! 
+	 ResultSet faqDetails=null;
+	Control ct = new Control(); 
+%>
 <div class="outercontainer" >
 	<div class="header-bottom-w3ls">  
 		<div class="row">
@@ -338,9 +349,9 @@
 	<div class="container"> 
 		<h3>About Us</h3>
 		<div class="about-info">
-			<div class="col-md-8 about-grids">
+				<div class="col-md-8 about-grids">
 				<h4>Our Beneficiaries:</h4>
-				<p>We aim to connect volunteers and mentors for India's education</p>		
+				<p>We aim to uplift the various sections of the society by technologically assisting the NGO's that aid them </p>		
 					<div class="about-w3ls-row">
 						<script type="text/javascript">
 								 $(window).load(function() {
@@ -387,93 +398,41 @@
 						<div class="clearfix"> </div>
 					</div>
 			</div>
+			
+			
 			<div class="col-md-4 about-grids">
-					<h4>News and Events</h4>
+			
+					<h3>News and Events</h3>
 					<div class="scroll-up">
 					<i class="fa fa fa-chevron-circle-up"></i>
 					</div>
 					<div class="news">
+					<%  
+			faqDetails = ct.viewNews();  %>
+				<%! int j=01; %>
+				
+					<% while(faqDetails.next()){
+						 %> 
+						
 					<div class="pince">
 						<div class="pince-left">
-							<h5>01</h5>
+							<h5><% if (j<10){%>0<%=j%><%}else{%>
+								<%=j %>
+								 <%} %>
+							</h5>
+							
 						</div>
 						<div class="pince-right">
-							<p>NGO's can use our free services to run their organisation.</p>
+						<p><b><%=faqDetails.getString("title")%></b></p>
+							<p><%=faqDetails.getString("content") %></p>
 						</div>
 						<div class="clearfix"> </div>
 					</div>
-					<div class="pince">
-						<div class="pince-left">
-							<h5>02</h5>
-						</div>
-						<div class="pince-right">
-							<p>Customers have an easy to use system to support the community.</p>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="pince">
-						<div class="pince-left">
-							<h5>03</h5>
-						</div>
-						<div class="pince-right">
-							<p>A free system benefiting the society as a whole.</p>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="pince">
-						<div class="pince-left">
-							<h5>04</h5>
-						</div>
-						<div class="pince-right">
-							<p>We have aimed to model simplicity at its best.</p>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="pince">
-						<div class="pince-left">
-							<h5>04</h5>
-						</div>
-						<div class="pince-right">
-							<p>We have aimed to model simplicity at its best.</p>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="pince">
-						<div class="pince-left">
-							<h5>01</h5>
-						</div>
-						<div class="pince-right">
-							<p>NGO's can use our free services to run their organisation.</p>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="pince">
-						<div class="pince-left">
-							<h5>02</h5>
-						</div>
-						<div class="pince-right">
-							<p>Customers have an easy to use system to support the community.</p>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="pince">
-						<div class="pince-left">
-							<h5>03</h5>
-						</div>
-						<div class="pince-right">
-							<p>A free system benefiting the society as a whole.</p>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-										<div class="pince">
-						<div class="pince-left">
-							<h5>09</h5>
-						</div>
-						<div class="pince-right">
-							<p>A free system benefiting the society as a whole.</p>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
+					
+					<% j++;}j=1; %>
+				 
+					  
+							 
 					</div>
 					<div class="scroll-down">
 					<i class="fa fa fa-chevron-circle-down"></i>
@@ -502,7 +461,7 @@
 		</div>
 			<div class="col-md-3 team-grid">
 				<a target="_blank"  href="https://www.linkedin.com/in/kapil-thakur/"><div class="team-img">
-					<img src="images/kapil.jpg" class="img-responsive" alt=" " style="  border:2px solid black;" />
+					<img src="images/kapil.jpg" class="img-responsive"  alt=" "   />
 					<figcaption class="overlay">
 						<div class="social-icon" style="margin-top:178px;" >
 							
@@ -523,7 +482,7 @@
 					</figcaption>
 				</div></a> 
 				<h4>Anurag Goel</h4>
-				<h5>Team Member</h5><br>
+				<h5>Team Member</h5> 
 				<a  href="https://www.linkedin.com/in/anurag-goel/" target="_blank"> <i style="font-size:32px;" class="fa fa-linkedin" aria-hidden="true"></i></a>
 		
 			</div>

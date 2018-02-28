@@ -106,7 +106,7 @@ h1 {
 	<h3>CHoose Your skills</h3>
  </div>
 	  
-<form action="Control?action=volunteerChooseSkills" method="post" onSubmit="return validateChecks()">
+<form action="Control?action=volunteerChooseSkills" method="post" >
 	<div class="container" style="paddin:0px; margin-left:150px;  ">
 	    <div class="row" style="height:400px;"><br>
 	        <div class="col-md-3 col-lg-3" style="text-algin:center; ">
@@ -114,7 +114,7 @@ h1 {
 				<% academicSkillRs = ct.getAcademicSkill(); %>
 		        <% while(academicSkillRs.next() ){ %>
 		           <label class="container"> <%=academicSkillRs.getString("skill_name") %> 
-						  <input type="checkbox" value="<%=academicSkillRs.getString("skill_name") %>" name="skills" >
+						  <input  type="checkbox" value="<%=academicSkillRs.getString("skill_name") %>" name="skills" >
 						  <span class="checkmark"></span>
 					</label>
 		       <%} %>  
@@ -214,33 +214,31 @@ h1 {
 		<div class="clearfix"></div>
 		 </div>
 </div>
-
+<% 
+ String action =request.getParameter("action");
+ if(action==null){
+ 
+ }else if(action!=null)
+ {
+	 
+  
+  %><%if(action.equals("volunteerChooseSkills")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="At least Select One Skill";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
+<%}%>
+<%}%>
 	 <div class="footer" style="background-color:#2A3F54;   height:50px;">
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
 	     <div id="snackbar"></div>
-	 <script type="text/javascript">
 	  
-	 function validateChecks() {
-     	
-  		var chks =  document.getElementsByName('vIds');
-  		var checkCount = 0;
-  		for (var i = 0; i < chks.length; i++) {
-  			if (chks[i].checked) {
-  				checkCount++;
-  			}
-  		}
-  		if (checkCount < 1) {
-  			
-  			var x = document.getElementById("snackbar")
-  		    x.className = "show";
-  		    x.innerHTML="Select at least one skill";
-  		    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-  		 
-  			return false;
-  		}
-  		return true;
-  	}
-	 </script>
+	  volunteerChooseSkills
 </body>
 </html>

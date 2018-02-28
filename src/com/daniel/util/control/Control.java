@@ -539,6 +539,38 @@ finally {
 return faqRs;
 
 }
+public  ResultSet viewNews()throws ServletException, IOException { 
+	Statement faqSt =null;
+	ResultSet faqRs = null;
+
+	try {  				
+		faqSt = connection.createStatement();
+		String faqQ ="select * from common_notification";
+		faqRs = faqSt.executeQuery(faqQ);
+	  
+		} 
+	catch (SQLException e) {
+	// TODO: handle exception
+		e.printStackTrace();
+		}
+	catch (Exception e) {
+	// TODO: handle exception
+		e.printStackTrace();
+		}
+finally {
+	
+	/*if(NgoDetailSt!=null)
+		try {
+			NgoDetailSt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+	 
+}
+return faqRs;
+
+}
 private void addTrainingType( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 	response.setContentType("text/html");
@@ -1271,7 +1303,12 @@ private void volunteerChooseSkills( HttpServletRequest request, HttpServletRespo
 	if(volunteerId !=null) {
 		String skills="";
 		String lang[]=request.getParameterValues("skills");
-		if(lang.length!=0) {
+		if(lang.length == 0)
+		{
+			response.sendRedirect("volunteerChooseSkill.jsp?action=volunteerChooseSkills"); 
+ 			
+		}
+		else if(lang.length!=0) {
 			for(int i=0;i<lang.length;i++){
 				skills+=lang[i]+" , ";
 			}
@@ -4219,7 +4256,7 @@ public void createBranchProject( HttpServletRequest request, HttpServletResponse
 					      Transport.send(message);
 					     // result = "Sent message successfully....";  
 					       
-					      response.sendRedirect("assignBranchProjects.jsp?projectId="+maxId);
+					      response.sendRedirect("assignBranchProjects.jsp?action=BranchProjectCreated&projectId="+maxId);
 					   			  
 					   } 
 					    catch (MessagingException mex) {

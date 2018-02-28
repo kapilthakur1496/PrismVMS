@@ -182,7 +182,26 @@ if(mentorStatus == 1){
  			<% String projectId = request.getParameter("projectId"); 
 		 		
 		 		volunteerDetails = ct.getVolunteerForBranchProject(projectId,adminId);
+		 		String action = request.getParameter("action"); 
+		 		if(action == null)
+		 		{
+		 			
+		 		}
+		 		else if(action.equals("BranchProjectCreated"))
+		 		{%>
+		 			<a style="margin:30px;" class="btn btn-primary" href="branchProject.jsp">Skip  &nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right" style="color:#fff;"></i></a>
+		 			<div id="snackbar"></div>
+		 			<script>
+ 
+					    var x = document.getElementById("snackbar")
+					    x.className = "show";
+					    x.innerHTML="Project Has Been Created, Branch Volunteers Has Been Notified To Send Enroll Request";
+					    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+					 
+					</script>
+		 		<%}
 		 		 %>
+		 		 
  			<form action="Control?action=assignBranchProject" method="post" onSubmit="return validateChecks()" >
  			<div style="height:400px; overflow-x:hidden;">
 		 		

@@ -202,18 +202,9 @@ if(volunteerStatus == 1){
 					<li>
 						<div class="collapsible-header active"><p style="padding:10px; background-color:#EDE576; font-size:14px;">
 							
-							 <%
 							 
-							 System.out.println("Status "+status);
-							 if(status ==null){%>
 								<span class="glyphicon glyphicon-pushpin" style="font-size:20px; color:#fff; font-size:22px; font-style: bold;"></span>&nbsp;&nbsp;
-							<%} else if(status.equals("Project Assigned")){ %>
-								<span class="glyphicon glyphicon-pushpin" style="font-size:20px; color:#fff; font-size:22px; font-style: bold;"></span>&nbsp;&nbsp;
-							 <%}else if(status.equals("Rejected")){ %>
-							 	<span class="glyphicon glyphicon-home" style="font-size:20px; color:#fff; font-size:22px; font-style: bold;"></span>&nbsp;&nbsp;
-							 		<%}else if(status.equals("Approved")){ %> 
-								<span class="glyphicon glyphicon-ok-sign " style="font-size:20px; color:#fff; font-size:22px; font-style: bold;"></span>&nbsp;&nbsp;
-							 	<%} %>  
+							 
 							<!-- <span class="glyphicon glyphicon-pushpin" style="font-size:20px; color:#fff; font-size:22px; font-style: bold;"></span>&nbsp;&nbsp;
 							 --><%=teamProjectsRs.getString("tproject_title") %>
 							 

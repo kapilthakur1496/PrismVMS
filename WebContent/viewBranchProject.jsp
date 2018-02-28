@@ -203,15 +203,9 @@ if(volunteerStatus == 1){
 					<li>
 						<div class="collapsible-header active"><p style="padding:10px; background-color:#EDE576; font-size:14px;">
 							
-							<%if(status ==null){%>
+							 
 								<span class="glyphicon glyphicon-pushpin" style="font-size:20px; color:#fff; font-size:22px; font-style: bold;"></span>&nbsp;&nbsp;
-							<%} else if(status.equals("Project Assigned")){ %>
-								<span class="glyphicon glyphicon-pushpin" style="font-size:20px; color:#fff; font-size:22px; font-style: bold;"></span>&nbsp;&nbsp;
-							 <%}else if(status.equals("Rejected")){ %>
-							 	<i class="fa fa-cross" style="color:red;"></i>
-							<%}else if(status.equals("Approved")){ %> 
-								<i class="fa fa-cricle-right" style="color:green;"></i>
-							 <%} %>
+							 
 							<!-- <span class="glyphicon glyphicon-pushpin" style="font-size:20px; color:#fff; font-size:22px; font-style: bold;"></span>&nbsp;&nbsp;
 							 --><%=branchProjectsRs.getString("bproject_title") %>
 							 

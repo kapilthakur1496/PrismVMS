@@ -48,12 +48,73 @@ h1 {
  
 </style>
 
-
-    <style type="text/css">
-        
+ 
+     <style type="text/css">
+        .scroll-up
+	{
+	font-size:40px;
+	text-align:center;
+	}
+	.scroll-down
+	{
+	font-size:40px;
+	text-align:center;
+	}
+	.news
+	{
+	overflow-y:hidden !important;
+	height:400px;
+	}
         
      
     </style>
+    
+<script type="text/javascript">
+	$(document).ready(function()
+	{
+		var i=0,j=0,k=0,count=0;
+		j=i;
+		$(".pince:last-child").attr("id","top-news");
+			
+		do
+		{
+			count++;
+			k++;
+			}while($(".pince:eq("+k+")").attr("id")!="top-news")
+		$("#login-btn").click(function(){
+			$("#login-box").animate({marginLeft:"-60%",opacity:"0.1"},"slow","swing");
+			$(".loader").show();
+			$(".loader").delay("800").fadeOut(300,"linear");
+			setTimeout(function(){
+			$("#login-type").animate({marginLeft:"50%",opacity:"1"},"slow","swing");
+			},800);
+		});
+		$("#close").click(function(){
+			$("#login-type").animate({marginLeft:"120%",opacity:"0"},"slow","swing");
+			$(".loader").show();
+			$(".loader").delay("800").fadeOut(300,"linear");
+			setTimeout(function(){
+			$("#login-box").animate({marginLeft:"50%",opacity:"1"},"slow","swing");
+			},800);
+		});
+		$(".scroll-up").click(function(){
+			if(count-3!=i)
+			{
+			$("h5:eq("+i+")").css("text-decoration","line-through");
+			$(".pince:eq("+i+")").fadeOut("slow","linear");
+			i++;
+			}
+		});
+		$(".scroll-down").click(function(){
+			if(j<i)
+			{
+			i--;
+			$("h5:eq("+i+")").css("text-decoration","none");
+			$(".pince:eq("+i+")").fadeIn("slow","linear");
+			}
+		});
+	});
+</script>
 </head>
 <body>
 
@@ -243,27 +304,74 @@ if(mentorStatus == 1){
             <h3 style="color: #2a3f54; text-align:left; font-style: italic"><%=mentorTeams%></h3><br>
              
     		<a href="#"  data-toggle="modal" data-target="#myModal"  class="btn btn-info  " style=" float:left;"> Edit Profile</a>
-        	 <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                   
-                   <%while(userNotificationRs.next()) {%>
-                     <div>
-                     	<h3 style="text-align:left;"><%=userNotificationRs.getString("title") %></h3>
-                     	<h4 style="text-align:left;"><%=userNotificationRs.getString("news_date") %></h4>
-                     	<p style="text-align:left;"><%=userNotificationRs.getString("content") %></p>
-                     </div>
-                     <%} %>
-                     <%while(notificationRs.next()) {%>
-                     <div>
-                     	<h3 style="text-align:left;"><%=notificationRs.getString("title") %></h3>
-                     	<h4 style="text-align:left;"><%=notificationRs.getString("news_date") %></h4>
-                     	<p style="text-align:left;"><%=notificationRs.getString("content") %></p>
-                     </div>
-                     <%} %>
+        	 <div class="templatemo-flex-row flex-content-row">
+                <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
                      
                   
                    
                 </div>   
-        
+                  <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12 about-grids" style="float:right;">
+                 
+			
+					<h3>Notifications  </h3>
+					<div class="scroll-up">
+					<i class="fa fa fa-chevron-circle-up"></i>
+					</div>
+					<div class="news" style="margin-top:-30px;">
+					<%!int j=1; %>
+					 <%while(notificationRs.next()) {  %>
+					  
+				  
+					<div class="pince">
+						<div class="pince-left">
+							<h5><% if (j<10){%>0<%=j%><%}else{%>
+								<%=j %>
+								 <%} %>
+							</h5>
+							
+						</div>
+						<div class="pince-right">
+						<p><b><%=notificationRs.getString("title")%></b></p>
+						<p><b><%=notificationRs.getString("news_date")%></b></p>
+							<p><%=notificationRs.getString("content") %></p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					
+					<% j++;}  %>		 
+				   <%while(userNotificationRs.next()) {%>
+                   
+					<div class="pince">
+						<div class="pince-left">
+							<h5><% if (j<10){%>0<%=j%><%}else{%>
+								<%=j %>
+								 <%} %>
+							</h5>
+							
+						</div>
+						<div class="pince-right">
+						<p><b><%=userNotificationRs.getString("title") %></b></p>
+							<p><%=userNotificationRs.getString("news_date") %></p>
+							<p><%=userNotificationRs.getString("content") %></p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					
+					<% j++;}j=1; %>
+				 
+					  
+							 
+					</div>
+					<div class="scroll-down">
+					<i class="fa fa fa-chevron-circle-down"></i>
+					</div>
+			</div>
+			 
+                  
+              
+                </div>   
+        	
+        	 
          </div>
  	</div>
 </div>
