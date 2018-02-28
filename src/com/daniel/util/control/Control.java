@@ -2907,7 +2907,7 @@ public void createMentor( HttpServletRequest request, HttpServletResponse respon
 				   			      message.setSubject("PrismVMS Account Details"); 
 				   			      message.setText("Dear Sir/Ma'am\n "
 				   			    		  +"\n\n Thanks for being a part of our orgainization"
-				   			    		  +"\n\n Please    http://localhost:8081/PrismVMS/admin/updatePassword.jsp    to set your Password"
+				   			    		  +"\n\n Please    http://13.126.168.110:8081/PrismVMS/admin/updatePassword.jsp    to set your Password"
 				   			    		  +"\n\nThank You" 
 				   			    		  +"\nWarm Regards"
 				   			    		  +"\n\nPrismVMS"
@@ -3069,7 +3069,7 @@ public void mentorVarification( HttpServletRequest request, HttpServletResponse 
 					
 		 	}
 		 else{     
-			 response.sendRedirect("adminLogon.jsp?action=PasswordAlreadySetUseForgotOption");
+			 response.sendRedirect("adminLogin.jsp?action=PasswordAlreadySetUseForgotOption");
 		 }
 			 
 		}  

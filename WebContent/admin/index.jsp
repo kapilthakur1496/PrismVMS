@@ -862,7 +862,7 @@ address: <span id="c"></span>
  
     var x = document.getElementById("snackbar")
     x.className = "show";
-    x.innerHTML="Skill Already Exist In The Life Skill List";
+    x.innerHTML="New mentor has been created for the selcted team";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
  
 </script>
