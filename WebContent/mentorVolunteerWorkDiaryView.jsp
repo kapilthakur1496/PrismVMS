@@ -227,7 +227,7 @@ if(volunteerStatus == 1){
 	 	  			</form>
  	  			</tr>
  	  			
-	 	  	<%i++;} %>
+	 	  	<%i++;} i=1; %>
 	 	  	
 	 	  	</tbody>
 	 	  

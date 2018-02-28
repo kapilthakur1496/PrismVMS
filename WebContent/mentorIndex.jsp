@@ -44,15 +44,22 @@ h1 {
 	margin-bottom: 14px;
 	
  }
- 
- 
-</style>
-
- 
-     <style type="text/css">
-        .scroll-up
+    .pince
+  
+  {
+  
+  
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    padding:10px;
+    border-top: 1px solid #eee;
+  }
+    
+     .scroll-up
 	{
 	font-size:40px;
+	margin-bottom:10px;
 	text-align:center;
 	}
 	.scroll-down
@@ -65,40 +72,44 @@ h1 {
 	overflow-y:hidden !important;
 	height:400px;
 	}
-        
-     
-    </style>
+	.scroll-up>i,.scroll-down>i
+	{
+	cursor:pointer;
+	}
+	#notification-class
+	{
+	float: right;
+    margin-top: -9%;
+    width: 45%;
+    }
+    .news-alert
+    {
+        border: 4px solid #2A3F54;
+    }
+    #notification-class>h3
+    {
+    background-color: #2A3F54;
+    color: linen;
+    padding-top:20px;
+    padding-bottom:20px;
     
+    }
+    </style>
+        
 <script type="text/javascript">
 	$(document).ready(function()
 	{
 		var i=0,j=0,k=0,count=0;
 		j=i;
 		$(".pince:last-child").attr("id","top-news");
-			
+	 	
 		do
 		{
 			count++;
 			k++;
-			}while($(".pince:eq("+k+")").attr("id")!="top-news")
-		$("#login-btn").click(function(){
-			$("#login-box").animate({marginLeft:"-60%",opacity:"0.1"},"slow","swing");
-			$(".loader").show();
-			$(".loader").delay("800").fadeOut(300,"linear");
-			setTimeout(function(){
-			$("#login-type").animate({marginLeft:"50%",opacity:"1"},"slow","swing");
-			},800);
-		});
-		$("#close").click(function(){
-			$("#login-type").animate({marginLeft:"120%",opacity:"0"},"slow","swing");
-			$(".loader").show();
-			$(".loader").delay("800").fadeOut(300,"linear");
-			setTimeout(function(){
-			$("#login-box").animate({marginLeft:"50%",opacity:"1"},"slow","swing");
-			},800);
-		});
+			}while($(".pince:eq("+k+")").attr("id")!="top-news");
 		$(".scroll-up").click(function(){
-			if(count-3!=i)
+			if(count-2!=i)
 			{
 			$("h5:eq("+i+")").css("text-decoration","line-through");
 			$(".pince:eq("+i+")").fadeOut("slow","linear");
@@ -310,21 +321,22 @@ if(mentorStatus == 1){
                   
                    
                 </div>   
-                  <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12 about-grids" style="float:right;">
-                 
-			
+                  <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12 about-grids" style="float:right;" id="notification-class">
 					<h3>Notifications  </h3>
+					<div class="news-alert">
 					<div class="scroll-up">
 					<i class="fa fa fa-chevron-circle-up"></i>
-					</div>
+					</div> 
 					<div class="news" style="margin-top:-30px;">
-					<%!int j=1; %>
+					<%int j=1; %>
 					 <%while(notificationRs.next()) {  %>
 					  
 				  
 					<div class="pince">
-						<div class="pince-left">
-							<h5><% if (j<10){%>0<%=j%><%}else{%>
+						<div class="pince-left">	
+							<h5><% if (j<10){%>
+							
+							0<%=j%><%}else{%>
 								<%=j %>
 								 <%} %>
 							</h5>
@@ -337,13 +349,16 @@ if(mentorStatus == 1){
 						</div>
 						<div class="clearfix"> </div>
 					</div>
+				 
+					<% 	 j++;}%>		 
 					
-					<% j++;}  %>		 
-				   <%while(userNotificationRs.next()) {%>
+					
+				   <%while(userNotificationRs.next()) { %>
                    
 					<div class="pince">
 						<div class="pince-left">
-							<h5><% if (j<10){%>0<%=j%><%}else{%>
+							<h5><% if (j<10){%>
+							0<%=j%><%}else{%>
 								<%=j %>
 								 <%} %>
 							</h5>
@@ -356,15 +371,16 @@ if(mentorStatus == 1){
 						</div>
 						<div class="clearfix"> </div>
 					</div>
-					
+				 
 					<% j++;}j=1; %>
 				 
 					  
 							 
-					</div>
+					</div> 
 					<div class="scroll-down">
 					<i class="fa fa fa-chevron-circle-down"></i>
 					</div>
+			</div>
 			</div>
 			 
                   
@@ -449,6 +465,7 @@ if(mentorStatus == 1){
     }
 
 </script>
+    
  
 	 
 </body>

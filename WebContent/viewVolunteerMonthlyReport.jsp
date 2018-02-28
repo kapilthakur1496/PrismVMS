@@ -196,9 +196,9 @@ String id = request.getParameter("vId");
 	 	  	<thead>
 	 	  	<tr>
 	 	  		<th>#</th>
-	 	  		<th>Submit Date</th>
-	 	  		<th>From Date</th>
-	 	  		<th>To Date</th>
+	 	  		<th style="width:11%">Submit Date</th>
+	 	  		<th style="width:9%">From Date</th>
+	 	  		<th style="width:9%">To Date</th>
 	 	  		<th>Skills Acquired</th>  
 				<th>Progress</th>
 				<th>Challenges</th>
@@ -227,7 +227,7 @@ String id = request.getParameter("vId");
  	  				<%} %>
  	  			</tr>
  	  			
-	 	   	<%i++;} %>   
+	 	   	<%i++;}i=1; %>   
 	 	  	</tbody> 
 	 	  </table> 
     	</div>

@@ -65,7 +65,27 @@ h1 {
 	overflow-y:hidden !important;
 	height:400px;
 	}
-        
+    .scroll-up>i,.scroll-down>i
+	{
+	cursor:pointer;
+	}
+	#notification-class
+	{
+	float: right;
+    width: 45%;
+    }
+    .news-alert
+    {
+        border: 4px solid #2A3F54;
+    }
+    #notification-class>h3
+    {
+    background-color: #2A3F54;
+    color: linen;
+    padding-top:20px;
+    padding-bottom:20px;
+    
+    }    
      
     </style>
     
@@ -81,24 +101,8 @@ h1 {
 			count++;
 			k++;
 			}while($(".pince:eq("+k+")").attr("id")!="top-news")
-		$("#login-btn").click(function(){
-			$("#login-box").animate({marginLeft:"-60%",opacity:"0.1"},"slow","swing");
-			$(".loader").show();
-			$(".loader").delay("800").fadeOut(300,"linear");
-			setTimeout(function(){
-			$("#login-type").animate({marginLeft:"50%",opacity:"1"},"slow","swing");
-			},800);
-		});
-		$("#close").click(function(){
-			$("#login-type").animate({marginLeft:"120%",opacity:"0"},"slow","swing");
-			$(".loader").show();
-			$(".loader").delay("800").fadeOut(300,"linear");
-			setTimeout(function(){
-			$("#login-box").animate({marginLeft:"50%",opacity:"1"},"slow","swing");
-			},800);
-		});
 		$(".scroll-up").click(function(){
-			if(count-3!=i)
+			if(count-2!=i)
 			{
 			$("h5:eq("+i+")").css("text-decoration","line-through");
 			$(".pince:eq("+i+")").fadeOut("slow","linear");
@@ -322,6 +326,7 @@ if(volunteerStatus == 1){
             <h1 style="color: #2a3f54; text-align:left;  font-weight: 800"><%=volunteerName%></h1>
             <h3 style="color: #2a3f54; text-align:left; font-style: italic"><%=volunteerTeam%></h3><br>
             <a href="#"  data-toggle="modal" data-target="#myModal" class="btn btn-info  "> Edit Profile</a>
+       
             <hr>    
           <div class="templatemo-flex-row flex-content-row templatemo-overflow-hidden"> <!-- overflow hidden for iPad mini landscape view-->
             <div class="col-1 templatemo-overflow-hidden">
@@ -331,34 +336,14 @@ if(volunteerStatus == 1){
                   <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <h3 class="text-center">Work Reports Chart &nbsp;<span class="badge">new</span></h3>
                     <div id="pie_chart_div" class="templatemo-chart"></div> <!-- Pie chart div -->
-                  </div> 
-                  <div class="templatemo-flex-row flex-content-row">
-                  <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <h3 class="text-center">Projects Chart &nbsp;<span class="badge">new</span></h3>
-                    <div id="pie_chart_div1" class="templatemo-chart"></div> <!-- Pie chart div -->
                   </div>
-                  <div style="background:transparent; height:200px;">
-                   
-                  </div>  <hr>
-                  <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <h3 class="text-center">Work Reports Graphs &nbsp;<span class="badge">new</span></h3>
-                    <div id="bar_chart_div" class="templatemo-chart"></div> <!-- Bar chart div -->
-                  </div>   
-                  <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <h3 class="text-center">Projects Graph &nbsp;<span class="badge">new</span></h3>
-                    <div id="bar_chart_div1" class="templatemo-chart"></div> <!-- Bar chart div -->
-                  </div>
-                  <hr>
-                <div class="templatemo-flex-row flex-content-row">
-                <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                     
                   
-                   
-                </div>   
-                  <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12 about-grids">
+                  <div class="templatemo-flex-row flex-content-row">
+                       <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12 about-grids" id="notification-class">
                  
 			
 					<h3>Notifications  </h3>
+				  <div class="news-alert">
 					<div class="scroll-up">
 					<i class="fa fa fa-chevron-circle-up"></i>
 					</div>
@@ -410,11 +395,46 @@ if(volunteerStatus == 1){
 					<div class="scroll-down">
 					<i class="fa fa fa-chevron-circle-down"></i>
 					</div>
-			</div>
+										</div>
+			            
+                     
+                    
+                  </div>
+                  
+                  
+                  
+                   
+                  <div class="templatemo-flex-row flex-content-row">
+                  <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <h3 class="text-center">Projects Chart &nbsp;<span class="badge">new</span></h3>
+                    <div id="pie_chart_div1" class="templatemo-chart"></div> <!-- Pie chart div -->
+                  </div>
+               
+                  <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                     
+                  
+                   
+                </div>  
+                  </div>
+                  
+                     
+                <div class="row" >
+                 
 			 
                   
               
-                </div>   
+                </div>  
+                  <div class="templatemo-flex-row flex-content-row" >
+                  
+                  <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <h3 class="text-center">Work Reports Graphs &nbsp;<span class="badge">new</span></h3>
+                    <div id="bar_chart_div" class="templatemo-chart"></div> <!-- Bar chart div -->
+                  </div>   
+                  <div class="col-1 col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <h3 class="text-center">Projects Graph &nbsp;<span class="badge">new</span></h3>
+                    <div id="bar_chart_div1" class="templatemo-chart"></div> <!-- Bar chart div -->
+                  </div>
+                
                    
               </div>
             </div>

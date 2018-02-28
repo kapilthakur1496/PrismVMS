@@ -227,7 +227,7 @@ if(volunteerStatus == 1){
 	 	  				<% }%>
 	 	  			</td> 
  	  			</tr> 
-	 	  	<%i++;} %> 
+	 	  	<%i++;} i=1; %> 
 	 	  	</tbody> 
 	 	  </table>
 	 	   

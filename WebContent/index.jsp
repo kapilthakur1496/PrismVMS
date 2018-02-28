@@ -25,13 +25,12 @@
 	{
 		var i=0,j=0,k=0,count=0;
 		j=i;
-		$(".pince:last-child").attr("id","top-news");
-			
+		$(".pince:last-child").attr("id","top-news");	
 		do
 		{
 			count++;
 			k++;
-			}while($(".pince:eq("+k+")").attr("id")!="top-news")
+			}while($(".pince:eq("+k+")").attr("id")!="top-news");
 		$("#login-btn").click(function(){
 			$("#login-box").animate({marginLeft:"-60%",opacity:"0.1"},"slow","swing");
 			$(".loader").show();
@@ -268,7 +267,7 @@
 	.news
 	{
 	overflow-y:hidden !important;
-	height:400px;
+	height:450px;
 	padding:0px;
 	}
 </style>
@@ -349,15 +348,11 @@
 	<div class="container"> 
 		<h3>About Us</h3>
 		<div class="about-info">
-<<<<<<< HEAD
-				<div class="col-md-8 about-grids">
-				<h4>Our Beneficiaries:</h4>
-				<p>We aim to uplift the various sections of the society by technologically assisting the NGO's that aid them </p>		
-=======
+ 
 			<div class="col-md-8 about-grids">
 				<h4>Our Advantages:</h4>
 				<p>We aim to connect volunteers and mentors for India's education</p>		
->>>>>>> branch 'master' of https://github.com/kapilthakur1496/PrismVMS.git
+ 
 					<div class="about-w3ls-row">
 						<script type="text/javascript">
 								 $(window).load(function() {

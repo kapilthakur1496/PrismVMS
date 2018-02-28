@@ -1457,7 +1457,7 @@ public   String getMentorName(String id) throws ServletException, IOException {
 			 {
 				 name = getStatusRs.getString("name");
 			 }
-			 
+			 System.out.println("Admin name "+name);
 	} 
 catch (SQLException e) {
 		// TODO: handle exception
@@ -1758,7 +1758,7 @@ public   ResultSet getMentorNotification(HttpServletRequest request, HttpServlet
 				volunteerCountRs = volunteerCountSt.executeQuery("select * from common_notification  order by id desc ");
 			
 				 
-			  
+				System.out.println("common notificaion");
 			} 
 			catch (SQLException e) {
 				// TODO: handle exception
@@ -1852,7 +1852,7 @@ public   ResultSet getMentorUsersNotication(HttpServletRequest request, HttpServ
 				volunteerCountSt = connection.createStatement();
 				 
 				volunteerCountRs = volunteerCountSt.executeQuery("select * from users_notification where receiver='"+team+"' order by id desc");
-			
+				System.out.println("user Notification ");
 				 
 			  
 			} 
@@ -3243,8 +3243,7 @@ public   int getAdminType(HttpServletRequest request, HttpServletResponse respon
 }
 public   String getMentorType(HttpServletRequest request, HttpServletResponse response,String id) throws ServletException, IOException { 
 	Statement checkStatusSt =null;
-	ResultSet checkStatusRs = null; 
-	  PreparedStatement assingProjectPs =null;
+	ResultSet checkStatusRs = null;  
 	  String type=null;
 		HttpSession session = request.getSession();
 		String adminId = (String)session.getAttribute("adminId");
@@ -3258,7 +3257,7 @@ public   String getMentorType(HttpServletRequest request, HttpServletResponse re
 				{
 					type = checkStatusRs.getString("admin_type");
 				}
-				 
+				System.out.println("admin type ");
 				 
 			} 
 		catch (SQLException e) {
@@ -3362,7 +3361,7 @@ public   String  getMentorTeams(String id ) throws ServletException, IOException
 				team = getTeamsRs.getString("team");
 				
 			}
-			 
+			 System.out.println("Admin team "+team);
 	} 
 catch (SQLException e) {
 		// TODO: handle exception
@@ -3635,7 +3634,10 @@ public   String getMentorPhone(String id) throws ServletException, IOException {
 			{
 				email = getTeamsRs.getString("phone");
 			}
-			 
+			System.out.println("Phone "+email);
+			
+	
+	
 	} 
 catch (SQLException e) {
 		// TODO: handle exception

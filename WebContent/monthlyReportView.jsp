@@ -230,7 +230,7 @@ if(volunteerStatus == 1){
  	  				<td><a href="monthlyReportViewGrade.jsp?id=<%=monthlyReportRs.getString("month_work_id") %>">View</a> </td> 
  	  			</tr>
  	  			
-	 	   	<%i++;} %>  
+	 	   	<%i++;} i=1; %>  
 	 	  	
 	 	  	</tbody>
 	 	  

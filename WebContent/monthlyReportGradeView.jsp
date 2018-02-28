@@ -44,13 +44,17 @@ h1 {
 	margin-bottom: 14px;
 	
  }
- 
+ textarea
+ {
+ width:56%;
+ text-align:justify;
+ outline:none;
+ }
  
 </style>
 
 
     <style type="text/css">
-        
         
      
     </style>
@@ -193,42 +197,42 @@ String id = request.getParameter("id");
 					 
 						<tbody>
 							<tr>
-							<td><p>Creativity </p></td>
-							<td><%=monthlyReportRs.getString("creativity") %></td>
-							<td><p>Punctuality </p></td>
-							<td><%=monthlyReportRs.getString("Punctuality") %></td>
+							<td style="background:orange; padding:38px">Creativity </td>
+							<td style=" padding:38px"><%=monthlyReportRs.getString("creativity") %></td>
+							<td style="background:orange; padding:38px">Punctuality</td>
+							<td style=" padding:38px"><%=monthlyReportRs.getString("Punctuality") %></td>
 							
-							<td><p>Work Ethics</p></td>
-							<td><%=monthlyReportRs.getString("work_ethics") %> </td>
+							<td style="background:orange; padding:38px">Work Ethics</td>
+							<td style=" padding:38px"><%=monthlyReportRs.getString("work_ethics") %> </td>
 						</tr>
 							<tr>
-							<td><p>Quality of Work</p></td>
-							<td><%=monthlyReportRs.getString("quality_work") %> </td>
+							<td style="background:orange; padding:38px">Quality of Work</td>
+							<td style=" padding:38px"><%=monthlyReportRs.getString("quality_work") %> </td>
 							
-							<td><p>Reliability</p></td>
-							<td> <%=monthlyReportRs.getString("reliability") %></td>
+							<td  style="background:orange; padding:38px">Reliability</td>
+							<td style=" padding:38px"> <%=monthlyReportRs.getString("reliability") %></td>
 							
-							<td><p>Decision Making</p></td>
-							<td><%=monthlyReportRs.getString("decision_making") %> </td>
+							<td  style="background:orange; padding:38px">Decision Making</td>
+							<td style=" padding:38px"><%=monthlyReportRs.getString("decision_making") %> </td>
 						</tr>
 						<tr>
-						<td><p>Promptness</p></td>
-						<td><%=monthlyReportRs.getString("promptness") %> </td>
+						<td  style="background:orange; padding:38px">Promptness </td>
+						<td style=" padding:38px"><%=monthlyReportRs.getString("promptness") %> </td>
 						
-						<td><p>Involvement </p></td>
-						<td><%=monthlyReportRs.getString("involvement") %> </td>
+						<td  style="background:orange; padding:38px">Involvement </p></td>
+						<td style=" padding:38px"><%=monthlyReportRs.getString("involvement") %> </td>
 						
-						<td><p>Upgradation of skills</p></td>
-						<td><%=monthlyReportRs.getString("upgradation_of_skills") %> </td>
+						<td  style="background:orange">Upgradation of skills</td>
+						<td style=" padding:38px"><%=monthlyReportRs.getString("upgradation_of_skills") %> </td>
 						</tr>
 						<tr>
-						<td><p>Overall Growth</p></td>
-						<td><%=monthlyReportRs.getString("overall_growth") %> </td>
+						<td style="background:orange; padding:38px">Overall Growth</td>
+						<td style=" padding:38px"><%=monthlyReportRs.getString("overall_growth") %> </td>
 						
-							<td><p>Total</p></td>
-							<td> <%=monthlyReportRs.getString("total") %></td>
-							<td><p>Comment</p>
-							<td><textarea><%=monthlyReportRs.getString("comment") %></textarea></td>
+							<td style="background:orange; padding:38px">Total</td>
+							<td style=" padding:38px"> <%=monthlyReportRs.getString("total") %></td>
+							<td  style="background:orange; padding:38px">Comment</td>
+							<td style=" padding:38px"><textarea><%=monthlyReportRs.getString("comment") %></textarea></td>
 						</tr>
 						
 						</tbody>
