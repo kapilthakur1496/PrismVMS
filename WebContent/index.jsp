@@ -349,9 +349,15 @@
 	<div class="container"> 
 		<h3>About Us</h3>
 		<div class="about-info">
+<<<<<<< HEAD
 				<div class="col-md-8 about-grids">
 				<h4>Our Beneficiaries:</h4>
 				<p>We aim to uplift the various sections of the society by technologically assisting the NGO's that aid them </p>		
+=======
+			<div class="col-md-8 about-grids">
+				<h4>Our Advantages:</h4>
+				<p>We aim to connect volunteers and mentors for India's education</p>		
+>>>>>>> branch 'master' of https://github.com/kapilthakur1496/PrismVMS.git
 					<div class="about-w3ls-row">
 						<script type="text/javascript">
 								 $(window).load(function() {

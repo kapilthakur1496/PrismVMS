@@ -106,7 +106,7 @@ h1 {
 	<h3>CHoose Your skills</h3>
  </div>
 	  
-<form action="Control?action=volunteerChooseSkills" method="post" >
+<form action="Control?action=volunteerChooseSkills" method="post">
 	<div class="container" style="paddin:0px; margin-left:150px;  ">
 	    <div class="row" style="height:400px;"><br>
 	        <div class="col-md-3 col-lg-3" style="text-algin:center; ">
@@ -114,7 +114,7 @@ h1 {
 				<% academicSkillRs = ct.getAcademicSkill(); %>
 		        <% while(academicSkillRs.next() ){ %>
 		           <label class="container"> <%=academicSkillRs.getString("skill_name") %> 
-						  <input  type="checkbox" value="<%=academicSkillRs.getString("skill_name") %>" name="skills" >
+						  <input type="checkbox" value="<%=academicSkillRs.getString("skill_name") %>" name="skills" >
 						  <span class="checkmark"></span>
 					</label>
 		       <%} %>  
