@@ -106,7 +106,7 @@ h1 {
 	<h3>CHoose Your skills</h3>
  </div>
 	  
-<form action="Control?action=volunteerChooseSkills" method="post" onSubmit="return validateChecks()">
+<form action="Control?action=volunteerChooseSkills" method="post">
 	<div class="container" style="paddin:0px; margin-left:150px;  ">
 	    <div class="row" style="height:400px;"><br>
 	        <div class="col-md-3 col-lg-3" style="text-algin:center; ">
@@ -219,7 +219,7 @@ h1 {
 	 <p class="copy-right">© 2018 PrismVMS. All rights reserved | Design by <a href="#">Kapil Thakur & Anurag Goel</a></p>
 </div> 
 	     <div id="snackbar"></div>
-	 <script type="text/javascript">
+	<!--  <script type="text/javascript">
 	  
 	 function validateChecks() {
      	
@@ -241,6 +241,6 @@ h1 {
   		}
   		return true;
   	}
-	 </script>
+	 </script> -->
 </body>
 </html>

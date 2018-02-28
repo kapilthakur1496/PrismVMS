@@ -339,7 +339,7 @@
 		<h3>About Us</h3>
 		<div class="about-info">
 			<div class="col-md-8 about-grids">
-				<h4>Our Beneficiaries:</h4>
+				<h4>Our Advantages:</h4>
 				<p>We aim to connect volunteers and mentors for India's education</p>		
 					<div class="about-w3ls-row">
 						<script type="text/javascript">
