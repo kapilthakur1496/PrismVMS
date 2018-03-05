@@ -96,11 +96,11 @@ h1 {
 		j=i;
 		$(".pince:last-child").attr("id","top-news");
 			
-		do
+		/* do
 		{
 			count++;
 			k++;
-			}while($(".pince:eq("+k+")").attr("id")!="top-news")
+			}while($(".pince:eq("+k+")").attr("id")!="top-news") */
 		$(".scroll-up").click(function(){
 			if(count-2!=i)
 			{
@@ -108,7 +108,7 @@ h1 {
 			$(".pince:eq("+i+")").fadeOut("slow","linear");
 			i++;
 			}
-		});
+		});	
 		$(".scroll-down").click(function(){
 			if(j<i)
 			{
