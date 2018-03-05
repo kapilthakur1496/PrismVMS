@@ -2906,8 +2906,8 @@ public void createMentor( HttpServletRequest request, HttpServletResponse respon
 				   			                               new InternetAddress(to)); 
 				   			      message.setSubject("PrismVMS Account Details"); 
 				   			      message.setText("Dear Sir/Ma'am\n "
-				   			    		  +"\n\n Thanks for being a part of our orgainization"
-				   			    		  +"\n\n Please    http://13.126.168.110:8081/PrismVMS/admin/updatePassword.jsp    to set your Password"
+				   			    		  +"\n\n You have been as a mentor"
+				   			    		  +"\n\n Please go to   http://13.126.168.110:8081/PrismVMS/updatePassword.jsp    to set your Password"
 				   			    		  +"\n\nThank You" 
 				   			    		  +"\nWarm Regards"
 				   			    		  +"\n\nPrismVMS"
