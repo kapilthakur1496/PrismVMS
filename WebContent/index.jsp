@@ -349,10 +349,9 @@
 		<h3>About Us</h3>
 		<div class="about-info">
  
-			<div class="col-md-8 about-grids">
+		<div class="col-md-8 about-grids">
 				<h4>Our Advantages:</h4>
 				<p>We aim to connect volunteers and mentors for India's education</p>		
- 
 					<div class="about-w3ls-row">
 						<script type="text/javascript">
 								 $(window).load(function() {
@@ -449,7 +448,7 @@
 		<div class="container">
 			<h3>Do your part <span>for</span> the Nation</h3>
 			<h4>Register as a volunteer</h4>
-			<a href="volunteerRegistraton.jsp"> Register</a>
+			<a href="volunteerRegistration.jsp" target="_bkank"> Register</a>
 		</div>
 	</div>
 <!-- //about-bottom -->
