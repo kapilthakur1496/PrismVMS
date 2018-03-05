@@ -200,6 +200,12 @@ if(mentorStatus == 1){
 					 
 					</script>
 		 		<%}
+		 		else if(action.equals("assignProject"))
+		 		{%>
+		 			<a style="margin:30px;" class="btn btn-primary" href="branchProjectView.jsp">Skip  &nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right" style="color:#fff;"></i></a>
+		 			 
+		 		<%}
+		 		
 		 		 %>
 		 		 
  			<form action="Control?action=assignBranchProject" method="post" onSubmit="return validateChecks()" >

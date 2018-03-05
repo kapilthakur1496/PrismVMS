@@ -276,7 +276,11 @@ public class Control extends HttpServlet {
 		{   
 			teamNewsNotification(request,response); 
 		}
-		   
+		else if(action.equals("updateMentorTeams"))
+		{   
+			updateMentorTeams(request,response); 
+		}
+		  
 		  
 	}
 	private void addTeam( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -2717,6 +2721,43 @@ public   ResultSet volunteerDetails( int pageNumber, int nextRecordCount)throws 
 return volunteerDetailsRs;
 
 }
+public   ResultSet mentorDetails(HttpServletRequest request, HttpServletResponse response, int pageNumber, int nextRecordCount)throws ServletException, IOException { 
+  	Statement volunteerDetailsSt =null;
+  	ResultSet volunteerDetailsRs = null;
+  	HttpSession session = request.getSession();
+	String adminId = (String)session.getAttribute("adminId");
+	if(adminId !=null) {
+  	try {  				
+  			volunteerDetailsSt = connection.createStatement();
+  			volunteerDetailsRs = volunteerDetailsSt.executeQuery("select * from admin where approve_status='Approved' and admin_type='Mentor' limit "+(pageNumber*10)+","+nextRecordCount);
+		  } 
+  	catch (SQLException e) {
+		// TODO: handle exception
+  		e.printStackTrace();
+			}
+  	catch (Exception e) {
+		// TODO: handle exception
+  		e.printStackTrace();
+  		}
+	finally {
+		
+		/*if(NgoDetailSt!=null)
+			try {
+				NgoDetailSt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+    	 
+	}
+	}
+	else 
+	{ 
+		response.sendRedirect("adminLogin.jsp?action=LoginAgain"); 
+	}
+return volunteerDetailsRs;
+
+}
 public   ResultSet teamVolunteerDetails( int pageNumber, int nextRecordCount, String adminId,String branchId)throws ServletException, IOException { 
   	Statement volunteerDetailsSt =null;
   	ResultSet volunteerDetailsRs = null;
@@ -2817,6 +2858,67 @@ public void assignTeam( HttpServletRequest request, HttpServletResponse response
 	out.close(); 
 	 
 	}
+public void updateMentorTeams( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	response.setContentType("text/html");
+    PrintWriter out = response.getWriter();  
+    PreparedStatement updateTeamPs = null;
+	
+	HttpSession session = request.getSession();
+	String adminId = (String)session.getAttribute("adminId");
+	if(adminId !=null) {
+	 
+	try { 
+	   		String volunteerIds[] = request.getParameterValues("mentorIds"); 
+		   	  
+		   	String team[] = request.getParameterValues("team1"); 
+	 		String team1= "";
+	 		for( int j=0; j<team.length;j++)
+	 		{
+	 			team1 = team1+team[j]+" , ";
+	 		} 
+	 		team1 = team1.substring(0,team1.length()-3);
+			String branch = request.getParameter("branch");  
+		   	
+		   	String pageNumber = request.getParameter("pageNumber"); 
+		    
+		   	if(volunteerIds != null)
+		   	{
+		   		 for ( int i=0; i<volunteerIds.length;i++ )
+				 {  
+		   			updateTeamPs = connection.prepareStatement("update  admin set  team = ?,branch_id=? where id ="+volunteerIds[i]);  
+		   			updateTeamPs.setString(1, team1);  
+		   			updateTeamPs.setString(2, branch);  
+		   			updateTeamPs.executeUpdate(); 
+				 }  
+		   	}  
+	   		response.sendRedirect("admin/manageUsers.jsp?action=mentorTeamBranchAssigned&pageNumber="+pageNumber);
+	   	 
+		}  
+	 catch (SQLException e) {
+		// TODO: handle exception
+		 e.printStackTrace();
+		}
+	 catch (Exception e) {
+			// TODO: handle exception
+			 e.printStackTrace();
+		}
+	 finally {
+		  if(updateTeamPs!=null)
+				try {
+					updateTeamPs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}  
+	 		}
+		}
+	else {
+	response.sendRedirect("admin/adminLogin.jsp?action=LoginAgain"); 
+	}
+	out.close(); 
+	 
+	}
 public void createMentor( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 	response.setContentType("text/html");
@@ -2824,6 +2926,10 @@ public void createMentor( HttpServletRequest request, HttpServletResponse respon
     String email=request.getParameter("email");  
 	Statement checkMentorSt = null;
 	ResultSet checkMentorRs = null;
+	HttpSession session = request.getSession();
+	String adminId = (String)session.getAttribute("adminId");
+	if(adminId !=null) {
+	 
 	Statement mentorIdSt=null;
 	ResultSet mentorIdRs=null;	 
 	PreparedStatement addVolunteerps =null;
@@ -2980,8 +3086,12 @@ public void createMentor( HttpServletRequest request, HttpServletResponse respon
 					e.printStackTrace();
 				}  
 			}
-			
 	 }
+	
+	 }
+	else {
+		response.sendRedirect("admin/adminLogin.jsp?action=LoginAgain"); 
+	}
 	out.close();
 }
 	 

@@ -36,7 +36,7 @@
 	<%@ page import ="javax.sql.*" %>
 	<%@ page import="com.daniel.util.control.*"  %> 
 	<%!   
-		String adminId=null;
+		String adminId=null,branchName=null;
 		int adminStatus=0; 
 	%> 
 	<%! 
@@ -100,8 +100,12 @@ if(adminId !=null){
       </div>
 	
         <div class="templatemo-content-container" style="padding:0px 0px;">
+              
           <div class="templatemo-content-widget no-padding"> 
+          
             <div class="panel panel-default table-responsive">
+            <div class="panel-heading templatemo-position-relative"><h2 class="text-uppercase">Applications</h2></div>
+         
             <form id="regForm" action="${pageContext.request.contextPath}/Control?action=volunteerApproval" name="f1"  onSubmit="return validateChecks1()" method="post" style="margin-top:0px; padding-top:30px;">  
 			  <table class="table table-striped table-bordered templatemo-user-table">
                 <thead>
@@ -154,6 +158,7 @@ if(adminId !=null){
                 </tbody>
               </table>  
               <div style="margin:10px;">
+              
 						<div class="col-lg-5">
 							<select required  class="form-control" name="status">
 							<option value="">Select the Status</option>
@@ -178,6 +183,8 @@ if(adminId !=null){
 		 	</div>  
             </div>
             <div class="panel panel-default table-responsive">
+             <div class="panel-heading templatemo-position-relative"><h2 class="text-uppercase">Volunteers</h2></div>
+              
             <form id="regForm" action="${pageContext.request.contextPath}/Control?action=assignTeam" name="f2" onSubmit="return validateChecks2()" method="post" style="margin-top:0px; padding-top:30px;">  
 			  <table class="table table-striped table-bordered templatemo-user-table">
                 <thead>
@@ -186,8 +193,10 @@ if(adminId !=null){
                     <td><a href="" class="white-text templatemo-sort-by">First Name <span class="caret"></span></a></td>
                     <td><a href="" class="white-text templatemo-sort-by">Email<span class="caret"></span></a></td>
                     <td><a href="" class="white-text templatemo-sort-by">  Status <span class="caret"></span></a></td>
-                    <td><a href="" class="white-text templatemo-sort-by">Profile <span class="caret"></span></a></td>
-                     
+                  
+                    <td><a href="" class="white-text templatemo-sort-by">Team <span class="caret"></span></a></td>
+                    <td><a href="" class="white-text templatemo-sort-by">Branch <span class="caret"></span></a></td>
+                    
                     
                   </tr>
                 </thead>
@@ -219,9 +228,28 @@ if(adminId !=null){
 								<td>
 									<input type="text" readonly name="email_status"  class="form-control"   value="<%=volunteerDetailsRs.getString("approve_status") %>" >
 								</td> 
-								 <td>
-									<a href="#" >View </a>
-								</td> 
+								 
+								 <%if(volunteerDetailsRs.getString("team") == null) {  %>
+								<td>
+									<input type="text" readonly name="team"  class="form-control"   value="No Team Assigned" >
+								</td>				                    
+ 								<%}else if(volunteerDetailsRs.getString("team") != null ) { %>
+				                 <td>
+									<input type="text" readonly name="team"  class="form-control"   value="<%=volunteerDetailsRs.getString("team") %>" >
+								</td>
+								 <%} %>
+								 <%if(volunteerDetailsRs.getString("branch_id") == null) {  %>
+								<td>
+									<input type="text" readonly name="team"  class="form-control"   value="No Branch Assigned" >
+								</td>				                    
+ 								<%}else if(volunteerDetailsRs.getString("branch_id") != null ) {
+ 									
+ 								branchName = ct.getBranchName(volunteerDetailsRs.getString("branch_id"));%>
+				                 <td>
+									<input type="text" readonly name="team"  class="form-control"   value="<%=branchName%>" >
+								</td>
+								 <%} %>
+								 
 								 
 							</tr>
 							<input type="hidden" name="pageNumber"  value="<%=pageNumber %>">
@@ -261,7 +289,115 @@ if(adminId !=null){
 				    <% } %> 
 			 	</ul>
 		 	</div>  
-            </div>                          
+            </div>
+            <div class="panel panel-default table-responsive">
+             <div class="panel-heading templatemo-position-relative"><h2 class="text-uppercase">Mentors</h2></div>
+              
+            <form id="regForm" action="${pageContext.request.contextPath}/Control?action=updateMentorTeams" name="f2" onSubmit="return validateChecks3()" method="post" style="margin-top:0px; padding-top:30px;">  
+			  <table class="table table-striped table-bordered templatemo-user-table">
+                <thead>
+                  <tr>
+                    <td><a href="" class="white-text templatemo-sort-by"># <span class="caret"></span></a></td>
+                    <td><a href="" class="white-text templatemo-sort-by">First Name <span class="caret"></span></a></td>
+                    <td><a href="" class="white-text templatemo-sort-by">Email<span class="caret"></span></a></td>
+                    <td><a href="" class="white-text templatemo-sort-by">  Status <span class="caret"></span></a></td>
+                  
+                    <td><a href="" class="white-text templatemo-sort-by">Team <span class="caret"></span></a></td>
+                    <td><a href="" class="white-text templatemo-sort-by">Branch <span class="caret"></span></a></td>
+                    
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                <% try{ %> 
+				<%  
+				 	pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
+					volunteerCount = ct.AdminVolunteerCount();
+					pageCount= volunteerCount/10 +1;		  
+					volunteerDetailsRs = ct.mentorDetails(request, response,pageNumber-1, nextRecordCount);
+			} catch (Exception e)	{
+				}
+			%>
+			 <%!  int k=i; %>
+			 <%  while(volunteerDetailsRs.next()){  %>
+			
+							<tr>
+								<td>
+								  	<input type="checkbox" name="mentorIds" id="s<%=k%>" value="<%=volunteerDetailsRs.getString("id") %>">
+                      				<label for="s<%=k%>" class="font-weight-400"><span></span> </label> 
+								 				
+								</td>
+								<td> 
+									<input type="text" readonly class="form-control" name="name" value="<%=volunteerDetailsRs.getString("name") %>" >					
+								</td>
+								<td>
+									<input type="text" readonly name="email"  class="form-control"  value="<%=volunteerDetailsRs.getString("email") %>" >
+								</td>  
+								<td>
+									<input type="text" readonly name="email_status"  class="form-control"   value="<%=volunteerDetailsRs.getString("approve_status") %>" >
+								</td> 
+								 
+								 <%if(volunteerDetailsRs.getString("team") == null) {  %>
+								<td>
+									<input type="text" readonly name="team"  class="form-control"   value="No Team Assigned" >
+								</td>				                    
+ 								<%}else if(volunteerDetailsRs.getString("team") != null ) { %>
+				                 <td>
+									<input type="text" readonly name="team"  class="form-control"   value="<%=volunteerDetailsRs.getString("team") %>" >
+								</td>
+								 <%} %>
+								 <%if(volunteerDetailsRs.getString("branch_id") == null) {  %>
+								<td>
+									<input type="text" readonly name="team"  class="form-control"   value="No Branch Assigned" >
+								</td>				                    
+ 								<%}else if(volunteerDetailsRs.getString("branch_id") != null ) {
+ 									
+ 								branchName = ct.getBranchName(volunteerDetailsRs.getString("branch_id"));%>
+				                 <td>
+									<input type="text" readonly name="team"  class="form-control"   value="<%=branchName%>" >
+								</td>
+								 <%} %>
+							</tr>
+							<input type="hidden" name="pageNumber"  value="<%=pageNumber %>">
+							<% ++k; } %> 
+                </tbody>
+              </table>  
+              <div style="margin:10px;">
+						<div class="col-lg-4">
+						<label class="control-label templatemo-block">Select Teams</label>                 
+			                  
+							<select required multiple name="team1" class="templatemo-multi-select form-control" style="overflow-y: scroll;">
+	                				<% 	teamRs = ct.getTeams();  %>
+	              					<% while(teamRs.next() ){ %>
+	              					<option value="<%=teamRs.getString("team_name") %>"><%=teamRs.getString("team_name") %></option>
+	              					<% } %>  
+           					</select> 
+						</div>  
+						<div class="col-lg-4">
+						<label class="control-label templatemo-block">Select Branch</label>                 
+			            
+							<select required  class="form-control" name="branch">
+							<option value="">Select the Branch</option>
+								<%	branchRs = ct.getBranch();
+              					%>
+              				<% while(branchRs.next() ){ %>
+              					<option value="<%=branchRs.getString("id") %>" > <%=branchRs.getString("name") %></option>
+              				<%} %> 
+							</select>
+						</div>
+						<div  class="col-lg-4">
+							<input type="submit"  class="form-control"  value="Update Mentor Team & Branch" >
+						</div> 
+					</div>
+					</form> 
+			 <div class="col-lg-12 text-center" style="margin-left:auto; margin-right:auto;">
+				<ul class="pagination " >
+					<% for( int k=1; k<=pageCount; k++){ %>
+				    	<li><a href="manageUsers.jsp?pageNumber=<%=k%>"><%=k%></a></li>
+				    <% } %> 
+			 	</ul>
+		 	</div>  
+            </div>                         
           </div> 
                    
           <!-- <div class="templatemo-flex-row flex-content-row">
@@ -435,6 +571,16 @@ if(adminId !=null){
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
  
 </script>
+<%}else if(action.equals("mentorTeamBranchAssigned")){ 
+ %>
+	 <script>
+ 
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    x.innerHTML="New Team and Branch Has been Updated";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+ 
+</script>
 <%}%>
 
 
@@ -455,6 +601,26 @@ if(adminId !=null){
   			var x = document.getElementById("snackbar")
   		    x.className = "show";
   		    x.innerHTML="Select at least one Volunteer";
+  		    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+  		 
+  			return false;
+  		}
+  		return true;
+  	}
+	 function validateChecks3() {
+	     	
+		 var chks =  document.getElementsByName('mentorIds');
+  		var checkCount = 0;
+  		for (var i = 0; i < chks.length; i++) {
+  			if (chks[i].checked) {
+  				checkCount++;
+  			}
+  		}
+  		if (checkCount < 1) {
+  			
+  			var x = document.getElementById("snackbar")
+  		    x.className = "show";
+  		    x.innerHTML="Select at least one Mentor";
   		    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
   		 
   			return false;
