@@ -822,7 +822,7 @@ address: <span id="c"></span>
  
     var x = document.getElementById("snackbar")
     x.className = "show";
-    x.innerHTML="Skill Already Exist In The Life Skill List";
+    x.innerHTML="Skill Is Added To The Professional Skill List";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
  
 </script>

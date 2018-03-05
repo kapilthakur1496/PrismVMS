@@ -174,10 +174,11 @@ String name = ct.getVolunteerName(volunteerId);
 	<br>
 	   <h4>Congratulations  your Application is  <%=status %></h4>
 	  <br>
-	 
+	
 	<h4> <a href="volunteerLogin.jsp">click here</a> to View Your Profile.</h4>
 	 <%} else {%>
 	 <h3>Welcome <%=name %>! </h3>
+	 <h4>  Your Application is  <%=status %></h4>
 	  <h4>You can check you application status <a href="volunteerPreLogin.jsp">here.</a>   </h4>
 	 
 	 <%} %>
