@@ -258,7 +258,7 @@ if(adminId !=null){
               </table>  
               <div style="margin:10px;">
 						<div class="col-lg-4">
-							<select required   class="form-control" name="team">
+							<select required   class="form-control" name="team10">
 							<option value="">Select the Team</option>
 								<%	teamRs = ct.getTeams();
               					%>
