@@ -2817,6 +2817,8 @@ public void assignTeam( HttpServletRequest request, HttpServletResponse response
 	try { 
 	   		String volunteerIds[] = request.getParameterValues("volunteerIds"); 
 		   	String team = request.getParameter("team");  
+		   	
+		   	System.out.println("Team Name "+team);
 			String branch = request.getParameter("branch");  
 		   	
 		   	String pageNumber = request.getParameter("pageNumber"); 
