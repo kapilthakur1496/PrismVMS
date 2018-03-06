@@ -240,13 +240,13 @@ if(adminId !=null){
 								 <%} %>
 								 <%if(volunteerDetailsRs.getString("branch_id") == null) {  %>
 								<td>
-									<input type="text" readonly name="team"  class="form-control"   value="No Branch Assigned" >
+									<input type="text" readonly name="team4"  class="form-control"   value="No Branch Assigned" >
 								</td>				                    
  								<%}else if(volunteerDetailsRs.getString("branch_id") != null ) {
  									
  								branchName = ct.getBranchName(volunteerDetailsRs.getString("branch_id"));%>
 				                 <td>
-									<input type="text" readonly name="team"  class="form-control"   value="<%=branchName%>" >
+									<input type="text" readonly name="team4"  class="form-control"   value="<%=branchName%>" >
 								</td>
 								 <%} %>
 								 
@@ -339,22 +339,22 @@ if(adminId !=null){
 								 
 								 <%if(volunteerDetailsRs.getString("team") == null) {  %>
 								<td>
-									<input type="text" readonly name="team"  class="form-control"   value="No Team Assigned" >
+									<input type="text" readonly name="team8"  class="form-control"   value="No Team Assigned" >
 								</td>				                    
  								<%}else if(volunteerDetailsRs.getString("team") != null ) { %>
 				                 <td>
-									<input type="text" readonly name="team"  class="form-control"   value="<%=volunteerDetailsRs.getString("team") %>" >
+									<input type="text" readonly name="team8"  class="form-control"   value="<%=volunteerDetailsRs.getString("team") %>" >
 								</td>
 								 <%} %>
 								 <%if(volunteerDetailsRs.getString("branch_id") == null) {  %>
 								<td>
-									<input type="text" readonly name="team"  class="form-control"   value="No Branch Assigned" >
+									<input type="text" readonly name="team5"  class="form-control"   value="No Branch Assigned" >
 								</td>				                    
  								<%}else if(volunteerDetailsRs.getString("branch_id") != null ) {
  									
  								branchName = ct.getBranchName(volunteerDetailsRs.getString("branch_id"));%>
 				                 <td>
-									<input type="text" readonly name="team"  class="form-control"   value="<%=branchName%>" >
+									<input type="text" readonly name="team5"  class="form-control"   value="<%=branchName%>" >
 								</td>
 								 <%} %>
 							</tr>
