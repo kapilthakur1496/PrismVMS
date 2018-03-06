@@ -68,7 +68,7 @@ if(adminId !=null){
 	   </header>
         </header>
         <div class="profile-photo-container">
-          <img src="images/profile-photo.jpg" alt="Profile Photo" class="img-responsive">  
+          <img src="${pageContext.request.contextPath}/DisplayMentorPic?name=<%=adminId%>" alt="Profile Photo" class="img-responsive">  
           <div class="profile-photo-overlay"></div>
         </div>      
         <!-- Search box -->
